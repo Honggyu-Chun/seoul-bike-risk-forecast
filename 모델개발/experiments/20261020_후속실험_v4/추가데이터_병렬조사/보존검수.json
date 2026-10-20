@@ -1,0 +1,239 @@
+{
+  "saved_at_utc": "2026-10-20T07:03:39.879307+00:00",
+  "status": "saved_and_offline_verified",
+  "new_network_requests_stopped": true,
+  "model_training_started_by_this_subtask": false,
+  "files": 40,
+  "bytes": 35176661,
+  "checks_passed": [
+    "all_rows_equal_exact_past_shift:pm10_ug_m3:2",
+    "all_rows_equal_exact_past_shift:pm10_ug_m3:3",
+    "all_rows_equal_exact_past_shift:pm10_ug_m3:24",
+    "all_rows_equal_exact_past_shift:pm25_ug_m3:2",
+    "all_rows_equal_exact_past_shift:pm25_ug_m3:3",
+    "all_rows_equal_exact_past_shift:pm25_ug_m3:24",
+    "all_rows_equal_exact_past_shift:o3_ppm:2",
+    "all_rows_equal_exact_past_shift:o3_ppm:3",
+    "all_rows_equal_exact_past_shift:o3_ppm:24",
+    "all_rows_equal_exact_past_shift:no2_ppm:2",
+    "all_rows_equal_exact_past_shift:no2_ppm:3",
+    "all_rows_equal_exact_past_shift:no2_ppm:24",
+    "all_rows_equal_exact_past_shift:co_ppm:2",
+    "all_rows_equal_exact_past_shift:co_ppm:3",
+    "all_rows_equal_exact_past_shift:co_ppm:24",
+    "all_rows_equal_exact_past_shift:so2_ppm:2",
+    "all_rows_equal_exact_past_shift:so2_ppm:3",
+    "all_rows_equal_exact_past_shift:so2_ppm:24",
+    "forecast_time_keys_unique",
+    "forecast_valid_time_equals_input_plus_1h",
+    "forecast_no_nulls"
+  ],
+  "pending": [
+    "Historical publication/revision equivalence",
+    "Production snapshot cache and freshness gates",
+    "Exact live forecast-run replacement metadata",
+    "Any model performance improvement requires separate main experiment"
+  ],
+  "inventory": [
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\air_curation_audit.json",
+      "bytes": 3834,
+      "sha256": "a9101a6389bb264ca2e08d4760e331b5a6d0439c5b69cbef130678dc349e0efd"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\air_district_missing_percent.csv",
+      "bytes": 3155,
+      "sha256": "9467c701cf1d6a48338f5a60315e00b8b0d40bc098cc5740f83af37c7a527e9c"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\air_download_manifest.json",
+      "bytes": 711,
+      "sha256": "86fd6ccd20971509f4b1e21d6f8a62e313a72393be116790fa0b4ff7fbf39b3b"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\air_live_20261020_audit.json",
+      "bytes": 1696,
+      "sha256": "7f37c57faf5288e261ad976a6cb1c7fa09d5c776c99665f7b9ab54b0a7785aa9"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\air_runtime_lags_schema.json",
+      "bytes": 1226,
+      "sha256": "8c9ffb41a763c5766d0cfe8ab926210c390f05a5b46bf7620fe5e6afd8b4e7a8"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\collect_extra.py",
+      "bytes": 5405,
+      "sha256": "ff5087aa52280083c0144b8f7d72997c70a0daa6848fbb20f593be6b6760a544"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\forecast_curation_audit.json",
+      "bytes": 2073,
+      "sha256": "897c9d5f64dd5d74fd777a87bd60db99957045a0363fa3b200a80b3b47ed3fe0"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\forecast_download_manifest.json",
+      "bytes": 7463,
+      "sha256": "e666991eb4005f07b345f98ba5b075477f9800e38066e2b052fb11afc3a1d4e6"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\forecast_probe_manifest.json",
+      "bytes": 1491,
+      "sha256": "e5e34a84d228d946b409c844c36ee83c6abe8d10ebf51e4e6094fa9abaa8a3cb"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\gfs_day1_live_20261020_audit.json",
+      "bytes": 2309,
+      "sha256": "34d1c939f150486fef5cb5b42d977cf8a7723a54e0a0b8313662c9c0772c281a"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\OA-1200_catalog.html",
+      "bytes": 99622,
+      "sha256": "f9f1c0b18b52a430531cdaa57e0459df31294d8cf1053cbdabaf714bcfbdabdb"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\OA-1200_openapi.html",
+      "bytes": 21289,
+      "sha256": "09efc8811cf55cae4cdf73415f55d5ddb2788879b5ac2872d0dc7be4a0ee4380"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\OA-2221_catalog.html",
+      "bytes": 113007,
+      "sha256": "c45e66c5790e250b66040f18f191ad8cc62e053f56c749a2a8b3fd01158f5b69"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\prepare_extra.py",
+      "bytes": 14942,
+      "sha256": "e3252283c6555c759f870fc4e218d4c03b246cbb29066777b22d5d7b9976700b"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\verify_live.py",
+      "bytes": 6913,
+      "sha256": "6b686f0302149ff9b2159177c568fccbdf50bc77147d5df1c499a9b848d7adb7"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\verify_saved.py",
+      "bytes": 2751,
+      "sha256": "116aee1e22c41f00bd093610e19372e5b4b442ba94ea4086383951de88faefb7"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\보고서와재개방법.md",
+      "bytes": 10040,
+      "sha256": "e1398d44691423fc8cf845ff7ccf7de3661f41ac0af400e132fae2859abe4151"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\시각화\\01_대기질_기간추이.png",
+      "bytes": 146749,
+      "sha256": "0cdd9c85a57d858959a1e3b8864e196a941a5993e733688cbbe424d7a127eb84"
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\시각화\\02_대기질_결측률.png",
+      "bytes": 58852,
+      "sha256": "1d71fb9de5cdc0a536bbe4be8fa2af6179bebba505cd05eaad5bb4079f49158e"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\air_live_20261020.json",
+      "bytes": 5400,
+      "sha256": "8dafb1566e83f52d6a46125d369e8fba1aa0aecbdf1ae0a2550702c2e4f8abcb"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\gfs_day1_center_2025h1.json",
+      "bytes": 173078,
+      "sha256": "7dc22b4ebc128d3408b49746cdada823ca5e1a429b0589c246dd21c89c7983d2"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\gfs_day1_center_probe.json",
+      "bytes": 7157,
+      "sha256": "9cd3fc48a6fabe83230a594ba9abdba77f84457335ab6305fbf105dfc09716b9"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\gfs_day1_live_20261020.json",
+      "bytes": 2514,
+      "sha256": "a1aa130e043cdec34a391692ac8124696db1e06686bada3560bc96ba86b09d37"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\gfs_day1_northeast_2025h1.json",
+      "bytes": 173251,
+      "sha256": "dc1fac35056c932cdd2fdc6e53751b3b15aa14cb01f7913500ca92ba95ea5a28"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\gfs_day1_northwest_2025h1.json",
+      "bytes": 173097,
+      "sha256": "de42d15560d792a585c52d3151235af2089fdaa1a19b2d82b74d3add4dd37b15"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\gfs_day1_southeast_2025h1.json",
+      "bytes": 173108,
+      "sha256": "c748b9c9c1e3d5a739d094338ffda00c5b4dc79fb171a8e485ef24917ae90145"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\gfs_day1_southwest_2025h1.json",
+      "bytes": 173009,
+      "sha256": "b4e4ff5ddc8510d67af4b7db1b642a1b13d3c4c2a311bf69560d716d3c065e0e"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\seoul_air_2025.zip",
+      "bytes": 2910118,
+      "sha256": "ccbcb2991a15ab4bc7523ca803689578146f11ff9d2c6ca0707bbdebfdedbbb8"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\air_2025h1_input_lags.csv",
+      "bytes": 13537134,
+      "sha256": "a1ef23aa459d6f17e0788ecd542d7bf9096470866fff8dc87b28d3152a616c47"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\air_2025h1_input_lags.parquet",
+      "bytes": 1518461,
+      "sha256": "9635cae1889ab45417024ba3b0ae93b87f917df30ce9d52eb29bbcd34d3a8c7f"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\air_2025h1_input_lags2_3_24.parquet",
+      "bytes": 2253153,
+      "sha256": "825ac49044d5b0b180dedd354fe2b78fbff18487a4965d94259cae6c68738dea"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\air_2025h1_observations.csv",
+      "bytes": 10527664,
+      "sha256": "85c74b3aaaf16d6774b1d2f259fba72630b7ccb079f8ea351c1073bf63b5fd05"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\air_2025h1_observations.parquet",
+      "bytes": 899647,
+      "sha256": "2f7bf2f2cc922c6bc68e6a4794ec53b79efa6f398de58041ab8d09edfabe2627"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\air_live_20261020.csv",
+      "bytes": 3928,
+      "sha256": "bd0e5c7d6d1f23f504eaaa6868dfba32b694b97c3e95e0b0a6fdd958a6c2051a"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\gfs_day1_2025h1_input.csv",
+      "bytes": 1801940,
+      "sha256": "3a6a19f1afd1cee3c82ba4ba9e537fc6b7bd3dd954ffa44e8d8ebbb46823965f"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\gfs_day1_2025h1_input.parquet",
+      "bytes": 206240,
+      "sha256": "077014fc1de5a3019489dc566a214172ecf6f21b698634652b6b808a93ff3964"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\gfs_day1_live_20261020.csv",
+      "bytes": 2424,
+      "sha256": "6d61dd60191ceb37513df2aa147100add75fa6696aa9d640954352ff06052435"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\gfs_day1_points.csv",
+      "bytes": 284,
+      "sha256": "2681ed516d216f842027eccb11ce31883d644a96b4f896dac1928a5e16c780dd"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\station_air_district_join.csv",
+      "bytes": 43744,
+      "sha256": "e87c187d22b4b5159dfa81f23862111a13398d84d7742735c5f9a44de632805c"
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\station_gfs_point_join.csv",
+      "bytes": 87782,
+      "sha256": "a2ce0e3f7c6ae92424710898107f90b7c7423130385c278b2c7934e1b469edf8"
+    }
+  ]
+}

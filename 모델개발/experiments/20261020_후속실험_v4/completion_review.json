@@ -1,0 +1,31 @@
+{
+  "reviewed_at_utc": "2026-10-20T15:51:13.460827+00:00",
+  "registered_minimum_comparisons": 53,
+  "required_including_confirmation": 53,
+  "completed": 53,
+  "public_extension_required": 9,
+  "public_extension_missing": [],
+  "public_extension_complete": true,
+  "public_extension_report_verified": true,
+  "missing_comparisons": [],
+  "confirmation_selection_exists": true,
+  "artifact_issues": [],
+  "missing_evidence": [],
+  "verification_coverage": {
+    "roundtrip_checks.json": true,
+    "uncertainty_checks.json": true,
+    "example_selection.json": true,
+    "calibration_diagnostic_checks.json": true
+  },
+  "all_basic_baseline_pair_rows_exist": true,
+  "missing_report_images": [],
+  "protected_files_checked": 23,
+  "protected_files_changed": [],
+  "checkpoint_zip_crc_passed": true,
+  "report_count_matches": true,
+  "ready_for_manual_final_review": true,
+  "goal_complete": false,
+  "analysis_scope_complete": true,
+  "manual_review_verified": true,
+  "manual_checks_remaining": []
+}

@@ -1,0 +1,80 @@
+{
+  "new_test_scored": false,
+  "checks": [
+    {
+      "model": "causal_weather_spatial",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    },
+    {
+      "model": "catboost_depth_8",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    },
+    {
+      "model": "spatial_multiscale_63",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    },
+    {
+      "model": "causal_weather_own",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    },
+    {
+      "model": "causal_transition_spatial",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    },
+    {
+      "model": "causal_transition_63",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    },
+    {
+      "model": "state_experts_spatial",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    },
+    {
+      "model": "xgboost_depth_9",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    },
+    {
+      "model": "B1_tuned_127",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    },
+    {
+      "model": "B1_original_63",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    },
+    {
+      "model": "B1_original_31",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    },
+    {
+      "model": "neural_mlp",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    },
+    {
+      "model": "neural_gru",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    },
+    {
+      "model": "neural_tcn_weighted",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    },
+    {
+      "model": "neural_tcn",
+      "validation_max_absolute_prediction_difference": 0.0,
+      "frozen_decision_disagreements": 0
+    }
+  ]
+}

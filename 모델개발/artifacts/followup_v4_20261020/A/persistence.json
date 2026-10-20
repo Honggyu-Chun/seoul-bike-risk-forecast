@@ -1,0 +1,186 @@
+{
+  "name": "persistence",
+  "status": "ok",
+  "fold": "A",
+  "spec": {
+    "name": "persistence",
+    "kind": "rule",
+    "rule": "current",
+    "group": "basic",
+    "window": 56,
+    "seed": 20261020
+  },
+  "features": [
+    "station_code",
+    "hour",
+    "weekday",
+    "weekend",
+    "quantity",
+    "log_quantity",
+    "q_lag_1",
+    "q_lag_2",
+    "q_lag_24",
+    "q_lag_168",
+    "q_mean_3",
+    "q_known_3",
+    "q_mean_24",
+    "q_known_24",
+    "q_change_1",
+    "q_change_3"
+  ],
+  "fit": {},
+  "actual_train_rows": 3663966,
+  "full_train_rows": 3663966,
+  "stage_rows": {
+    "stop": 457283,
+    "cal": 195912,
+    "policy": 261202,
+    "valid": 1109673
+  },
+  "rule": {
+    "kind": "global",
+    "threshold": 0.79,
+    "f1": 0.6959014332411365
+  },
+  "validation": {
+    "overall": {
+      "n": 1109673,
+      "zero_cases": 133319,
+      "zero_rate": 0.12014260056791505,
+      "f1": 0.721434141074856,
+      "precision": 0.7211259583461362,
+      "recall": 0.7217425873281378,
+      "average_precision": 0.5538978841519204,
+      "brier": 0.05731748417019844,
+      "tn": 939143,
+      "fp": 37211,
+      "fn": 37097,
+      "tp": 96222,
+      "threshold": 0.79,
+      "rule": {
+        "kind": "global",
+        "threshold": 0.79,
+        "f1": 0.6959014332411365
+      }
+    },
+    "current_positive": {
+      "n": 976240,
+      "zero_cases": 37097,
+      "zero_rate": 0.037999877079406705,
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "average_precision": 0.037999877079406705,
+      "brier": 0.03684462979435921,
+      "tn": 939143,
+      "fp": 0,
+      "fn": 37097,
+      "tp": 0,
+      "threshold": 0.79,
+      "rule": {
+        "kind": "global",
+        "threshold": 0.79,
+        "f1": 0.6959014332411365
+      }
+    },
+    "current_1_to_3": {
+      "n": 235750,
+      "zero_cases": 32901,
+      "zero_rate": 0.13955885471898197,
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "average_precision": 0.13955885471898197,
+      "brier": 0.1341366469860077,
+      "tn": 202849,
+      "fp": 0,
+      "fn": 32901,
+      "tp": 0,
+      "threshold": 0.79,
+      "rule": {
+        "kind": "global",
+        "threshold": 0.79,
+        "f1": 0.6959014332411365
+      }
+    }
+  },
+  "raw_validation": {
+    "overall": {
+      "n": 1109673,
+      "zero_cases": 133319,
+      "zero_rate": 0.12014260056791505,
+      "f1": 0.721434141074856,
+      "precision": 0.7211259583461362,
+      "recall": 0.7217425873281378,
+      "average_precision": 0.5538978841519204,
+      "brier": 0.06696387380361557,
+      "tn": 939143,
+      "fp": 37211,
+      "fn": 37097,
+      "tp": 96222,
+      "threshold": 0.99,
+      "rule": {
+        "kind": "global",
+        "threshold": 0.99,
+        "f1": 0.6959014332411365
+      }
+    },
+    "current_positive": {
+      "n": 976240,
+      "zero_cases": 37097,
+      "zero_rate": 0.037999877079406705,
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "average_precision": 0.037999877079406705,
+      "brier": 0.03799987584352493,
+      "tn": 939143,
+      "fp": 0,
+      "fn": 37097,
+      "tp": 0,
+      "threshold": 0.99,
+      "rule": {
+        "kind": "global",
+        "threshold": 0.99,
+        "f1": 0.6959014332411365
+      }
+    },
+    "current_1_to_3": {
+      "n": 235750,
+      "zero_cases": 32901,
+      "zero_rate": 0.13955885471898197,
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "average_precision": 0.13955885471898197,
+      "brier": 0.1395588517189026,
+      "tn": 202849,
+      "fp": 0,
+      "fn": 32901,
+      "tp": 0,
+      "threshold": 0.99,
+      "rule": {
+        "kind": "global",
+        "threshold": 0.99,
+        "f1": 0.6959014332411365
+      }
+    }
+  },
+  "raw_rule": {
+    "kind": "global",
+    "threshold": 0.99,
+    "f1": 0.6959014332411365
+  },
+  "calibrated_on": "2025-05-08/2025-05-11",
+  "seconds": 6.356562300003134,
+  "memory": {
+    "rss_gib": 0.3969993591308594,
+    "peak_rss_gib": 0.47917938232421875
+  },
+  "code_sha256": "3dc1725d1b321f383b66858e626296154c6ecfd91ae53f2f8ce20ec1982c1362",
+  "protocol_sha256": "b27638a47352bd26ed8c1b0dc34f3f434c9bb914ed3667f0f52ec1640ba362f8",
+  "data_sha256": "d3c9895a41a39a52c9fe8e26f5d4333456c6b8d45c2e460d887d983a88c79233",
+  "completed_at_utc": "2026-10-20T06:19:15.804179+00:00",
+  "information_track": "availability_timestamp_causal",
+  "independent_final_test": false
+}

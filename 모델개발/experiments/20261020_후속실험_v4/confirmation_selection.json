@@ -1,0 +1,32 @@
+{
+  "selected_at_utc": "2026-10-20T14:29:33.232241+00:00",
+  "selected": [],
+  "qualifying": [],
+  "plan_sha256": "69252c51dbb4462612b4be859992adac1a9cdf64812fab48d74736f7e3820d21",
+  "forecast_plan_sha256": "7c914484210e1b753ce356467971f4bd4f55b88e8a94488a65e14f7197486f2a",
+  "criterion": {
+    "eligible": [
+      "lightgbm_full_112d",
+      "lightgbm_full_recency28",
+      "lightgbm_full_63",
+      "lightgbm_ordinal",
+      "lightgbm_poisson",
+      "lightgbm_state_experts",
+      "lightgbm_calendar",
+      "lightgbm_prior_year",
+      "lightgbm_kbo",
+      "temporal_mlp24",
+      "temporal_mlp168",
+      "tcn24",
+      "graph_tcn24",
+      "lightgbm_air_lag2",
+      "lightgbm_air_lag3",
+      "lightgbm_gfs_prior_day"
+    ],
+    "minimum_A_F1_gain_absolute": 0.002,
+    "maximum_candidates": 2,
+    "selection": "rank by A F1 gain, name ascending for ties; then run identical candidate on B and C",
+    "interpretation": "Development confirmation only; selected intervals are not independent final tests"
+  },
+  "independent_final_test": false
+}

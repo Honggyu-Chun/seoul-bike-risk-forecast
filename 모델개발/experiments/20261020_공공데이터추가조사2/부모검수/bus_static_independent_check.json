@@ -1,0 +1,14 @@
+{
+  "checked_at_utc": "2026-10-20T09:45:26.857364+00:00",
+  "all_station_rows_checked": 2729,
+  "source_rows": 11262,
+  "physical_rows": 11171,
+  "method": "independent full brute-force Haversine vs agent KD-tree unit-sphere chord method",
+  "distance_radius_m": 6371008.8,
+  "maximum_nearest_distance_error_m": 1.2157315154581738e-09,
+  "all_300_500_1000m_counts_match": true,
+  "source_sha256": "5ae361afa5526b83cf59a05b14859883ee1074df1b4d76723ceef4dff12543d2",
+  "feature_sha256": "cf4771766b296423264d81c7818e33fa1c961e44310e4d4b0495f0019b8ba5db",
+  "passed": true,
+  "model_training_run": false
+}

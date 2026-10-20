@@ -1,0 +1,49 @@
+{
+  "status": "ok",
+  "service": "bikeList / rentBikeStatus",
+  "request_start_utc": "2026-10-20T06:58:36.088578+00:00",
+  "pages": [
+    {
+      "start": 1,
+      "rows": 1000,
+      "received_at_utc": "2026-10-20T06:58:36.787142+00:00"
+    },
+    {
+      "start": 1001,
+      "rows": 1000,
+      "received_at_utc": "2026-10-20T06:58:37.493981+00:00"
+    },
+    {
+      "start": 2001,
+      "rows": 716,
+      "received_at_utc": "2026-10-20T06:58:38.066773+00:00"
+    }
+  ],
+  "rows": 2716,
+  "fields": [
+    "rackTotCnt",
+    "stationName",
+    "parkingBikeTotCnt",
+    "shared",
+    "stationLatitude",
+    "stationLongitude",
+    "stationId",
+    "station_id",
+    "quantity",
+    "received_at_utc",
+    "received_at_kst"
+  ],
+  "numeric_quantity_rows": 2716,
+  "matched_historical_cohort": 2618,
+  "historical_cohort_rows": 2729,
+  "historical_hourly_grid_equivalence_verified": false,
+  "provider_observation_timestamp_present": false,
+  "timestamp_policy": "received_at is acquisition time only, not a fabricated provider measurement time",
+  "execution_scope": "one-shot capture, no recurring automation or service deployment",
+  "operational_requirements": [
+    "retain timestamped snapshots at hourly decision grid",
+    "validate source measurement age",
+    "allow fallback when previous hourly features are unavailable",
+    "measure prediction latency separately"
+  ]
+}

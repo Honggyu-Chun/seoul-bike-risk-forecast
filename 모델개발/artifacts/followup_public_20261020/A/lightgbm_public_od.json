@@ -1,0 +1,366 @@
+{
+  "name": "lightgbm_public_od",
+  "status": "ok",
+  "fold": "A",
+  "spec": {
+    "name": "lightgbm_public_od",
+    "extra_features": 7,
+    "base_features": 105,
+    "group": "od",
+    "kind": "lgb",
+    "leaves": 127,
+    "rounds": 900,
+    "window": 56,
+    "seed": 20261020
+  },
+  "features": [
+    "station_code",
+    "hour",
+    "weekday",
+    "weekend",
+    "quantity",
+    "log_quantity",
+    "q_lag_1",
+    "q_lag_2",
+    "q_lag_24",
+    "q_lag_168",
+    "q_mean_3",
+    "q_known_3",
+    "q_mean_24",
+    "q_known_24",
+    "q_change_1",
+    "q_change_3",
+    "neighbor_mean",
+    "neighbor_std",
+    "neighbor_zero_fraction",
+    "neighbor_low2_fraction",
+    "neighbor_observed_count",
+    "neighbor_degree",
+    "neighbor_coverage",
+    "neighbor_min",
+    "neighbor_change_1",
+    "neighbor_change_3",
+    "own_minus_neighbor",
+    "q_lag_3",
+    "q_lag_4",
+    "q_lag_5",
+    "q_lag_6",
+    "q_lag_8",
+    "q_lag_12",
+    "q_lag_23",
+    "q_lag_25",
+    "q_lag_47",
+    "q_lag_48",
+    "q_lag_49",
+    "q_lag_72",
+    "q_lag_96",
+    "q_lag_120",
+    "q_lag_144",
+    "q_lag_167",
+    "q_lag_169",
+    "q_lag_192",
+    "q_lag_336",
+    "t_std_3",
+    "t_zero_fraction_3",
+    "t_std_6",
+    "t_mean_6",
+    "t_zero_fraction_6",
+    "t_low2_fraction_6",
+    "t_std_12",
+    "t_mean_12",
+    "t_zero_fraction_12",
+    "t_std_24",
+    "t_zero_fraction_24",
+    "t_low2_fraction_24",
+    "t_std_48",
+    "t_mean_48",
+    "t_zero_fraction_48",
+    "t_std_168",
+    "t_mean_168",
+    "t_zero_fraction_168",
+    "t_low2_fraction_168",
+    "t_zero_run",
+    "t_low3_run",
+    "t_positive_run",
+    "t_delta2",
+    "t_delta6",
+    "t_acceleration",
+    "t_relative_change",
+    "t_samehour_mean7d",
+    "t_samehour_deviation",
+    "t_samehour_zero7d",
+    "t_nominal_capacity",
+    "t_capacity_ratio",
+    "t_hour_sin",
+    "t_hour_cos",
+    "t_week_sin",
+    "t_week_cos",
+    "t_latitude",
+    "t_longitude",
+    "t_district",
+    "g_250m_mean",
+    "g_250m_zero",
+    "g_250m_low2",
+    "g_250m_change",
+    "g_1000m_mean",
+    "g_1000m_zero",
+    "g_1000m_low2",
+    "g_1000m_change",
+    "g_knn5_mean",
+    "g_knn5_zero",
+    "g_knn5_low2",
+    "g_knn5_change",
+    "g_city_zero",
+    "g_district_zero",
+    "h_global",
+    "h_station",
+    "h_station_hour",
+    "h_station_weekday",
+    "h_station_duration",
+    "h_recent_station",
+    "h_station_known",
+    "od_log_reported_departures_mean",
+    "od_log_reported_arrivals_mean",
+    "od_departure_reported_day_fraction",
+    "od_arrival_reported_day_fraction",
+    "od_departure_report_present",
+    "od_arrival_report_present",
+    "od_current_crosswalk_linked"
+  ],
+  "fit": {
+    "iterations": 140
+  },
+  "actual_train_rows": 3663966,
+  "full_train_rows": 3663966,
+  "stage_rows": {
+    "stop": 457283,
+    "cal": 195912,
+    "policy": 261202,
+    "valid": 1109673
+  },
+  "rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.35000000000000003,
+    "positive_threshold": 0.36000000000000004,
+    "f1": 0.7257505773672055
+  },
+  "validation": {
+    "overall": {
+      "n": 1109673,
+      "zero_cases": 133319,
+      "zero_rate": 0.12014260056791505,
+      "f1": 0.7426716174281153,
+      "precision": 0.7117571823470356,
+      "recall": 0.776393462297197,
+      "average_precision": 0.8222233798997051,
+      "brier": 0.04412121698260307,
+      "tn": 934436,
+      "fp": 41918,
+      "fn": 29811,
+      "tp": 103508,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.35000000000000003,
+        "positive_threshold": 0.36000000000000004,
+        "f1": 0.7257505773672055
+      }
+    },
+    "current_positive": {
+      "n": 976240,
+      "zero_cases": 37097,
+      "zero_rate": 0.037999877079406705,
+      "f1": 0.3372697213037317,
+      "precision": 0.45069660489652374,
+      "recall": 0.26945575113890613,
+      "average_precision": 0.36626944778537623,
+      "brier": 0.028637029230594635,
+      "tn": 926960,
+      "fp": 12183,
+      "fn": 27101,
+      "tp": 9996,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.35000000000000003,
+        "positive_threshold": 0.36000000000000004,
+        "f1": 0.7257505773672055
+      }
+    },
+    "current_1_to_3": {
+      "n": 235750,
+      "zero_cases": 32901,
+      "zero_rate": 0.13955885471898197,
+      "f1": 0.3503300452421568,
+      "precision": 0.44919404688317244,
+      "recall": 0.2871341296617124,
+      "average_precision": 0.3815639874788866,
+      "brier": 0.10309741646051407,
+      "tn": 191265,
+      "fp": 11584,
+      "fn": 23454,
+      "tp": 9447,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.35000000000000003,
+        "positive_threshold": 0.36000000000000004,
+        "f1": 0.7257505773672055
+      }
+    }
+  },
+  "raw_validation": {
+    "overall": {
+      "n": 1109673,
+      "zero_cases": 133319,
+      "zero_rate": 0.12014260056791505,
+      "f1": 0.7426438689646023,
+      "precision": 0.7113284523139054,
+      "recall": 0.7768435106773979,
+      "average_precision": 0.8222233899384777,
+      "brier": 0.04382406969010348,
+      "tn": 934324,
+      "fp": 42030,
+      "fn": 29751,
+      "tp": 103568,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.35000000000000003,
+        "positive_threshold": 0.36000000000000004,
+        "f1": 0.7257573329059144
+      }
+    },
+    "current_positive": {
+      "n": 976240,
+      "zero_cases": 37097,
+      "zero_rate": 0.037999877079406705,
+      "f1": 0.3374355170437304,
+      "precision": 0.45038477116241393,
+      "recall": 0.2697792274307895,
+      "average_precision": 0.3662694489728281,
+      "brier": 0.02847544033164693,
+      "tn": 926930,
+      "fp": 12213,
+      "fn": 27089,
+      "tp": 10008,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.35000000000000003,
+        "positive_threshold": 0.36000000000000004,
+        "f1": 0.7257573329059144
+      }
+    },
+    "current_1_to_3": {
+      "n": 235750,
+      "zero_cases": 32901,
+      "zero_rate": 0.13955885471898197,
+      "f1": 0.35048451946415665,
+      "precision": 0.44888467014712863,
+      "recall": 0.28746846600407283,
+      "average_precision": 0.3815639871882263,
+      "brier": 0.10254441261374779,
+      "tn": 191237,
+      "fp": 11612,
+      "fn": 23443,
+      "tp": 9458,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.35000000000000003,
+        "positive_threshold": 0.36000000000000004,
+        "f1": 0.7257573329059144
+      }
+    }
+  },
+  "raw_rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.35000000000000003,
+    "positive_threshold": 0.36000000000000004,
+    "f1": 0.7257573329059144
+  },
+  "calibrated_on": "2025-05-08/2025-05-11",
+  "seconds": 567.7029579000082,
+  "memory": {
+    "rss_gib": 2.886486053466797,
+    "peak_rss_gib": 6.7470245361328125
+  },
+  "code_sha256": "8911aa28af7ca368c1bb5522541a959c58180bdafba1ab5df07a2636668255f0",
+  "protocol_sha256": "d46dda0183613a3b647e6625df37181b144e7ee42d651390b769395c81689e41",
+  "data_sha256": "d3c9895a41a39a52c9fe8e26f5d4333456c6b8d45c2e460d887d983a88c79233",
+  "completed_at_utc": "2026-10-20T14:54:15.843124+00:00",
+  "information_track": "public_archive_and_current_crosswalk_sensitivity",
+  "independent_final_test": false,
+  "public_extension_plan_sha256": "7d39ff6b19a08eaf60270d6aa37d5a87e77ee891e2635a1b0254137a91af2a3b",
+  "public_feature_metadata_sha256": "d63aef664f9a5933385ea366453b16590ee4821c034855b8dc4049ac9b7fffdb",
+  "public_runner_sha256": "58c964e9e78138ad31122224623aaa285a9aa2ef47c66204d5fe54eae9b49a03",
+  "historical_reception_verified": false,
+  "historical_station_ID_identity_verified": false,
+  "interpretation": "conditional prior archive and current crosswalk comparison; not proven historical live reception",
+  "public_checks": {
+    "all_passed": true,
+    "all_stage_raw_predictions_checked": true,
+    "entire_validation_counts_and_metrics_match": true,
+    "checks": [
+      {
+        "stage": "cal",
+        "rows": 195912,
+        "raw_maximum_absolute_error": 2.9800516498923457e-08
+      },
+      {
+        "stage": "policy",
+        "rows": 261202,
+        "raw_maximum_absolute_error": 2.9801982881494382e-08
+      },
+      {
+        "stage": "valid",
+        "rows": 1109673,
+        "raw_maximum_absolute_error": 2.980197244539795e-08
+      }
+    ],
+    "artifact_hashes": [
+      {
+        "path": "A\\models\\lightgbm_public_od.txt",
+        "bytes": 5285670,
+        "sha256": "06481b4fa96e3ae8ade13e31b2b442fc3d40f131db78777a28755b1d14f7404e"
+      },
+      {
+        "path": "A\\models\\lightgbm_public_od_calibrator.joblib",
+        "bytes": 847,
+        "sha256": "bd0e9e5997af18c021795d085fb668660516fd3ed3c9ba32441f1e9db540cabd"
+      },
+      {
+        "path": "predictions\\A\\lightgbm_public_od_cal.npy",
+        "bytes": 783776,
+        "sha256": "0cc050bf917e22a9a7a63415d1aae139c913dda41d421c618a74fa2315161a52"
+      },
+      {
+        "path": "predictions\\A\\lightgbm_public_od_cal_exact.npy",
+        "bytes": 1567424,
+        "sha256": "bff41b9811a87fb8768eadf8e76ebf0b77256a189f7dcabb88d1d55286a007ec"
+      },
+      {
+        "path": "predictions\\A\\lightgbm_public_od_policy.npy",
+        "bytes": 1044936,
+        "sha256": "cf7f352c2a7c38650fad921be1cf3b81388ce507f825b0d5cd60557e278f0905"
+      },
+      {
+        "path": "predictions\\A\\lightgbm_public_od_policy_exact.npy",
+        "bytes": 2089744,
+        "sha256": "c2ccf02bd28c1e0bfd6d0941b5c2e735cb4b1418a33bbd1d1bf848a69fefda3c"
+      },
+      {
+        "path": "predictions\\A\\lightgbm_public_od_valid.npy",
+        "bytes": 4438820,
+        "sha256": "37269d8282cca05a910ded605fa7f9ca5bce1861504acc8470ae1d3171c37524"
+      },
+      {
+        "path": "predictions\\A\\lightgbm_public_od_valid_exact.npy",
+        "bytes": 8877512,
+        "sha256": "156d02867ba8988b65e38b9545404fec7dd67e70ff3576899e2c28978d2ecd5c"
+      }
+    ],
+    "verified_at_utc": "2026-10-20T14:54:57.514249+00:00"
+  }
+}

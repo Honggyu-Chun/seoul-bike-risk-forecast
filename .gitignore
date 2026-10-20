@@ -1,0 +1,46 @@
+# Local archives and authoring intermediates
+/백업/
+/작업기록/
+/.migration-20261020/
+/참고자료/
+/legacy/
+/제공파일/
+/과제제안서/이전작성본/
+/모델개발/deliverables/
+/모델개발/docs/reference_20261020/
+
+# Python environments and machine specific state
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.cache/
+*.pyc
+.env
+.env.*
+!**/.env.example
+*.log
+~$*
+*.tmp
+
+# Large generated data and binary artifacts
+*.zip
+*.parquet
+*.npy
+*.npz
+*.joblib
+*.cbm
+*.pt
+*.pth
+
+# Machine-specific handoff notes remain on the owner's PC
+/AGENTS.md
+/이어서_작업하기.md
+/로컬작업안내.md
+/P프로젝트_시작안내.md
+
+# Transfer-only files belong to the preserved transfer branch
+/backup_parts/
+/restore_p_project.py
+/transfer_manifest.json
+/verification.json
+/verification_tests.xml

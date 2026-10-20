@@ -1,0 +1,213 @@
+{
+  "started_at_utc": "2026-10-20T10:15:29.411257+00:00",
+  "received_at_utc": "2026-10-20T10:15:48.326161+00:00",
+  "catalog_url": "https://data.seoul.go.kr/dataList/OA-21229/F/1/datasetView.do",
+  "catalog_sha256": "59433d151ace235fe52ea47ab9609accb678a865f201e3cb339fdcb034cb73f7",
+  "download_url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?&useCache=false",
+  "post_parameters": {
+    "infId": "OA-21229",
+    "seqNo": "",
+    "seq": "2411",
+    "infSeq": "1"
+  },
+  "response": {
+    "status": 200,
+    "content_type": "application/x-msdownload",
+    "content_length": "123792524",
+    "last_modified": null
+  },
+  "archive": "원본/tpss_bcycl_od_statnhm_202411.zip",
+  "bytes": 123792524,
+  "sha256": "47c55849ebe695c4e7d89e53ad78e6a5ada29d4244d53052cb47dc369be854a4",
+  "plan_sha256_before_fetch": "5fd606a6e3583667d9278973afec31e83a644789bac97861e8d87a829124d8f9",
+  "catalog_modified_date": "2024-12-08",
+  "first_publication_proven": false,
+  "historical_received_at_proven": false,
+  "historical_original_unchanged_proven": false,
+  "target_data_month": "2024-11",
+  "private_key_used": false,
+  "members": [
+    {
+      "name": "tpss_bcycl_od_statnhm_20241101.csv",
+      "bytes": 29010751,
+      "compressed_bytes": 5936073,
+      "crc32": "920819d2"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241102.csv",
+      "bytes": 24542427,
+      "compressed_bytes": 5048659,
+      "crc32": "d255c1ec"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241103.csv",
+      "bytes": 22151035,
+      "compressed_bytes": 4549192,
+      "crc32": "d357f213"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241104.csv",
+      "bytes": 26961413,
+      "compressed_bytes": 5501040,
+      "crc32": "88813d65"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241105.csv",
+      "bytes": 25594760,
+      "compressed_bytes": 5217657,
+      "crc32": "525b2e9b"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241106.csv",
+      "bytes": 24373579,
+      "compressed_bytes": 4964283,
+      "crc32": "6f314232"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241107.csv",
+      "bytes": 24642525,
+      "compressed_bytes": 5023268,
+      "crc32": "86c9c245"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241108.csv",
+      "bytes": 25681497,
+      "compressed_bytes": 5245631,
+      "crc32": "008f3323"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241109.csv",
+      "bytes": 21373722,
+      "compressed_bytes": 4394496,
+      "crc32": "876944a9"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241110.csv",
+      "bytes": 19373466,
+      "compressed_bytes": 3982681,
+      "crc32": "4ab34391"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241111.csv",
+      "bytes": 27278832,
+      "compressed_bytes": 5574482,
+      "crc32": "dd53aa42"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241112.csv",
+      "bytes": 27794438,
+      "compressed_bytes": 5680882,
+      "crc32": "f92405af"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241113.csv",
+      "bytes": 28562478,
+      "compressed_bytes": 5837997,
+      "crc32": "7b9bed9d"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241114.csv",
+      "bytes": 24123038,
+      "compressed_bytes": 4920416,
+      "crc32": "0007e038"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241115.csv",
+      "bytes": 27650750,
+      "compressed_bytes": 5650460,
+      "crc32": "294607c9"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241116.csv",
+      "bytes": 13910210,
+      "compressed_bytes": 2851173,
+      "crc32": "c1532f01"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241117.csv",
+      "bytes": 13563004,
+      "compressed_bytes": 2774172,
+      "crc32": "6f039345"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241118.csv",
+      "bytes": 19394040,
+      "compressed_bytes": 3936772,
+      "crc32": "7b8bb847"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241119.csv",
+      "bytes": 21974977,
+      "compressed_bytes": 4473838,
+      "crc32": "8cc91426"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241120.csv",
+      "bytes": 21877052,
+      "compressed_bytes": 4448725,
+      "crc32": "dca25a46"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241121.csv",
+      "bytes": 22694346,
+      "compressed_bytes": 4583527,
+      "crc32": "47c661e5"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241122.csv",
+      "bytes": 22449982,
+      "compressed_bytes": 4575715,
+      "crc32": "bd674f70"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241123.csv",
+      "bytes": 16419291,
+      "compressed_bytes": 3361301,
+      "crc32": "8500eb91"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241124.csv",
+      "bytes": 14695824,
+      "compressed_bytes": 3011052,
+      "crc32": "65dcf42f"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241125.csv",
+      "bytes": 23051748,
+      "compressed_bytes": 4695159,
+      "crc32": "6b480533"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241126.csv",
+      "bytes": 6355107,
+      "compressed_bytes": 1277538,
+      "crc32": "924d7b1c"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241127.csv",
+      "bytes": 199,
+      "compressed_bytes": 117,
+      "crc32": "ac14bb46"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241128.csv",
+      "bytes": 7746598,
+      "compressed_bytes": 1557127,
+      "crc32": "9da193e6"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241129.csv",
+      "bytes": 13187697,
+      "compressed_bytes": 2660348,
+      "crc32": "ffcde284"
+    },
+    {
+      "name": "tpss_bcycl_od_statnhm_20241130.csv",
+      "bytes": 10111487,
+      "compressed_bytes": 2053321,
+      "crc32": "91e28f9b"
+    }
+  ],
+  "scope": "Prior-period aggregate source inspection; no new model scores or held-back labels.",
+  "storage_folder_name_normalized_at_utc": "2026-10-20T10:16:23.704553+00:00"
+}

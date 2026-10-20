@@ -1,0 +1,35 @@
+{
+  "experiment_id": "rider_q1_v1",
+  "purpose": "Forecast the next recorded hourly zero-quantity state and evaluate rider station choice in archived data.",
+  "freeze_before_test": true,
+  "timezone": "Asia/Seoul",
+  "input_period": ["2025-01-01T00:00:00", "2025-03-31T23:00:00"],
+  "split_on": "target_time",
+  "train_target_end_exclusive": "2025-03-01T00:00:00",
+  "validation_target_end_exclusive": "2025-03-15T00:00:00",
+  "test_target_end_exclusive": "2025-04-01T00:00:00",
+  "station_cohort_train_only": {
+    "minimum_known_train_hours": 336,
+    "minimum_nonzero_train_hours": 24,
+    "quantity_varies_in_train": true,
+    "requires_202412_location": true
+  },
+  "horizon_hours": 1,
+  "neighbor_radius_m": 500,
+  "candidate_models": [
+    {"num_leaves": 31, "min_data_in_leaf": 300},
+    {"num_leaves": 63, "min_data_in_leaf": 500}
+  ],
+  "training": {"learning_rate": 0.05, "num_boost_round": 240, "early_stopping_rounds": 30, "num_threads": 4, "seed": 20261019},
+  "threshold_grid": [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95],
+  "selection": "Highest validation F1; ties prefer higher threshold. B1 and M1 use the same search budget. No test-based selection.",
+  "recommendation": {"origin_count": 120, "candidate_radius_m": 500, "input_hours": [7, 8, 18, 19], "weekdays_only": true, "seed": 20261019},
+  "provisional_goals": {"m1_minus_b1_f1_pp": 5, "m1_recall_no_worse": true, "r2_minus_r0_effective_recommendation_pp": 5, "paired_extra_straight_distance_m_max": 100},
+  "limitations": [
+    "Cohort establishes observed quantity variation, not certified operating status.",
+    "The source column is 거치대수량 on a portal described as hourly available quantity; exact within-hour sampling semantics remain unverified.",
+    "Missing records are unknown, never zero.",
+    "Evaluation is next-record, rolling one-hour retrospective replay, not proof of 5-10 minute accuracy or actual rentals.",
+    "B1S is a separately evaluated snapshot-only baseline for live sample preview, not a replacement for B1 in the primary comparison."
+  ]
+}

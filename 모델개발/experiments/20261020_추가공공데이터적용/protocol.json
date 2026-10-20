@@ -1,0 +1,129 @@
+{
+  "created_at_utc": "2026-10-20T10:30:45.754233+00:00",
+  "status": "after_partial_v4_development_results_before_public_extension_training",
+  "v4_protocol_sha256": "b27638a47352bd26ed8c1b0dc34f3f434c9bb914ed3667f0f52ec1640ba362f8",
+  "feature_metadata_sha256": "d63aef664f9a5933385ea366453b16590ee4821c034855b8dc4049ac9b7fffdb",
+  "definition_document_sha256": "4ba045954895d210f770f5aace67f11779fa7f031e9a03f68f7f6483a2e0e101",
+  "information_track": "public_archive_and_current_crosswalk_sensitivity",
+  "development_folds": {
+    "A": {
+      "train_end": "2025-05-01",
+      "stop_start": "2025-05-01",
+      "stop_end": "2025-05-08",
+      "cal_start": "2025-05-08",
+      "cal_end": "2025-05-11",
+      "policy_start": "2025-05-11",
+      "policy_end": "2025-05-15",
+      "valid_start": "2025-05-15",
+      "valid_end": "2025-06-01"
+    },
+    "B": {
+      "train_end": "2025-05-15",
+      "stop_start": "2025-05-15",
+      "stop_end": "2025-05-22",
+      "cal_start": "2025-05-22",
+      "cal_end": "2025-05-26",
+      "policy_start": "2025-05-26",
+      "policy_end": "2025-06-01",
+      "valid_start": "2025-06-01",
+      "valid_end": "2025-06-15"
+    },
+    "C": {
+      "train_end": "2025-06-01",
+      "stop_start": "2025-06-01",
+      "stop_end": "2025-06-08",
+      "cal_start": "2025-06-08",
+      "cal_end": "2025-06-11",
+      "policy_start": "2025-06-11",
+      "policy_end": "2025-06-15",
+      "valid_start": "2025-06-15",
+      "valid_end": "2025-07-01"
+    }
+  },
+  "candidate_specs": [
+    {
+      "name": "lightgbm_public_bus",
+      "extra_features": 4,
+      "base_features": 105,
+      "group": "bus",
+      "kind": "lgb",
+      "leaves": 127,
+      "rounds": 900,
+      "window": 56,
+      "seed": 20261020
+    },
+    {
+      "name": "lightgbm_public_od",
+      "extra_features": 7,
+      "base_features": 105,
+      "group": "od",
+      "kind": "lgb",
+      "leaves": 127,
+      "rounds": 900,
+      "window": 56,
+      "seed": 20261020
+    },
+    {
+      "name": "lightgbm_public_bus_od",
+      "extra_features": 11,
+      "base_features": 105,
+      "group": "bus_od",
+      "kind": "lgb",
+      "leaves": 127,
+      "rounds": 900,
+      "window": 56,
+      "seed": 20261020
+    }
+  ],
+  "folds": [
+    "A",
+    "B",
+    "C"
+  ],
+  "registered_comparisons": 9,
+  "primary_control": "lightgbm_full",
+  "additional_controls": [
+    "persistence",
+    "seasonal_day",
+    "seasonal_week",
+    "smoothed_markov",
+    "logistic",
+    "random_forest",
+    "lightgbm_basic"
+  ],
+  "calibration_and_threshold_policy": "same time windows and v4 procedures; never outside validation tuning",
+  "parallel_training_jobs": 1,
+  "threads": 4,
+  "run_only_after_v4_queue_terminates": true,
+  "unopened_Q3_Q4_scores_remain_unopened": true,
+  "independent_final_test": false,
+  "historical_reception_verified": false,
+  "historical_station_ID_identity_verified": false,
+  "adoption": "conditional data experiment; not eligible as proven historical live-input winner",
+  "inherited_fit_function_source_sha256": "8911aa28af7ca368c1bb5522541a959c58180bdafba1ab5df07a2636668255f0",
+  "inherited_reader_source_sha256": "1f6f619b3223115393059c75e7d789b1dc54582f8f443038116a9e8e4471b2d7",
+  "source_cross_midnight_date_semantics_verified": false,
+  "extension_runner_implemented": true,
+  "implementation_scope": "Reuse frozen v4 fitting/calibration/threshold procedures after the active v4 queue terminates; separate output folder and report.",
+  "public_runner_source_sha256": "58c964e9e78138ad31122224623aaa285a9aa2ef47c66204d5fe54eae9b49a03",
+  "implementation_frozen_at_utc": "2026-10-20T10:52:38.793932+00:00",
+  "reporting_plan": {
+    "groups": [
+      "overall",
+      "current_positive",
+      "current_1_to_3"
+    ],
+    "day_block_groups": [
+      "overall",
+      "current_positive"
+    ],
+    "block_lengths_days": [
+      1,
+      7
+    ],
+    "paired_repeats": 2000,
+    "seed": 20261020,
+    "interpretation": "development sensitivity ranges, not independent superiority proof or guaranteed 95% coverage",
+    "brier_difference_unit": "native Brier units, not percentage points"
+  }
+}

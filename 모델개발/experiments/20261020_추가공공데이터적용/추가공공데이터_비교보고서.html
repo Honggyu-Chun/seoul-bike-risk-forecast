@@ -1,0 +1,86 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>추가 공공데이터 모델 비교</title><style>body{background:#edf1f5;color:#203246;margin:0;font:16px/1.8 "Malgun Gothic",sans-serif}main{max-width:1120px;margin:30px auto;padding:32px;background:white}h1{font-size:28px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:10px;border-bottom:1px solid #dce4eb}th{background:#edf4f9}img{width:100%;height:auto}figure{margin:24px 0}a{color:#176c9d}</style><main><h1>추가 공공데이터가 예측에 도움이 되는가</h1><p>9개 비교의 계산 검수를 완료한다.</p><p>버스정류소 4개, 선행 대여·반납 7개, 결합 11개를 같은 105개 특징 LightGBM에 각각 추가한다. 같은 A/B/C 개발 기간·정답·코호트·학습 설정·종료·보정·정책 선택 절차를 사용한다.</p><p>역사 수신·원본 불변·과거 ST-ID 동일성·자정을 넘는 이동의 기준 날짜는 미검증이다. 이 결과는 조건부 자료 비교이며 운영 성능이나 독립 최종 시험 우위로 바꾸어 쓰지 않는다.</p><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>기간</th>
+      <th>추가 자료</th>
+      <th>전체 F1(%)</th>
+      <th>공간·전환 기준 대비(%p)</th>
+      <th>전환 재현율(%)</th>
+      <th>전환 오경보 차이(건)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>A</td>
+      <td>버스정류소 4개 추가</td>
+      <td>74.155</td>
+      <td>+0.000</td>
+      <td>28.47</td>
+      <td>+0</td>
+    </tr>
+    <tr>
+      <td>A</td>
+      <td>선행 대여·반납 7개 추가</td>
+      <td>74.267</td>
+      <td>+0.112</td>
+      <td>26.95</td>
+      <td>-1,293</td>
+    </tr>
+    <tr>
+      <td>A</td>
+      <td>버스·선행 흐름 11개 추가</td>
+      <td>74.267</td>
+      <td>+0.112</td>
+      <td>26.95</td>
+      <td>-1,293</td>
+    </tr>
+    <tr>
+      <td>B</td>
+      <td>버스정류소 4개 추가</td>
+      <td>72.316</td>
+      <td>+0.000</td>
+      <td>24.94</td>
+      <td>+0</td>
+    </tr>
+    <tr>
+      <td>B</td>
+      <td>선행 대여·반납 7개 추가</td>
+      <td>72.337</td>
+      <td>+0.021</td>
+      <td>27.54</td>
+      <td>+1,446</td>
+    </tr>
+    <tr>
+      <td>B</td>
+      <td>버스·선행 흐름 11개 추가</td>
+      <td>72.337</td>
+      <td>+0.021</td>
+      <td>27.54</td>
+      <td>+1,446</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>버스정류소 4개 추가</td>
+      <td>74.463</td>
+      <td>+0.000</td>
+      <td>22.25</td>
+      <td>+0</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>선행 대여·반납 7개 추가</td>
+      <td>74.443</td>
+      <td>-0.020</td>
+      <td>24.13</td>
+      <td>+1,051</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>버스·선행 흐름 11개 추가</td>
+      <td>74.443</td>
+      <td>-0.020</td>
+      <td>24.13</td>
+      <td>+1,051</td>
+    </tr>
+  </tbody>
+</table><figure><img src="시각화/03_추가자료_F1차이.png" alt="추가자료의 기간별 F1 차이"></figure><p>양수인 F1 차이는 점수 증가, 음수인 오류 건수 차이는 오류 감소를 뜻한다. 전체 F1·전환 재현율·오경보를 함께 확인한다. 전체·현재 양수·현재 1~3대 구간을 각 기준 모델과 비교한 CSV를 저장한다.</p><p>날짜별 모든 대여소를 함께 묶은 짝지은 1일·7일 블록을 각각 2,000회 다시 뽑는다. 짧은 개발 기간·단일 초기값·여러 후보 비교·선택 편향이 남아 재표집 범위를 보장된 95% 신뢰수준이나 독립 우월성 증명으로 표현하지 않는다.</p><p><a href="추가자료_각기준모델대비.csv">각 기준 모델 대비 전체 수치</a> · <a href="추가자료_날짜블록_차이범위.csv">날짜별 변동 범위</a></p><p><a href="데이터준비_쉬운설명.html">원천·정제·누락·연결 설명</a> · <a href="특징정의와근거.md">처리 근거와 정확한 특징 정의</a></p></main></html>

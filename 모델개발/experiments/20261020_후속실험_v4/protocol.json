@@ -1,0 +1,32 @@
+{
+  "id": "followup_v4_20261020",
+  "status": "development_protocol_frozen_before_new_comparisons",
+  "authorization": "사용자가 조사 범위를 모델 구현·학습·비교 실험으로 확장함",
+  "timezone": "Asia/Seoul",
+  "seed": 20261020,
+  "threads": 4,
+  "cohort": "preserved 2729 training-selected stations",
+  "target": "quantity at exact next hourly grid equals zero; current and target both observed",
+  "already_opened": ["2025-03-15/2025-03-31", "2025-04-15/2025-05-14"],
+  "development_folds": {
+    "A": {"train_end":"2025-05-01", "stop_start":"2025-05-01", "stop_end":"2025-05-08", "cal_start":"2025-05-08", "cal_end":"2025-05-11", "policy_start":"2025-05-11", "policy_end":"2025-05-15", "valid_start":"2025-05-15", "valid_end":"2025-06-01"},
+    "B": {"train_end":"2025-05-15", "stop_start":"2025-05-15", "stop_end":"2025-05-22", "cal_start":"2025-05-22", "cal_end":"2025-05-26", "policy_start":"2025-05-26", "policy_end":"2025-06-01", "valid_start":"2025-06-01", "valid_end":"2025-06-15"},
+    "C": {"train_end":"2025-06-01", "stop_start":"2025-06-01", "stop_end":"2025-06-08", "cal_start":"2025-06-08", "cal_end":"2025-06-11", "policy_start":"2025-06-11", "policy_end":"2025-06-15", "valid_start":"2025-06-15", "valid_end":"2025-07-01"}
+  },
+  "duplicate_policy":"collapse_identical_discard_conflicts",
+  "model_checkpoint_selection":"early stopping by stop-set logloss, never by outside validation",
+  "decision_selection":"global or current-state thresholds selected on policy set using same 0.01 grid for all models",
+  "probability_calibration":"raw discrimination is reported; any calibration fits cal set only",
+  "train_windows_days":[56,112],
+  "basic_baselines":["persistence","seasonal_day","seasonal_week","smoothed_markov","logistic","random_forest","lightgbm_basic"],
+  "mandatory_strong_controls":["lightgbm_full","catboost_temporal","xgboost_temporal","M2_refit"],
+  "next_families":["window_and_recency","calendar_and_prior_year","temporal_neural","ordinal_and_count_distribution","sparse_graph","temporal_ensemble"],
+  "unopened_later_validation":"2025-Q3",
+  "unopened_final_candidate":"2025-Q4",
+  "later_test_gate":"no Q3/Q4 scoring before saved selection; current user authorization includes the experiments, and development may continue on A/B/C",
+  "information_tracks":["timestamp-causal availability and public calendar","archived-weather sensitivity, not verified live vintage"],
+  "data_admissibility":"external features require historical coverage, station/time linkage, and source/publication timing record",
+  "resource_plan":{"parallel_training_jobs":1,"threads":4,"soft_process_memory_gib":9,"no_cuda_gpu_detected":true},
+  "performance_reporting":"F1, precision, recall, AP, Brier, FP, FN, current-positive and low-quantity subsets, sample sizes, fit time and peak RSS",
+  "non_goals":["modify service UI/API","overwrite v1/v3 frozen results","claim observed rental success","retune on Q3/Q4 scores"]
+}

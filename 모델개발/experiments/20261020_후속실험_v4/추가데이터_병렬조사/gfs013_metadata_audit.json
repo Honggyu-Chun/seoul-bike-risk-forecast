@@ -1,0 +1,32 @@
+{
+  "source_url": "https://api.open-meteo.com/data/ncep_gfs013/static/meta.json",
+  "endpoint_provenance": "Official website source model-updates +page.svelte: lines51-67,366-377; tree7083376e436061822f26c5becb9d41c5f87b6d58",
+  "started_at_utc": "2026-10-20T08:48:08.127869+00:00",
+  "received_at_utc": "2026-10-20T08:48:09.370407+00:00",
+  "status": 200,
+  "server_date": "Tue, 20 Oct 2026 08:48:11 GMT",
+  "bytes": 608,
+  "sha256": "8e844c7b3185c849eb635ab8e7720eaed189b3e000bc73e891719b1d42e1cc84",
+  "current_snapshot_only": true,
+  "historical_2025_publication_verified": false,
+  "metadata_api_calls_this_step": 1,
+  "raw_fields": [
+    "chunk_time_length",
+    "crs_wkt",
+    "data_end_time",
+    "last_run_availability_time",
+    "last_run_initialisation_time",
+    "last_run_modification_time",
+    "temporal_resolution_seconds",
+    "update_interval_seconds"
+  ],
+  "converted_utc": {
+    "data_end_time": "2026-11-05T01:00:00+00:00",
+    "last_run_availability_time": "2026-10-20T05:44:23+00:00",
+    "last_run_initialisation_time": "2026-10-20T00:00:00+00:00",
+    "last_run_modification_time": "2026-10-20T05:23:31+00:00"
+  },
+  "measured_init_to_available_hours": 5.739722222222222,
+  "day1_to_input_nominal_margin_hours": 17.09361111111111,
+  "nominal_margin_assumptions": "At target V=t+1h, fixed day1 offset has nominal origin V-24h; observed CURRENT init-to-availability delay plus10min propagation. Not a historical maximum-delay bound or per-row run reconstruction."
+}

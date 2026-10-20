@@ -1,0 +1,28 @@
+[
+  {
+    "source_id": "vol_20250101_sample",
+    "url": "http://openapi.seoul.go.kr:8088/sample/xml/VolInfo/1/5/A-01/20250101/12/",
+    "checked_at": "2026-10-20T18:39:23.722180+09:00",
+    "request_rows": 5,
+    "key_type": "public sample; no private key loaded",
+    "http_status": 200,
+    "bytes": 685,
+    "sha256": "f270bf85e9882d4ffc90c3a5e90c91b976915dce6f618ce2bc4e3edf6aa235c8",
+    "access_result": "response received",
+    "xml_fields": [
+      "CODE",
+      "MESSAGE",
+      "RESULT",
+      "VolInfo",
+      "hh",
+      "io_type",
+      "lane_num",
+      "list_total_count",
+      "row",
+      "spot_num",
+      "vol",
+      "ymd"
+    ],
+    "preview": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><VolInfo><list_total_count>4</list_total_count><RESULT><CODE>INFO-000</CODE><MESSAGE>정상 처리되었습니다</MESSAGE></RESULT><row><spot_num>A-01</spot_num><ymd>20250101</ymd><hh>12</hh><io_type>1</io_type><lane_num>1</lane_num><vol>513</vol></row><row><spot_num>A-01</spot_num><ymd>20250101</ymd><hh>12</hh><io_type>1</io_type><lane_num>2</lane_num><vol>752</vol></row><row><spot_num>A-01</spot_num><ymd>20250101</ymd><hh>12</hh><io_type>2</io_type><lane_num>1</lane_num><vol>523</vol></row><row><spot_num>A-01</spot_num><ymd>20250101</ymd><hh>12</hh><io_type>2</io_type><lane_num>2</lane_num><vol>490</vol></row></VolInfo>"
+  }
+]

@@ -1,0 +1,497 @@
+{
+  "saved_at_utc": "2026-10-20T08:52:35.460504+00:00",
+  "status": "current_files_hashed",
+  "files": 66,
+  "bytes": 35448352,
+  "all_files_stable_during_hash": true,
+  "initial_preservation": {
+    "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\최초보존검수_20261020T070339Z.json",
+    "sha256": "a16de73dfb20121c2fec81eb91194a97a85ae1c9c50487063537cb01963a7861",
+    "bytes_identical_to_original": true,
+    "prior_entries": 40,
+    "currently_matched": 39,
+    "changed_since_initial": [
+      "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\보고서와재개방법.md"
+    ],
+    "missing_since_initial": []
+  },
+  "validation_scope": {
+    "operational_input_tests_last_run": "21 passed; prior subtask test run; not rerun for documentation-only edits",
+    "saved_table_offline_checks": "21 passed in initial checkpoint; original results retained",
+    "new_metadata_http_calls": 1,
+    "new_model_training": false,
+    "new_large_data_downloads": false,
+    "kopis_requests": false,
+    "current_metadata_capture": "2026-10-20T08:48:09.370407+00:00",
+    "historical_2025_as_issued_verified": false,
+    "current_pipeline_adapter_files_included_if_present": [
+      "bike_demo\\followup_v4\\operational_inputs.py",
+      "tests\\test_operational_inputs.py",
+      "bike_demo\\followup_v4\\air_runtime.py"
+    ]
+  },
+  "inventory": [
+    {
+      "path": "bike_demo\\followup_v4\\air_runtime.py",
+      "bytes": 1198,
+      "sha256": "8a9736668298fcd42b12a0c677c7f161805aa4cba2a4dc252ef90777cc8adfc3",
+      "mtime_ns": 1792485621440648100,
+      "stable_during_hash": true
+    },
+    {
+      "path": "bike_demo\\followup_v4\\operational_inputs.py",
+      "bytes": 10454,
+      "sha256": "98f2c53b32c5af96d368fe4b5af16f5bf6f698cc3eaa6eb66fabba7c53493fa8",
+      "mtime_ns": 1792484847078440600,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\air_live_20261020.json",
+      "bytes": 5400,
+      "sha256": "8dafb1566e83f52d6a46125d369e8fba1aa0aecbdf1ae0a2550702c2e4f8abcb",
+      "mtime_ns": 1792479607724612400,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\gfs_day1_center_2025h1.json",
+      "bytes": 173078,
+      "sha256": "7dc22b4ebc128d3408b49746cdada823ca5e1a429b0589c246dd21c89c7983d2",
+      "mtime_ns": 1792479220415329100,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\gfs_day1_center_probe.json",
+      "bytes": 7157,
+      "sha256": "9cd3fc48a6fabe83230a594ba9abdba77f84457335ab6305fbf105dfc09716b9",
+      "mtime_ns": 1792479158185261100,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\gfs_day1_live_20261020.json",
+      "bytes": 2514,
+      "sha256": "a1aa130e043cdec34a391692ac8124696db1e06686bada3560bc96ba86b09d37",
+      "mtime_ns": 1792479608855612300,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\gfs_day1_northeast_2025h1.json",
+      "bytes": 173251,
+      "sha256": "dc1fac35056c932cdd2fdc6e53751b3b15aa14cb01f7913500ca92ba95ea5a28",
+      "mtime_ns": 1792479231552131600,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\gfs_day1_northwest_2025h1.json",
+      "bytes": 173097,
+      "sha256": "de42d15560d792a585c52d3151235af2089fdaa1a19b2d82b74d3add4dd37b15",
+      "mtime_ns": 1792479227551167600,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\gfs_day1_southeast_2025h1.json",
+      "bytes": 173108,
+      "sha256": "c748b9c9c1e3d5a739d094338ffda00c5b4dc79fb171a8e485ef24917ae90145",
+      "mtime_ns": 1792479238151073900,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\gfs_day1_southwest_2025h1.json",
+      "bytes": 173009,
+      "sha256": "b4e4ff5ddc8510d67af4b7db1b642a1b13d3c4c2a311bf69560d716d3c065e0e",
+      "mtime_ns": 1792479234933786200,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\air_2025h1_input_lags.csv",
+      "bytes": 13537134,
+      "sha256": "a1ef23aa459d6f17e0788ecd542d7bf9096470866fff8dc87b28d3152a616c47",
+      "mtime_ns": 1792479305069786400,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\air_2025h1_input_lags.parquet",
+      "bytes": 1518461,
+      "sha256": "9635cae1889ab45417024ba3b0ae93b87f917df30ce9d52eb29bbcd34d3a8c7f",
+      "mtime_ns": 1792479299593927800,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\air_2025h1_input_lags2_3_24.parquet",
+      "bytes": 2253153,
+      "sha256": "825ac49044d5b0b180dedd354fe2b78fbff18487a4965d94259cae6c68738dea",
+      "mtime_ns": 1792479717225562300,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\air_2025h1_observations.csv",
+      "bytes": 10527664,
+      "sha256": "85c74b3aaaf16d6774b1d2f259fba72630b7ccb079f8ea351c1073bf63b5fd05",
+      "mtime_ns": 1792479297226621700,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\air_2025h1_observations.parquet",
+      "bytes": 899647,
+      "sha256": "2f7bf2f2cc922c6bc68e6a4794ec53b79efa6f398de58041ab8d09edfabe2627",
+      "mtime_ns": 1792479292747914600,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\air_live_20261020.csv",
+      "bytes": 3928,
+      "sha256": "bd0e5c7d6d1f23f504eaaa6868dfba32b694b97c3e95e0b0a6fdd958a6c2051a",
+      "mtime_ns": 1792479617982302300,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\gfs_day1_2025h1_input.csv",
+      "bytes": 1801940,
+      "sha256": "3a6a19f1afd1cee3c82ba4ba9e537fc6b7bd3dd954ffa44e8d8ebbb46823965f",
+      "mtime_ns": 1792479422574452600,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\gfs_day1_2025h1_input.parquet",
+      "bytes": 206240,
+      "sha256": "077014fc1de5a3019489dc566a214172ecf6f21b698634652b6b808a93ff3964",
+      "mtime_ns": 1792479421726931400,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\gfs_day1_live_20261020.csv",
+      "bytes": 2424,
+      "sha256": "6d61dd60191ceb37513df2aa147100add75fa6696aa9d640954352ff06052435",
+      "mtime_ns": 1792479617965309400,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\gfs_day1_points.csv",
+      "bytes": 284,
+      "sha256": "2681ed516d216f842027eccb11ce31883d644a96b4f896dac1928a5e16c780dd",
+      "mtime_ns": 1792479422579046600,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\station_air_district_join.csv",
+      "bytes": 43744,
+      "sha256": "e87c187d22b4b5159dfa81f23862111a13398d84d7742735c5f9a44de632805c",
+      "mtime_ns": 1792479305299607400,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\model_ready\\station_gfs_point_join.csv",
+      "bytes": 87782,
+      "sha256": "a2ce0e3f7c6ae92424710898107f90b7c7423130385c278b2c7934e1b469edf8",
+      "mtime_ns": 1792479422829140800,
+      "stable_during_hash": true
+    },
+    {
+      "path": "data\\raw\\followup_v4_extra\\seoul_air_2025.zip",
+      "bytes": 2910118,
+      "sha256": "ccbcb2991a15ab4bc7523ca803689578146f11ff9d2c6ca0707bbdebfdedbbb8",
+      "mtime_ns": 1792479157909393100,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\air_curation_audit.json",
+      "bytes": 3834,
+      "sha256": "a9101a6389bb264ca2e08d4760e331b5a6d0439c5b69cbef130678dc349e0efd",
+      "mtime_ns": 1792479305774384200,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\air_district_missing_percent.csv",
+      "bytes": 3155,
+      "sha256": "9467c701cf1d6a48338f5a60315e00b8b0d40bc098cc5740f83af37c7a527e9c",
+      "mtime_ns": 1792479717311708900,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\air_download_manifest.json",
+      "bytes": 711,
+      "sha256": "86fd6ccd20971509f4b1e21d6f8a62e313a72393be116790fa0b4ff7fbf39b3b",
+      "mtime_ns": 1792479158112849800,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\air_live_20261020_audit.json",
+      "bytes": 1696,
+      "sha256": "7f37c57faf5288e261ad976a6cb1c7fa09d5c776c99665f7b9ab54b0a7785aa9",
+      "mtime_ns": 1792479617983324800,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\air_runtime_lags_schema.json",
+      "bytes": 1226,
+      "sha256": "8c9ffb41a763c5766d0cfe8ab926210c390f05a5b46bf7620fe5e6afd8b4e7a8",
+      "mtime_ns": 1792479717344228600,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\api__Sources__App__Gfs__GfsDomain.swift",
+      "bytes": 13541,
+      "sha256": "292ecc0bd9c360a3b3512375163a2bb6f498dc8a48afbf2db5b266d848efab8f",
+      "mtime_ns": 1792486121344011300,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\api__Sources__App__Gfs__GfsDomainVariable.swift",
+      "bytes": 4055,
+      "sha256": "a7cadcd6f3f17a4a1261ac35fbfb4a856acfa363813f1576871d70f1f0879b3d",
+      "mtime_ns": 1792486121705653100,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\api__Sources__App__Gfs__GfsDownload.swift",
+      "bytes": 29996,
+      "sha256": "24a2ae0f6c87247284fd286797cf1fe8eee45aec756004caac142842dc4c5207",
+      "mtime_ns": 1792486176845638100,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\api__Sources__App__Gfs__GfsVariableDownloadable.swift",
+      "bytes": 21966,
+      "sha256": "176e1fe5d30acb5d31ad9f538f72bae10a04bef45aa6a4167e2d7983a223fb27",
+      "mtime_ns": 1792486177216594800,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\api__Sources__App__Helper__OmFileSplitter.swift",
+      "bytes": 44083,
+      "sha256": "477723d0c382da553f4e3f8861199cfaa733f6d401ac80193e66f56b40d82b3c",
+      "mtime_ns": 1792486122126970900,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\api__Sources__App__Helper__Reader__GenericReader.swift",
+      "bytes": 11991,
+      "sha256": "074f37b6106a4791342b8628667714bad3eef034e0bcf3d5a16c250de50d4eea",
+      "mtime_ns": 1792486122487757700,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\api__Sources__App__Helper__Reader__GenericReaderCached.swift",
+      "bytes": 1902,
+      "sha256": "180a0e28f6a2ad7192318b4a30c36719ad0c45507adca5c16c10719fbaa3ab6a",
+      "mtime_ns": 1792486122880499900,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\api__Sources__App__Helper__Reader__GenericReaderDerived.swift",
+      "bytes": 4564,
+      "sha256": "ee822663ca6967d8d2383338aafb41c634d9175144c1973ad2fe0750a3721d19",
+      "mtime_ns": 1792486123293510100,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\api__Sources__App__Helper__Reader__GenericReaderMixerRaw.swift",
+      "bytes": 6998,
+      "sha256": "ea33ff313b46e7300b7501f57814f19aadfe8a1a3b55c506acc4785d5e5c1e21",
+      "mtime_ns": 1792486123752574300,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\api__Sources__App__Helper__Reader__GenericReaderMulti.swift",
+      "bytes": 5369,
+      "sha256": "84f3284c225dd187c9393dd5492c78bc1706671fcbb6a09b747076a365391b6d",
+      "mtime_ns": 1792486124139746700,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\api__Tests__AppTests__GenericReaderMissingRunTests.swift",
+      "bytes": 11409,
+      "sha256": "69efd9a4c0f08d419117cdf626f894790689fbcb19729cc8ab545ebeacefc446",
+      "mtime_ns": 1792486124559493500,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\collect_extra.py",
+      "bytes": 5405,
+      "sha256": "ff5087aa52280083c0144b8f7d72997c70a0daa6848fbb20f593be6b6760a544",
+      "mtime_ns": 1792479144816343000,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\forecast_curation_audit.json",
+      "bytes": 2073,
+      "sha256": "897c9d5f64dd5d74fd777a87bd60db99957045a0363fa3b200a80b3b47ed3fe0",
+      "mtime_ns": 1792479423073138800,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\forecast_download_manifest.json",
+      "bytes": 7463,
+      "sha256": "e666991eb4005f07b345f98ba5b075477f9800e38066e2b052fb11afc3a1d4e6",
+      "mtime_ns": 1792479239183965900,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\forecast_probe_manifest.json",
+      "bytes": 1491,
+      "sha256": "e5e34a84d228d946b409c844c36ee83c6abe8d10ebf51e4e6094fa9abaa8a3cb",
+      "mtime_ns": 1792479159224840600,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\gfs013_metadata_audit.json",
+      "bytes": 1520,
+      "sha256": "516852b5776a537da86cdc7c564735056cc6cda3d89117453cd48fb63d6da111",
+      "mtime_ns": 1792486089372409300,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\gfs013_metadata_current_20261020.json",
+      "bytes": 608,
+      "sha256": "8e844c7b3185c849eb635ab8e7720eaed189b3e000bc73e891719b1d42e1cc84",
+      "mtime_ns": 1792486089370407100,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\gfs_day1_live_20261020_audit.json",
+      "bytes": 2309,
+      "sha256": "34d1c939f150486fef5cb5b42d977cf8a7723a54e0a0b8313662c9c0772c281a",
+      "mtime_ns": 1792479617969345300,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\GFS_실시간적격성_최종검토.md",
+      "bytes": 7900,
+      "sha256": "dfdc78faef4b32db5fd7ad0125d9bcc7838f85fe763f9ca133cd8d313b7261d4",
+      "mtime_ns": 1792486315924297000,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\OA-1200_catalog.html",
+      "bytes": 99622,
+      "sha256": "f9f1c0b18b52a430531cdaa57e0459df31294d8cf1053cbdabaf714bcfbdabdb",
+      "mtime_ns": 1792479465277592600,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\OA-1200_openapi.html",
+      "bytes": 21289,
+      "sha256": "09efc8811cf55cae4cdf73415f55d5ddb2788879b5ac2872d0dc7be4a0ee4380",
+      "mtime_ns": 1792479513601600600,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\OA-2221_catalog.html",
+      "bytes": 113007,
+      "sha256": "c45e66c5790e250b66040f18f191ad8cc62e053f56c749a2a8b3fd01158f5b69",
+      "mtime_ns": 1792479032924296700,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\official_api_source_paths.json",
+      "bytes": 3103,
+      "sha256": "4fea7ced4b17c4512a692bd6d1faef63de6ec3f4623317b0368923aaa1ddb5d7",
+      "mtime_ns": 1792486120641742800,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\official_website_source_paths.json",
+      "bytes": 2453,
+      "sha256": "e4309f5b25683d77f11d7abae8acb646e62286770536def7d51143755dc11a71",
+      "mtime_ns": 1792486021841553100,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\prepare_extra.py",
+      "bytes": 14942,
+      "sha256": "e3252283c6555c759f870fc4e218d4c03b246cbb29066777b22d5d7b9976700b",
+      "mtime_ns": 1792479711511169800,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\src__routes__en__docs__model-updates__+layout.ts",
+      "bytes": 308,
+      "sha256": "a3b94f48a87be038bf6fb7ffa75c6fd6d2d53b655e0b7d11a6cd8d11d6433323",
+      "mtime_ns": 1792486022227121100,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\src__routes__en__docs__model-updates__+page.svelte",
+      "bytes": 31920,
+      "sha256": "ac9de9a1a2c7a72f1006b0672c92020afc828edd83181ec72af00f09b37c4050",
+      "mtime_ns": 1792486022618328000,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\src__routes__en__docs__previous-runs-api__+layout.ts",
+      "bytes": 328,
+      "sha256": "292e6dd90545aa9ed21996d32688f4473326543025103af93072e4a55ce7074d",
+      "mtime_ns": 1792486022929460600,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\src__routes__en__docs__previous-runs-api__+page.svelte",
+      "bytes": 14422,
+      "sha256": "3c9888eb416d2f20d04f11500f1fbea689c796a0e2ad7ea7bbdfab9f7d3415ac",
+      "mtime_ns": 1792486023227983800,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\src__routes__en__docs__previous-runs-api__options.ts",
+      "bytes": 3572,
+      "sha256": "c26547127a15edc5d4cafe7775e7fe0c7e5cfaed3ae4dea61e24f413a6dedb3d",
+      "mtime_ns": 1792486023549247300,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\verify_live.py",
+      "bytes": 6913,
+      "sha256": "6b686f0302149ff9b2159177c568fccbdf50bc77147d5df1c499a9b848d7adb7",
+      "mtime_ns": 1792479600709334600,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\verify_saved.py",
+      "bytes": 2751,
+      "sha256": "116aee1e22c41f00bd093610e19372e5b4b442ba94ea4086383951de88faefb7",
+      "mtime_ns": 1792479812879070000,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\보고서와재개방법.md",
+      "bytes": 20251,
+      "sha256": "4b8741fadd22bbfccb9788686f264efe5fbf0c3627a9fac78e9e6e6518f90d21",
+      "mtime_ns": 1792486315926290900,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\보존검수.json",
+      "bytes": 10349,
+      "sha256": "a16de73dfb20121c2fec81eb91194a97a85ae1c9c50487063537cb01963a7861",
+      "mtime_ns": 1792479819880424100,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\시각화\\01_대기질_기간추이.png",
+      "bytes": 146749,
+      "sha256": "0cdd9c85a57d858959a1e3b8864e196a941a5993e733688cbbe424d7a127eb84",
+      "mtime_ns": 1792479310069358800,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\시각화\\02_대기질_결측률.png",
+      "bytes": 58852,
+      "sha256": "1d71fb9de5cdc0a536bbe4be8fa2af6179bebba505cd05eaad5bb4079f49158e",
+      "mtime_ns": 1792479311962811000,
+      "stable_during_hash": true
+    },
+    {
+      "path": "experiments\\20261020_후속실험_v4\\추가데이터_병렬조사\\최초보존검수_20261020T070339Z.json",
+      "bytes": 10349,
+      "sha256": "a16de73dfb20121c2fec81eb91194a97a85ae1c9c50487063537cb01963a7861",
+      "mtime_ns": 1792486351752899100,
+      "stable_during_hash": true
+    },
+    {
+      "path": "tests\\test_operational_inputs.py",
+      "bytes": 7122,
+      "sha256": "63f5185022579c5bbc6e834d3e49c9be010f63b9bc5dba1b700902681cf8028c",
+      "mtime_ns": 1792484847079440300,
+      "stable_during_hash": true
+    }
+  ]
+}

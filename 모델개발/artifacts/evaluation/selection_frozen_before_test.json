@@ -1,0 +1,101 @@
+{
+  "frozen_at_utc": "2026-10-19T15:13:39.400922+00:00",
+  "protocol_sha256": "8f9ce76e32e9764f715e7ca185e3d75b1ef785f782156cb43913c11b381393b2",
+  "models": {
+    "B1S": {
+      "features": [
+        "station_code",
+        "hour",
+        "weekday",
+        "weekend",
+        "quantity",
+        "log_quantity"
+      ],
+      "model": "B1S",
+      "candidate": 1,
+      "setting": {
+        "num_leaves": 63,
+        "min_data_in_leaf": 500
+      },
+      "best_iteration": 166,
+      "threshold": 0.35,
+      "validation_f1": 0.7452342249150288,
+      "seconds": 32.318117468999844,
+      "model_sha256": "bf6afc52319383de1a92a230b2549cc9232f320b6404cac0ab5481c91d24f49d"
+    },
+    "B1": {
+      "features": [
+        "station_code",
+        "hour",
+        "weekday",
+        "weekend",
+        "quantity",
+        "log_quantity",
+        "q_lag_1",
+        "q_lag_2",
+        "q_lag_24",
+        "q_lag_168",
+        "q_mean_3",
+        "q_known_3",
+        "q_mean_24",
+        "q_known_24",
+        "q_change_1",
+        "q_change_3"
+      ],
+      "model": "B1",
+      "candidate": 1,
+      "setting": {
+        "num_leaves": 63,
+        "min_data_in_leaf": 500
+      },
+      "best_iteration": 240,
+      "threshold": 0.35,
+      "validation_f1": 0.7478851316294074,
+      "seconds": 49.263972508000734,
+      "model_sha256": "f51d3c6694c8bb099c58363c169bd192b2d6622075fee57906ec4268d32dce61"
+    },
+    "M1": {
+      "features": [
+        "station_code",
+        "hour",
+        "weekday",
+        "weekend",
+        "quantity",
+        "log_quantity",
+        "q_lag_1",
+        "q_lag_2",
+        "q_lag_24",
+        "q_lag_168",
+        "q_mean_3",
+        "q_known_3",
+        "q_mean_24",
+        "q_known_24",
+        "q_change_1",
+        "q_change_3",
+        "neighbor_mean",
+        "neighbor_std",
+        "neighbor_zero_fraction",
+        "neighbor_low2_fraction",
+        "neighbor_observed_count",
+        "neighbor_degree",
+        "neighbor_coverage",
+        "neighbor_min",
+        "neighbor_change_1",
+        "neighbor_change_3",
+        "own_minus_neighbor"
+      ],
+      "model": "M1",
+      "candidate": 1,
+      "setting": {
+        "num_leaves": 63,
+        "min_data_in_leaf": 500
+      },
+      "best_iteration": 164,
+      "threshold": 0.35,
+      "validation_f1": 0.7489508014360116,
+      "seconds": 50.33649689400045,
+      "model_sha256": "1f171b93aa8d64d647fcb260054262bafac3c5397067793ef7febd8dc213e4cb"
+    }
+  },
+  "selection_uses_test": false
+}

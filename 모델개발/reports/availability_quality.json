@@ -1,0 +1,222 @@
+{
+  "source_rows_january": 1922370,
+  "source_member": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2025년도_1분기/data_2501.csv",
+  "encoding": "cp949",
+  "columns": [
+    "일시",
+    "대여소번호",
+    "대여소명",
+    "시간대",
+    "거치대수량"
+  ],
+  "source_unique_hours": 695,
+  "source_rows_per_hour_min": 2766,
+  "source_rows_per_hour_max": 2766,
+  "missing_city_hours_count": 49,
+  "missing_city_hours": [
+    "2025-01-02 09:00:00",
+    "2025-01-09 00:00:00",
+    "2025-01-09 01:00:00",
+    "2025-01-09 02:00:00",
+    "2025-01-09 03:00:00",
+    "2025-01-09 04:00:00",
+    "2025-01-09 05:00:00",
+    "2025-01-09 06:00:00",
+    "2025-01-09 07:00:00",
+    "2025-01-09 08:00:00",
+    "2025-01-09 09:00:00",
+    "2025-01-09 10:00:00",
+    "2025-01-09 11:00:00",
+    "2025-01-09 12:00:00",
+    "2025-01-09 13:00:00",
+    "2025-01-09 14:00:00",
+    "2025-01-09 15:00:00",
+    "2025-01-09 16:00:00",
+    "2025-01-09 17:00:00",
+    "2025-01-09 18:00:00",
+    "2025-01-09 19:00:00",
+    "2025-01-09 20:00:00",
+    "2025-01-09 21:00:00",
+    "2025-01-09 22:00:00",
+    "2025-01-09 23:00:00",
+    "2025-01-10 00:00:00",
+    "2025-01-10 01:00:00",
+    "2025-01-10 02:00:00",
+    "2025-01-10 03:00:00",
+    "2025-01-10 04:00:00",
+    "2025-01-10 05:00:00",
+    "2025-01-10 06:00:00",
+    "2025-01-10 07:00:00",
+    "2025-01-10 08:00:00",
+    "2025-01-10 09:00:00",
+    "2025-01-10 10:00:00",
+    "2025-01-10 11:00:00",
+    "2025-01-10 12:00:00",
+    "2025-01-10 13:00:00",
+    "2025-01-10 14:00:00",
+    "2025-01-10 15:00:00",
+    "2025-01-10 16:00:00",
+    "2025-01-10 17:00:00",
+    "2025-01-10 18:00:00",
+    "2025-01-10 19:00:00",
+    "2025-01-10 20:00:00",
+    "2025-01-10 21:00:00",
+    "2025-01-10 22:00:00",
+    "2025-01-10 23:00:00"
+  ],
+  "selected_rows": 13900,
+  "selected_duplicate_station_hours": 0,
+  "selected_quantity_zero_records": 894,
+  "selected_quantity_zero_rate": 0.06431654676258992,
+  "missing_rental_bins_with_availability_record": 7860,
+  "positive_rental_bins_with_zero_reported_quantity": 112,
+  "per_station": [
+    {
+      "station_id": "301",
+      "count": 695,
+      "min": 0,
+      "max": 23,
+      "nunique": 24
+    },
+    {
+      "station_id": "302",
+      "count": 695,
+      "min": 0,
+      "max": 33,
+      "nunique": 31
+    },
+    {
+      "station_id": "303",
+      "count": 695,
+      "min": 0,
+      "max": 29,
+      "nunique": 28
+    },
+    {
+      "station_id": "305",
+      "count": 695,
+      "min": 0,
+      "max": 37,
+      "nunique": 33
+    },
+    {
+      "station_id": "307",
+      "count": 695,
+      "min": 0,
+      "max": 26,
+      "nunique": 26
+    },
+    {
+      "station_id": "308",
+      "count": 695,
+      "min": 0,
+      "max": 68,
+      "nunique": 60
+    },
+    {
+      "station_id": "309",
+      "count": 695,
+      "min": 0,
+      "max": 24,
+      "nunique": 25
+    },
+    {
+      "station_id": "310",
+      "count": 695,
+      "min": 0,
+      "max": 18,
+      "nunique": 19
+    },
+    {
+      "station_id": "316",
+      "count": 695,
+      "min": 0,
+      "max": 28,
+      "nunique": 29
+    },
+    {
+      "station_id": "3405",
+      "count": 695,
+      "min": 0,
+      "max": 23,
+      "nunique": 24
+    },
+    {
+      "station_id": "3425",
+      "count": 695,
+      "min": 0,
+      "max": 22,
+      "nunique": 23
+    },
+    {
+      "station_id": "368",
+      "count": 695,
+      "min": 0,
+      "max": 42,
+      "nunique": 40
+    },
+    {
+      "station_id": "385",
+      "count": 695,
+      "min": 0,
+      "max": 27,
+      "nunique": 28
+    },
+    {
+      "station_id": "458",
+      "count": 695,
+      "min": 0,
+      "max": 27,
+      "nunique": 28
+    },
+    {
+      "station_id": "461",
+      "count": 695,
+      "min": 0,
+      "max": 21,
+      "nunique": 22
+    },
+    {
+      "station_id": "4708",
+      "count": 695,
+      "min": 0,
+      "max": 44,
+      "nunique": 42
+    },
+    {
+      "station_id": "4718",
+      "count": 695,
+      "min": 0,
+      "max": 9,
+      "nunique": 10
+    },
+    {
+      "station_id": "4719",
+      "count": 695,
+      "min": 0,
+      "max": 21,
+      "nunique": 21
+    },
+    {
+      "station_id": "4768",
+      "count": 695,
+      "min": 0,
+      "max": 11,
+      "nunique": 12
+    },
+    {
+      "station_id": "6058",
+      "count": 695,
+      "min": 0,
+      "max": 48,
+      "nunique": 49
+    }
+  ],
+  "interpretation": [
+    "Page describes hourly rental availability; actual column name is 거치대수량",
+    "Quantity varies by hour and can exceed physical QR rack count; not static installed capacity",
+    "Exact within-hour sampling/aggregation timestamp is not documented in the examined file",
+    "A zero reading does not prove a whole hour of stockout, and cannot be substituted for rental count",
+    "Unavailable source time bins stay missing; no rental label was filled from inventory"
+  ]
+}

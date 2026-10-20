@@ -1,0 +1,62 @@
+[
+  {
+    "source_id": "vol_files",
+    "url": "https://topis.seoul.go.kr/refRoom/openRefRoom_2.do",
+    "checked_at": "2026-10-20T18:39:09.348010+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 36790,
+    "sha256": "dd217a12291bb156e3ca6b3c1afd79b20b6b7b8d307b2fec2015b9d00b5b3e59",
+    "final_url": "https://topis.seoul.go.kr/refRoom/openRefRoom_2.do",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\vol_files.txt"
+  },
+  {
+    "source_id": "speed_files",
+    "url": "https://topis.seoul.go.kr/refRoom/openRefRoom_1.do",
+    "checked_at": "2026-10-20T18:39:09.349070+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 46732,
+    "sha256": "927a235f702ff00003ae93b58a84e47873f7b72dce26237a620cefb1ee595461",
+    "final_url": "https://topis.seoul.go.kr/refRoom/openRefRoom_1.do",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\speed_files.txt"
+  },
+  {
+    "source_id": "bike_history_meta",
+    "url": "https://data.seoul.go.kr/dataList/OA-15182/F/1/datasetView.do",
+    "checked_at": "2026-10-20T18:39:09.351087+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 101205,
+    "sha256": "342fd5c3eaa57f1a99bb03264907e36fafa86d02cfc520d085824d7610b392c9",
+    "final_url": "https://data.seoul.go.kr/dataList/OA-15182/F/1/datasetView.do",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\bike_history_meta.txt"
+  },
+  {
+    "source_id": "bike_history_api",
+    "url": "https://data.seoul.go.kr/dataList/openApiView.do?infId=OA-15182&srvType=A&infSeq=1",
+    "checked_at": "2026-10-20T18:39:09.829000+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 20528,
+    "sha256": "d3886cc118f6592df071305ebc81c6ef94882e4519b0e7179bd05e106aed84db",
+    "final_url": "https://data.seoul.go.kr/dataList/openApiView.do?infId=OA-15182&srvType=A&infSeq=1",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\bike_history_api.txt"
+  },
+  {
+    "source_id": "crosswalk_api",
+    "url": "https://data.seoul.go.kr/dataList/openApiView.do?infId=OA-15986&srvType=A&infSeq=1",
+    "checked_at": "2026-10-20T18:39:09.829000+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 19550,
+    "sha256": "edb9f5286f3860cebacd8655522e0b6a672fcc17c1f01c8ab080d91ae1dcb76d",
+    "final_url": "https://data.seoul.go.kr/dataList/openApiView.do?infId=OA-15986&srvType=A&infSeq=1",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\crosswalk_api.txt"
+  }
+]

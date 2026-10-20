@@ -1,0 +1,18 @@
+{
+  "model_f1_delta_pp": 0.024533043714658476,
+  "recall_delta_pp": 0.4135796429873717,
+  "precision_delta_pp": -0.3471280728003179,
+  "false_negatives_reduced": 465,
+  "false_positives_added": 689,
+  "effective_recommendations_added_vs_distance": 10,
+  "effective_recommendations_added_vs_basic_ai": -5,
+  "distance_baseline_ceiling_headroom_pp": 4.823889739663089,
+  "original_5pp_service_goal_exceeds_mathematical_ceiling": true,
+  "current_positive_transition_recall": 0.09396046056919401,
+  "current_positive_transition_f1_delta_pp": -0.31148781858290064,
+  "neighbor_feature_gain_share": 0.0035226891292589628,
+  "current_quantity_gain_share": 0.8993521568080238,
+  "f1_delta_bootstrap_interval_contains_zero": true,
+  "field_success_verified": false,
+  "conclusion": "Prototype works and comparison is reproducible. Spatial-model superiority and practical rider benefit are not established; transition detection needs substantial improvement."
+}

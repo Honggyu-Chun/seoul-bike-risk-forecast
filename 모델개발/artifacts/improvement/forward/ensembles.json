@@ -1,0 +1,320 @@
+[
+  {
+    "a": "causal_weather_spatial",
+    "b": "catboost_depth_8",
+    "weight_a": 0.5,
+    "rule": {
+      "kind": "global",
+      "threshold": 0.39,
+      "f1": 0.7770409416387991
+    },
+    "unconstrained_rule": {
+      "kind": "global",
+      "threshold": 0.39,
+      "f1": 0.7770409416387991
+    },
+    "f1": 0.7770409416387991
+  },
+  {
+    "a": "causal_weather_spatial",
+    "b": "catboost_depth_8",
+    "weight_a": 0.75,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.38,
+      "positive_threshold": 0.41000000000000003,
+      "f1": 0.7761755644224456
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.38,
+      "positive_threshold": 0.41000000000000003,
+      "f1": 0.7761755644224456
+    },
+    "f1": 0.7761755644224456
+  },
+  {
+    "a": "catboost_depth_8",
+    "b": "causal_weather_own",
+    "weight_a": 0.5,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.41000000000000003,
+      "f1": 0.776028787715892
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.41000000000000003,
+      "f1": 0.776028787715892
+    },
+    "f1": 0.776028787715892
+  },
+  {
+    "a": "causal_weather_spatial",
+    "b": "catboost_depth_8",
+    "weight_a": 0.25,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.36000000000000004,
+      "positive_threshold": 0.38,
+      "f1": 0.775758028658434
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.36000000000000004,
+      "positive_threshold": 0.38,
+      "f1": 0.775758028658434
+    },
+    "f1": 0.775758028658434
+  },
+  {
+    "a": "catboost_depth_8",
+    "b": "spatial_multiscale_63",
+    "weight_a": 0.5,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.42000000000000004,
+      "positive_threshold": 0.39,
+      "f1": 0.7755933146575438
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.42000000000000004,
+      "positive_threshold": 0.39,
+      "f1": 0.7755933146575438
+    },
+    "f1": 0.7755933146575438
+  },
+  {
+    "a": "catboost_depth_8",
+    "b": "causal_weather_own",
+    "weight_a": 0.75,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.36000000000000004,
+      "positive_threshold": 0.41000000000000003,
+      "f1": 0.7753329436682568
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.36000000000000004,
+      "positive_threshold": 0.41000000000000003,
+      "f1": 0.7753329436682568
+    },
+    "f1": 0.7753329436682568
+  },
+  {
+    "a": "catboost_depth_8",
+    "b": "causal_weather_own",
+    "weight_a": 0.25,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.38,
+      "positive_threshold": 0.43,
+      "f1": 0.7753242556534853
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.38,
+      "positive_threshold": 0.43,
+      "f1": 0.7753242556534853
+    },
+    "f1": 0.7753242556534853
+  },
+  {
+    "a": "causal_weather_spatial",
+    "b": "spatial_multiscale_63",
+    "weight_a": 0.5,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.41000000000000003,
+      "positive_threshold": 0.4,
+      "f1": 0.7752714699442863
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.41000000000000003,
+      "positive_threshold": 0.4,
+      "f1": 0.7752714699442863
+    },
+    "f1": 0.7752714699442863
+  },
+  {
+    "a": "spatial_multiscale_63",
+    "b": "causal_weather_own",
+    "weight_a": 0.5,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.41000000000000003,
+      "positive_threshold": 0.4,
+      "f1": 0.7752359219077998
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.41000000000000003,
+      "positive_threshold": 0.4,
+      "f1": 0.7752359219077998
+    },
+    "f1": 0.7752359219077998
+  },
+  {
+    "a": "catboost_depth_8",
+    "b": "spatial_multiscale_63",
+    "weight_a": 0.75,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.38,
+      "f1": 0.7752162285728601
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.38,
+      "f1": 0.7752162285728601
+    },
+    "f1": 0.7752162285728601
+  },
+  {
+    "a": "causal_weather_spatial",
+    "b": "spatial_multiscale_63",
+    "weight_a": 0.75,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.4,
+      "positive_threshold": 0.41000000000000003,
+      "f1": 0.7751394704550342
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.4,
+      "positive_threshold": 0.41000000000000003,
+      "f1": 0.7751394704550342
+    },
+    "f1": 0.7751394704550342
+  },
+  {
+    "a": "spatial_multiscale_63",
+    "b": "causal_weather_own",
+    "weight_a": 0.25,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.42000000000000004,
+      "f1": 0.7749165083112899
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.42000000000000004,
+      "f1": 0.7749165083112899
+    },
+    "f1": 0.7749165083112899
+  },
+  {
+    "a": "catboost_depth_8",
+    "b": "spatial_multiscale_63",
+    "weight_a": 0.25,
+    "rule": {
+      "kind": "global",
+      "threshold": 0.4,
+      "f1": 0.7745592018770483
+    },
+    "unconstrained_rule": {
+      "kind": "global",
+      "threshold": 0.4,
+      "f1": 0.7745592018770483
+    },
+    "f1": 0.7745592018770483
+  },
+  {
+    "a": "causal_weather_spatial",
+    "b": "causal_weather_own",
+    "weight_a": 0.75,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.43,
+      "f1": 0.7744685717189942
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.43,
+      "f1": 0.7744685717189942
+    },
+    "f1": 0.7744685717189942
+  },
+  {
+    "a": "causal_weather_spatial",
+    "b": "spatial_multiscale_63",
+    "weight_a": 0.25,
+    "rule": {
+      "kind": "global",
+      "threshold": 0.41000000000000003,
+      "f1": 0.7744662034112445
+    },
+    "unconstrained_rule": {
+      "kind": "global",
+      "threshold": 0.41000000000000003,
+      "f1": 0.7744662034112445
+    },
+    "f1": 0.7744662034112445
+  },
+  {
+    "a": "causal_weather_spatial",
+    "b": "causal_weather_own",
+    "weight_a": 0.5,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.42000000000000004,
+      "f1": 0.7744598941316516
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.42000000000000004,
+      "f1": 0.7744598941316516
+    },
+    "f1": 0.7744598941316516
+  },
+  {
+    "a": "spatial_multiscale_63",
+    "b": "causal_weather_own",
+    "weight_a": 0.75,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.4,
+      "positive_threshold": 0.42000000000000004,
+      "f1": 0.7743956745011591
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.4,
+      "positive_threshold": 0.42000000000000004,
+      "f1": 0.7743956745011591
+    },
+    "f1": 0.7743956745011591
+  },
+  {
+    "a": "causal_weather_spatial",
+    "b": "causal_weather_own",
+    "weight_a": 0.25,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.37,
+      "positive_threshold": 0.41000000000000003,
+      "f1": 0.7737836125624894
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.37,
+      "positive_threshold": 0.41000000000000003,
+      "f1": 0.7737836125624894
+    },
+    "f1": 0.7737836125624894
+  }
+]

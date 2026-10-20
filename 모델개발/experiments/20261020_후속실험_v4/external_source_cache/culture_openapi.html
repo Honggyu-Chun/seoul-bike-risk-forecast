@@ -1,0 +1,812 @@
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+
+
+	 
+
+<script type="text/javascript">
+    jQuery(document.body).ready(function () {
+    	
+    	if('3' > 0){
+    		paramAction('OA-23041');
+    		paramAction('서울문화포털 홈페이지');
+    	}
+    	
+    });
+    
+    function paramAction(infId) {
+    	$.ajax({
+            url: '/together/mypage/getReqParam.do',
+            type : 'post',
+            dataType : 'json',
+            data : {infId : infId},
+            success : function(data) {
+                console.log(JSON.stringify(data));
+                makePramTag(data);
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+                console.log( 'jqXHR.status : ' + jqXHR.status +
+                        '\njqXHR.statusText : '+ jqXHR.statusText +
+                        '\njqXHR.responseText : '+ jqXHR.responseText +
+                        '\njqXHR.readyState : '+ jqXHR.readyState );
+            }
+        });
+    }
+    
+    function makePramTag(data) {
+        var paramList = data.paramList;
+        var filterList = data.filterList;
+        var tmpIdx = 0;
+        
+        if(paramList != null && paramList != undefined) {
+            $("#reqParamDiv").show();
+            
+            $(paramList).each(function(index, item) {
+                // filter가 없는 파라미터의 경우 
+                if(item.fitCode == null || item.fitCode == "") {
+                    necYn = item.necYn;
+                    //2012 Hub 개편 : 요청변수 필수/선택 구분
+                    if(necYn == "N") {
+                        necYn = '선택';
+                    } else {
+                        necYn = '필수';
+                    }
+                     
+                  
+                    $('#reqParamTbl').append(''
+                   + ' <tr><th style="width:14%;"> '
+                   + item.reqPrmExp
+                   + ' </th><td><input type=\"text\" title=\"'+item.reqPrmExp+'\" class=\"inp-base input_tit\" onkeypress=\"javascript:if(event.keyCode==13){ requestSend();return false;}\"></td></tr> '
+                              );
+            	
+                } else {    // filter가 있는 파라미터의 경우
+                    //2012 Hub 개편 : 요청변수 필수/선택 구분 
+                    necYn = item.necYn;
+                    if(necYn == "N") {
+                        necYn = '선택';
+                    } else {
+                        necYn = '필수';
+                    }
+
+                    if(filterList != null && filterList != undefined) {
+                    	var tagStr = [filterList.length];
+                        tagStr[tmpIdx] = "";
+                        $(filterList).each(function(idx, fit) {
+                        	for(x in fit) {
+                                $(fit[x]).each(function(i, data) {
+                                    tagStr[idx] += '<option value=\"' + data.ditcCd + '\">'
+                                    + '[' + data.ditcCd + ']' + data.ditcNm + '</option>\n';
+                                });
+                            }
+                        });
+                        
+                        $('#reqParamTbl').append(
+                                '<tr><th scope=\"row\">'
+                                + '<label for=\"REQ_PRM_EXP\">'
+                                + item.reqPrmExp
+                                + '(' + necYn + ')</label></th>'
+                                + '<td>'
+                                + '<select class=\"paramInput\" style=\"max-width: 100%;\">'
+                                + '<option value=\"\">선택</option>'
+                                + tagStr[tmpIdx]
+                                + '</select>'
+                                + '<div>' + item.reqValExp + '</div></td></tr>');
+                        
+                        //20220311
+                        $("#"+item.fitCode+"_D").html(
+	                          '<select style="width: 300;">'
+							+ '<option value="">선택</option>'
+							+ tagStr[tmpIdx]
+							+ '</select>');
+
+                        tmpIdx++;
+                    }
+                }
+            });
+        } else {
+            $("#reqParamDiv").hide();
+        }
+    }
+    
+    function confAct(id) {
+		
+		document.frm.method="post";
+		document.frm.action= "/together/guide/useGuide.do";
+		document.frm.submit();
+	}
+      
+    
+    function createActKey(){
+    	document.frm.action= "https://data.seoul.go.kr/together/mypage/actkeyReq_ss.do";
+		document.frm.method = "get";
+		document.frm.submit();
+	}
+    
+    function createActMetroKey(){
+    	document.frm.action= "/together/mypage/actkeyMetroReq_ss.do";
+		document.frm.method = "get";
+		document.frm.submit();
+	}
+    
+    function downloadFileApi(seqNo) {
+    	$('#seq').val(seqNo);
+    	document.frmFileApi.action = "//datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?&useCache=false";
+    	document.frmFileApi.target = "_self";
+    	document.frmFileApi.method = "post";
+    	document.frmFileApi.submit();
+    } 
+    
+    function requestSend(){
+    	//2012 Hub 개편 : 리스트 출력은 한글 서비스명으로 실제 호출 url은 신규 방식으로(/인증키/요청문서타입/서비스명/요청시작건수/요청종료건수/)
+      	var defaultUrl = "http://openAPI.seoul.go.kr:8088/sample/xml/";
+    	
+    	
+    	//서비스명 추가 
+    	var svcNm = 'aiViewCulture';
+    	
+    	//API_SERVICE_NAME으로 요청 
+    	var requestUrl = defaultUrl+svcNm;
+       	if("OA-23041" == "OA-15799") {
+    		requestUrl += "";
+  //  	} else if("OA-23041" == "OA-12764" || "OA-23041" == "OA-12601") {
+  //  		requestUrl += "/1/5/"+$("#reqParamTbl .inp-base").val() ; 
+    	} else {
+    		requestUrl += "/1/5/";
+    	}
+
+    	var params = "";
+    	var params_1 = "";
+    	var params_2 = "";
+    	var params_rank = "";
+
+    	//테스트 파라미터 중 첫번째 엘리먼트 값이 text 필드인지 select box인지 구분
+    	var td_first = $("#reqParamTbl").find("td:first").html();
+    	if(td_first != null){
+    		if(td_first.indexOf("input_tit") > 0){
+    			params_rank = "1";
+    		}else if(td_first.indexOf("paramInput") > 0){
+    			params_rank = "2";
+    		}
+    	}
+
+    	if($(".input_tit").length >= 1){
+    		for(var i=0; i<$(".input_tit").length; i++){
+    			var param = $(".input_tit").eq(i).val();
+    			if(trim(param) == ""){
+    					var nullValue = $(".paramLabel").eq(i).text();
+    					var necYn = nullValue.split("(");
+    					if(necYn[1] == "필수)") {
+    						alert("[ "+necYn[0]+" ]"+" 입력값이 누락되었습니다.");
+    						return;
+    					}else {
+    						param = " ";
+    					}
+    			}  
+    			params_1 = params_1 + param+"/";
+    		}
+    	}
+    	
+    	//2012 Hub 개편 요청변수의 필수/선택 구분
+    	if($(".paramInput").length >= 1){
+    		for(var i=0; i<$(".paramInput").length; i++){
+    			var param = $(".paramInput").eq(i).val();
+    			if(trim(param) == ""){
+    					var nullValue = $(".paramLabel").eq(i).text();
+    					var necYn = nullValue.split("(");
+    					if(necYn[1] == "필수)") {
+    						alert("[ "+necYn[0]+" ]"+" 입력값이 누락되었습니다.");
+    						return;
+    					}else {
+    						param = " ";
+    					}
+    			}  
+    			params_2 = params_2 + param+"/";
+    		}
+    	}
+
+    	//파라미터의 rank 값에 따라 URL 생성
+    	if(params_rank == "1"){
+    		params= params+params_1+params_2;
+    	}else if(params_rank == "2"){
+    		params= params+params_2+params_1;
+    	}
+    	
+    	requestUrl = requestUrl + params;
+    	
+    	$("#requestUrlDiv").text("");
+    	$("#requestUrlDiv").append("<a href=\""+requestUrl+"\" target=\"_blank\">"+requestUrl+"</a>");
+ 
+//     	$("#resultIfr").attr("src",requestUrl);
+		$.ajax({
+            url: '/dataList/getOpenApiSample.do', 
+            type : 'get',
+            dataType : 'text',
+            data : {
+            	"url" : encodeURI(requestUrl)
+            },
+            success : function(data) {
+               //alert(data);
+               $("#resultIfr").val(data);
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+               // alert("errorThrown")
+            }
+        });
+    }
+    
+    function trim(str){
+        re = /^\s+|\s+$/g;
+        return str.replace(re, '');
+    }
+    
+    function popupKey(){
+  	  if("true"){ 
+  	  		alert('로그인은 필수 입니다.');
+  	  }else{ 
+  	  		alert('잘못된 접근입니다.');
+  	  } 
+  	}
+</script>
+
+
+<section class="ui-tab-pnl selected">
+
+<form name="frmFileApi" id="frmFileApi" >    
+	<input type="hidden" name="infId" id="infId" value="OA-23041"/> <!-- 추가:파일다운로드 변경 (2016.05.09-한국정보공학D&S)-->
+	<input type="hidden" name="seqNo" id="seqNo" />
+	<input type="hidden" name="seq" id="seq" />
+	<input type="hidden" name="infSeq" id="infSeq" value="2"/>
+</form>
+
+<form id="frm2" name="frm2" action="#">
+	<input type="hidden" name="infId" value="OA-23041" />
+	<input type="hidden" name="infSeq" value="2" />
+	<input type="hidden" name="srvType" value="A" />
+		
+	<div class="detail-cont-tit">
+		<div class="fl-item-r openapi-btn">
+			<button type="button" class="btn-base-s" onclick="confAct('1')">Open API 이용안내</button>
+				
+		
+		
+			<button type="button" class="btn-base-s" onclick="createActKey();">인증키 신청</button>
+		
+				
+			<button type="button" class="btn-base-s" onclick="downAPI();">명세서다운로드</button>	
+		</div>
+		<h2>샘플 URL</h2>		
+	</div>
+	<!--1테이블-->	
+	<div class="tbl-base-s type-form">
+		<table>
+			<caption>
+				<strong>샘플 URL</strong>
+				<span class="ui-caption"></span>
+			</caption>
+			<colgroup>
+				<col class="col1">
+				<col class="col2">
+			</colgroup>
+			<tbody>
+			
+			
+							
+			
+				<tr>
+               		<th scope="row">샘플 URL</th>
+					<td>(AI친화)서울시 문화행사 정보<br/>
+                    	
+
+						<a href="http://openapi.seoul.go.kr:8088/sample/xml/aiViewCulture/1/5/" target= "ifr1" title="open api 새창열림">http://openapi.seoul.go.kr:8088/(인증키)/xml/aiViewCulture/1/5/ </a>
+						<br />
+					</td> 
+				</tr>
+				<script type="text/javascript">
+					$.ajax({
+			            url: '/dataList/getOpenApiSample.do', 
+			            type : 'get',
+			            dataType : 'text',
+			            data : {
+			            	"url" : encodeURI("http://openapi.seoul.go.kr:8088/sample/xml/aiViewCulture/1/5/")
+			            },
+			            success : function(data) {
+			               //alert(data);
+			               $("#ifr1").val(data);
+			            },
+			            error : function(jqXHR, textStatus, errorThrown) {
+			                //alert(errorThrown);
+			            }
+			        });
+				</script>
+			
+			
+			
+				<tr>
+					<th scope="row">예제</th>
+                    <td>
+
+                    	<textarea id="ifr1" name="ifr1" style="width: 100%; height: 180px; font-size: 12px;"></textarea>
+					</td>
+                 </tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="detail-cont-tit mgt-m">
+		<h2>요청인자</h2>
+	</div>
+	<!--2테이블-->
+	<div class="tbl-base-s">
+		<table>
+			<caption>
+				<strong>요청인자</strong>
+				<span class="ui-caption"></span>
+			</caption>
+			<colgroup>
+				<col style="width:20%">
+				<col style="width:20%">
+				<col style="width:20%">
+				<col style="width:40%">
+			</colgroup>
+			<thead>
+				<tr>
+					<th scope="col">변수명</th>
+					<th scope="col">타입</th>
+					<th scope="col">변수설명</th>
+					<th scope="col">값설명</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>KEY</td>
+					<td>String(필수)</td>
+					<td>인증키</td>
+					<td>OpenAPI 에서 발급된 인증키</td>
+				</tr>
+				<tr>
+					<td>TYPE</td>
+					<td>String(필수)</td>
+					<td>요청파일타입</td>
+					<td>
+					
+						
+						
+							xml : xml, xml파일 : xmlf, 엑셀파일 : xls, json파일 : json
+						
+					
+					
+					
+					</td>
+				</tr>
+				<tr>
+					<td>SERVICE</td>
+					<td>String(필수)</td>
+					<td>서비스명</td>
+					<td>aiViewCulture</td>
+				</tr>
+				<!-- ESB Bypass인 경우 pageNo, pageIndex로 Service해야 하는 경우가 있음 2017.11.27 by shoh@ydns.co.kr -->
+            
+            
+            
+                <tr>
+                    <td>START_INDEX</td>
+                    <td>INTEGER(필수)</td>
+                    <td>요청시작위치</td>
+                    <td>정수 입력 (페이징 시작번호 입니다 : 데이터 행 시작번호)</td>
+                </tr>
+                <tr>
+                    <td>END_INDEX</td>
+                    <td>INTEGER(필수)</td>
+                    <td>요청종료위치</td>
+                    <td>정수 입력 (페이징 끝번호 입니다 : 데이터 행 끝번호)</td>
+                </tr>
+            
+            
+	
+			
+			
+				 
+				<tr>
+					<td>CODENAME</td>
+					<td>STRING(선택)</td>
+					<td>분류</td>
+					<td></td>
+				</tr>
+				
+				
+			
+			
+			
+				 
+				<tr>
+					<td>TITLE</td>
+					<td>STRING(선택)</td>
+					<td>공연/행사명</td>
+					<td></td>
+				</tr>
+				
+				
+			
+			
+			
+				 
+				<tr>
+					<td>DATE</td>
+					<td>STRING(선택)</td>
+					<td>날짜</td>
+					<td>YYYY-MM-DD</td>
+				</tr>
+				
+				
+			
+			
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="detail-cont-tit mgt-m">
+		<h2>출력값</h2>
+	</div>
+	<!--3테이블-->
+	<div class="tbl-base-s">
+		<table>
+			<caption>
+				<strong>출력값</strong>
+				<span class="ui-caption"></span>
+			</caption>
+			<colgroup>
+				<col style="width:10%">
+				<col style="width:30%">
+				<col style="width:60%">
+			</colgroup>
+			<thead>
+				<tr>
+					<th scope="col">No</th>
+					<th scope="col">출력명</th>
+					<th scope="col">출력설명</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>공통</td>
+					<td>list_total_count</td>
+					<td>총 데이터 건수 (정상조회 시 출력됨)</td>
+				</tr>
+				<tr>
+					<td>공통</td>
+					<td>RESULT.CODE</td>
+					<td>요청결과 코드 (하단 메세지설명 참고)</td>
+				</tr>
+				<tr>
+					<td>공통</td>
+					<td>RESULT.MESSAGE</td>
+					<td>요청결과 메시지 (하단 메세지설명 참고)</td>
+				</tr>				
+			
+				<tr>
+
+					<td>1</td>
+					<td>CODENAME</td>
+					<td>분류</td>
+				</tr>
+			
+				<tr>
+
+					<td>2</td>
+					<td>GUNAME</td>
+					<td>자치구</td>
+				</tr>
+			
+				<tr>
+
+					<td>3</td>
+					<td>CGG_CD</td>
+					<td>자치구코드</td>
+				</tr>
+			
+				<tr>
+
+					<td>4</td>
+					<td>TITLE</td>
+					<td>공연/행사명</td>
+				</tr>
+			
+				<tr>
+
+					<td>5</td>
+					<td>DATE</td>
+					<td>날짜</td>
+				</tr>
+			
+				<tr>
+
+					<td>6</td>
+					<td>PLACE</td>
+					<td>장소</td>
+				</tr>
+			
+				<tr>
+
+					<td>7</td>
+					<td>ORG_NAME</td>
+					<td>기관명</td>
+				</tr>
+			
+				<tr>
+
+					<td>8</td>
+					<td>USE_TRGT</td>
+					<td>이용대상</td>
+				</tr>
+			
+				<tr>
+
+					<td>9</td>
+					<td>USE_FEE</td>
+					<td>이용요금</td>
+				</tr>
+			
+				<tr>
+
+					<td>10</td>
+					<td>INQUIRY</td>
+					<td>문의</td>
+				</tr>
+			
+				<tr>
+
+					<td>11</td>
+					<td>PLAYER</td>
+					<td>출연자정보</td>
+				</tr>
+			
+				<tr>
+
+					<td>12</td>
+					<td>PROGRAM</td>
+					<td>프로그램소개</td>
+				</tr>
+			
+				<tr>
+
+					<td>13</td>
+					<td>ETC_DESC</td>
+					<td>기타내용</td>
+				</tr>
+			
+				<tr>
+
+					<td>14</td>
+					<td>ORG_LINK</td>
+					<td>홈페이지 주소</td>
+				</tr>
+			
+				<tr>
+
+					<td>15</td>
+					<td>MAIN_IMG</td>
+					<td>대표이미지</td>
+				</tr>
+			
+				<tr>
+
+					<td>16</td>
+					<td>RGSTDATE</td>
+					<td>신청일</td>
+				</tr>
+			
+				<tr>
+
+					<td>17</td>
+					<td>TICKET</td>
+					<td>시민/기관</td>
+				</tr>
+			
+				<tr>
+
+					<td>18</td>
+					<td>STRTDATE</td>
+					<td>시작일</td>
+				</tr>
+			
+				<tr>
+
+					<td>19</td>
+					<td>END_DATE</td>
+					<td>종료일</td>
+				</tr>
+			
+				<tr>
+
+					<td>20</td>
+					<td>THEMECODE</td>
+					<td>테마분류</td>
+				</tr>
+			
+				<tr>
+
+					<td>21</td>
+					<td>LOT</td>
+					<td>경도(Y좌표)</td>
+				</tr>
+			
+				<tr>
+
+					<td>22</td>
+					<td>LAT</td>
+					<td>위도(X좌표)</td>
+				</tr>
+			
+				<tr>
+
+					<td>23</td>
+					<td>IS_FREE</td>
+					<td>유무료</td>
+				</tr>
+			
+				<tr>
+
+					<td>24</td>
+					<td>HMPG_ADDR</td>
+					<td>문화포털상세URL</td>
+				</tr>
+			
+				<tr>
+
+					<td>25</td>
+					<td>PRO_TIME</td>
+					<td>행사시간</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+				
+	</div>
+	
+	
+	<div class="detail-cont-tit mgt-m">
+		<h2>샘플 테스트</h2>
+	</div>
+	<!--4테이블-->
+	<div class="tbl-base-s type-form">
+		<table>
+			<caption>
+				<strong>Sample</strong>
+				<span class="ui-caption"></span>
+			</caption>
+			<colgroup>
+				<col class="col1">
+				<col class="col2">
+			</colgroup>
+			<tbody id="reqParamTbl"></tbody>
+		</table>
+	</div>
+	<div class="btn-wrap align-r">
+		<button type="button" class="btn-base-s" onclick="requestSend();"><span>결과확인</span></button>
+	</div>
+	<div class="tbl-base-s type-form">
+		<table>
+			<caption>
+				<strong>Call URL</strong>
+				<span class="ui-caption"></span>
+			</caption>
+			<colgroup>
+				<col class="col1">
+				<col class="col2">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th scope="row">요청주소</th>
+					<td>
+
+						<textarea id="resultIfr" name="resultIfr" style="width: 100%; height: 180px; font-size: 12px;"></textarea>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+		
+	
+	
+	<div class="detail-cont-tit mgt-m">
+		<h2>메시지 설명</h2>
+	</div>
+	<div class="tbl-base-s type-form">
+		<table>
+			<caption>
+				<strong>메시지 설명</strong>
+				<span class="ui-caption"></span>
+			</caption>
+			<colgroup>
+				<col class="col1">
+				<col class="col2">
+			</colgroup>
+			<tbody>
+            
+            <tr>
+				<th scope="row">INFO-000</th>
+				<td>정상 처리되었습니다</td>
+			</tr>
+			
+            <tr>
+				<th scope="row">ERROR-300</th>
+				<td>필수 값이 누락되어 있습니다.<br />요청인자를 참고 하십시오.</td>
+			</tr>
+			
+            <tr>
+				<th scope="row">INFO-100</th>
+				<td>인증키가 유효하지 않습니다.<br />인증키가 없는 경우, 열린 데이터 광장 홈페이지에서 인증키를 신청하십시오.</td>
+			</tr>
+			
+            <tr>
+				<th scope="row">ERROR-301</th>
+				<td>파일타입 값이 누락 혹은 유효하지 않습니다.<br />요청인자 중 TYPE을 확인하십시오.</td>
+			</tr>
+			
+            <tr>
+				<th scope="row">ERROR-310</th>
+				<td>해당하는 서비스를 찾을 수 없습니다.<br />요청인자 중 SERVICE를 확인하십시오.</td>
+			</tr>
+			
+            <tr>
+				<th scope="row">ERROR-331</th>
+				<td>요청시작위치 값을 확인하십시오.<br />요청인자 중 START_INDEX를 확인하십시오.</td>
+			</tr>
+			
+            <tr>
+				<th scope="row">ERROR-332</th>
+				<td>요청종료위치 값을 확인하십시오.<br />요청인자 중 END_INDEX를 확인하십시오.</td>
+			</tr>
+			
+            <tr>
+				<th scope="row">ERROR-333</th>
+				<td>요청위치 값의 타입이 유효하지 않습니다.<br />요청위치 값은 정수를 입력하세요.</td>
+			</tr>
+			
+            <tr>
+				<th scope="row">ERROR-334</th>
+				<td>요청종료위치 보다 요청시작위치가 더 큽니다.<br />요청시작조회건수는 정수를 입력하세요.</td>
+			</tr>
+			
+            <tr>
+				<th scope="row">ERROR-335</th>
+				<td>샘플데이터(샘플키:sample) 는 한번에 최대 5건을 넘을 수 없습니다.<br />요청시작위치와  요청종료위치 값은 1 ~ 5 사이만 가능합니다.</td>
+			</tr>
+			
+            <tr>
+				<th scope="row">ERROR-336</th>
+				<td>데이터요청은 한번에 최대 1000건을 넘을 수 없습니다.<br />요청종료위치에서 요청시작위치를 뺀 값이 1000을 넘지 않도록 수정하세요.</td>
+			</tr>
+			
+            <tr>
+				<th scope="row">ERROR-500</th>
+				<td>서버 오류입니다.<br />지속적으로 발생시 열린 데이터 광장으로 문의(Q&A) 바랍니다.</td>
+			</tr>
+			
+            <tr>
+				<th scope="row">ERROR-600</th>
+				<td>데이터베이스 연결 오류입니다.<br />지속적으로 발생시 열린 데이터 광장으로 문의(Q&A) 바랍니다.</td>
+			</tr>
+			
+            <tr>
+				<th scope="row">ERROR-601</th>
+				<td>SQL 문장 오류 입니다.<br />지속적으로 발생시 열린 데이터 광장으로 문의(Q&A) 바랍니다.</td>
+			</tr>
+			
+            <tr>
+				<th scope="row">INFO-200</th>
+				<td>해당하는 데이터가 없습니다.</td>
+			</tr>
+			
+			</tbody>
+		</table>
+	</div>
+	
+	
+
+</form>
+</section>
+
+
+
+

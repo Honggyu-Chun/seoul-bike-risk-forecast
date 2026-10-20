@@ -1,0 +1,92 @@
+[
+  {
+    "id": "stations_202412",
+    "file": "stations_202412.xlsx",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false",
+    "form": {
+      "infId": "OA-13252",
+      "seq": "21",
+      "infSeq": "2",
+      "seqNo": ""
+    },
+    "max_bytes": 50000000
+  },
+  {
+    "id": "stations_202506",
+    "file": "stations_202506.xlsx",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-13252&infSeq=2&seq=22",
+    "form": null,
+    "max_bytes": 50000000
+  },
+  {
+    "id": "events_csv",
+    "file": "events_all.csv",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/sheet/csv/download.do",
+    "form": {
+      "srvType": "S",
+      "infId": "OA-15486",
+      "serviceKind": "1",
+      "pageNo": "1",
+      "ssUserId": "SAMPLE_VIEW",
+      "strWhere": "",
+      "strOrderby": "DATE DESC",
+      "txtFilter": "",
+      "filterCol": ""
+    },
+    "max_bytes": 50000000
+  },
+  {
+    "id": "events_json",
+    "file": "events_all.json",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/sheet/json/download.do",
+    "form": {
+      "srvType": "S",
+      "infId": "OA-15486",
+      "serviceKind": "1",
+      "pageNo": "1",
+      "ssUserId": "SAMPLE_VIEW",
+      "strWhere": "",
+      "strOrderby": "DATE DESC",
+      "txtFilter": "",
+      "filterCol": ""
+    },
+    "max_bytes": 50000000
+  },
+  {
+    "id": "kopis_guide",
+    "file": "kopis_guide.pdf",
+    "url": "https://www.kopis.or.kr/upload/openApi/%EA%B3%B5%EC%97%B0%EC%98%88%EC%88%A0%ED%86%B5%ED%95%A9%EC%A0%84%EC%82%B0%EB%A7%9DOpenAPI%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C.pdf",
+    "form": null,
+    "max_bytes": 50000000
+  },
+  {
+    "id": "hourly_202501",
+    "file": "bike_hourly_202501.csv",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-15245&infSeq=2&seq=104",
+    "max_bytes": 200000000
+  },
+  {
+    "id": "availability_2025q1",
+    "file": "availability_2025q1.zip",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-22382&infSeq=1&seq=13",
+    "max_bytes": 110000000
+  },
+  {
+    "id": "trips_202601_sample",
+    "file": "trips_202601_sample.csv",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-15182&infSeq=1&seq=144",
+    "sample_bytes": 1000000
+  },
+  {
+    "id": "hourly_202601_sample",
+    "file": "hourly_202601_sample.csv",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-15245&infSeq=2&seq=116",
+    "sample_bytes": 1000000
+  },
+  {
+    "id": "events_api_sample",
+    "file": "events_sample_api.xml",
+    "url": "https://data.seoul.go.kr/dataList/getOpenApiSample.do?url=http%3A%2F%2Fopenapi.seoul.go.kr%3A8088%2Fsample%2Fxml%2FculturalEventInfo%2F1%2F5%2F",
+    "max_bytes": 1000000
+  }
+]

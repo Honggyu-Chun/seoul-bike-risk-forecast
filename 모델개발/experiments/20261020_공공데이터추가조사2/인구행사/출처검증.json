@@ -1,0 +1,785 @@
+{
+  "verified_at": "2026-10-20T18:47:20.559837+09:00",
+  "task_scope": "2025H1 input t→t+1h inventory=0 risk; 2729 fixed stations",
+  "boundaries": {
+    "training_started": false,
+    "large_data_collection": false,
+    "personal_api_keys_read": false,
+    "kopis_api_calls": 0,
+    "q3_q4_labels_or_metrics_opened": false,
+    "writes_outside_dedicated_output": false
+  },
+  "candidate_count": 19,
+  "source_family_count_note": "동일 도시데이터 필드는 PE01 하나로 통합; 내외국 생활인구와 신구 S-DoT도 가족으로 묶음. PE07/08/12/19는 기존 원천의 재점검이다.",
+  "time_semantics": {
+    "received_at": "원래2025수신시각 없음. 파일mtime은수신시각으로대체하지않음. sdot_historical_sample_audit만실제HTTP수신기록있음",
+    "first_publication": "포털수정일/등록일을최초공개로동일시하지않음",
+    "current_api": "현재응답확인은2025당시원본증거아님"
+  },
+  "candidates": [
+    {
+      "candidate_id": "PE01",
+      "official_sources": [
+        "https://data.seoul.go.kr/dataVisual/seoul/guide.do",
+        "https://data.seoul.go.kr/together/notice/boardView.do?seq=8ce4ea450eb8820dddc6302d1e783a27",
+        "https://data.seoul.go.kr/together/notice/datasetNoticeView.do?bbsCd=10008&ditcCd=&pageIndex=1&seq=80d6f0ee7267f416f3f199e85d4da68e",
+        "https://data.seoul.go.kr/dataList/openApiView.do?infId=OA-21285&srvType=A&infSeq=1"
+      ],
+      "verified_facts": [
+        "2025-05-12 공지는 2025-05-16 업데이트 후 116→120장소 변경과 예측 제공 106장소를 안내한다.",
+        "현행 가이드는 2025-09-17 이전과 이후의 통신사/추계 변경을 구분한다.",
+        "현재 표본 광화문·덕수궁은 PPLTN_TIME=2026-10-20 18:05, 19:00 이후 FCST_TIME을 반환했다.",
+        "공식 메타의 이용허락은 공공누리 1유형이다.",
+        "현행 인구 추계는 90일 이하 단기체류 외국인을 제외한다."
+      ],
+      "limitations": [
+        "현재 121장소/산식을 2025 전체에 소급하지 않는다.",
+        "예측값의 FCST_TIME은 예측 유효시각이며 생성·공개·수신시각이 아니다.",
+        "city_live.xml은 앞 150000바이트 부분응답이다; 재사용 XML 전체로 파싱하면 안 된다."
+      ],
+      "sample_files": [
+        "city_api.html",
+        "city_guide.html",
+        "city_change_20250512.html",
+        "city_live.xml",
+        "city_live_partial_schema.json",
+        "city_dataset.html"
+      ],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE02",
+      "official_sources": [
+        "https://data.seoul.go.kr/dataList/OA-14991/S/1/datasetView.do",
+        "https://data.seoul.go.kr/dataVisual/seoul/seoulLivingPopulation.do?testcode=0318",
+        "https://data.seoul.go.kr/dataVisual/seoul/seoulLivingArchive.do",
+        "https://data.seoul.go.kr/dataList/OA-14993/S/1/datasetView.do"
+      ],
+      "verified_facts": [
+        "202501 ZIP 수정일 2025-02-07, 202505 ZIP 2025-06-07, 202506 ZIP 2025-07-07을 확인했다.",
+        "현행 FAQ는 시간 단위 생산, 4일 후 공개를 안내한다.",
+        "API의 실제 열은 날짜·시간대·행정동코드·총생활인구·성연령별 인구이다."
+      ],
+      "limitations": [
+        "2025년에도 정확히 D+4였는지 개별 배포 이력은 미검증. 단순 lag4를 당연히 적격으로 만들지 않는다.",
+        "H1 안에서 6월 월파일은 7월 공개이므로 H1 입력에 사용 불가; 일별 API 당시 캐시가 있어야 별도 가능.",
+        "월파일 수정일은 최초 공개를 완전히 증명하지 않으므로 archived_reception_unknown 유지."
+      ],
+      "sample_files": [
+        "people_api.html",
+        "people_live.json",
+        "dong_list.html",
+        "living_guide.html"
+      ],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE03",
+      "official_sources": [
+        "https://data.seoul.go.kr/dataVisual/seoul/capitalRegionLivingMigration.do",
+        "https://data.seoul.go.kr/dataList/OA-22300/F/1/datasetView.do",
+        "https://data.seoul.go.kr/dataList/OA-22298/F/1/datasetView.do"
+      ],
+      "verified_facts": [
+        "공식 안내는 서울 행정동 1시간, 캠퍼스 250m 20분을 구분한다.",
+        "7가지 이동목적은 출근·등교·귀가·쇼핑·병원·관광·기타이다.",
+        "2025-01 일별 ZIP과 2025-05 월별 ZIP들의 수정일이 2025-11-25로 표시된다."
+      ],
+      "limitations": [
+        "일별 파일이 있다고 당일 공개라는 뜻은 아니다.",
+        "원천은 통신 추정 이동이며 따릉이 이용자 수/승하차와 동일하지 않다."
+      ],
+      "sample_files": [
+        "migration.html",
+        "migration.txt"
+      ],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE04",
+      "official_sources": [
+        "https://data.seoul.go.kr/dataList/OA-15964/S/1/datasetView.do",
+        "https://data.seoul.go.kr/dataList/openApiView.do?infId=OA-15964&srvType=A&infSeq=1",
+        "https://data.seoul.go.kr/dataList/OA-22832/S/1/datasetView.do"
+      ],
+      "verified_facts": [
+        "2025-01-06~12 주간파일의 앞8192바이트를 저장해 완전한 68행을 확인했다.",
+        "표본의 센서 숫자코드→2024-06-20 좌표표 연결 68/68, 측정키 중복17건이다.",
+        "현재 API도 MODEL_NM/SERIAL_NO/SENSING_TIME/VISITOR_COUNT/REG_DTTM의 같은 스키마이다.",
+        "표본 첫 행은 측정2025-01-05 23:54, 등록2025-01-06 00:08:03: 파일 라벨이 측정일 경계와 완전히 일치하지 않는다."
+      ],
+      "limitations": [
+        "WiFi MAC 카운트와 CCTV 피플카운트 방식이 섞이며 정확한 실인구수가 아니다.",
+        "REG_DTTM은 등록일이지 공개시각이 아니다. 2025-01-06~12 파일 수정일은 2025-01-20이다.",
+        "표본은 전체 주/전센서 품질을 대표하지 않는다.",
+        "신형 OA-22832를 2025H1에도 제공된 실시간 원천으로 소급하지 않는다."
+      ],
+      "sample_files": [
+        "sdot_20250106_partial.csv",
+        "sdot_20250106_first8192.bin",
+        "sdot_historical_sample_audit.json",
+        "sdot_locations_20240620.xlsx",
+        "sdot_locations_schema_sample.json",
+        "sdot_schema_and_sample_check.json",
+        "sdot_live.json",
+        "sdot_api.html",
+        "sdot_list.html"
+      ],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE05",
+      "official_sources": [
+        "https://data.seoul.go.kr/dataVisual/seoul/seoulStay.do",
+        "https://data.seoul.go.kr/dataList/OA-22892/F/1/datasetView.do"
+      ],
+      "verified_facts": [
+        "공식 문서는 시작시각 기준 집계와 중복 집계 가능성을 안내한다.",
+        "전후일 연결·직전/직후 위치 보간 등 사후 보정이 명시된다.",
+        "2025-01-01 이후 데이터 제공과 현재 D+5 제한을 확인했다."
+      ],
+      "limitations": [
+        "체류의 결과 길이는 미래 행태를 포함할 수 있다.",
+        "보유연도와 그 해 공개 여부는 다르다."
+      ],
+      "sample_files": [
+        "stay_metadata.html"
+      ],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE06",
+      "official_sources": [
+        "https://data.seoul.go.kr/dataList/OA-15568/S/1/datasetView.do",
+        "https://data.seoul.go.kr/dataList/openApiView.do?infId=OA-15568&srvType=A&infSeq=1",
+        "https://data.seoul.go.kr/together/notice/datasetNoticeView.do?bbsCd=10008&ditcCd=&pageIndex=1&seq=a2197dabd5a3a52edd6fe0d4eead6bd3"
+      ],
+      "verified_facts": [
+        "STDR_YYQU_CD=20243인 1행이 반환됐고 6시간구간 인구/요일별 인구 열이 있다.",
+        "현재 메타는 월간 갱신이지만 실제 조회키는 기준분기이다.",
+        "2026-07-03 이후 2021년부터 제공, 2024 공간 단위 변경 안내가 있다."
+      ],
+      "limitations": [
+        "TMZON_00_06_FLPOP_CO 등은 시간별 관측값이 아니다.",
+        "각 요일×각 시간대의 공동 분포가 아니므로 임의 곱으로 만들지 않는다."
+      ],
+      "sample_files": [
+        "market_api.html",
+        "market_2024q3_sample.json"
+      ],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE07",
+      "official_sources": [
+        "https://data.seoul.go.kr/dataList/openApiView.do?infId=OA-23041&srvType=A&infSeq=2"
+      ],
+      "verified_facts": [
+        "이번에는 공식 명세만 저장했다. 건수는 기존 API와추가데이터.md의 확인 결과를 승계했다."
+      ],
+      "limitations": [
+        "기간 동안 매일 공연 또는 일정시간 관객발생으로 가정하지 않는다.",
+        "현재 과거행사 스냅샷은 당시 버전을 증명하지 않는다."
+      ],
+      "sample_files": [
+        "culture_docs.html"
+      ],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE08",
+      "official_sources": [
+        "https://kopis.or.kr/por/cs/openapi/openApiInfo.do?menuId=MNU_00077"
+      ],
+      "verified_facts": [
+        "명세PDF 5.0(2026-04-23)와 기존 부분수집·차단사실을 작업기록에서 확인했다.",
+        "이번에는 공개 안내 페이지만 읽고 KOPIS API 호출하지 않았다."
+      ],
+      "limitations": [
+        "frstregdt/updatedate 필터만으로 변경 전 공연시각 복원 불가.",
+        "흥행순위·사후관객·현재상태 금지."
+      ],
+      "sample_files": [
+        "kopis_info.html"
+      ],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE09",
+      "official_sources": [
+        "https://www.data.go.kr/data/15013104/standard.do"
+      ],
+      "verified_facts": [
+        "축제명·기간·장소·주소·좌표·데이터기준일 스키마를 확인했다.",
+        "개별기관자료는 월초 병합하므로 시점 차이가 발생한다고 공식 안내한다."
+      ],
+      "limitations": [
+        "현재 합본에 2025 행이 남는지와 당시 공개 여부는 별도.",
+        "일정·예정정보만 사용하며 방문인원 사후성과는 제외."
+      ],
+      "sample_files": [
+        "festival_standard.html"
+      ],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE10",
+      "official_sources": [
+        "https://www.data.go.kr/data/15013106/standard.do"
+      ],
+      "verified_facts": [
+        "정부예산이 투입된 지역주민 대상 단발 공연행사 범위다.",
+        "공식 항목은 행사 시작/종료시각·객석수·입장연령·주소·좌표를 포함한다."
+      ],
+      "limitations": [
+        "전국 민간공연을 포괄하지 않는다.",
+        "객석수는 실제 참석인원이 아니다."
+      ],
+      "sample_files": [
+        "stage_standard.html",
+        "stage_standard.txt"
+      ],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE11",
+      "official_sources": [
+        "https://www.data.go.kr/data/15101578/openapi.do"
+      ],
+      "verified_facts": [
+        "공식 서비스는 행사정보를 포함하는 15종 관광정보를 제공한다.",
+        "HTML 내 Swagger의 searchFestival2에 createdtime/modifiedtime/행사일/위경도가 있다.",
+        "개발 자동승인·운영 심의·개발1000·무료를 확인했다."
+      ],
+      "limitations": [
+        "createdtime은 등록일이지 모든 경로의 최초공개시각을 보장하지 않는다.",
+        "현재 수정일은 변경전 일정 내용을 복원하지 못한다."
+      ],
+      "sample_files": [
+        "tour_api.html",
+        "tour_festival_schema_excerpt.json"
+      ],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE12",
+      "official_sources": [
+        "https://www.koreabaseball.com/MediaNews/Notice/View.aspx?bdSe=10341"
+      ],
+      "verified_facts": [
+        "공식 본문은 2024-12-20 발표, 2025-03-22 개막, 팀당135경기 우선편성과 미편성45경기를 명시한다.",
+        "이번에는 기존675경기 원파일을 재수집하지 않았다."
+      ],
+      "limitations": [
+        "최종 개최·관중·취소 결과를 원일정 특징과 섞지 않는다.",
+        "기존 경기장 좌표는 대여소 위치 대리값이므로 실제 경기장/출입구 좌표로 검수 필요."
+      ],
+      "sample_files": [],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE13",
+      "official_sources": [
+        "https://www.kleague.com/news_view.do?orderBy=seq&page=1&search=%EC%9D%BC%EC%A0%95&seq=91720&viewOption=album",
+        "https://portal.kleague.com/"
+      ],
+      "verified_facts": [
+        "2025-01-10 공식발표는 1~33R 198경기와 2월15일 개막을 안내한다.",
+        "AFC·클럽월드컵에 따른 순연 가능과 파이널 추후 공개를 명시한다.",
+        "포털에는 비보도 복사·저장·배포·판매 사전허가 문구가 있다."
+      ],
+      "limitations": [
+        "현재 결과페이지는 당시 알려진 일정과 다를 수 있다.",
+        "이 작업에서는 원일정 첨부를 내려받지 않았다."
+      ],
+      "sample_files": [],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE14",
+      "official_sources": [
+        "https://www.smpa.go.kr/user/nd54882.do"
+      ],
+      "verified_facts": [
+        "현행 목록은 2026-10-20 집회 안내가 2026-10-19 작성, 10월21일 안내가 10월20일 작성된 것을 보여준다."
+      ],
+      "limitations": [
+        "현재의 사전게시 패턴이 2025 모든 집회에서 같았다고 가정하지 않는다.",
+        "시각 없는 게시일을 당일00시 공개로 만들지 않는다."
+      ],
+      "sample_files": [
+        "police.html",
+        "police.txt"
+      ],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE15",
+      "official_sources": [
+        "https://ni3.korea.ac.kr/bbs/bigdatascience/159/256513/artclView.do",
+        "https://new.snu.ac.kr/academics/resources/calendar?year=2025",
+        "https://ido.yonsei.ac.kr/ido/info03.do"
+      ],
+      "verified_facts": [
+        "고려대 공지는 2025-02-24 게시, 2025-02-21 변경본을 명시하고 원XLSX가 제공된다.",
+        "원XLSX는 제목에 학사일정(안)을 포함한다; 예정 상태를 보존한다.",
+        "서울대/연세대 현재 2025 달력은 개강/종강/방학·시험 범위를 확인할 수 있다."
+      ],
+      "limitations": [
+        "3월학년도 자료만으로 1~2월 방학을 채우지 않는다.",
+        "대학별·캠퍼스별 일정을 하나의 서울 공통달력으로 만들지 않는다.",
+        "공지일 이후 첨부 교체 여부는 미검증."
+      ],
+      "sample_files": [
+        "ku_calendar.html",
+        "ku_calendar_original.xlsx",
+        "ku_calendar_rows.json"
+      ],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE16",
+      "official_sources": [
+        "https://open.neis.go.kr/portal/data/service/selectServicePage.do?infId=OPEN17220190722175038389180&infSeq=2"
+      ],
+      "verified_facts": [
+        "가락고 학교코드7010057을 schoolInfo로 확인한 후 2025-01~06 학사일정 sample5행을 받았다.",
+        "표본에는2025-03-04 입학식 등이 있고 LOAD_DTM=20261020이다.",
+        "공식 매일적재/LOAD_DTM 수정일자/이용제한없음을 확인했다."
+      ],
+      "limitations": [
+        "LOAD_DTM은 현재 적재·수정정보이며 2025 사전공개 증거가 아니다.",
+        "초등학교 주변을 학생 직접 따릉이 이용효과라고 단정하지 않는다."
+      ],
+      "sample_files": [
+        "neis_docs.html",
+        "neis_school_sample.json",
+        "neis_2025h1_schedule_sample.json"
+      ],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE17",
+      "official_sources": [
+        "https://data.seoul.go.kr/dataList/OA-12040/F/1/datasetView.do",
+        "https://www.data.go.kr/data/15051956/fileData.do"
+      ],
+      "verified_facts": [
+        "공식 제목/파일은2017년이며 갱신주기는1회성이다."
+      ],
+      "limitations": [
+        "2025 포털등록일이나2024 메타갱신일을2025 관측 보유로 오인하지 않는다."
+      ],
+      "sample_files": [],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE18",
+      "official_sources": [
+        "https://data.seoul.go.kr/bsp/wgs/dataView/data300View/476.do"
+      ],
+      "verified_facts": [
+        "공식 개요는 일반보고통계·매년공표·자치구범위이며 한사람의 여러지점 중복을 경고한다."
+      ],
+      "limitations": [
+        "해당지점 방문수요이며 서울 관광객 총량도 실시간 군중도 아니다."
+      ],
+      "sample_files": [],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    },
+    {
+      "candidate_id": "PE19",
+      "official_sources": [
+        "https://astro.kasi.re.kr/life/post/calendarData?search_year=2025",
+        "https://www.korea.kr/news/policyNewsView.do?newsId=148938559",
+        "https://www.korea.kr/news/policyNewsView.do?newsId=148941443"
+      ],
+      "verified_facts": [
+        "기존 API와추가데이터.md에 발표일 반영 완료가 기록되어 있다."
+      ],
+      "limitations": [
+        "이 항목은 새로 발견한 원천/새로 확보한 데이터로 세지 않는다."
+      ],
+      "sample_files": [],
+      "model_effect_evidence": "따릉이 1시간 후 0대 개선 직접 증거 없음; 영향 설명은 검증 전 가설",
+      "verified_at": "2026-10-20T18:47:20.559837+09:00"
+    }
+  ],
+  "local_files": [
+    {
+      "file": "build_report.py",
+      "bytes": 46461,
+      "sha256": "81d2d5a115ba9904d964b0402f2ff5d719a0a1acc30e8afde629a4d06c7fbc75",
+      "local_file_modified_at": "2026-10-20T18:46:43.674399+09:00",
+      "partial": false
+    },
+    {
+      "file": "city_api.html",
+      "bytes": 50445,
+      "sha256": "41d58df247560b1bad8f97c3574e8c9363775b9cfe7f9f4656250fcfe6e0d204",
+      "local_file_modified_at": "2026-10-20T18:37:22.760783+09:00",
+      "partial": false
+    },
+    {
+      "file": "city_api.txt",
+      "bytes": 13902,
+      "sha256": "f4a4a01fc0ae38426c6e57338652e3f9aa893d849c8cfc7ccd1f373f58543d20",
+      "local_file_modified_at": "2026-10-20T18:37:22.767783+09:00",
+      "partial": false
+    },
+    {
+      "file": "city_change_20250512.html",
+      "bytes": 78350,
+      "sha256": "e7c445123d265db0f82e67fad939621144fb47fda4e459614c7b834c08a89b06",
+      "local_file_modified_at": "2026-10-20T18:41:36.071736+09:00",
+      "partial": false
+    },
+    {
+      "file": "city_dataset.html",
+      "bytes": 95520,
+      "sha256": "8e0a33d1c5316a905d9febb1eb12c784cf031b8ef5584522cac9eda587442819",
+      "local_file_modified_at": "2026-10-20T18:48:01.911702+09:00",
+      "partial": false
+    },
+    {
+      "file": "city_guide.html",
+      "bytes": 109794,
+      "sha256": "f5e83a9296b5f1807a27e0ca96c00f9cdeead1edccaa214b646cb1523f446d3c",
+      "local_file_modified_at": "2026-10-20T18:40:08.793082+09:00",
+      "partial": false
+    },
+    {
+      "file": "city_live.xml",
+      "bytes": 150000,
+      "sha256": "b464eb0bbeb4390eb554b4b7f41d1a29e0b9829d658a8b7c0ca9dc6fb2afb377",
+      "local_file_modified_at": "2026-10-20T18:37:50.074076+09:00",
+      "partial": true
+    },
+    {
+      "file": "city_live_partial_schema.json",
+      "bytes": 712,
+      "sha256": "6bf63fe001659322f22d099cba99a041753390ae8fe316004d1af777492a2357",
+      "local_file_modified_at": "2026-10-20T18:38:08.574101+09:00",
+      "partial": false
+    },
+    {
+      "file": "culture_docs.html",
+      "bytes": 21430,
+      "sha256": "b1803d3a5cef06beaf64f6f1c3327d668f1820a5764ddd5403527e2d828c0133",
+      "local_file_modified_at": "2026-10-20T18:41:39.025863+09:00",
+      "partial": false
+    },
+    {
+      "file": "dong_list.html",
+      "bytes": 126288,
+      "sha256": "8bc6f6e3f8c78af16f92620a5f4dbde57e78e9af8d26963cdc20fb1d39d9a2c1",
+      "local_file_modified_at": "2026-10-20T18:37:25.641461+09:00",
+      "partial": false
+    },
+    {
+      "file": "dong_list.txt",
+      "bytes": 14485,
+      "sha256": "71bc98b5e9807c798bcd3ed7a76b0822216107ff525145ea2696ecf243e124cb",
+      "local_file_modified_at": "2026-10-20T18:37:25.646675+09:00",
+      "partial": false
+    },
+    {
+      "file": "festival_standard.html",
+      "bytes": 500000,
+      "sha256": "74d10901d0584cb4a6874c8dca2ce72333db8e388d9aba1b4472ce118e28175c",
+      "local_file_modified_at": "2026-10-20T18:41:37.369607+09:00",
+      "partial": true
+    },
+    {
+      "file": "finalize_report.py",
+      "bytes": 11936,
+      "sha256": "3f11a0d4e326988581ed6c155162e94245c0a9d423aa9c5c4dd582881f87cb76",
+      "local_file_modified_at": "2026-10-20T18:49:07.293158+09:00",
+      "partial": false
+    },
+    {
+      "file": "kopis_info.html",
+      "bytes": 22647,
+      "sha256": "5e6cb240d08c52b2edaa231dc566e7dd5a0e5a3046eed737a6d7fa711234b46a",
+      "local_file_modified_at": "2026-10-20T18:41:38.547647+09:00",
+      "partial": false
+    },
+    {
+      "file": "ku_calendar.html",
+      "bytes": 15377,
+      "sha256": "5a0f8cdceb6be37b39804e8dee79bac8c4dae5349f0b5ed36d8fc725aaafe6ea",
+      "local_file_modified_at": "2026-10-20T18:40:08.415123+09:00",
+      "partial": false
+    },
+    {
+      "file": "ku_calendar_original.xlsx",
+      "bytes": 20204,
+      "sha256": "52ba6041d3eacc305401d42479a0e8852c3e7f31863b4df8e79a4b43ef4bdfc2",
+      "local_file_modified_at": "2026-10-20T18:40:34.650963+09:00",
+      "partial": false
+    },
+    {
+      "file": "ku_calendar_rows.json",
+      "bytes": 4460,
+      "sha256": "28969b5064d3c45b87e24746b7de08ba9fbf8ecbbe2012bb1a5fd67069183893",
+      "local_file_modified_at": "2026-10-20T18:40:34.665964+09:00",
+      "partial": false
+    },
+    {
+      "file": "living_guide.html",
+      "bytes": 78659,
+      "sha256": "e8e7ad30f90c740cc680e34230d442ea03ebbefcb1fe3a032b36b9748fefb114",
+      "local_file_modified_at": "2026-10-20T18:41:35.566586+09:00",
+      "partial": false
+    },
+    {
+      "file": "market_2024q3_sample.json",
+      "bytes": 822,
+      "sha256": "8f00a221231451efc0200f773899a451129968905febb319e33d079930e60864",
+      "local_file_modified_at": "2026-10-20T18:40:34.766087+09:00",
+      "partial": false
+    },
+    {
+      "file": "market_api.html",
+      "bytes": 23865,
+      "sha256": "bfd3f8e34258089aed4d2e0fa724397654583b674d36d8de2ee941a07d3ac4f7",
+      "local_file_modified_at": "2026-10-20T18:39:37.027187+09:00",
+      "partial": false
+    },
+    {
+      "file": "market_api.txt",
+      "bytes": 4327,
+      "sha256": "2e13b16a8db5e95a114d2b62732398039f7e5485fc1589dfa88fc347d3c664e6",
+      "local_file_modified_at": "2026-10-20T18:39:37.029186+09:00",
+      "partial": false
+    },
+    {
+      "file": "migration.html",
+      "bytes": 509154,
+      "sha256": "5713951aa99f33892124b00291ed7711009d0d9566fceb7c6a4a39ce070ef040",
+      "local_file_modified_at": "2026-10-20T18:39:36.560461+09:00",
+      "partial": true
+    },
+    {
+      "file": "migration.txt",
+      "bytes": 93623,
+      "sha256": "6b62eb1121b9880c5f6e3ea5265019f742f1f5b0a0028ded85351a9de41dd01c",
+      "local_file_modified_at": "2026-10-20T18:39:36.582386+09:00",
+      "partial": true
+    },
+    {
+      "file": "neis_2025h1_schedule_sample.json",
+      "bytes": 2492,
+      "sha256": "1e60585e2acc510967a7e20802f4cacf9150b8c6801d9373f27e1f96703868a9",
+      "local_file_modified_at": "2026-10-20T18:39:02.937503+09:00",
+      "partial": false
+    },
+    {
+      "file": "neis_docs.html",
+      "bytes": 72017,
+      "sha256": "32e0cc18a4c79e370f54884cbe96323b12fabeb4029c74c77684586f75bb93e0",
+      "local_file_modified_at": "2026-10-20T18:41:38.330263+09:00",
+      "partial": false
+    },
+    {
+      "file": "neis_school_sample.json",
+      "bytes": 3967,
+      "sha256": "7b9a54ae5c3f0a7e0e731c667e6c2c90862c5f8d218669e2dfceaffad146074a",
+      "local_file_modified_at": "2026-10-20T18:39:02.693019+09:00",
+      "partial": false
+    },
+    {
+      "file": "people_api.html",
+      "bytes": 26356,
+      "sha256": "90d1114e35e23bb92608234423c691ce3c67d06865b7bb17c84fafe845d4c7bb",
+      "local_file_modified_at": "2026-10-20T18:37:23.514441+09:00",
+      "partial": false
+    },
+    {
+      "file": "people_api.txt",
+      "bytes": 5188,
+      "sha256": "c4634267c0df0708ab949437d1a3e08dc787426769cc9a6957a242e5c09bf73e",
+      "local_file_modified_at": "2026-10-20T18:37:23.518438+09:00",
+      "partial": false
+    },
+    {
+      "file": "people_live.json",
+      "bytes": 1204,
+      "sha256": "653f775a7e918860ebffd221986e61ede5364a9b1620b38cb260687cad5b51c4",
+      "local_file_modified_at": "2026-10-20T18:37:49.498290+09:00",
+      "partial": false
+    },
+    {
+      "file": "police.html",
+      "bytes": 45679,
+      "sha256": "dd7969e1084e044c72fc0b9d16f17d0495124994abc99ffbd896ad2fd128e405",
+      "local_file_modified_at": "2026-10-20T18:39:35.009323+09:00",
+      "partial": false
+    },
+    {
+      "file": "police.txt",
+      "bytes": 5626,
+      "sha256": "7726d2278875c3df68d13910430f300465dcdd0de6164cafdd3a26b51973eef1",
+      "local_file_modified_at": "2026-10-20T18:39:35.015352+09:00",
+      "partial": false
+    },
+    {
+      "file": "sdot_20250106_first8192.bin",
+      "bytes": 8192,
+      "sha256": "0dee57c60e0dd164b9817c30cb5fccb965b6dc0f2ea1c348710d0affdde4ee6f",
+      "local_file_modified_at": "2026-10-20T18:38:08.539413+09:00",
+      "partial": true
+    },
+    {
+      "file": "sdot_20250106_partial.csv",
+      "bytes": 8282,
+      "sha256": "ff114e626400c1f1ce4e1762d45e16761ff65f955ba4b65e95e472527422b823",
+      "local_file_modified_at": "2026-10-20T18:38:08.546642+09:00",
+      "partial": true
+    },
+    {
+      "file": "sdot_api.html",
+      "bytes": 20350,
+      "sha256": "31fb35bd0be091b87fcee03277356d78ab7d656f9f0bb4f23094e1674c207554",
+      "local_file_modified_at": "2026-10-20T18:37:24.315083+09:00",
+      "partial": false
+    },
+    {
+      "file": "sdot_api.txt",
+      "bytes": 3167,
+      "sha256": "229eb532f870ae7d1f6def4b55d5f27982921671403af37aab80c04b642442ab",
+      "local_file_modified_at": "2026-10-20T18:37:24.319110+09:00",
+      "partial": false
+    },
+    {
+      "file": "sdot_historical_sample_audit.json",
+      "bytes": 695,
+      "sha256": "df74836bc84dea3993c351f252328d283948314a19e79583d3e6971d2c50fe08",
+      "local_file_modified_at": "2026-10-20T18:38:08.541428+09:00",
+      "partial": false
+    },
+    {
+      "file": "sdot_list.html",
+      "bytes": 186214,
+      "sha256": "d6955c3339517808923c0939bd1467c9d24d1e7e6340ed6520a059e8455577e2",
+      "local_file_modified_at": "2026-10-20T18:37:24.880675+09:00",
+      "partial": false
+    },
+    {
+      "file": "sdot_list.txt",
+      "bytes": 25849,
+      "sha256": "1c8571132f3bae59993f65209c2faccf9cec5f00e4c753bcef58d859ec24cb7b",
+      "local_file_modified_at": "2026-10-20T18:37:24.886704+09:00",
+      "partial": false
+    },
+    {
+      "file": "sdot_live.json",
+      "bytes": 362,
+      "sha256": "ec81cf3f03067d045e017d542898df9577aa8944ec36929ea2103472147c108a",
+      "local_file_modified_at": "2026-10-20T18:37:47.520605+09:00",
+      "partial": false
+    },
+    {
+      "file": "sdot_locations_20240620.xlsx",
+      "bytes": 19783,
+      "sha256": "3c812e18e72d6d55a9dc33234c8102ed032199717ed84996d6fccc9a5048e132",
+      "local_file_modified_at": "2026-10-20T18:39:02.236979+09:00",
+      "partial": false
+    },
+    {
+      "file": "sdot_locations_schema_sample.json",
+      "bytes": 871,
+      "sha256": "d286b26d7ac14fc3e7d0dce13437dc5e024538d2a3a0c5a72eba5a741d2f2fc2",
+      "local_file_modified_at": "2026-10-20T18:39:02.256633+09:00",
+      "partial": false
+    },
+    {
+      "file": "sdot_schema_and_sample_check.json",
+      "bytes": 605,
+      "sha256": "29ab63ea3dfc45f2fc6c69abf13608695a5a6ff0454eb651c1d2af9c43cdf272",
+      "local_file_modified_at": "2026-10-20T18:40:34.846310+09:00",
+      "partial": false
+    },
+    {
+      "file": "stage_standard.html",
+      "bytes": 518141,
+      "sha256": "380b7c44463789425905476f7465e3650d076592410df11a8acdfd19cb305fe7",
+      "local_file_modified_at": "2026-10-20T18:39:35.727910+09:00",
+      "partial": true
+    },
+    {
+      "file": "stage_standard.txt",
+      "bytes": 51200,
+      "sha256": "7652c244c63e992dc3e2768510342a44906349fc3036fade6959a70a93092d59",
+      "local_file_modified_at": "2026-10-20T18:39:35.757250+09:00",
+      "partial": true
+    },
+    {
+      "file": "stay_metadata.html",
+      "bytes": 118907,
+      "sha256": "d010743f70a0b619266d9c4769946c41028c65f35c479bfd7173c9a82c05134b",
+      "local_file_modified_at": "2026-10-20T18:41:37.897429+09:00",
+      "partial": false
+    },
+    {
+      "file": "tour_api.html",
+      "bytes": 341217,
+      "sha256": "a3977565aa2e20ed0ca18bfa554549275bc94ce49ce9b0fcc28f81a40679d9c2",
+      "local_file_modified_at": "2026-10-20T18:39:37.888685+09:00",
+      "partial": false
+    },
+    {
+      "file": "tour_api.txt",
+      "bytes": 10042,
+      "sha256": "3495da8cc2aea3bb6cef6b9d1f216a705a02d462b0fb1d48356ad4710824af9d",
+      "local_file_modified_at": "2026-10-20T18:39:37.895690+09:00",
+      "partial": false
+    },
+    {
+      "file": "tour_festival_schema_excerpt.json",
+      "bytes": 8317,
+      "sha256": "4bd6673d118ff19db1128121a339b425258c57947c4e3cfd43fa613246c7f023",
+      "local_file_modified_at": "2026-10-20T18:41:39.031663+09:00",
+      "partial": false
+    },
+    {
+      "file": "조사보고서.md",
+      "bytes": 41833,
+      "sha256": "7e8b54618b38daa4d49077e47b54bca8dcc67381cdb7085f71148491189a7442",
+      "local_file_modified_at": "2026-10-20T18:49:16.892417+09:00",
+      "partial": false
+    },
+    {
+      "file": "후보목록.csv",
+      "bytes": 20679,
+      "sha256": "e338c6806d9530d38ecdc11a78e47ff71f0346ed22b42768a85713fd6cb97532",
+      "local_file_modified_at": "2026-10-20T18:49:16.896807+09:00",
+      "partial": false
+    }
+  ],
+  "validation": {
+    "candidate_rows": 19,
+    "csv_fields": 21,
+    "candidate_id_unique": true,
+    "all_primary_urls": true,
+    "note": "동일 날짜 자료를 나중에 받은 표본이다. 2025 당시 수신·공개 확인으로 표시하지 않는다."
+  }
+}

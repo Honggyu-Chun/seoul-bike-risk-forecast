@@ -1,0 +1,14 @@
+{
+  "source": "artifacts/improvement/final/results.json",
+  "source_already_opened": true,
+  "new_predictions_computed": false,
+  "all_M2_false_negatives": 48187,
+  "current_positive_false_negatives": 43631,
+  "current_positive_fraction_of_all_false_negatives": 0.9054516778384212,
+  "current_1_to_3_false_negatives": 37799,
+  "current_1_to_3_fraction_of_all_false_negatives": 0.784423184676365,
+  "current_1_to_3_zero_cases": 45025,
+  "all_current_positive_zero_cases": 51237,
+  "low_quantity_fraction_of_current_positive_zero_cases": 0.8787594902121514,
+  "subgroups_overlap_do_not_sum": true
+}

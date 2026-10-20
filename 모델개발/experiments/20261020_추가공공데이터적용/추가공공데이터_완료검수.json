@@ -1,0 +1,212 @@
+{
+  "reviewed_at_utc": "2026-10-20T15:46:36.240539+00:00",
+  "public_extension_plan_sha256": "7d39ff6b19a08eaf60270d6aa37d5a87e77ee891e2635a1b0254137a91af2a3b",
+  "report_code_sha256": "2278eef4bf866ed6b596817d43ef0b75f3fb00dc014158782c6a6af00e7c6b1a",
+  "required": 9,
+  "completed": 9,
+  "missing": [],
+  "matched_control_names": [
+    "persistence",
+    "seasonal_day",
+    "seasonal_week",
+    "smoothed_markov",
+    "logistic",
+    "random_forest",
+    "lightgbm_basic",
+    "lightgbm_full",
+    "lightgbm_temporal",
+    "catboost_temporal",
+    "xgboost_temporal",
+    "M2_no_weather"
+  ],
+  "comparison_rows": 324,
+  "day_block_range_rows": 1296,
+  "result_coverage": [
+    {
+      "fold": "A",
+      "model": "lightgbm_public_bus",
+      "result_sha256": "b76a0485eaf7cae3438ca0314b2b3d59ad03ad2e13dd5971a129a9faea086e07",
+      "all_controls_matched": true
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_public_od",
+      "result_sha256": "77d51d4f755765fa134d4e81625c9cb9038947a1fd9628daf977c4031a596e5e",
+      "all_controls_matched": true
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_public_bus_od",
+      "result_sha256": "b13f771318469dfb44da69ce0810ce1b6ccfa65fae4b352c871e2af40b1a192c",
+      "all_controls_matched": true
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_bus",
+      "result_sha256": "74d4d4e90ea0d72001c3e0a753c1f83e0e2fcac3da0aa2fd6aeafbe42f541cf2",
+      "all_controls_matched": true
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_od",
+      "result_sha256": "c1345860c589b237a51201544fe3b67d92f265344c407b79958c8d24a9ff200e",
+      "all_controls_matched": true
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_bus_od",
+      "result_sha256": "20a18a2500358ce8ec671ed2e79ac25f8398a65475bb80c1209d3289c741bc03",
+      "all_controls_matched": true
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_bus",
+      "result_sha256": "8e2424794f8ba1294146669dcc10d0edc55f97b45f42c1441ee5d5bd7f2857dd",
+      "all_controls_matched": true
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_od",
+      "result_sha256": "8528662e7826ad7ff1de6b352e0501846478f455a85c6c020dee600ecc41ab87",
+      "all_controls_matched": true
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_bus_od",
+      "result_sha256": "83a67d94898e2cd8e8b92cc17a65be2e61a51faa95d5d7b4e181b87d3321588c",
+      "all_controls_matched": true
+    }
+  ],
+  "exact_decision_checks": [
+    {
+      "fold": "A",
+      "model": "lightgbm_public_bus",
+      "group": "overall",
+      "exact_counts_match": true,
+      "result_sha256": "b76a0485eaf7cae3438ca0314b2b3d59ad03ad2e13dd5971a129a9faea086e07"
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_public_bus",
+      "group": "current_positive",
+      "exact_counts_match": true,
+      "result_sha256": "b76a0485eaf7cae3438ca0314b2b3d59ad03ad2e13dd5971a129a9faea086e07"
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_public_od",
+      "group": "overall",
+      "exact_counts_match": true,
+      "result_sha256": "77d51d4f755765fa134d4e81625c9cb9038947a1fd9628daf977c4031a596e5e"
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_public_od",
+      "group": "current_positive",
+      "exact_counts_match": true,
+      "result_sha256": "77d51d4f755765fa134d4e81625c9cb9038947a1fd9628daf977c4031a596e5e"
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_public_bus_od",
+      "group": "overall",
+      "exact_counts_match": true,
+      "result_sha256": "b13f771318469dfb44da69ce0810ce1b6ccfa65fae4b352c871e2af40b1a192c"
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_public_bus_od",
+      "group": "current_positive",
+      "exact_counts_match": true,
+      "result_sha256": "b13f771318469dfb44da69ce0810ce1b6ccfa65fae4b352c871e2af40b1a192c"
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_bus",
+      "group": "overall",
+      "exact_counts_match": true,
+      "result_sha256": "74d4d4e90ea0d72001c3e0a753c1f83e0e2fcac3da0aa2fd6aeafbe42f541cf2"
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_bus",
+      "group": "current_positive",
+      "exact_counts_match": true,
+      "result_sha256": "74d4d4e90ea0d72001c3e0a753c1f83e0e2fcac3da0aa2fd6aeafbe42f541cf2"
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_od",
+      "group": "overall",
+      "exact_counts_match": true,
+      "result_sha256": "c1345860c589b237a51201544fe3b67d92f265344c407b79958c8d24a9ff200e"
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_od",
+      "group": "current_positive",
+      "exact_counts_match": true,
+      "result_sha256": "c1345860c589b237a51201544fe3b67d92f265344c407b79958c8d24a9ff200e"
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_bus_od",
+      "group": "overall",
+      "exact_counts_match": true,
+      "result_sha256": "20a18a2500358ce8ec671ed2e79ac25f8398a65475bb80c1209d3289c741bc03"
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_bus_od",
+      "group": "current_positive",
+      "exact_counts_match": true,
+      "result_sha256": "20a18a2500358ce8ec671ed2e79ac25f8398a65475bb80c1209d3289c741bc03"
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_bus",
+      "group": "overall",
+      "exact_counts_match": true,
+      "result_sha256": "8e2424794f8ba1294146669dcc10d0edc55f97b45f42c1441ee5d5bd7f2857dd"
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_bus",
+      "group": "current_positive",
+      "exact_counts_match": true,
+      "result_sha256": "8e2424794f8ba1294146669dcc10d0edc55f97b45f42c1441ee5d5bd7f2857dd"
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_od",
+      "group": "overall",
+      "exact_counts_match": true,
+      "result_sha256": "8528662e7826ad7ff1de6b352e0501846478f455a85c6c020dee600ecc41ab87"
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_od",
+      "group": "current_positive",
+      "exact_counts_match": true,
+      "result_sha256": "8528662e7826ad7ff1de6b352e0501846478f455a85c6c020dee600ecc41ab87"
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_bus_od",
+      "group": "overall",
+      "exact_counts_match": true,
+      "result_sha256": "83a67d94898e2cd8e8b92cc17a65be2e61a51faa95d5d7b4e181b87d3321588c"
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_bus_od",
+      "group": "current_positive",
+      "exact_counts_match": true,
+      "result_sha256": "83a67d94898e2cd8e8b92cc17a65be2e61a51faa95d5d7b4e181b87d3321588c"
+    }
+  ],
+  "all_controls_and_frozen_validation_match": true,
+  "ready_for_manual_review": true,
+  "goal_complete": false,
+  "information_track": "public_archive_and_current_crosswalk_sensitivity"
+}

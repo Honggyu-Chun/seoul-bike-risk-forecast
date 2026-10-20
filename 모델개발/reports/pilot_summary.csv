@@ -1,0 +1,13 @@
+split,segment,model,n,mae,rmse
+validation,all,B0_previous_week,666,1.8138138138138136,2.653684616159585
+validation,all,B1_lite_calendar_lags,666,1.6829616560629637,2.4576749831184785
+validation,recorded_start_window,B0_previous_week,76,1.8026315789473684,2.8214404682341736
+validation,recorded_start_window,B1_lite_calendar_lags,76,1.9360589492044789,3.060799402279234
+validation,outside_recorded_window,B0_previous_week,590,1.8152542372881355,2.6312979332563846
+validation,outside_recorded_window,B1_lite_calendar_lags,590,1.6503592928786328,2.3688462844174567
+test,all,B0_previous_week,103,1.970873786407767,3.400456851088763
+test,all,B1_lite_calendar_lags,103,1.1893298082572323,1.5555713477069069
+test,recorded_start_window,B0_previous_week,2,3.0,3.1622776601683795
+test,recorded_start_window,B1_lite_calendar_lags,2,2.153623828287888,2.379727927049774
+test,outside_recorded_window,B0_previous_week,101,1.9504950495049505,3.405005052263593
+test,outside_recorded_window,B1_lite_calendar_lags,101,1.1702348771675164,1.5347893667221046

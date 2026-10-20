@@ -1,0 +1,23 @@
+{
+  "rows": 8760,
+  "columns": [
+    "Date",
+    "Rented Bike Count",
+    "Hour",
+    "Temperature(°C)",
+    "Humidity(%)",
+    "Wind speed (m/s)",
+    "Visibility (10m)",
+    "Dew point temperature(°C)",
+    "Solar Radiation (MJ/m2)",
+    "Rainfall(mm)",
+    "Snowfall (cm)",
+    "Seasons",
+    "Holiday",
+    "Functioning Day"
+  ],
+  "date_min_raw": "01/12/2017",
+  "date_max_raw": "30/11/2018",
+  "station_id_present": false,
+  "source": "UCI official repository zip, directly inspected"
+}

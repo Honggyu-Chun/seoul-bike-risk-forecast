@@ -1,0 +1,25 @@
+{
+  "recorded_at_utc": "2026-10-20T09:18:28.381498+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "D:\\P실무\\모델개발\\.venv\\Scripts\\python.exe",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "logical_cpu_count": 8,
+  "training_threads": 4,
+  "training_parallel_jobs": 1,
+  "versions": {
+    "numpy": "2.5.4",
+    "pandas": "2.3.3",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "lightgbm": "4.7.0",
+    "catboost": "1.2.10",
+    "xgboost": "3.4.1",
+    "torch": "2.6.0+cpu",
+    "joblib": "1.6.0",
+    "matplotlib": "3.11.2",
+    "pytest": "8.4.2"
+  },
+  "scope": "local CPU development comparisons; not the old Linux environment",
+  "updated_at_utc": "2026-10-20T15:35:47.190299+00:00",
+  "version_source_note": "xgboost is installed through the xgboost-cpu distribution; null from the former distribution-name lookup is corrected."
+}

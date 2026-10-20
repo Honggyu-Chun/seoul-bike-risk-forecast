@@ -1,0 +1,12 @@
+[
+  {"id":"bike_trips","url":"https://data.seoul.go.kr/dataList/OA-15182/F/1/datasetView.do","purpose":"대여 원천기록; 실제 스키마·기간 미확인"},
+  {"id":"bike_hourly","url":"https://data.seoul.go.kr/dataList/OA-15245/F/1/datasetView.do","purpose":"시간대별 이용정보; 집계 단위와 이용건수 컬럼 미확인"},
+  {"id":"stations","url":"https://data.seoul.go.kr/dataList/OA-13252/F/1/datasetView.do","purpose":"과거 시점 대여소 메타데이터; 대여소 ID 연결 미확인"},
+  {"id":"events","url":"https://data.seoul.go.kr/dataList/OA-15486/S/1/datasetView.do","purpose":"문화행사; 과거 이력 보존·시간표·등록일 미확인"},
+  {"id":"kopis","url":"https://kopis.or.kr/por/cs/openapi/openApiInfo.do?menuId=MNU_00077","purpose":"공연·시설 API 공식 안내; 실제 과거 조회·인증 조건 재확인 필요"},
+  {"id":"weather","url":"https://data.kma.go.kr/data/grnd/selectAsosList.do?pgmNo=36","purpose":"ASOS 관측; 시각·품질 플래그·제공 지연 미확인"},
+  {"id":"festival","url":"https://www.data.go.kr/data/15013104/standard.do","purpose":"축제 표준자료; 과거 보존·실제 시간대 미확인"},
+  {"id":"city","url":"https://data.seoul.go.kr/dataVisual/seoul/guide.do","purpose":"실시간 도시데이터; 과거 자료 제공 여부 공식 재확인"},
+  {"id":"availability","url":"https://data.seoul.go.kr/dataList/OA-22382/F/1/datasetView.do","purpose":"시간당 잔여 수량; 대여 건수와 다른 정답"},
+  {"id":"realtime","url":"https://data.seoul.go.kr/dataList/OA-15493/A/1/datasetView.do","purpose":"현재 대여가능 수량; 과거 대여 건수 대체 불가"}
+]

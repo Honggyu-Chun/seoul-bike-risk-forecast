@@ -1,0 +1,20 @@
+[
+  {
+    "source_id": "topis_volume_2025_month_files",
+    "url": "https://topis.seoul.go.kr/refroom/selectRefRoomListASC.do",
+    "parameters": {
+      "blbdDivCd": "08",
+      "bdwrDivCd": "2025",
+      "mainBdwrRowNum": "12"
+    },
+    "method": "POST form; method verified in official /js/common.js commonAjax",
+    "checked_at": "2026-10-20T18:41:17.766428+09:00",
+    "http_status": 200,
+    "bytes": 5460,
+    "sha256": "310c57477da9a9a8e93d8530e199a276389cb973626f51212bfa2dbd734d33a3",
+    "access_result": "success",
+    "response_keys": [
+      "rows"
+    ]
+  }
+]

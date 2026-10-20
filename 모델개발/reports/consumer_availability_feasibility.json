@@ -1,0 +1,39 @@
+{
+  "source": "Seoul OA-22382 official archived hourly quantity; January 2025 member",
+  "source_rows": 1922370,
+  "station_ids": 2766,
+  "unique_record_hours": 695,
+  "missing_city_hours": 49,
+  "duplicate_station_hours": 0,
+  "quantity_missing": 0,
+  "quantity_negative": 0,
+  "zero_quantity_rows": 193832,
+  "zero_quantity_rate": 0.10082970499955783,
+  "exactly_one_hour_successive_pairs": 1914072,
+  "target_zero_rows_in_successive_pairs": 192817,
+  "source_column": "거치대수량",
+  "spatial_mapping": {
+    "location_snapshot": "2024-12",
+    "source_station_ids": 2766,
+    "matched_ids": 2765,
+    "valid_coordinates": 2765,
+    "unmatched_ids": [
+      4721
+    ],
+    "stations_with_neighbor_within_500m": 2711,
+    "median_neighbors_within_500m": 5.0,
+    "scope": "coordinate matching and straight-line geometric feasibility, not routing or operating status"
+  },
+  "weather_mapping": {
+    "quantity_unique_hours": 695,
+    "matched_weather_hours": 695,
+    "scope": "archived time alignment only; future actual weather is not available forecast input"
+  },
+  "limitations": [
+    "No model training, performance result, or live API verification.",
+    "This confirms adjacent record availability, not exact within-hour observation time.",
+    "A zero record does not establish an entire hour of stockout or actual rider failure.",
+    "Provider meaning, station operating state, and recording cadence must be checked before operational labels.",
+    "Hourly records cannot validate a 5- or 10-minute arrival forecast."
+  ]
+}

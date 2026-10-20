@@ -1,0 +1,33 @@
+[
+  {
+    "id": "kma_seoul_2025",
+    "file": "kma_seoul_2025.zip",
+    "url": "https://data.kma.go.kr/data/common/processDtsSampleReqst.do",
+    "form": {
+      "cmmnCdList": "",
+      "upperCmmnCode": "",
+      "lrgClssCd": "SFC",
+      "mddlClssCd": "SFC01",
+      "menuNo": "32",
+      "pageIndex": "1",
+      "stnIds": "108",
+      "elementGroupSns": "",
+      "serviceSe": "F00101",
+      "txtStnNm": "서울",
+      "stnTreeId": "",
+      "mngRprtNo": "",
+      "ctlgNo": "",
+      "pgmNo": "36",
+      "schListCnt": "",
+      "dataFormCd": "F00502",
+      "startDt": "2025",
+      "endDt": "2025",
+      "startMt": "01",
+      "endMt": "01",
+      "filesetSnList": "16364",
+      "filesetDtlSnList": "5439337"
+    },
+    "max_bytes": 5000000,
+    "referer": "https://data.kma.go.kr/"
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "generated_at_utc": "2026-10-20T10:08:00.036379+00:00",
+  "candidate_rows": 62,
+  "unique_source_groups": 62,
+  "domain_rows": {
+    "교통흐름": 24,
+    "공간시설": 19,
+    "인구행사": 19
+  },
+  "shared_source_groups": {},
+  "inputs": [
+    {
+      "path": "교통흐름\\후보목록.csv",
+      "sha256": "717734e1843d6b7a5faecf8768e0bee581416ba6699b544cc4422dca7ead5aa3"
+    },
+    {
+      "path": "공간시설\\후보목록.csv",
+      "sha256": "2061a1a7dfd527208ed764b0eebf5efab86108a14d60f656436cdfa4db045572"
+    },
+    {
+      "path": "인구행사\\후보목록.csv",
+      "sha256": "e338c6806d9530d38ecdc11a78e47ff71f0346ed22b42768a85713fd6cb97532"
+    }
+  ],
+  "effect_proven_by_this_catalog": false,
+  "selection_policy_exists": true
+}

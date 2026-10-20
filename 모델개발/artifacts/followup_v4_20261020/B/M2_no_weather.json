@@ -1,0 +1,168 @@
+{
+  "name": "M2_no_weather",
+  "status": "ok",
+  "fold": "B",
+  "spec": {
+    "components": {
+      "lightgbm_full": 0.5,
+      "catboost_temporal": 0.5
+    },
+    "weights_selected_on": "fixed before outside scores"
+  },
+  "component_result_sha256": {
+    "lightgbm_full": "aa30ec165f11eca3dded3c9aa8011a46114b50c83f7f42d497ca54d0be7a440b",
+    "catboost_temporal": "306dc26e0a6ba370d1aeb58a0803599e44928b64349c2bf93e15d1f1b4298cf4"
+  },
+  "rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.41000000000000003,
+    "positive_threshold": 0.36000000000000004,
+    "f1": 0.7347629493665219
+  },
+  "validation": {
+    "overall": {
+      "n": 913584,
+      "zero_cases": 108042,
+      "zero_rate": 0.11826170335732675,
+      "f1": 0.7252908026876671,
+      "precision": 0.7081136367644206,
+      "recall": 0.7433220414283335,
+      "average_precision": 0.8060845932486971,
+      "brier": 0.04543028771877289,
+      "tn": 772438,
+      "fp": 33104,
+      "fn": 27732,
+      "tp": 80310,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.41000000000000003,
+        "positive_threshold": 0.36000000000000004,
+        "f1": 0.7347629493665219
+      }
+    },
+    "current_positive": {
+      "n": 805481,
+      "zero_cases": 32223,
+      "zero_rate": 0.040004668018240035,
+      "f1": 0.3247565641638156,
+      "precision": 0.46704320484453243,
+      "recall": 0.24892157775501972,
+      "average_precision": 0.37631544280596263,
+      "brier": 0.029652375727891922,
+      "tn": 764105,
+      "fp": 9153,
+      "fn": 24202,
+      "tp": 8021,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.41000000000000003,
+        "positive_threshold": 0.36000000000000004,
+        "f1": 0.7347629493665219
+      }
+    },
+    "current_1_to_3": {
+      "n": 191859,
+      "zero_cases": 28651,
+      "zero_rate": 0.14933362521435012,
+      "f1": 0.34001554001554,
+      "precision": 0.4671221178479932,
+      "recall": 0.26728560957732717,
+      "average_precision": 0.39248617203305786,
+      "brier": 0.10825049877166748,
+      "tn": 154472,
+      "fp": 8736,
+      "fn": 20993,
+      "tp": 7658,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.41000000000000003,
+        "positive_threshold": 0.36000000000000004,
+        "f1": 0.7347629493665219
+      }
+    }
+  },
+  "raw_validation": {
+    "overall": {
+      "n": 913584,
+      "zero_cases": 108042,
+      "zero_rate": 0.11826170335732675,
+      "f1": 0.7254888736010504,
+      "precision": 0.7054574709025245,
+      "recall": 0.7466911016086337,
+      "average_precision": 0.8060845975220781,
+      "brier": 0.04544038698077202,
+      "tn": 771859,
+      "fp": 33683,
+      "fn": 27368,
+      "tp": 80674,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.38,
+        "positive_threshold": 0.34,
+        "f1": 0.7347524814283038
+      }
+    },
+    "current_positive": {
+      "n": 805481,
+      "zero_cases": 32223,
+      "zero_rate": 0.040004668018240035,
+      "f1": 0.3261816422003549,
+      "precision": 0.46565720536588173,
+      "recall": 0.25100083791080907,
+      "average_precision": 0.37631546294154516,
+      "brier": 0.029693210497498512,
+      "tn": 763977,
+      "fp": 9281,
+      "fn": 24135,
+      "tp": 8088,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.38,
+        "positive_threshold": 0.34,
+        "f1": 0.7347524814283038
+      }
+    },
+    "current_1_to_3": {
+      "n": 191859,
+      "zero_cases": 28651,
+      "zero_rate": 0.14933362521435012,
+      "f1": 0.3414245921209709,
+      "precision": 0.46565760115781224,
+      "recall": 0.2695193885030191,
+      "average_precision": 0.39248619446343636,
+      "brier": 0.10841687023639679,
+      "tn": 154347,
+      "fp": 8861,
+      "fn": 20929,
+      "tp": 7722,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.38,
+        "positive_threshold": 0.34,
+        "f1": 0.7347524814283038
+      }
+    }
+  },
+  "stage_rows": {
+    "cal": 261120,
+    "policy": 391593,
+    "valid": 913584
+  },
+  "actual_train_rows": 0,
+  "seconds": 16.19914989999961,
+  "memory": {
+    "rss_gib": 3.2267532348632812,
+    "peak_rss_gib": 4.541595458984375
+  },
+  "code_sha256": "0d2950915921d2ad66395ad9474631e47bedda63cafa3b1ef9e5c815a3af13c7",
+  "protocol_sha256": "b27638a47352bd26ed8c1b0dc34f3f434c9bb914ed3667f0f52ec1640ba362f8",
+  "independent_final_test": false,
+  "information_track": "availability_timestamp_causal",
+  "completed_at_utc": "2026-10-20T11:29:40.958674+00:00"
+}

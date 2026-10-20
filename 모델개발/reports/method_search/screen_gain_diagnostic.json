@@ -1,0 +1,11 @@
+{
+  "model": "causal_transition_spatial",
+  "validation_f1": 0.7549605465471892,
+  "group_gain_share": {
+    "other_past_calendar_location": 0.09034287066116058,
+    "current_quantity": 0.23136028026546937,
+    "neighbor": 0.003143895574201302,
+    "past_transition": 0.6751529534991687
+  },
+  "interpretation": "Model split-gain usage, not causal effects or local feature contributions. Other hyperparameters/budgets also differ across candidates."
+}

@@ -1,0 +1,65 @@
+{
+  "n_rows": 21720,
+  "n_points": 5,
+  "n_unique_grid_coordinates": 5,
+  "hours_per_point": {
+    "center": 4344,
+    "northeast": 4344,
+    "northwest": 4344,
+    "southeast": 4344,
+    "southwest": 4344
+  },
+  "min_valid_time": "2025-01-01 00:00:00",
+  "max_valid_time": "2025-06-30 23:00:00",
+  "min_input_time": "2024-12-31 23:00:00",
+  "max_input_time": "2025-06-30 22:00:00",
+  "null_counts": {
+    "gfs_day1_temperature_c": 0,
+    "gfs_day1_precipitation_mm": 0,
+    "gfs_day1_relative_humidity_pct": 0,
+    "gfs_day1_wind_speed_m_s": 0,
+    "gfs_day1_cloud_cover_pct": 0
+  },
+  "fixed_lead_hours": 24,
+  "target_valid_time_minus_input_hours": 1,
+  "first_publication_time_verified": false,
+  "information_track": "Archived fixed-day1 forecast sensitivity, not verified historical operational feed or 1h-lead weather forecast",
+  "cohort_rows": 2729,
+  "cohort_assigned_rows": 2729,
+  "nearest_grid_distance_km": {
+    "count": 2729.0,
+    "mean": 8.132838749606027,
+    "std": 2.9823492577885418,
+    "min": 0.3681838472418706,
+    "50%": 8.188273698026459,
+    "90%": 11.97460003240596,
+    "95%": 12.503456768586442,
+    "max": 14.237009157910189
+  },
+  "point_assignment_counts": {
+    "center": 1707,
+    "southwest": 337,
+    "northeast": 277,
+    "northwest": 239,
+    "southeast": 169
+  },
+  "source_manifest_sha256": "e666991eb4005f07b345f98ba5b075477f9800e38066e2b052fb11afc3a1d4e6",
+  "outputs": {
+    "gfs_day1_2025h1_input.csv": {
+      "bytes": 1801940,
+      "sha256": "3a6a19f1afd1cee3c82ba4ba9e537fc6b7bd3dd954ffa44e8d8ebbb46823965f"
+    },
+    "gfs_day1_2025h1_input.parquet": {
+      "bytes": 206240,
+      "sha256": "077014fc1de5a3019489dc566a214172ecf6f21b698634652b6b808a93ff3964"
+    },
+    "gfs_day1_points.csv": {
+      "bytes": 284,
+      "sha256": "2681ed516d216f842027eccb11ce31883d644a96b4f896dac1928a5e16c780dd"
+    },
+    "station_gfs_point_join.csv": {
+      "bytes": 87782,
+      "sha256": "a2ce0e3f7c6ae92424710898107f90b7c7423130385c278b2c7934e1b469edf8"
+    }
+  }
+}

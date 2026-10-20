@@ -1,0 +1,52 @@
+{
+  "source_rows": 1610875,
+  "total_rentals_sum": 1704190,
+  "columns": [
+    "대여일자",
+    "대여시간",
+    "대여소번호",
+    "대여소명",
+    "대여구분코드",
+    "성별",
+    "연령대코드",
+    "이용건수",
+    "운동량",
+    "탄소량",
+    "이동거리"
+  ],
+  "encoding": "cp949",
+  "source_station_ids": 2730,
+  "all_source_date_hours_present": 744,
+  "expected_month_hours": 744,
+  "global_hourly_min_rentals": 132,
+  "first_hour": "2025-01-01 00:00:00",
+  "last_hour": "2025-01-31 23:00:00",
+  "id_name_prefix_mismatches": 0,
+  "ids_absent_from_202412_snapshot": [
+    "4721",
+    "9980"
+  ],
+  "numeric_id_rule": "strip zero padding only after numeric validation; cross-check station-name numeric prefix",
+  "missing_by_column": {
+    "대여일자": 0,
+    "대여시간": 0,
+    "대여소번호": 0,
+    "대여소명": 0,
+    "대여구분코드": 0,
+    "성별": 420294,
+    "연령대코드": 0,
+    "이용건수": 0,
+    "운동량": 6237,
+    "탄소량": 6237,
+    "이동거리": 0
+  },
+  "row_hash_duplicate_candidates": 94,
+  "duplicates_policy": "not removed; duplicate-looking grouped records need provider semantics, not blind deduplication",
+  "selected_station_hours_grid": 14880,
+  "selected_hours_with_source_records": 6521,
+  "selected_hours_missing_unknown": 8359,
+  "selected_explicit_zero_hours": 0,
+  "selected_rentals_sum": 15475,
+  "scope": "conditional-on-observed-hours pilot; no full zero-demand evaluation and no operational uptime proof",
+  "event_window_definition": "only parsed single-day Sejong starts, station <=500m, bin start in [start-2h,start+2h); no claim of exhaustive events or end times"
+}

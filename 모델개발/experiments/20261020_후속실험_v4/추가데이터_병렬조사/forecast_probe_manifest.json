@@ -1,0 +1,34 @@
+[
+  {
+    "source_url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.978&start_date=2025-01-01&end_date=2025-01-07&timezone=Asia%2FSeoul&hourly=temperature_2m_previous_day1%2Cprecipitation_previous_day1%2Crelative_humidity_2m_previous_day1%2Cwind_speed_10m_previous_day1%2Ccloud_cover_previous_day1&models=gfs_global&wind_speed_unit=ms",
+    "path": "data\\raw\\followup_v4_extra\\gfs_day1_center_probe.json",
+    "bytes": 7157,
+    "sha256": "9cd3fc48a6fabe83230a594ba9abdba77f84457335ab6305fbf105dfc09716b9",
+    "received_at_utc": "2026-10-20T06:52:38.222257+00:00",
+    "point_id": "center",
+    "request_latitude": 37.5665,
+    "request_longitude": 126.978,
+    "grid_latitude": 37.54637,
+    "grid_longitude": 127.03125,
+    "model": "gfs_global",
+    "fixed_lead_hours": 24,
+    "n_hours": 168,
+    "null_counts": {
+      "temperature_2m_previous_day1": 0,
+      "precipitation_previous_day1": 0,
+      "relative_humidity_2m_previous_day1": 0,
+      "wind_speed_10m_previous_day1": 0,
+      "cloud_cover_previous_day1": 0
+    },
+    "timezone": "Asia/Seoul",
+    "units": {
+      "time": "iso8601",
+      "temperature_2m_previous_day1": "°C",
+      "precipitation_previous_day1": "mm",
+      "relative_humidity_2m_previous_day1": "%",
+      "wind_speed_10m_previous_day1": "m/s",
+      "cloud_cover_previous_day1": "%"
+    },
+    "individual_run_initialization_and_publication_timestamp_available": false
+  }
+]

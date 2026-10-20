@@ -1,0 +1,21 @@
+{
+  "scope": "Previously opened v1 March test only; not the new April-May test",
+  "manifest": {
+    "attempted": 5280,
+    "common_queries": 5224,
+    "excluded_no_candidate": 56
+  },
+  "reproduced_R0": {
+    "requests": 5224,
+    "valid_recommendations": 4972,
+    "recommended": 5224,
+    "effective_rate": 0.9517611026033691,
+    "hit_rate": 0.9517611026033691,
+    "abstention_rate": 0.0,
+    "extra_distance_m": 0.0
+  },
+  "maximum_rate_even_with_perfect_future_labels": 0.9921516079632465,
+  "oracle_improvement_pp_over_R0": 4.039050535987743,
+  "absolute_100percent_headroom_pp": 4.823889739663089,
+  "original_5pp_goal_exceeds_both_upper_bounds": true
+}

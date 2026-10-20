@@ -1,0 +1,74 @@
+[
+  {
+    "source_id": "parking_meta",
+    "url": "https://data.seoul.go.kr/dataList/OA-13122/A/1/datasetView.do",
+    "checked_at": "2026-10-20T19:00:05.767497+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 86351,
+    "sha256": "1234fa2305812c904310acc0abe3d29ca047cd145f6d032751b5d25270c64403",
+    "final_url": "https://data.seoul.go.kr/dataList/OA-13122/A/1/datasetView.do",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\parking_meta.txt"
+  },
+  {
+    "source_id": "parking_api",
+    "url": "https://data.seoul.go.kr/dataList/openApiView.do?infId=OA-13122&srvType=A&infSeq=1",
+    "checked_at": "2026-10-20T19:00:05.849321+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 26654,
+    "sha256": "3feef0eb1f59b0deb25d0ca0369d675f53a1dd5a098108d1ce6943249d24b6df",
+    "final_url": "https://data.seoul.go.kr/dataList/openApiView.do?infId=OA-13122&srvType=A&infSeq=1",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\parking_api.txt"
+  },
+  {
+    "source_id": "kickboard_fleet",
+    "url": "https://data.seoul.go.kr/dataList/OA-22199/F/1/datasetView.do",
+    "checked_at": "2026-10-20T19:00:06.126826+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 118789,
+    "sha256": "deb8f4a847053830c1aad220c1d82aef00baa925282154c9dae688632fe2920e",
+    "final_url": "https://data.seoul.go.kr/dataList/OA-22199/F/1/datasetView.do",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\kickboard_fleet.txt"
+  },
+  {
+    "source_id": "transit_transfers",
+    "url": "https://data.seoul.go.kr/dataList/OA-21221/F/1/datasetView.do",
+    "checked_at": "2026-10-20T19:00:06.981160+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 137621,
+    "sha256": "c8f851500e55f714730ea40a526481b4c1a9d21dd33a40138eda9f887b469411",
+    "final_url": "https://data.seoul.go.kr/dataList/OA-21221/F/1/datasetView.do",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\transit_transfers.txt"
+  },
+  {
+    "source_id": "transit_hour_boardings",
+    "url": "https://data.seoul.go.kr/dataList/OA-21219/A/1/datasetView.do",
+    "checked_at": "2026-10-20T19:00:06.983176+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 133185,
+    "sha256": "e6471cd784321e40f67f13e204c76a75e839bad4ee3e5989d7816c4519ad9ce4",
+    "final_url": "https://data.seoul.go.kr/dataList/OA-21219/A/1/datasetView.do",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\transit_hour_boardings.txt"
+  },
+  {
+    "source_id": "taxi_campus",
+    "url": "https://bigdata.seoul.go.kr/data/selectPageListDataSet.do?attrb_code_1=B&attrb_code_2=&currentPage=5&r_id=P211&sch_text=&sort_type=updt",
+    "checked_at": "2026-10-20T19:00:07.068307+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 27804,
+    "sha256": "ca8cf87cc1c4bac11ade5df6898d39263c59f7076d98654b4f3f2b2df8d8396e",
+    "final_url": "https://bigdata.seoul.go.kr/data/selectPageListDataSet.do?attrb_code_1=B&attrb_code_2=&currentPage=5&r_id=P211&sch_text=&sort_type=updt",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\taxi_campus.txt"
+  }
+]

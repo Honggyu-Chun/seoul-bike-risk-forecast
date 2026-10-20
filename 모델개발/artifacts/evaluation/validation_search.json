@@ -1,0 +1,74 @@
+[
+  {
+    "model": "B1S",
+    "candidate": 0,
+    "setting": {
+      "num_leaves": 31,
+      "min_data_in_leaf": 300
+    },
+    "best_iteration": 240,
+    "threshold": 0.3,
+    "validation_f1": 0.7441198309503738,
+    "seconds": 32.01166737599851
+  },
+  {
+    "model": "B1S",
+    "candidate": 1,
+    "setting": {
+      "num_leaves": 63,
+      "min_data_in_leaf": 500
+    },
+    "best_iteration": 166,
+    "threshold": 0.35,
+    "validation_f1": 0.7452342249150288,
+    "seconds": 32.318117468999844
+  },
+  {
+    "model": "B1",
+    "candidate": 0,
+    "setting": {
+      "num_leaves": 31,
+      "min_data_in_leaf": 300
+    },
+    "best_iteration": 240,
+    "threshold": 0.35,
+    "validation_f1": 0.7477491225392949,
+    "seconds": 42.00966579600208
+  },
+  {
+    "model": "B1",
+    "candidate": 1,
+    "setting": {
+      "num_leaves": 63,
+      "min_data_in_leaf": 500
+    },
+    "best_iteration": 240,
+    "threshold": 0.35,
+    "validation_f1": 0.7478851316294074,
+    "seconds": 49.263972508000734
+  },
+  {
+    "model": "M1",
+    "candidate": 0,
+    "setting": {
+      "num_leaves": 31,
+      "min_data_in_leaf": 300
+    },
+    "best_iteration": 226,
+    "threshold": 0.35,
+    "validation_f1": 0.7481470634616685,
+    "seconds": 53.326513906999025
+  },
+  {
+    "model": "M1",
+    "candidate": 1,
+    "setting": {
+      "num_leaves": 63,
+      "min_data_in_leaf": 500
+    },
+    "best_iteration": 164,
+    "threshold": 0.35,
+    "validation_f1": 0.7489508014360116,
+    "seconds": 50.33649689400045
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "checked_at_utc": "2026-10-20T10:53:32.037247+00:00",
+  "public_extension_plan_sha256": "7d39ff6b19a08eaf60270d6aa37d5a87e77ee891e2635a1b0254137a91af2a3b",
+  "source_hashes_valid": true,
+  "cohort_size": 2729,
+  "join_checks": [
+    {
+      "group": "bus",
+      "features": 109,
+      "base_features_unchanged": true,
+      "repeated_index_order_preserved": true
+    },
+    {
+      "group": "od",
+      "features": 112,
+      "base_features_unchanged": true,
+      "repeated_index_order_preserved": true
+    },
+    {
+      "group": "bus_od",
+      "features": 116,
+      "base_features_unchanged": true,
+      "repeated_index_order_preserved": true
+    }
+  ],
+  "v4_wait_reasons": [
+    "v4 queue launcher is live",
+    "v4 model worker is live",
+    "registered v4 comparisons or confirmation remain incomplete"
+  ],
+  "main_training_started": false,
+  "held_back_Q3_Q4_read": false
+}

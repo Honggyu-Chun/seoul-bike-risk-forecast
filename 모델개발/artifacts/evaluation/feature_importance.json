@@ -1,0 +1,204 @@
+{
+  "B1S": [
+    {
+      "feature": "quantity",
+      "gain": 14333397.758648396
+    },
+    {
+      "feature": "station_code",
+      "gain": 1100134.8432593346
+    },
+    {
+      "feature": "hour",
+      "gain": 226793.46293258667
+    },
+    {
+      "feature": "weekend",
+      "gain": 13329.264022827148
+    },
+    {
+      "feature": "weekday",
+      "gain": 6114.668152809143
+    },
+    {
+      "feature": "log_quantity",
+      "gain": 0.0
+    }
+  ],
+  "B1": [
+    {
+      "feature": "quantity",
+      "gain": 14269563.279527187
+    },
+    {
+      "feature": "station_code",
+      "gain": 1079201.1938886642
+    },
+    {
+      "feature": "hour",
+      "gain": 240615.44776248932
+    },
+    {
+      "feature": "q_mean_24",
+      "gain": 177306.47542476654
+    },
+    {
+      "feature": "q_mean_3",
+      "gain": 85513.12013483047
+    },
+    {
+      "feature": "q_change_3",
+      "gain": 43680.97508239746
+    },
+    {
+      "feature": "q_lag_1",
+      "gain": 42455.74416780472
+    },
+    {
+      "feature": "q_change_1",
+      "gain": 28961.750342845917
+    },
+    {
+      "feature": "q_lag_2",
+      "gain": 20023.308403491974
+    },
+    {
+      "feature": "weekend",
+      "gain": 7633.288411140442
+    },
+    {
+      "feature": "q_lag_24",
+      "gain": 7153.429740905762
+    },
+    {
+      "feature": "weekday",
+      "gain": 2092.3322310447693
+    },
+    {
+      "feature": "q_lag_168",
+      "gain": 1147.1471090316772
+    },
+    {
+      "feature": "q_known_24",
+      "gain": 1110.7819185256958
+    },
+    {
+      "feature": "log_quantity",
+      "gain": 0.0
+    },
+    {
+      "feature": "q_known_3",
+      "gain": 0.0
+    }
+  ],
+  "M1": [
+    {
+      "feature": "quantity",
+      "gain": 14264356.354379654
+    },
+    {
+      "feature": "station_code",
+      "gain": 929604.0249700546
+    },
+    {
+      "feature": "hour",
+      "gain": 220437.12248897552
+    },
+    {
+      "feature": "q_mean_24",
+      "gain": 174522.28181266785
+    },
+    {
+      "feature": "q_mean_3",
+      "gain": 84255.56880760193
+    },
+    {
+      "feature": "q_lag_1",
+      "gain": 39188.707511901855
+    },
+    {
+      "feature": "q_change_3",
+      "gain": 36003.712799072266
+    },
+    {
+      "feature": "q_change_1",
+      "gain": 29048.648997306824
+    },
+    {
+      "feature": "neighbor_change_1",
+      "gain": 20614.93881893158
+    },
+    {
+      "feature": "neighbor_change_3",
+      "gain": 18372.81478691101
+    },
+    {
+      "feature": "q_lag_2",
+      "gain": 17567.041049957275
+    },
+    {
+      "feature": "neighbor_zero_fraction",
+      "gain": 9954.165901184082
+    },
+    {
+      "feature": "q_lag_24",
+      "gain": 4626.354299545288
+    },
+    {
+      "feature": "neighbor_low2_fraction",
+      "gain": 4498.5132303237915
+    },
+    {
+      "feature": "weekend",
+      "gain": 3100.3615074157715
+    },
+    {
+      "feature": "neighbor_min",
+      "gain": 1248.2853050231934
+    },
+    {
+      "feature": "weekday",
+      "gain": 1213.1879920959473
+    },
+    {
+      "feature": "q_known_24",
+      "gain": 756.6318969726562
+    },
+    {
+      "feature": "neighbor_observed_count",
+      "gain": 754.0179023742676
+    },
+    {
+      "feature": "neighbor_mean",
+      "gain": 256.2291965484619
+    },
+    {
+      "feature": "own_minus_neighbor",
+      "gain": 151.94100189208984
+    },
+    {
+      "feature": "q_lag_168",
+      "gain": 149.45979690551758
+    },
+    {
+      "feature": "neighbor_std",
+      "gain": 21.415599822998047
+    },
+    {
+      "feature": "log_quantity",
+      "gain": 0.0
+    },
+    {
+      "feature": "q_known_3",
+      "gain": 0.0
+    },
+    {
+      "feature": "neighbor_degree",
+      "gain": 0.0
+    },
+    {
+      "feature": "neighbor_coverage",
+      "gain": 0.0
+    }
+  ]
+}

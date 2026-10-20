@@ -1,0 +1,427 @@
+{
+  "events": {
+    "rows": 19631,
+    "columns": [
+      "org_name",
+      "use_fee",
+      "org_link",
+      "player",
+      "guname",
+      "pro_time",
+      "main_img",
+      "themecode",
+      "date",
+      "etc_desc",
+      "end_date",
+      "title",
+      "inquiry",
+      "ticket",
+      "codename",
+      "use_trgt",
+      "program",
+      "lot",
+      "rgstdate",
+      "strtdate",
+      "place",
+      "hmpg_addr",
+      "lat",
+      "is_free"
+    ],
+    "scope": "complete_current_export_not_historical_snapshot",
+    "start_min": "2021-10-19 00:00:00",
+    "start_max": "2026-12-24 00:00:00",
+    "starts_by_year": {
+      "2021": 458,
+      "2022": 3075,
+      "2023": 3566,
+      "2024": 5537,
+      "2025": 3918,
+      "2026": 3077
+    },
+    "missing_fields": {
+      "org_name": 0,
+      "use_fee": 10635,
+      "org_link": 267,
+      "player": 17654,
+      "guname": 121,
+      "pro_time": 0,
+      "main_img": 0,
+      "themecode": 3043,
+      "date": 0,
+      "etc_desc": 19288,
+      "end_date": 0,
+      "title": 0,
+      "inquiry": 3411,
+      "ticket": 0,
+      "codename": 0,
+      "use_trgt": 0,
+      "program": 17457,
+      "lot": 496,
+      "rgstdate": 0,
+      "strtdate": 0,
+      "place": 0,
+      "hmpg_addr": 0,
+      "lat": 496,
+      "is_free": 8
+    },
+    "exact_duplicate_rows": 0,
+    "duplicate_event_ids": 0,
+    "invalid_end_timestamp": 1,
+    "reversed_date_intervals": 54,
+    "invalid_or_missing_coordinates": 507,
+    "registered_after_start_date": 2242,
+    "simple_one_day_starts": 5318,
+    "january_overlap_candidates_before_interval_validation": 365,
+    "january_overlap_events": 364,
+    "january_sejong_venue_events": 28,
+    "january_simple_sejong_starts": 23,
+    "registered_on_or_after_event_day_in_selected": 0,
+    "historical_version_proof": "unavailable; registration date does not prove original schedule contents",
+    "source_json_timestamp_unit": "Unix milliseconds, UTC converted to Asia/Seoul",
+    "csv_problem": "strict CP949 decode fails at byte 5382564; official UTF-8 JSON export used instead",
+    "invalid_date_rows": [
+      {
+        "event_id": "159325",
+        "title": "COLD FEET [No Filter]",
+        "date": "2026-09-25~2026-09-15"
+      },
+      {
+        "event_id": "158497",
+        "title": "[서울영화센터] 스마트폰으로 만드는 나만의 영화 - Ⅱ.프리프로덕션",
+        "date": "2026-07-18~2626-08-08"
+      },
+      {
+        "event_id": "156891",
+        "title": "[라율 영재&영아티스트] 이윤하 바이올린 독주회",
+        "date": "2026-03-14~2026-02-14"
+      },
+      {
+        "event_id": "156829",
+        "title": "코리아나미술관 *c-lab 9.0 [미술관/실험실 Museum/Laboratory]",
+        "date": "2026-02-24~2026-02-14"
+      },
+      {
+        "event_id": "155806",
+        "title": "[중구문화재단] 뮤지컬 [한복 입은 남자]",
+        "date": "2025-12-02~2025-03-08"
+      },
+      {
+        "event_id": "155994",
+        "title": "지운하 명인의 예인 인생 70주년 [동행]",
+        "date": "2025-11-28~2025-11-25"
+      },
+      {
+        "event_id": "155273",
+        "title": "2025 추석, 함께 지내는 차례대행 서비스 [함께할 차례]",
+        "date": "2025-10-02~2025-09-02"
+      },
+      {
+        "event_id": "153552",
+        "title": "[서울백제어린이박물관] 유아ㆍ어린이와 양육자 대상 [서울역사생태탐험대2] 시장놀이",
+        "date": "2025-07-12~2025-07-10"
+      },
+      {
+        "event_id": "153375",
+        "title": "[2025 클래식다방 - 갤러리반포대로5] 그림과 함께하는 (네 대의) 더블베이스",
+        "date": "2025-05-25~2025-04-25"
+      },
+      {
+        "event_id": "153203",
+        "title": "[서울공예박물관] 가사 안 풍경 [사전체험단]",
+        "date": "2025-04-24~2025-04-14"
+      },
+      {
+        "event_id": "151912",
+        "title": "[서울백제어린이박물관] 가족 대상 겨울방학 교육1 [어박 사용법+뚝딱뚝딱!백제집!] 1차",
+        "date": "2025-01-07~2025-01-01"
+      },
+      {
+        "event_id": "151757",
+        "title": "명동스퀘어 카운트다운 축제",
+        "date": "2024-12-31~2024-01-01"
+      },
+      {
+        "event_id": "151329",
+        "title": "[영등포문화재단] 장밋빛 미래: 모호한 경계",
+        "date": "2024-12-19~2024-01-02"
+      },
+      {
+        "event_id": "150568",
+        "title": "[강남문화재단] 11월 키즈예술공연 [목림삼]",
+        "date": "2024-11-16~2024-10-16"
+      },
+      {
+        "event_id": "148210",
+        "title": "[강북문화재단] 2024 강북Festa 공연 (8월 매주 토요일 5팀)",
+        "date": "2024-08-03~2024-07-31"
+      },
+      {
+        "event_id": "146120",
+        "title": "2024 서울시향 레이 첸의 멘델스존과 차이콥스키 ①",
+        "date": "2024-06-28~2024-06-26"
+      },
+      {
+        "event_id": "145452",
+        "title": "[구로구립 궁동어린이도서관] 2024년 도서관 주간 프로그램",
+        "date": "2024-04-01~2024-03-29"
+      },
+      {
+        "event_id": "145257",
+        "title": "[마포구립서강도서관] 2024년 읽는 인간 호모부커스 Ⅰ 가즈오 이시구로 작품 읽기",
+        "date": "2024-03-07~2024-02-28"
+      },
+      {
+        "event_id": "144644",
+        "title": "[서울식물원] 전시온실 열대 난초 전시 [오늘, 난(蘭)]",
+        "date": "2023-12-15~2014-02-28"
+      },
+      {
+        "event_id": "143882",
+        "title": "[서울마포음악창작소] 2023 M 인디열전 ♪7 ‘3.14(삼점일사) ",
+        "date": "2023-11-11~2023-10-11"
+      },
+      {
+        "event_id": "143094",
+        "title": "더 나은 관계를 꿈꾸는 사람들을 위한 특급 심리 코칭 (Book-ing Club)",
+        "date": "2023-09-04~2023-08-14"
+      },
+      {
+        "event_id": "142443",
+        "title": "오앤앤한태희 조형예술전시 [무엇이 무엇이 똑같을까]",
+        "date": "2023-08-03~2023-07-08"
+      },
+      {
+        "event_id": "141679",
+        "title": "[퓨전국악콘서트] 5히려 좋아",
+        "date": "2023-06-23~2023-05-23"
+      },
+      {
+        "event_id": "142024",
+        "title": "그림책 속 마음 이끄미 샘들과 함께 하는 감정 북큐레이션 [내 마음을 읽어요] - 분노와 이해",
+        "date": "2023-06-14~2023-06-09"
+      },
+      {
+        "event_id": "141711",
+        "title": "[구립증산정보도서관] AI 면접특강",
+        "date": "2023-06-08~2023-05-29"
+      },
+      {
+        "event_id": "141728",
+        "title": " 2023 노들 예술체험 프로그램 [다채로운 노들공방 6월]",
+        "date": "2023-06-03~2023-06-02"
+      },
+      {
+        "event_id": "141752",
+        "title": "[구립증산정보도서관] 그림책 속 마음 이끄미 샘들과 함께 하는 감정 북큐레이션 [내 마음을 읽어요]",
+        "date": "2023-05-18~2023-05-11"
+      },
+      {
+        "event_id": "141075",
+        "title": "강남심포니오케스트라 제98회 정기연주회  MASTERPIECE SERIES Ⅸ",
+        "date": "2023-05-17~2023-03-17"
+      },
+      {
+        "event_id": "141270",
+        "title": "[꿈마을울림교실] 후후! 우리 음악 속으로 (온라인)",
+        "date": "2023-05-11~2023-04-25"
+      },
+      {
+        "event_id": "141418",
+        "title": "G-KID'S : [어딘가, 반짝]",
+        "date": "2023-05-05~2023-04-05"
+      },
+      {
+        "event_id": "140544",
+        "title": "2023 노원문화재단 신년음악회-국립심포니오케스트라",
+        "date": "2023-02-17~2023-01-17"
+      },
+      {
+        "event_id": "140335",
+        "title": "2022 온라인 국제다양성영화제 개최 (1차 2022. 12.20 ~ 30 / 2023. 1.20~30)",
+        "date": "2022-12-20~2022-01-30"
+      },
+      {
+        "event_id": "140144",
+        "title": "2023 한글일일달력전 `365일 365명 희망을 이야기하다`",
+        "date": "2022-11-29~2022-01-02"
+      },
+      {
+        "event_id": "139527",
+        "title": "[10월/일반강좌] (안정희작가와의만남) 기억 공간을 찾아서 / 2022년 마포구 한 주제로 함께 읽기",
+        "date": "2022-10-20~2022-10-19"
+      },
+      {
+        "event_id": "139101",
+        "title": "[서강도서관][9월/길위의인문학] (노중훈 작가) K-푸드 / 다시, 여기, 지금 [K-마포]",
+        "date": "2022-09-07~2022-08-07"
+      },
+      {
+        "event_id": "138974",
+        "title": "[서강도서관][9월/어린이공연] (김리라 작가) 미술시간 마술시간",
+        "date": "2022-09-02~2022-08-02"
+      },
+      {
+        "event_id": "138951",
+        "title": "서울마포음악창작소 {2022M 인디열전] 3. 로파이베이비 x정예원 MC 한경록(캡틴락)",
+        "date": "2022-09-02~2022-08-02"
+      },
+      {
+        "event_id": "138999",
+        "title": "[꿈나무역사체험교실]",
+        "date": "2022-09-01~2022-08-22"
+      },
+      {
+        "event_id": "139086",
+        "title": "대세라는데 나만 몰랐나봐 클래식과 함께하는 여름, 세계초연곡 洋樂器 恩平(호른 은평) 최초공개",
+        "date": "2022-09-01~2022-08-01"
+      },
+      {
+        "event_id": "138591",
+        "title": "박물관문화향연 [정오의 음악회] 4. 금관오중주 '브라스마켓'",
+        "date": "2022-08-20~2022-08-13"
+      },
+      {
+        "event_id": "138800",
+        "title": "[구립증산정보도서관] 2022 도서관 상주작가 지원사업 '초등 글쓰기 비밀수업'",
+        "date": "2022-08-16~2022-07-25"
+      },
+      {
+        "event_id": "138398",
+        "title": "[서강도서관][7월/길위의인문학] (심두보 교수) K-wave, 타인의 시선 / 다시, 여기, 지금 [K-마포]",
+        "date": "2022-07-13~2022-06-13"
+      },
+      {
+        "event_id": "138215",
+        "title": "2022년 상반기 독립민주시민학교 특별강좌 안내",
+        "date": "2022-06-18~2022-06-16"
+      },
+      {
+        "event_id": "137802",
+        "title": "[구립증산정보도서관] 나로 채우는 에세이, 우리 에세이 써볼래요?",
+        "date": "2022-05-02~2022-04-09"
+      },
+      {
+        "event_id": "137410",
+        "title": "[서강도서관][4월/어린이메이킹] 소망의 오르골 / 해봄이웃집maker",
+        "date": "2022-04-16~2022-03-23"
+      },
+      {
+        "event_id": "137342",
+        "title": "미생물 : 관찰과 배양",
+        "date": "2022-04-02~2022-03-26"
+      },
+      {
+        "event_id": "137244",
+        "title": "오페라 음악극 <라 트라비아타>",
+        "date": "2022-03-24~2022-02-26"
+      },
+      {
+        "event_id": "137218",
+        "title": "2022 노원문화재단 시각예술 신진작가전  <Wave of arts>",
+        "date": "2022-03-03~2022-02-23"
+      },
+      {
+        "event_id": "137197",
+        "title": "시샘달 클라와의 산책",
+        "date": "2022-02-26~2022-02-19"
+      },
+      {
+        "event_id": "137098",
+        "title": "[서강도서관] 2월/일반강좌 (김누리 교수) 미래교육, 삶을 위한 수업 1부, 집중인문학",
+        "date": "2022-02-09~2022-01-10"
+      },
+      {
+        "event_id": "137090",
+        "title": "연극배우 서요한의 <보이스 디자인> 온라인 예술 워크숍",
+        "date": "2022-02-05~2022-01-13"
+      },
+      {
+        "event_id": "137055",
+        "title": "뮤지컬<포파이> 쇼케이스",
+        "date": "2022-01-29~2022-01-22"
+      },
+      {
+        "event_id": "137056",
+        "title": "뮤지컬<원더랜드> 쇼케이스",
+        "date": "2022-01-29~2022-01-15"
+      },
+      {
+        "event_id": "136769",
+        "title": "［2021자치구 문화 예술 특성화사업]＇M페스티벌시리즈＇꼬레아리듬터치#3〈마포삼해주이야기〉",
+        "date": "2021-12-09~2021-11-09"
+      },
+      {
+        "event_id": "136294",
+        "title": "하수처리장 24시",
+        "date": "2021-10-21~2021-09-30"
+      }
+    ]
+  },
+  "stations": {
+    "202412_rows": 2766,
+    "202506_rows": 2780,
+    "shared_ids": 2753,
+    "stable_location_and_installed_before_january": 2753,
+    "within_500m": 9,
+    "within_1000m": 36,
+    "selected_count": 20,
+    "center": [
+      37.57260128068914,
+      126.97577534746527
+    ],
+    "selection": "nearest up to 20 within 1000m, <=10m snapshot displacement, installed before month; no rental/test scores used",
+    "operational_caveat": "Two snapshots and install dates do not prove uninterrupted operation in between"
+  },
+  "rentals": {
+    "source_rows": 1610875,
+    "total_rentals_sum": 1704190,
+    "columns": [
+      "대여일자",
+      "대여시간",
+      "대여소번호",
+      "대여소명",
+      "대여구분코드",
+      "성별",
+      "연령대코드",
+      "이용건수",
+      "운동량",
+      "탄소량",
+      "이동거리"
+    ],
+    "encoding": "cp949",
+    "source_station_ids": 2730,
+    "all_source_date_hours_present": 744,
+    "expected_month_hours": 744,
+    "global_hourly_min_rentals": 132,
+    "first_hour": "2025-01-01 00:00:00",
+    "last_hour": "2025-01-31 23:00:00",
+    "id_name_prefix_mismatches": 0,
+    "ids_absent_from_202412_snapshot": [
+      "4721",
+      "9980"
+    ],
+    "numeric_id_rule": "strip zero padding only after numeric validation; cross-check station-name numeric prefix",
+    "missing_by_column": {
+      "대여일자": 0,
+      "대여시간": 0,
+      "대여소번호": 0,
+      "대여소명": 0,
+      "대여구분코드": 0,
+      "성별": 420294,
+      "연령대코드": 0,
+      "이용건수": 0,
+      "운동량": 6237,
+      "탄소량": 6237,
+      "이동거리": 0
+    },
+    "row_hash_duplicate_candidates": 94,
+    "duplicates_policy": "not removed; duplicate-looking grouped records need provider semantics, not blind deduplication",
+    "selected_station_hours_grid": 14880,
+    "selected_hours_with_source_records": 6521,
+    "selected_hours_missing_unknown": 8359,
+    "selected_explicit_zero_hours": 0,
+    "selected_rentals_sum": 15475,
+    "scope": "conditional-on-observed-hours pilot; no full zero-demand evaluation and no operational uptime proof",
+    "event_window_definition": "only parsed single-day Sejong starts, station <=500m, bin start in [start-2h,start+2h); no claim of exhaustive events or end times"
+  }
+}

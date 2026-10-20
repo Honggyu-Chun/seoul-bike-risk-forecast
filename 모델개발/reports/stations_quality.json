@@ -1,0 +1,15 @@
+{
+  "202412_rows": 2766,
+  "202506_rows": 2780,
+  "shared_ids": 2753,
+  "stable_location_and_installed_before_january": 2753,
+  "within_500m": 9,
+  "within_1000m": 36,
+  "selected_count": 20,
+  "center": [
+    37.57260128068914,
+    126.97577534746527
+  ],
+  "selection": "nearest up to 20 within 1000m, <=10m snapshot displacement, installed before month; no rental/test scores used",
+  "operational_caveat": "Two snapshots and install dates do not prove uninterrupted operation in between"
+}

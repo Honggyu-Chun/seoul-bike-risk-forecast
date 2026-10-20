@@ -1,0 +1,175 @@
+{
+  "checked_at_utc": "2026-10-20T15:25:01.883002+00:00",
+  "plan_sha256": "b1caeab649a41693869d7534153fa9a843177956ee676956564e0033d7e9fad1",
+  "code_sha256": "e34e2e97c1c053e2b93b22067de52a2c77aadd1cd9a168d75412799cfe23095c",
+  "checks": [
+    {
+      "fold": "A",
+      "model": "lightgbm_basic",
+      "group": "overall",
+      "brier_difference_from_saved": 1.1759086968043952e-09,
+      "raw_brier_difference_from_saved": 1.7941759189454842e-12,
+      "result_sha256": "0562bb51782f0ce1cc163c0423dd7818ec42d1e6e53b92881d73c4c3ccb63f69",
+      "passed": true
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_basic",
+      "group": "current_positive",
+      "brier_difference_from_saved": 1.6885424655721515e-10,
+      "raw_brier_difference_from_saved": 2.4326027303622766e-12,
+      "result_sha256": "0562bb51782f0ce1cc163c0423dd7818ec42d1e6e53b92881d73c4c3ccb63f69",
+      "passed": true
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_full",
+      "group": "overall",
+      "brier_difference_from_saved": 1.223480754208861e-09,
+      "raw_brier_difference_from_saved": 1.1339193473069997e-12,
+      "result_sha256": "66598860013d66ee00a03dde1fa29cf1e70111d881e6fb2104d75c4379ab81b1",
+      "passed": true
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_full",
+      "group": "current_positive",
+      "brier_difference_from_saved": 4.3857778173062023e-10,
+      "raw_brier_difference_from_saved": 1.7030821197749901e-13,
+      "result_sha256": "66598860013d66ee00a03dde1fa29cf1e70111d881e6fb2104d75c4379ab81b1",
+      "passed": true
+    },
+    {
+      "fold": "A",
+      "model": "M2_no_weather",
+      "group": "overall",
+      "brier_difference_from_saved": 7.786318118041535e-10,
+      "raw_brier_difference_from_saved": 2.2991759052182204e-09,
+      "result_sha256": "01f1a7b05179b447d6c3e01ac5d29acb99bfeb91fd183fa786741eab9c66a296",
+      "passed": true
+    },
+    {
+      "fold": "A",
+      "model": "M2_no_weather",
+      "group": "current_positive",
+      "brier_difference_from_saved": 1.6967896879216404e-10,
+      "raw_brier_difference_from_saved": 1.2274197352946103e-09,
+      "result_sha256": "01f1a7b05179b447d6c3e01ac5d29acb99bfeb91fd183fa786741eab9c66a296",
+      "passed": true
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_basic",
+      "group": "overall",
+      "brier_difference_from_saved": 1.2547576380694814e-09,
+      "raw_brier_difference_from_saved": 2.4226454176101697e-12,
+      "result_sha256": "2b5c2b11923be1983627d1c31d160608043a06e2d218c3f14600ab33c50eb389",
+      "passed": true
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_basic",
+      "group": "current_positive",
+      "brier_difference_from_saved": 5.854112715419912e-10,
+      "raw_brier_difference_from_saved": 1.4135186077179895e-12,
+      "result_sha256": "2b5c2b11923be1983627d1c31d160608043a06e2d218c3f14600ab33c50eb389",
+      "passed": true
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_full",
+      "group": "overall",
+      "brier_difference_from_saved": 1.57552122737048e-09,
+      "raw_brier_difference_from_saved": 4.938292830214408e-12,
+      "result_sha256": "aa30ec165f11eca3dded3c9aa8011a46114b50c83f7f42d497ca54d0be7a440b",
+      "passed": true
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_full",
+      "group": "current_positive",
+      "brier_difference_from_saved": 3.0429615563432044e-09,
+      "raw_brier_difference_from_saved": 2.6217465698419318e-12,
+      "result_sha256": "aa30ec165f11eca3dded3c9aa8011a46114b50c83f7f42d497ca54d0be7a440b",
+      "passed": true
+    },
+    {
+      "fold": "B",
+      "model": "M2_no_weather",
+      "group": "overall",
+      "brier_difference_from_saved": 6.347089520630789e-11,
+      "raw_brier_difference_from_saved": 3.5484860883006064e-10,
+      "result_sha256": "c17e4d501d3011d66befda335c0f6d606424fb2188b7fbed25fb97df9465bb01",
+      "passed": true
+    },
+    {
+      "fold": "B",
+      "model": "M2_no_weather",
+      "group": "current_positive",
+      "brier_difference_from_saved": 7.837589778569853e-10,
+      "raw_brier_difference_from_saved": 1.5060609356853938e-10,
+      "result_sha256": "c17e4d501d3011d66befda335c0f6d606424fb2188b7fbed25fb97df9465bb01",
+      "passed": true
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_basic",
+      "group": "overall",
+      "brier_difference_from_saved": 3.1239947712036198e-09,
+      "raw_brier_difference_from_saved": 1.479372180313021e-12,
+      "result_sha256": "44fb6fdc08174ab4216fcf5182b74189da007f594c8e56dab945ca5d65145450",
+      "passed": true
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_basic",
+      "group": "current_positive",
+      "brier_difference_from_saved": 1.6534711100302246e-11,
+      "raw_brier_difference_from_saved": 1.994040349506676e-12,
+      "result_sha256": "44fb6fdc08174ab4216fcf5182b74189da007f594c8e56dab945ca5d65145450",
+      "passed": true
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_full",
+      "group": "overall",
+      "brier_difference_from_saved": 1.637929604447752e-09,
+      "raw_brier_difference_from_saved": 1.1475591310539102e-11,
+      "result_sha256": "a8d973149cfd7d360b616ee7ee72fbff2fd94c7208431846d58a3ab862d15178",
+      "passed": true
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_full",
+      "group": "current_positive",
+      "brier_difference_from_saved": 4.825657859419685e-10,
+      "raw_brier_difference_from_saved": 1.875957722496935e-12,
+      "result_sha256": "a8d973149cfd7d360b616ee7ee72fbff2fd94c7208431846d58a3ab862d15178",
+      "passed": true
+    },
+    {
+      "fold": "C",
+      "model": "M2_no_weather",
+      "group": "overall",
+      "brier_difference_from_saved": 2.5882543261412927e-09,
+      "raw_brier_difference_from_saved": 1.1130645710677456e-10,
+      "result_sha256": "2931c0c3f1be931279c40bf1ed2c47ebddc03242031936c594bf7ba6b9ea1f41",
+      "passed": true
+    },
+    {
+      "fold": "C",
+      "model": "M2_no_weather",
+      "group": "current_positive",
+      "brier_difference_from_saved": 9.693653171827243e-10,
+      "raw_brier_difference_from_saved": 7.04814158425382e-11,
+      "result_sha256": "2931c0c3f1be931279c40bf1ed2c47ebddc03242031936c594bf7ba6b9ea1f41",
+      "passed": true
+    }
+  ],
+  "all_passed": true,
+  "bin_rows": 180,
+  "score_rows": 18,
+  "training_or_recalibration_performed": false,
+  "independent_final_test": false,
+  "note": "Stored raw probabilities are float32; reconstructed Brier matches frozen scores within declared tolerance."
+}

@@ -1,0 +1,71 @@
+{
+  "checked_at_utc": "2026-10-20T06:06:13.230666+00:00",
+  "user_scope": "이번에는 조사와 실험 설계까지만 진행",
+  "source_entries": 61,
+  "source_categories": {
+    "data": 23,
+    "paper": 13,
+    "implementation": 14,
+    "documentation": 11
+  },
+  "source_cache_files_hash_verified": 61,
+  "method_review_items": 48,
+  "existing_candidates_reconciled": {
+    "forward": 15,
+    "screen": 45
+  },
+  "public_archives_verified": 6,
+  "public_archive_bytes": 662710474,
+  "monthly_headers_checked": 18,
+  "protected_original_files_unchanged": 23,
+  "local_document_links_checked": 8,
+  "new_model_implementation": false,
+  "new_model_training": false,
+  "new_performance_evaluation": false,
+  "scope_completion": true,
+  "limitations": [
+    "과거 원본의 전체 행 품질 검수는 다음 실행의 E0으로 설계한다.",
+    "API 키 호출·당시 제공본 일치·논문 재현·신규 성능 개선은 수행하지 않는다.",
+    "제안한 후속 기간은 실행 전에 전체 사용 이력과 데이터 품질을 확인해 확정한다."
+  ],
+  "requirements_evidence": [
+    {
+      "requirement": "데이터를 폭넓게 조사하고 확보 가능성을 확인한다.",
+      "evidence": [
+        "데이터조사.md",
+        "sources.tsv",
+        "availability_downloads.json",
+        "availability_headers.json"
+      ]
+    },
+    {
+      "requirement": "적합한 방법론과 개선 후보를 비교한다.",
+      "evidence": [
+        "방법론비교.md",
+        "핵심논문검토.md",
+        "기존오류와우선순위.md",
+        "existing_candidates.csv"
+      ]
+    },
+    {
+      "requirement": "일반적인 기준 모델을 정한다.",
+      "evidence": [
+        "후속검증계획.md 제2절",
+        "원논문 availability_rf/scalability"
+      ]
+    },
+    {
+      "requirement": "실행 가능한 후속 검증을 설계한다.",
+      "evidence": [
+        "후속검증계획.md 제1~8절"
+      ]
+    },
+    {
+      "requirement": "이번에는 조사와 실험 설계까지만 수행한다.",
+      "evidence": [
+        "보호된 모델·코드·설정·고정 결과 해시 일치",
+        "진행 상태에 학습·새 평가 미실시를 기록한다."
+      ]
+    }
+  ]
+}

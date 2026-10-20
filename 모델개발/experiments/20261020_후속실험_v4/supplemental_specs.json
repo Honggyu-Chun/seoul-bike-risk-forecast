@@ -1,0 +1,17 @@
+{
+  "registered_before_supplemental_scores": true,
+  "reference": "lightgbm_full at the same fold, 56-day train and 105 availability/spatial/hazard features",
+  "air_candidates": ["lightgbm_air_lag2", "lightgbm_air_lag3"],
+  "air_information_scope": "A live API and matching fields are verified. Historical reception/revision timestamps are unknown. Report separately from verified as-received operation.",
+  "air_effect_comparison": "Same LightGBM parameters and folds; add only six pollutants and six validity flags at the stated lag",
+  "pilot_fold": "A",
+  "confirmation": {
+    "eligible": ["lightgbm_full_112d", "lightgbm_full_recency28", "lightgbm_full_63", "lightgbm_ordinal", "lightgbm_poisson", "lightgbm_state_experts", "lightgbm_calendar", "lightgbm_prior_year", "lightgbm_kbo", "temporal_mlp24", "temporal_mlp168", "tcn24", "graph_tcn24", "lightgbm_air_lag2", "lightgbm_air_lag3"],
+    "minimum_A_F1_gain_absolute": 0.002,
+    "maximum_candidates": 2,
+    "selection": "rank by A F1 gain, name ascending for ties; then run identical candidate on B and C",
+    "interpretation": "Development confirmation only; selected intervals are not independent final tests"
+  },
+  "remaining_conditionals": ["historical OD with publication timing", "forecast run issue and publication boundary verification", "large foundation models when measured benefit and resources justify them"],
+  "do_not_modify_original_protocol_or_open_Q3_Q4": true
+}

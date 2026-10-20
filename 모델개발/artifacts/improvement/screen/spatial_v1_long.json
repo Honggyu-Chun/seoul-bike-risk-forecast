@@ -1,0 +1,106 @@
+{
+  "name": "spatial_v1_long",
+  "kind": "lgb",
+  "spec": {
+    "name": "spatial_v1_long",
+    "kind": "lgb",
+    "group": "spatial_v1",
+    "rounds": 800,
+    "leaves": 63,
+    "leaf": 300
+  },
+  "status": "ok",
+  "validation": {
+    "n": 916608,
+    "zero_cases": 87281,
+    "zero_rate": 0.09522173055439184,
+    "f1": 0.7490405893722514,
+    "precision": 0.7328918806323591,
+    "recall": 0.7659169807861963,
+    "average_precision": 0.8172039146798868,
+    "brier": 0.034802377223968506,
+    "tn": 804963,
+    "fp": 24364,
+    "fn": 20431,
+    "tp": 66850,
+    "threshold": 0.5,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.36000000000000004,
+      "positive_threshold": 0.34,
+      "f1": 0.7490405893722514
+    }
+  },
+  "rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.36000000000000004,
+    "positive_threshold": 0.34,
+    "f1": 0.7490405893722514
+  },
+  "fit": {
+    "paths": [
+      "spatial_v1_long.txt"
+    ],
+    "iterations": [
+      165
+    ]
+  },
+  "features": [
+    "station_code",
+    "hour",
+    "weekday",
+    "weekend",
+    "quantity",
+    "log_quantity",
+    "q_lag_1",
+    "q_lag_2",
+    "q_lag_24",
+    "q_lag_168",
+    "q_mean_3",
+    "q_known_3",
+    "q_mean_24",
+    "q_known_24",
+    "q_change_1",
+    "q_change_3",
+    "neighbor_mean",
+    "neighbor_std",
+    "neighbor_zero_fraction",
+    "neighbor_low2_fraction",
+    "neighbor_observed_count",
+    "neighbor_degree",
+    "neighbor_coverage",
+    "neighbor_min",
+    "neighbor_change_1",
+    "neighbor_change_3",
+    "own_minus_neighbor"
+  ],
+  "seconds": 80.97374044000026,
+  "test_used": false,
+  "selection_rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.36000000000000004,
+    "positive_threshold": 0.34,
+    "f1": 0.7490405893722514
+  },
+  "selection_validation": {
+    "n": 916608,
+    "zero_cases": 87281,
+    "zero_rate": 0.09522173055439184,
+    "f1": 0.7490405893722514,
+    "precision": 0.7328918806323591,
+    "recall": 0.7659169807861963,
+    "average_precision": 0.8172039146798868,
+    "brier": 0.034802377223968506,
+    "tn": 804963,
+    "fp": 24364,
+    "fn": 20431,
+    "tp": 66850,
+    "threshold": null,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.36000000000000004,
+      "positive_threshold": 0.34,
+      "f1": 0.7490405893722514
+    }
+  }
+}

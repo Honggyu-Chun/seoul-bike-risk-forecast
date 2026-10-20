@@ -1,0 +1,12 @@
+{
+  "version": "2.0.0",
+  "archive_bytes": 30750875,
+  "extracted_copy_started": true,
+  "health_ready": true,
+  "training_cohort_stations": 2729,
+  "history_hours": 24,
+  "eligible_city_records_at_20250320_0700": 2728,
+  "district_boundaries": 25,
+  "offline_html": true,
+  "environment": "reused current pinned virtual environment; clean-machine dependency install not independently tested"
+}

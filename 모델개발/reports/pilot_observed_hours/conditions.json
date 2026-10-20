@@ -1,0 +1,58 @@
+{
+  "scope": "offline_pilot_not_final_or_live_performance",
+  "timezone": "Asia/Seoul",
+  "latency_hours_assumption": 1,
+  "target": "rentals in [time, time+1h)",
+  "evaluation_mode": "rolling_one_hour; earlier validation/test labels used only after assumed latency",
+  "train_end_exclusive": "2025-01-21 00:00:00",
+  "valid_end_exclusive": "2025-01-26 00:00:00",
+  "test_end_exclusive": "2025-02-01 00:00:00",
+  "rows_after_hourly_reindex": 14880,
+  "eligible_rows": 1748,
+  "split_rows": {
+    "train": 979,
+    "validation": 666,
+    "test": 103
+  },
+  "features": {
+    "B1_lite_calendar_lags": [
+      "station_code",
+      "hour",
+      "weekday",
+      "lag_recent",
+      "lag_day",
+      "lag_week",
+      "mean_24h",
+      "known_hours_24h"
+    ]
+  },
+  "model_parameters": {
+    "n_estimators": 200,
+    "learning_rate": 0.05,
+    "num_leaves": 15,
+    "min_child_samples": 30,
+    "random_state": 20261019,
+    "n_jobs": 2,
+    "verbosity": -1,
+    "deterministic": true,
+    "force_col_wise": true
+  },
+  "inference": {
+    "B1_lite_calendar_lags:validation": {
+      "rows": 666,
+      "batch_seconds": 0.004380244000003586
+    },
+    "B1_lite_calendar_lags:test": {
+      "rows": 103,
+      "batch_seconds": 0.0014063839998925687
+    }
+  },
+  "limitations": [
+    "No weather or holiday features: this is B1-lite, not full B1",
+    "Rolling means use only known hours and include their count; missing hours are not zero",
+    "No hyperparameter search; equal fixed model settings",
+    "Batch model time is not API response latency",
+    "No causal effect, unmet demand, or rebalancing claim",
+    "Source vintage, schedule evidence, and split event overlap require separate audit"
+  ]
+}

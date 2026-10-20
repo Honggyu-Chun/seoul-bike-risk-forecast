@@ -1,0 +1,18 @@
+{
+  "created_at_utc": "2026-10-20T15:24:36.433707+00:00",
+  "selection": "For each fold and six declared outcome types, first chronological valid current-positive row in preserved cohort order",
+  "examples": 18,
+  "case_type_rows": 18,
+  "post_result_illustration": true,
+  "model_or_threshold_changed": false,
+  "classification_only_not_observed_rental_success": true,
+  "source_results": {
+    "A/lightgbm_basic": "0562bb51782f0ce1cc163c0423dd7818ec42d1e6e53b92881d73c4c3ccb63f69",
+    "A/M2_no_weather": "01f1a7b05179b447d6c3e01ac5d29acb99bfeb91fd183fa786741eab9c66a296",
+    "B/lightgbm_basic": "2b5c2b11923be1983627d1c31d160608043a06e2d218c3f14600ab33c50eb389",
+    "B/M2_no_weather": "c17e4d501d3011d66befda335c0f6d606424fb2188b7fbed25fb97df9465bb01",
+    "C/lightgbm_basic": "44fb6fdc08174ab4216fcf5182b74189da007f594c8e56dab945ca5d65145450",
+    "C/M2_no_weather": "2931c0c3f1be931279c40bf1ed2c47ebddc03242031936c594bf7ba6b9ea1f41"
+  },
+  "net_TP_and_FP_differences_match_saved_metrics": true
+}

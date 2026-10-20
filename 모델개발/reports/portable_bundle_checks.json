@@ -1,0 +1,10 @@
+{
+  "archive": "deliverables/따릉이_데모_실행패키지.zip",
+  "extracted_copy_started": true,
+  "health_ready": true,
+  "overview_stations": 2729,
+  "replay_candidates": 17,
+  "recommendation_methods": 3,
+  "offline_html": true,
+  "dependencies": "current pinned virtual environment reused; fresh-machine dependency install not independently tested"
+}

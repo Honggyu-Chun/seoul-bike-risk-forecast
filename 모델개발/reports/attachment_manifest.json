@@ -1,0 +1,37 @@
+[
+  {
+    "file": "2026_AI P-실무프로젝트_OT.pdf",
+    "bytes": 1039958,
+    "sha256": "4fb1373539dd44eeb51a6f0a8c6f7d0fcb307026e6461392cc02b8ae87c7bfd6",
+    "status": "read_local_attachment",
+    "extracted_text": "reports/source_text/2026_AI P-실무프로젝트_OT.txt"
+  },
+  {
+    "file": "AI P-실무프로젝트 과제 계획서 양식 (1).docx",
+    "bytes": 39166,
+    "sha256": "990903794e98126ab777092c70e55dce0701911e77206095b2a534cb808b53e0",
+    "status": "read_local_attachment",
+    "extracted_text": "reports/source_text/AI P-실무프로젝트 과제 계획서 양식 (1).txt"
+  },
+  {
+    "file": "2026_AI P-실무프로젝트_평가_260921.pdf",
+    "bytes": 837193,
+    "sha256": "00ff8eeaed4642c7fc56c70170f61603f729aa9e421b5ead17a1835c2a92d5da",
+    "status": "read_local_attachment",
+    "extracted_text": "reports/source_text/2026_AI P-실무프로젝트_평가_260921.txt"
+  },
+  {
+    "file": "따릉이_행사기반_수요예측_회의제안서.docx",
+    "bytes": 40003,
+    "sha256": "8fceb11b169b482bd2a9d5b6b3c296070449236c72b67754706f2524c70d440c",
+    "status": "read_local_attachment",
+    "extracted_text": "reports/source_text/따릉이_행사기반_수요예측_회의제안서.txt"
+  },
+  {
+    "file": "따릉이_행사기반_수요예측_과제계획서.docx",
+    "bytes": 33747,
+    "sha256": "6c7d4e48b8aa3210daaa052d3a440c5431c709928a2c0fc9d32b169a9df3f0ca",
+    "status": "read_local_attachment",
+    "extracted_text": "reports/source_text/따릉이_행사기반_수요예측_과제계획서.txt"
+  }
+]

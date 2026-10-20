@@ -1,0 +1,15 @@
+{
+  "rows": 19129,
+  "columns": [
+    "사용일자",
+    "노선명",
+    "역명",
+    "승차총승객수",
+    "하차총승객수",
+    "등록일자"
+  ],
+  "start": "20250101",
+  "end": "20250131",
+  "raw_issue": "verified one empty trailing field per data row; dropped only this field",
+  "unit": "station-line-day"
+}

@@ -1,0 +1,105 @@
+{
+  "experiment_id": "rider_q1_v1",
+  "protocol_sha256": "8f9ce76e32e9764f715e7ca185e3d75b1ef785f782156cb43913c11b381393b2",
+  "metrics": {
+    "B0": {
+      "n": 1112738,
+      "zero_cases": 112433,
+      "zero_rate": 0.1010417546628227,
+      "f1": 0.7540049428373309,
+      "precision": 0.753649845831223,
+      "recall": 0.7543603746231089,
+      "average_precision": 0.5933434387986891,
+      "brier": 0.04973497986793518,
+      "tn": 972581,
+      "fp": 27724,
+      "fn": 27618,
+      "tp": 84815,
+      "threshold": 0.5
+    },
+    "B1S": {
+      "n": 1112738,
+      "zero_cases": 112433,
+      "zero_rate": 0.1010417546628227,
+      "f1": 0.7541603061879162,
+      "precision": 0.7503786144472229,
+      "recall": 0.7579803082724823,
+      "average_precision": 0.8065566427841364,
+      "brier": 0.03734379634261131,
+      "tn": 971955,
+      "fp": 28350,
+      "fn": 27211,
+      "tp": 85222,
+      "threshold": 0.35
+    },
+    "B1": {
+      "n": 1112738,
+      "zero_cases": 112433,
+      "zero_rate": 0.1010417546628227,
+      "f1": 0.7574121494462098,
+      "precision": 0.7507120515822397,
+      "recall": 0.7642329209395818,
+      "average_precision": 0.8279244961111726,
+      "brier": 0.035782936960458755,
+      "tn": 971772,
+      "fp": 28533,
+      "fn": 26508,
+      "tp": 85925,
+      "threshold": 0.35
+    },
+    "M1": {
+      "n": 1112738,
+      "zero_cases": 112433,
+      "zero_rate": 0.1010417546628227,
+      "f1": 0.7576574798833564,
+      "precision": 0.7472407708542366,
+      "recall": 0.7683687173694556,
+      "average_precision": 0.829252181109978,
+      "brier": 0.03555631265044212,
+      "tn": 971083,
+      "fp": 29222,
+      "fn": 26043,
+      "tp": 86390,
+      "threshold": 0.35
+    }
+  },
+  "latency": {
+    "B1S": {
+      "test_batch_seconds": 2.8946886049998284,
+      "test_rows": 1112738,
+      "seconds_per_1000_rows": 0.002601410758866713
+    },
+    "B1": {
+      "test_batch_seconds": 4.8258772310000495,
+      "test_rows": 1112738,
+      "seconds_per_1000_rows": 0.004336939361287247
+    },
+    "M1": {
+      "test_batch_seconds": 2.9408603600022616,
+      "test_rows": 1112738,
+      "seconds_per_1000_rows": 0.0026429045831114434
+    }
+  },
+  "deltas": {
+    "m1_minus_b1_f1_pp": 0.024533043714658476,
+    "m1_minus_b1_recall_pp": 0.4135796429873717
+  },
+  "goals": {
+    "m1_minus_b1_f1_pp": 5,
+    "m1_recall_no_worse": true,
+    "r2_minus_r0_effective_recommendation_pp": 5,
+    "paired_extra_straight_distance_m_max": 100
+  },
+  "goals_are_not_school_cutoffs": true,
+  "goal_verdict": {
+    "f1_5pp": false,
+    "recall_no_worse": true
+  },
+  "day_block_bootstrap_f1_delta_pp": {
+    "replicates": 1000,
+    "lower_2_5": -0.04474956535466479,
+    "upper_97_5": 0.10378291918448883,
+    "interpretation": "Exploratory paired resampling of whole days; short 17-day test, not independent-season or field evidence."
+  },
+  "total_pipeline_seconds": 339.61396373900425
+}

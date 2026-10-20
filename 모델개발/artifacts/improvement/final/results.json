@@ -1,0 +1,443 @@
+{
+  "experiment_id": "rider_improvement_v3",
+  "test_period": [
+    "2025-04-15",
+    "2025-05-15"
+  ],
+  "weather_used_by_proposal": true,
+  "weather_assumptions_if_used": {
+    "source": "KMA ASOS Seoul 108 archived hourly observations",
+    "rows": 8760,
+    "source_start": "2025-01-01 00:00:00",
+    "source_end": "2025-12-31 23:00:00",
+    "source_zip_sha256": "8ee85fb216c1537b96c84423986f742968ba3e9c65d10fd978b04ae436eaf1cc",
+    "timezone_assumption": "Both archive timestamps interpreted as Asia/Seoul local time",
+    "features": [
+      "w_temperature_lag1",
+      "w_temperature_lag24",
+      "w_rain_lag1",
+      "w_rain_lag24",
+      "w_wind_lag1",
+      "w_humidity_lag1",
+      "w_pressure_lag1",
+      "w_cloud_lag1",
+      "w_visibility_lag1",
+      "w_snow_lag1",
+      "w_temperature_change23"
+    ],
+    "lags_hours": [
+      1,
+      24
+    ],
+    "observation_time_is_before_input": true,
+    "unknown_rain_snow_stay_missing": true,
+    "limitation": "Historical archive may contain later quality corrections; publication delay and matching live-vintage values are not verified. This is an archived-weather sensitivity experiment, not a verified real-time weather service."
+  },
+  "test_rows": 1960441,
+  "metrics": {
+    "B0": {
+      "n": 1960441,
+      "zero_cases": 184264,
+      "zero_rate": 0.09399109690115642,
+      "f1": 0.7225369478195219,
+      "precision": 0.7231378901705824,
+      "recall": 0.7219370034298616,
+      "average_precision": 0.5481954475515923,
+      "brier": 0.05211480334401131,
+      "tn": 1725246,
+      "fp": 50931,
+      "fn": 51237,
+      "tp": 133027,
+      "threshold": 0.5,
+      "rule": {
+        "kind": "global",
+        "threshold": 0.5
+      }
+    },
+    "B1": {
+      "n": 1960441,
+      "zero_cases": 184264,
+      "zero_rate": 0.09399109690115642,
+      "f1": 0.7295933446445186,
+      "precision": 0.7358519728852481,
+      "recall": 0.7234402813354752,
+      "average_precision": 0.7993947776738699,
+      "brier": 0.036534279584884644,
+      "tn": 1728325,
+      "fp": 47852,
+      "fn": 50960,
+      "tp": 133304,
+      "threshold": 0.4,
+      "rule": {
+        "kind": "global",
+        "threshold": 0.4,
+        "f1": 0.7656334964654704
+      }
+    },
+    "M2": {
+      "n": 1960441,
+      "zero_cases": 184264,
+      "zero_rate": 0.09399109690115642,
+      "f1": 0.7407022347296197,
+      "precision": 0.7429284298684778,
+      "recall": 0.7384893413797595,
+      "average_precision": 0.8170339631956833,
+      "brier": 0.03472176194190979,
+      "tn": 1729091,
+      "fp": 47086,
+      "fn": 48187,
+      "tp": 136077,
+      "threshold": 0.39,
+      "rule": {
+        "kind": "global",
+        "threshold": 0.39,
+        "f1": 0.7770409416387991
+      }
+    },
+    "B1_tuned": {
+      "n": 1960441,
+      "zero_cases": 184264,
+      "zero_rate": 0.09399109690115642,
+      "f1": 0.730232316861743,
+      "precision": 0.7347681082179964,
+      "recall": 0.7257521816524117,
+      "average_precision": 0.8005925758718149,
+      "brier": 0.03648459166288376,
+      "tn": 1727904,
+      "fp": 48273,
+      "fn": 50534,
+      "tp": 133730,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.39,
+        "positive_threshold": 0.4,
+        "f1": 0.7670925065643305
+      }
+    }
+  },
+  "subgroups": {
+    "current_positive": {
+      "B1": {
+        "n": 1776483,
+        "zero_cases": 51237,
+        "zero_rate": 0.02884181835683201,
+        "f1": 0.12174416032936933,
+        "precision": 0.47440997083001857,
+        "recall": 0.0698323477174698,
+        "average_precision": 0.29120606495871304,
+        "brier": 0.023199312388896942,
+        "tn": 1721282,
+        "fp": 3964,
+        "fn": 47659,
+        "tp": 3578,
+        "threshold": 0.4,
+        "rule": {
+          "kind": "global",
+          "threshold": 0.4,
+          "f1": 0.7656334964654704
+        }
+      },
+      "M2": {
+        "n": 1776483,
+        "zero_cases": 51237,
+        "zero_rate": 0.02884181835683201,
+        "f1": 0.22821309089818023,
+        "precision": 0.4932555123216602,
+        "recall": 0.14844741105060796,
+        "average_precision": 0.34095854446544754,
+        "brier": 0.02215947024524212,
+        "tn": 1717432,
+        "fp": 7814,
+        "fn": 43631,
+        "tp": 7606,
+        "threshold": 0.39,
+        "rule": {
+          "kind": "global",
+          "threshold": 0.39,
+          "f1": 0.7770409416387991
+        }
+      },
+      "B1_tuned": {
+        "n": 1776483,
+        "zero_cases": 51237,
+        "zero_rate": 0.02884181835683201,
+        "f1": 0.15651304544135194,
+        "precision": 0.45031084717453834,
+        "recall": 0.09471670862853017,
+        "average_precision": 0.2939053235998199,
+        "brier": 0.023195477202534676,
+        "tn": 1719322,
+        "fp": 5924,
+        "fn": 46384,
+        "tp": 4853,
+        "threshold": null,
+        "rule": {
+          "kind": "current_state",
+          "zero_threshold": 0.39,
+          "positive_threshold": 0.4,
+          "f1": 0.7670925065643305
+        }
+      }
+    },
+    "current_1_to_3": {
+      "B1": {
+        "n": 364620,
+        "zero_cases": 45025,
+        "zero_rate": 0.12348472382206133,
+        "f1": 0.1282543583442132,
+        "precision": 0.47315483779572176,
+        "recall": 0.07418101054969461,
+        "average_precision": 0.30770621401863374,
+        "brier": 0.09717676788568497,
+        "tn": 315876,
+        "fp": 3719,
+        "fn": 41685,
+        "tp": 3340,
+        "threshold": 0.4,
+        "rule": {
+          "kind": "global",
+          "threshold": 0.4,
+          "f1": 0.7656334964654704
+        }
+      },
+      "M2": {
+        "n": 364620,
+        "zero_cases": 45025,
+        "zero_rate": 0.12348472382206133,
+        "f1": 0.2421176076394706,
+        "precision": 0.4927378111148994,
+        "recall": 0.16048861743475848,
+        "average_precision": 0.3577365586258004,
+        "brier": 0.0928788036108017,
+        "tn": 312156,
+        "fp": 7439,
+        "fn": 37799,
+        "tp": 7226,
+        "threshold": 0.39,
+        "rule": {
+          "kind": "global",
+          "threshold": 0.39,
+          "f1": 0.7770409416387991
+        }
+      },
+      "B1_tuned": {
+        "n": 364620,
+        "zero_cases": 45025,
+        "zero_rate": 0.12348472382206133,
+        "f1": 0.16518617889126572,
+        "precision": 0.4494426358883299,
+        "recall": 0.101188228761799,
+        "average_precision": 0.31000117883715017,
+        "brier": 0.09720076620578766,
+        "tn": 314014,
+        "fp": 5581,
+        "fn": 40469,
+        "tp": 4556,
+        "threshold": null,
+        "rule": {
+          "kind": "current_state",
+          "zero_threshold": 0.39,
+          "positive_threshold": 0.4,
+          "f1": 0.7670925065643305
+        }
+      }
+    }
+  },
+  "proposal": {
+    "kind": "blend",
+    "members": [
+      "causal_weather_spatial",
+      "catboost_depth_8"
+    ],
+    "weights": [
+      0.5,
+      0.5
+    ],
+    "rule": {
+      "kind": "global",
+      "threshold": 0.39,
+      "f1": 0.7770409416387991
+    },
+    "validation_f1": 0.7770409416387991
+  },
+  "baseline_name": "B1_original_63",
+  "recommendation": {
+    "manifest": {
+      "attempted": 10560,
+      "common_queries": 10443,
+      "excluded_no_candidate": 117
+    },
+    "metrics": {
+      "R0": {
+        "requests": 10443,
+        "valid_recommendations": 9825,
+        "recommended": 10443,
+        "effective_rate": 0.9408216029876473,
+        "hit_rate": 0.9408216029876473,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 0.0
+      },
+      "R1": {
+        "requests": 10443,
+        "valid_recommendations": 9881,
+        "recommended": 10433,
+        "effective_rate": 0.9461840467298669,
+        "hit_rate": 0.9470909613725678,
+        "abstention_rate": 0.0009575792396820937,
+        "extra_distance_m": 2.2637618833624034
+      },
+      "R1u": {
+        "requests": 10443,
+        "valid_recommendations": 10205,
+        "recommended": 10443,
+        "effective_rate": 0.9772096140955664,
+        "hit_rate": 0.9772096140955664,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 32.18675561144199
+      },
+      "Rq": {
+        "requests": 10443,
+        "valid_recommendations": 10250,
+        "recommended": 10443,
+        "effective_rate": 0.9815187206741358,
+        "hit_rate": 0.9815187206741358,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 75.44975321686006
+      },
+      "R2": {
+        "requests": 10443,
+        "valid_recommendations": 10245,
+        "recommended": 10443,
+        "effective_rate": 0.9810399310542948,
+        "hit_rate": 0.9810399310542948,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 32.18215896168009
+      }
+    },
+    "subgroups": {
+      "nearest_current_1_to_3": {
+        "R0": {
+          "requests": 2677,
+          "valid_recommendations": 2184,
+          "recommended": 2677,
+          "effective_rate": 0.8158386253268585,
+          "hit_rate": 0.8158386253268585,
+          "abstention_rate": 0.0,
+          "extra_distance_m": 0.0
+        },
+        "R1": {
+          "requests": 2677,
+          "valid_recommendations": 2236,
+          "recommended": 2667,
+          "effective_rate": 0.8352633545013074,
+          "hit_rate": 0.838395200599925,
+          "abstention_rate": 0.0037355248412401787,
+          "extra_distance_m": 8.175742739732788
+        },
+        "R1u": {
+          "requests": 2677,
+          "valid_recommendations": 2525,
+          "recommended": 2677,
+          "effective_rate": 0.9432200224131491,
+          "hit_rate": 0.9432200224131491,
+          "abstention_rate": 0.0,
+          "extra_distance_m": 106.38437661755717
+        },
+        "Rq": {
+          "requests": 2677,
+          "valid_recommendations": 2550,
+          "recommended": 2677,
+          "effective_rate": 0.9525588345162496,
+          "hit_rate": 0.9525588345162496,
+          "abstention_rate": 0.0,
+          "extra_distance_m": 164.15698355656983
+        },
+        "R2": {
+          "requests": 2677,
+          "valid_recommendations": 2549,
+          "recommended": 2677,
+          "effective_rate": 0.9521852820321255,
+          "hit_rate": 0.9521852820321255,
+          "abstention_rate": 0.0,
+          "extra_distance_m": 103.87120869226321
+        }
+      }
+    },
+    "policies": {
+      "R0": {
+        "kind": "distance"
+      },
+      "R1": {
+        "kind": "gate",
+        "model": "base",
+        "threshold": 0.4
+      },
+      "R1u": {
+        "kind": "utility",
+        "weight": 4000,
+        "model": "base_utility"
+      },
+      "Rq": {
+        "kind": "quantity_utility",
+        "weight": 4000
+      },
+      "R2": {
+        "kind": "utility",
+        "weight": 4000,
+        "model": "proposal"
+      }
+    },
+    "perfect_future_oracle_rate": 0.9939672507900029,
+    "day_bootstrap": {
+      "unit": "whole input day; paired origins/times",
+      "replicates": 2000,
+      "days": 22,
+      "paired_requests": 10443,
+      "comparisons_R2_minus_baseline": {
+        "R0": {
+          "lower_pp": 3.441410795311687,
+          "upper_pp": 4.5428570755564435
+        },
+        "R1u": {
+          "lower_pp": 0.21042462752086188,
+          "upper_pp": 0.5763176674644442
+        },
+        "Rq": {
+          "lower_pp": -0.23907544764291028,
+          "upper_pp": 0.1440258114979573
+        }
+      }
+    }
+  },
+  "deltas": {
+    "f1_pp": 1.1108890085101075,
+    "recall_pp": 1.5049060044284301,
+    "effective_recommendation_pp": 4.021832806664749
+  },
+  "goals": {
+    "f1_5pp": false,
+    "recall_no_worse": true,
+    "effective_recommendation_5pp": false,
+    "extra_distance_100m": true
+  },
+  "goal_values": {
+    "model": {
+      "f1_improvement_pp_over_refit_B1": 5,
+      "recall_no_worse_than_refit_B1": true
+    },
+    "service": {
+      "effective_recommendation_improvement_pp_over_R0": 5,
+      "extra_straight_distance_m_max": 100
+    }
+  },
+  "goals_are_not_school_cutoffs": true,
+  "f1_day_bootstrap": {
+    "unit": "whole target day",
+    "replicates": 2000,
+    "days": 30,
+    "lower_pp": 0.7542567315080426,
+    "upper_pp": 1.4236172262284321
+  },
+  "interpretation": "New chronological archived test, not actual rental success or proof of short-minute live accuracy. All selection frozen before this evaluation."
+}

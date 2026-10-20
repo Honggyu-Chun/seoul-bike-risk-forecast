@@ -1,0 +1,35 @@
+[
+  {
+    "source_id": "bike_tpss_daily_meta",
+    "url": "https://data.seoul.go.kr/dataList/OA-21229/F/1/datasetView.do",
+    "checked_at": "2026-10-20T19:00:29.622898+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 148539,
+    "sha256": "59433d151ace235fe52ea47ab9609accb678a865f201e3cb339fdcb034cb73f7",
+    "final_url": "https://data.seoul.go.kr/dataList/OA-21229/F/1/datasetView.do",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\bike_tpss_daily_meta.txt"
+  },
+  {
+    "source_id": "bike_tpss_daily_api",
+    "url": "https://data.seoul.go.kr/dataList/openApiView.do?infId=OA-21229&srvType=A&infSeq=1",
+    "checked_at": "2026-10-20T19:00:29.623999+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "access_result": "failed; no retry or bypass",
+    "error_type": "HTTPError",
+    "http_status": 404
+  },
+  {
+    "source_id": "transit_hour_boardings_api",
+    "url": "https://data.seoul.go.kr/dataList/openApiView.do?infId=OA-21219&srvType=A&infSeq=1",
+    "checked_at": "2026-10-20T19:00:29.624544+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 21945,
+    "sha256": "1472db4a6b9e56a6761212e4233742b25833c52c2b5d459176d6f03396da31d1",
+    "final_url": "https://data.seoul.go.kr/dataList/openApiView.do?infId=OA-21219&srvType=A&infSeq=1",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\transit_hour_boardings_api.txt"
+  }
+]

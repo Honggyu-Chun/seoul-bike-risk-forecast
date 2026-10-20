@@ -1,0 +1,68 @@
+{
+  "name": "B1_original_63",
+  "kind": "lgb",
+  "spec": {
+    "name": "B1_original_63",
+    "kind": "lgb",
+    "group": "basic",
+    "rounds": 240,
+    "leaves": 63,
+    "leaf": 500,
+    "coarse": true
+  },
+  "status": "ok",
+  "validation": {
+    "n": 915936,
+    "zero_cases": 79549,
+    "zero_rate": 0.08684995458197953,
+    "f1": 0.7656334964654704,
+    "precision": 0.7702309013421538,
+    "recall": 0.7610906485310941,
+    "average_precision": 0.8470116459560952,
+    "brier": 0.029365306720137596,
+    "tn": 818326,
+    "fp": 18061,
+    "fn": 19005,
+    "tp": 60544,
+    "threshold": 0.4,
+    "rule": {
+      "kind": "global",
+      "threshold": 0.4,
+      "f1": 0.7656334964654704
+    }
+  },
+  "rule": {
+    "kind": "global",
+    "threshold": 0.4,
+    "f1": 0.7656334964654704
+  },
+  "fit": {
+    "paths": [
+      "B1_original_63.txt"
+    ],
+    "iterations": [
+      238
+    ]
+  },
+  "features": [
+    "station_code",
+    "hour",
+    "weekday",
+    "weekend",
+    "quantity",
+    "log_quantity",
+    "q_lag_1",
+    "q_lag_2",
+    "q_lag_24",
+    "q_lag_168",
+    "q_mean_3",
+    "q_known_3",
+    "q_mean_24",
+    "q_known_24",
+    "q_change_1",
+    "q_change_3"
+  ],
+  "seconds": 251.63281507600186,
+  "resource_threads": 1,
+  "test_used": false
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "source_id": "topis_speed_2025_month_files",
+    "url": "https://topis.seoul.go.kr/refroom/selectRefRoomListASC.do",
+    "parameters": {
+      "blbdDivCd": "14",
+      "bdwrDivCd": "2025",
+      "mainBdwrRowNum": "12"
+    },
+    "method": "POST form; parameters verified in official speed page source",
+    "checked_at": "2026-10-20T18:44:05.075944+09:00",
+    "http_status": 200,
+    "bytes": 5512,
+    "sha256": "be9c070dc9323fd527f004ae2212964bc5578065ea179fe996a17ef19c60a048",
+    "access_result": "success"
+  }
+]

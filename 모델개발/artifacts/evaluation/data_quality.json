@@ -1,0 +1,66 @@
+{
+  "monthly": [
+    {
+      "month": "2025-01",
+      "rows": 1922370,
+      "station_ids": 2766,
+      "hours": 695,
+      "zero_rows": 193832,
+      "min": 0.0,
+      "max": 282.0
+    },
+    {
+      "month": "2025-02",
+      "rows": 1855974,
+      "station_ids": 2766,
+      "hours": 671,
+      "zero_rows": 177176,
+      "min": 0.0,
+      "max": 478.0
+    },
+    {
+      "month": "2025-03",
+      "rows": 2056956,
+      "station_ids": 2766,
+      "hours": 744,
+      "zero_rows": 225839,
+      "min": 0.0,
+      "max": 465.0
+    }
+  ],
+  "source_rows": 5835300,
+  "source_station_ids": 2767,
+  "grid_hours": 2160,
+  "cohort_station_ids": 2729,
+  "excluded_station_ids": 38,
+  "cohort_rule_uses_train_only": true,
+  "cohort_rule": {
+    "minimum_known_train_hours": 336,
+    "minimum_nonzero_train_hours": 24,
+    "quantity_varies_in_train": true,
+    "requires_202412_location": true
+  },
+  "panel_contract": {
+    "input_period": [
+      "2025-01-01T00:00:00",
+      "2025-03-31T23:00:00"
+    ],
+    "training_end": "2025-03-01T00:00:00",
+    "cohort_rule": {
+      "minimum_known_train_hours": 336,
+      "minimum_nonzero_train_hours": 24,
+      "quantity_varies_in_train": true,
+      "requires_202412_location": true
+    },
+    "quantity_zip_sha256": "8312efd60994c2d5df36d064532a020017a42f04f6b966ffbbac2379c710c4a5",
+    "location_sha256": "d6d50a6ba16bd26654e6dfe05b0c31316c94d7cde37f4d0501a40c6c58e1a650"
+  },
+  "missing_city_hours": 50,
+  "quantity_quantiles_train": {
+    "0.5": 8.0,
+    "0.9": 23.0,
+    "0.99": 51.0,
+    "0.999": 95.0
+  },
+  "exclusion_note": "Excluded if no historical coordinate, insufficient training coverage, or no observed training quantity variation/positive quantity. This is not an official operating-status filter."
+}

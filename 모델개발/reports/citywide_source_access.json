@@ -1,0 +1,64 @@
+[
+  {
+    "file": "noaa_seoul_2025.csv",
+    "url": "https://www.ncei.noaa.gov/data/global-hourly/access/2025/47108099999.csv",
+    "retrieved_utc": "2026-10-19T07:04:43.881757+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "file": "noaa_docs.html",
+    "url": "https://www.ncei.noaa.gov/products/land-based-station/integrated-surface-database",
+    "retrieved_utc": "2026-10-19T07:04:43.882506+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "file": "kasi_holidays.html",
+    "url": "https://www.data.go.kr/data/15012690/openapi.do",
+    "retrieved_utc": "2026-10-19T07:04:43.883017+00:00",
+    "status": 200,
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 202572,
+    "truncated": false,
+    "sha256": "8369fd0a6300118123eee2c1f76303f3ae768b65dd9178545bdb4b1d263aeb34",
+    "final_url": "https://www.data.go.kr/data/15012690/openapi.do"
+  },
+  {
+    "file": "subway_hourly_page.html",
+    "url": "https://data.seoul.go.kr/dataList/OA-12914/F/1/datasetView.do",
+    "retrieved_utc": "2026-10-19T07:04:43.883531+00:00",
+    "status": 200,
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 118024,
+    "truncated": false,
+    "sha256": "818b539fa1d3cf958a4ce97590feef3adad5a52304fe775907a6f621b721ba9f",
+    "final_url": "https://data.seoul.go.kr/dataList/OA-12914/F/1/datasetView.do"
+  },
+  {
+    "file": "seoul_parks_page.html",
+    "url": "https://data.seoul.go.kr/dataList/OA-394/S/1/datasetView.do",
+    "retrieved_utc": "2026-10-19T07:04:43.899347+00:00",
+    "status": 200,
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 82454,
+    "truncated": false,
+    "sha256": "c6e0eddc6da73b027ffa46e7ea5afb665734e5f5bd2094c113ef5ecaa3c9030c",
+    "final_url": "https://data.seoul.go.kr/dataList/OA-394/S/1/datasetView.do"
+  },
+  {
+    "file": "subway_daily_page.html",
+    "url": "https://data.seoul.go.kr/dataList/OA-12252/S/1/datasetView.do",
+    "retrieved_utc": "2026-10-19T07:04:43.902858+00:00",
+    "status": 200,
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 88695,
+    "truncated": false,
+    "sha256": "eab9f35f02d5ebb76c719f6e97efa242f27aa8682808f0341e9029b224408f9e",
+    "final_url": "https://data.seoul.go.kr/dataList/OA-12252/S/1/datasetView.do"
+  },
+  {
+    "file": "kasi_calendar.html",
+    "url": "https://astro.kasi.re.kr/life/post/calendarData/",
+    "retrieved_utc": "2026-10-19T07:04:45.846122+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  }
+]

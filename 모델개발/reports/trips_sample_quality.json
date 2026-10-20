@@ -1,0 +1,13 @@
+{
+  "sample_rows": 5726,
+  "scope": "initial_file_bytes_not_random_sample_or_month_quality",
+  "rental_time_min": "2026-01-01 00:00:02",
+  "rental_time_max": "2026-01-01 07:09:29",
+  "id_pair_example": {
+    "대여 대여소번호": "01729",
+    "대여대여소ID": "ST-1461"
+  },
+  "zero_distance_rows": 219,
+  "zero_duration_rows": 163,
+  "sample_id_mapping_conflicts": 0
+}

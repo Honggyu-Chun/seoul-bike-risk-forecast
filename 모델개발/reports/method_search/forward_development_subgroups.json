@@ -1,0 +1,224 @@
+{
+  "scope": "April1-14 development validation only; NOT the new final test",
+  "original_frozen_validation_rules_not_retuned_for_subgroups": true,
+  "groups": {
+    "B1_original_63": {
+      "current_positive": {
+        "n": 836274,
+        "zero_cases": 19264,
+        "zero_rate": 0.023035512284251335,
+        "f1": 0.14369618017222344,
+        "precision": 0.48121857438627624,
+        "recall": 0.08445805647840532,
+        "average_precision": 0.29006892377171556,
+        "brier": 0.018573986366391182,
+        "tn": 815256,
+        "fp": 1754,
+        "fn": 17637,
+        "tp": 1627,
+        "threshold": 0.4,
+        "rule": {
+          "kind": "global",
+          "threshold": 0.4,
+          "f1": 0.7656334964654704
+        }
+      },
+      "current_1_to_3": {
+        "n": 153165,
+        "zero_cases": 16682,
+        "zero_rate": 0.10891522214605165,
+        "f1": 0.1508842849924204,
+        "precision": 0.4803732303732304,
+        "recall": 0.08949766215082125,
+        "average_precision": 0.30632539684353377,
+        "brier": 0.08603795617818832,
+        "tn": 134868,
+        "fp": 1615,
+        "fn": 15189,
+        "tp": 1493,
+        "threshold": 0.4,
+        "rule": {
+          "kind": "global",
+          "threshold": 0.4,
+          "f1": 0.7656334964654704
+        }
+      }
+    },
+    "B1_tuned_127": {
+      "current_positive": {
+        "n": 836274,
+        "zero_cases": 19264,
+        "zero_rate": 0.023035512284251335,
+        "f1": 0.18389267354871067,
+        "precision": 0.4717992708556723,
+        "recall": 0.11420265780730897,
+        "average_precision": 0.2948917370665901,
+        "brier": 0.01853039301931858,
+        "tn": 814547,
+        "fp": 2463,
+        "fn": 17064,
+        "tp": 2200,
+        "threshold": null,
+        "rule": {
+          "kind": "current_state",
+          "zero_threshold": 0.39,
+          "positive_threshold": 0.4,
+          "f1": 0.7670925065643305
+        }
+      },
+      "current_1_to_3": {
+        "n": 153165,
+        "zero_cases": 16682,
+        "zero_rate": 0.10891522214605165,
+        "f1": 0.19352994425651532,
+        "precision": 0.4715579289528674,
+        "recall": 0.1217479918475003,
+        "average_precision": 0.3106500810810471,
+        "brier": 0.08587963879108429,
+        "tn": 134207,
+        "fp": 2276,
+        "fn": 14651,
+        "tp": 2031,
+        "threshold": null,
+        "rule": {
+          "kind": "current_state",
+          "zero_threshold": 0.39,
+          "positive_threshold": 0.4,
+          "f1": 0.7670925065643305
+        }
+      }
+    },
+    "causal_weather_spatial": {
+      "current_positive": {
+        "n": 836274,
+        "zero_cases": 19264,
+        "zero_rate": 0.023035512284251335,
+        "f1": 0.22851897673304866,
+        "precision": 0.49421715863973764,
+        "recall": 0.14861918604651161,
+        "average_precision": 0.33004959068845713,
+        "brier": 0.01794593594968319,
+        "tn": 814080,
+        "fp": 2930,
+        "fn": 16401,
+        "tp": 2863,
+        "threshold": null,
+        "rule": {
+          "kind": "current_state",
+          "zero_threshold": 0.37,
+          "positive_threshold": 0.42000000000000004,
+          "f1": 0.774524139669734
+        }
+      },
+      "current_1_to_3": {
+        "n": 153165,
+        "zero_cases": 16682,
+        "zero_rate": 0.10891522214605165,
+        "f1": 0.23771761917783246,
+        "precision": 0.4958174904942966,
+        "recall": 0.1563361707229349,
+        "average_precision": 0.34617703165069513,
+        "brier": 0.08325847238302231,
+        "tn": 133831,
+        "fp": 2652,
+        "fn": 14074,
+        "tp": 2608,
+        "threshold": null,
+        "rule": {
+          "kind": "current_state",
+          "zero_threshold": 0.37,
+          "positive_threshold": 0.42000000000000004,
+          "f1": 0.774524139669734
+        }
+      }
+    },
+    "spatial_multiscale_63": {
+      "current_positive": {
+        "n": 836274,
+        "zero_cases": 19264,
+        "zero_rate": 0.023035512284251335,
+        "f1": 0.23298895618097612,
+        "precision": 0.49058176362727124,
+        "recall": 0.15277200996677742,
+        "average_precision": 0.32407339398349405,
+        "brier": 0.0180498156696558,
+        "tn": 813954,
+        "fp": 3056,
+        "fn": 16321,
+        "tp": 2943,
+        "threshold": null,
+        "rule": {
+          "kind": "current_state",
+          "zero_threshold": 0.38,
+          "positive_threshold": 0.4,
+          "f1": 0.7733027185205059
+        }
+      },
+      "current_1_to_3": {
+        "n": 153165,
+        "zero_cases": 16682,
+        "zero_rate": 0.10891522214605165,
+        "f1": 0.24430567410934903,
+        "precision": 0.4875381029227183,
+        "recall": 0.1629900491547776,
+        "average_precision": 0.3399636738878427,
+        "brier": 0.0836426168680191,
+        "tn": 133625,
+        "fp": 2858,
+        "fn": 13963,
+        "tp": 2719,
+        "threshold": null,
+        "rule": {
+          "kind": "current_state",
+          "zero_threshold": 0.38,
+          "positive_threshold": 0.4,
+          "f1": 0.7733027185205059
+        }
+      }
+    },
+    "state_experts_spatial": {
+      "current_positive": {
+        "n": 836274,
+        "zero_cases": 19264,
+        "zero_rate": 0.023035512284251335,
+        "f1": 0.2296951819075713,
+        "precision": 0.4739490342476871,
+        "recall": 0.151578073089701,
+        "average_precision": 0.3208605441173814,
+        "brier": 0.018100855872035027,
+        "tn": 813769,
+        "fp": 3241,
+        "fn": 16344,
+        "tp": 2920,
+        "threshold": null,
+        "rule": {
+          "kind": "current_state",
+          "zero_threshold": 0.4,
+          "positive_threshold": 0.41000000000000003,
+          "f1": 0.7720331301765901
+        }
+      },
+      "current_1_to_3": {
+        "n": 153165,
+        "zero_cases": 16682,
+        "zero_rate": 0.10891522214605165,
+        "f1": 0.24145623271169805,
+        "precision": 0.4720865317515701,
+        "recall": 0.16221076609519242,
+        "average_precision": 0.33581749501300984,
+        "brier": 0.08394258469343185,
+        "tn": 133457,
+        "fp": 3026,
+        "fn": 13976,
+        "tp": 2706,
+        "threshold": null,
+        "rule": {
+          "kind": "current_state",
+          "zero_threshold": 0.4,
+          "positive_threshold": 0.41000000000000003,
+          "f1": 0.7720331301765901
+        }
+      }
+    }
+  }
+}

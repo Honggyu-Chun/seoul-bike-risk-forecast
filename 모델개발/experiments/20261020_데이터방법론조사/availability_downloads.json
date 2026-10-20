@@ -1,0 +1,254 @@
+[
+  {
+    "name": "서울특별시_대여소별_공공자전거_대여가능_수량(1시간_단위)_2024년도_1분기.zip",
+    "seq": 9,
+    "advertised_MB": "89.06",
+    "modified": "2025.06.09.",
+    "catalog_url": "https://data.seoul.go.kr/dataList/OA-22382/F/1/datasetView.do",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-22382&infSeq=1&seq=9",
+    "file": "data\\raw\\research_20261020\\availability_2024q1.zip",
+    "target_values_inspected": false,
+    "status": "verified",
+    "response_url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-22382&infSeq=1&seq=9",
+    "content_type": "application/x-msdownload",
+    "bytes": 91197278,
+    "sha256": "6e367819a56dd319f2695a5e9b32dfb63b35ddae3c93b408cf948373e404d6df",
+    "zip_crc_passed": true,
+    "members": [
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2024년도_1분기/",
+        "uncompressed_bytes": 0,
+        "compressed_bytes": 0,
+        "crc32": "00000000"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2024년도_1분기/data_2401.csv",
+        "uncompressed_bytes": 107305984,
+        "compressed_bytes": 30264572,
+        "crc32": "8f1174b2"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2024년도_1분기/data_2402.csv",
+        "uncompressed_bytes": 100548971,
+        "compressed_bytes": 28377789,
+        "crc32": "e8c758e5"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2024년도_1분기/data_2403.csv",
+        "uncompressed_bytes": 115120181,
+        "compressed_bytes": 32552843,
+        "crc32": "8eb2d384"
+      }
+    ],
+    "received_at_utc": "2026-10-20T05:47:53.464626+00:00"
+  },
+  {
+    "name": "서울특별시_대여소별_공공자전거_대여가능_수량(1시간_단위)_2024년도_2분기.zip",
+    "seq": 10,
+    "advertised_MB": "74.35",
+    "modified": "2025.06.09.",
+    "catalog_url": "https://data.seoul.go.kr/dataList/OA-22382/F/1/datasetView.do",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-22382&infSeq=1&seq=10",
+    "file": "data\\raw\\research_20261020\\availability_2024q2.zip",
+    "target_values_inspected": false,
+    "status": "verified",
+    "response_url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-22382&infSeq=1&seq=10",
+    "content_type": "application/x-msdownload",
+    "bytes": 76138376,
+    "sha256": "1d6eb6fe2bd2956e95ed3994dd884d78b6b0cd635dc11139906ef68a6cb2e883",
+    "zip_crc_passed": true,
+    "members": [
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2024년도_2분기/",
+        "uncompressed_bytes": 0,
+        "compressed_bytes": 0,
+        "crc32": "00000000"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2024년도_2분기/data_2404.csv",
+        "uncompressed_bytes": 44053934,
+        "compressed_bytes": 12445042,
+        "crc32": "c787b1c3"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2024년도_2분기/data_2405.csv",
+        "uncompressed_bytes": 106532984,
+        "compressed_bytes": 30064582,
+        "crc32": "64ba7dfb"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2024년도_2분기/data_2406.csv",
+        "uncompressed_bytes": 119273271,
+        "compressed_bytes": 33626678,
+        "crc32": "2a08b97c"
+      }
+    ],
+    "received_at_utc": "2026-10-20T05:47:39.074803+00:00"
+  },
+  {
+    "name": "서울특별시_대여소별_공공자전거_대여가능_수량(1시간_단위)_2024년도_3분기.zip",
+    "seq": 11,
+    "advertised_MB": "181.49",
+    "modified": "2025.06.09.",
+    "catalog_url": "https://data.seoul.go.kr/dataList/OA-22382/F/1/datasetView.do",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-22382&infSeq=1&seq=11",
+    "file": "data\\raw\\research_20261020\\availability_2024q3.zip",
+    "target_values_inspected": false,
+    "status": "verified",
+    "response_url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-22382&infSeq=1&seq=11",
+    "content_type": "application/x-msdownload",
+    "bytes": 185847542,
+    "sha256": "5fe79426b003d99ef02213b3bb3d31944f1bbe4ef646e70d29230b3322d1fffa",
+    "zip_crc_passed": true,
+    "members": [
+      {
+        "name": "data_2407.csv",
+        "uncompressed_bytes": 265125511,
+        "compressed_bytes": 73909280,
+        "crc32": "38cac8dc"
+      },
+      {
+        "name": "data_2408.csv",
+        "uncompressed_bytes": 274315045,
+        "compressed_bytes": 76629405,
+        "crc32": "8a527f2a"
+      },
+      {
+        "name": "data_2409.csv",
+        "uncompressed_bytes": 126651788,
+        "compressed_bytes": 35308513,
+        "crc32": "a31ac355"
+      }
+    ],
+    "received_at_utc": "2026-10-20T05:47:39.521361+00:00"
+  },
+  {
+    "name": "서울특별시_대여소별_공공자전거_대여가능_수량(1시간_단위)_2024년도_4분기.zip",
+    "seq": 12,
+    "advertised_MB": "107.9",
+    "modified": "2025.06.09.",
+    "catalog_url": "https://data.seoul.go.kr/dataList/OA-22382/F/1/datasetView.do",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-22382&infSeq=1&seq=12",
+    "file": "data\\raw\\research_20261020\\availability_2024q4.zip",
+    "target_values_inspected": false,
+    "status": "verified",
+    "response_url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-22382&infSeq=1&seq=12",
+    "content_type": "application/x-msdownload",
+    "bytes": 110485203,
+    "sha256": "e2bd6bc292255e0d46e5e887cd6b38cbb30ab3e527a9fb27099c8f87a6dc0631",
+    "zip_crc_passed": true,
+    "members": [
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2024년도_4분기/",
+        "uncompressed_bytes": 0,
+        "compressed_bytes": 0,
+        "crc32": "00000000"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2024년도_4분기/data_2410.csv",
+        "uncompressed_bytes": 131795286,
+        "compressed_bytes": 37120050,
+        "crc32": "8f6982fe"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2024년도_4분기/data_2411.csv",
+        "uncompressed_bytes": 127782769,
+        "compressed_bytes": 36077577,
+        "crc32": "7fcd0b3e"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2024년도_4분기/data_2412.csv",
+        "uncompressed_bytes": 132136619,
+        "compressed_bytes": 37285502,
+        "crc32": "00122179"
+      }
+    ],
+    "received_at_utc": "2026-10-20T05:47:17.023618+00:00"
+  },
+  {
+    "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2025년도_3분기.zip",
+    "seq": 15,
+    "advertised_MB": "97.11",
+    "modified": "2026.06.26.",
+    "catalog_url": "https://data.seoul.go.kr/dataList/OA-22382/F/1/datasetView.do",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-22382&infSeq=1&seq=15",
+    "file": "data\\raw\\research_20261020\\availability_2025q3.zip",
+    "target_values_inspected": false,
+    "status": "verified",
+    "response_url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-22382&infSeq=1&seq=15",
+    "content_type": "application/x-msdownload",
+    "bytes": 99443780,
+    "sha256": "5b4185607d84dacf2549b7edbd1c872c6142a5adc16358d277d79c8d8cce2798",
+    "zip_crc_passed": true,
+    "members": [
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2025년도_3분기/",
+        "uncompressed_bytes": 0,
+        "compressed_bytes": 0,
+        "crc32": "00000000"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2025년도_3분기/data_2507.csv",
+        "uncompressed_bytes": 117449470,
+        "compressed_bytes": 33501633,
+        "crc32": "241fc40a"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2025년도_3분기/data_2508.csv",
+        "uncompressed_bytes": 117659000,
+        "compressed_bytes": 33537610,
+        "crc32": "2628bd84"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2025년도_3분기/data_2509.csv",
+        "uncompressed_bytes": 113686861,
+        "compressed_bytes": 32403061,
+        "crc32": "65c98e96"
+      }
+    ],
+    "received_at_utc": "2026-10-20T05:46:49.446504+00:00"
+  },
+  {
+    "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2025년도_4분기.zip",
+    "seq": 16,
+    "advertised_MB": "97.26",
+    "modified": "2026.06.26.",
+    "catalog_url": "https://data.seoul.go.kr/dataList/OA-22382/F/1/datasetView.do",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-22382&infSeq=1&seq=16",
+    "file": "data\\raw\\research_20261020\\availability_2025q4.zip",
+    "target_values_inspected": false,
+    "status": "verified",
+    "response_url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-22382&infSeq=1&seq=16",
+    "content_type": "application/x-msdownload",
+    "bytes": 99598295,
+    "sha256": "0a9f457f0d5e3833d944b6f6e406c694f22f4944a431d12f814fca4e1937c3e6",
+    "zip_crc_passed": true,
+    "members": [
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2025년도_4분기/",
+        "uncompressed_bytes": 0,
+        "compressed_bytes": 0,
+        "crc32": "00000000"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2025년도_4분기/data_2510.csv",
+        "uncompressed_bytes": 117559279,
+        "compressed_bytes": 33520846,
+        "crc32": "9857d3db"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2025년도_4분기/data_2511.csv",
+        "uncompressed_bytes": 113798524,
+        "compressed_bytes": 32470852,
+        "crc32": "eb72151f"
+      },
+      {
+        "name": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2025년도_4분기/data_2512.csv",
+        "uncompressed_bytes": 117831268,
+        "compressed_bytes": 33605121,
+        "crc32": "d4d0346f"
+      }
+    ],
+    "received_at_utc": "2026-10-20T05:46:53.787917+00:00"
+  }
+]

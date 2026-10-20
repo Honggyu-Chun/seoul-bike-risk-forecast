@@ -1,0 +1,28 @@
+{
+  "checked_at_utc": "2026-10-20T11:08:15.829457+00:00",
+  "reports": [
+    {
+      "path": "experiments\\20261020_후속실험_v4\\쉬운보고서.html",
+      "sha256": "be8f955978dd2fcb7d9d0393f147befb2514fb0b32ea9ef36d92534e9beba381",
+      "local_references": 16,
+      "missing_references": []
+    },
+    {
+      "path": "experiments\\20261020_추가공공데이터적용\\추가공공데이터_비교보고서.html",
+      "sha256": "98c5d1dc9d5581f8c969763fff59abbc79f561f03fa25537a7e805fbeadec3f2",
+      "local_references": 2,
+      "missing_references": []
+    },
+    {
+      "path": "experiments\\20261020_추가공공데이터적용\\데이터준비_쉬운설명.html",
+      "sha256": "79abd8d66f43a4812eac219dff71cc76b5ff81ec4d0a33de1d264abbd7903f12",
+      "local_references": 7,
+      "missing_references": []
+    }
+  ],
+  "visual_plot_review": "29-result three-fold F1 chart Korean labels and non-overlapping legend inspected",
+  "actual_public_model_fits": 0,
+  "public_execution_preflight": "109/112/116 features preserve frozen 105 values and repeated row order",
+  "isolation_and_temporal_tests_passed": 4,
+  "model_fitting_still_deferred_while_v4_live": true
+}

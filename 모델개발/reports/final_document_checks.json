@@ -1,0 +1,15 @@
+{
+  "checks": "original form period and basic table preserved; guides/examples removed; scores match; no blank or overflow pages",
+  "documents": [
+    {
+      "file": "따릉이_시민용서비스_과제계획서_실험결과반영.docx",
+      "pages": 10,
+      "min_page_characters": 675
+    },
+    {
+      "file": "따릉이_데모와실험_팀원용_쉬운상세설명서.docx",
+      "pages": 30,
+      "min_page_characters": 453
+    }
+  ]
+}

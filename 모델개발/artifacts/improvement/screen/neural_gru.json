@@ -1,0 +1,126 @@
+{
+  "name": "neural_gru",
+  "kind": "neural",
+  "spec": {
+    "kind": "neural",
+    "group": "sequence",
+    "name": "neural_gru",
+    "architecture": "gru",
+    "positive_weight": 1.0
+  },
+  "status": "ok",
+  "rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.43,
+    "positive_threshold": 0.36000000000000004,
+    "f1": 0.744903481869024
+  },
+  "validation": {
+    "n": 916608,
+    "zero_cases": 87281,
+    "zero_rate": 0.09522173055439184,
+    "f1": 0.744903481869024,
+    "precision": 0.7332704367611965,
+    "recall": 0.7569115844227265,
+    "average_precision": 0.79468888784266,
+    "brier": 0.03633172810077667,
+    "tn": 805296,
+    "fp": 24031,
+    "fn": 21217,
+    "tp": 66064,
+    "threshold": 0.5,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.43,
+      "positive_threshold": 0.36000000000000004,
+      "f1": 0.744903481869024
+    }
+  },
+  "fit": {
+    "paths": [
+      "neural_gru.pt"
+    ],
+    "epochs": 8,
+    "sampled_train_rows": 1200000,
+    "threads": 1,
+    "sequence_hours": 24,
+    "channels": [
+      "log_quantity",
+      "observed_flag",
+      "neighbor_log_mean",
+      "neighbor_zero_fraction"
+    ]
+  },
+  "features": [],
+  "learning_curves": [
+    {
+      "epoch": 1,
+      "train_loss": 0.21467510348904256,
+      "validation_f1": 0.7429794491149556
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.11300868785116859,
+      "validation_f1": 0.7432321575061526
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.10578128202173083,
+      "validation_f1": 0.7430240699716486
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.10398268597931586,
+      "validation_f1": 0.7431869334255538
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.10273518242933645,
+      "validation_f1": 0.7438182686097773
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.1015548495760143,
+      "validation_f1": 0.743811532258974
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.10067674171802533,
+      "validation_f1": 0.7441438819934864
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.0997380383643274,
+      "validation_f1": 0.744903481869024
+    }
+  ],
+  "seconds": 639.0576227900019,
+  "test_used": false,
+  "selection_rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.43,
+    "positive_threshold": 0.35000000000000003,
+    "f1": 0.7448967544988953
+  },
+  "selection_validation": {
+    "n": 916608,
+    "zero_cases": 87281,
+    "zero_rate": 0.09522173055439184,
+    "f1": 0.7448967544988953,
+    "precision": 0.7312684886749967,
+    "recall": 0.7590426324171354,
+    "average_precision": 0.79468888784266,
+    "brier": 0.03633172810077667,
+    "tn": 804981,
+    "fp": 24346,
+    "fn": 21031,
+    "tp": 66250,
+    "threshold": null,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.43,
+      "positive_threshold": 0.35000000000000003,
+      "f1": 0.7448967544988953
+    }
+  }
+}

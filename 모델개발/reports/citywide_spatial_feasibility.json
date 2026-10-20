@@ -1,0 +1,13 @@
+{
+  "source_ids": 2730,
+  "mapped_ids": 2728,
+  "unmapped_ids": [
+    "4721",
+    "9980"
+  ],
+  "stations_with_neighbor_500m": 2674,
+  "stations_with_neighbor_1000m": 2727,
+  "median_neighbors_500m": 5.0,
+  "scope": "geometric feature feasibility only; no accuracy result",
+  "source_snapshot": "2024-12"
+}

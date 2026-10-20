@@ -1,0 +1,62 @@
+[
+  {
+    "source_id": "sub_month_meta",
+    "url": "https://data.seoul.go.kr/dataList/OA-12252/S/1/datasetView.do",
+    "checked_at": "2026-10-20T18:43:50.052261+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 88695,
+    "sha256": "eab9f35f02d5ebb76c719f6e97efa242f27aa8682808f0341e9029b224408f9e",
+    "final_url": "https://data.seoul.go.kr/dataList/OA-12252/S/1/datasetView.do",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\sub_month_meta.txt"
+  },
+  {
+    "source_id": "bus_month_meta",
+    "url": "https://data.seoul.go.kr/dataList/OA-12913/S/1/datasetView.do",
+    "checked_at": "2026-10-20T18:43:50.052261+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 130560,
+    "sha256": "5092802914cfb655f9958eb8c1dc7fc25ca96ec605c8403ba271824de52d2bff",
+    "final_url": "https://data.seoul.go.kr/dataList/OA-12913/S/1/datasetView.do",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\bus_month_meta.txt"
+  },
+  {
+    "source_id": "incident_meta",
+    "url": "https://data.seoul.go.kr/dataList/OA-13315/A/1/datasetView.do",
+    "checked_at": "2026-10-20T18:43:50.052261+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 1097,
+    "sha256": "bd749267704e348de5c0d1ebb2fcc3210136420e592a1091df6a3c109f50ed21",
+    "final_url": "https://data.seoul.go.kr/dataList/OA-13315/A/1/datasetView.do",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\incident_meta.txt"
+  },
+  {
+    "source_id": "speed_meta",
+    "url": "https://data.seoul.go.kr/dataList/OA-13291/A/1/datasetView.do",
+    "checked_at": "2026-10-20T18:43:50.650154+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 92345,
+    "sha256": "d828cf9635da3442984f3fe06f905828c3acdfad9d1f131ccb4302778d60cf67",
+    "final_url": "https://data.seoul.go.kr/dataList/OA-13291/A/1/datasetView.do",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\speed_meta.txt"
+  },
+  {
+    "source_id": "topis_current_public",
+    "url": "https://topis.seoul.go.kr/",
+    "checked_at": "2026-10-20T18:43:51.425143+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 114746,
+    "sha256": "8b6ef435b4895b5052daf82816e40af0c981e3fcf9c369673ab9f49ce70bd429",
+    "final_url": "https://topis.seoul.go.kr/",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\topis_current_public.txt"
+  }
+]

@@ -1,0 +1,59 @@
+{
+  "protocol": {
+    "origin_count": 120,
+    "candidate_radius_m": 500,
+    "input_hours": [
+      7,
+      8,
+      18,
+      19
+    ],
+    "weekdays_only": true,
+    "seed": 20261019
+  },
+  "attempted_queries": 5280,
+  "common_eligible_queries": 5224,
+  "excluded_no_eligible_current_positive_candidate": 56,
+  "metrics": {
+    "R0": {
+      "requests": 5224,
+      "recommended": 5224,
+      "valid_recommendations": 4972,
+      "effective_rate": 0.9517611026033691,
+      "hit_rate": 0.9517611026033691,
+      "coverage": 1.0,
+      "abstention_rate": 0.0,
+      "mean_distance_m": 104.9024623902464,
+      "paired_extra_distance_vs_R0_m": 0.0
+    },
+    "R1": {
+      "requests": 5224,
+      "recommended": 5213,
+      "valid_recommendations": 4987,
+      "effective_rate": 0.9546324655436447,
+      "hit_rate": 0.956646844427393,
+      "coverage": 0.9978943338437979,
+      "abstention_rate": 0.002105666156202113,
+      "mean_distance_m": 106.95116300922598,
+      "paired_extra_distance_vs_R0_m": 2.4041572121147836
+    },
+    "R2": {
+      "requests": 5224,
+      "recommended": 5208,
+      "valid_recommendations": 4982,
+      "effective_rate": 0.9536753445635529,
+      "hit_rate": 0.956605222734255,
+      "coverage": 0.996937212863706,
+      "abstention_rate": 0.003062787136294043,
+      "mean_distance_m": 106.44105797111256,
+      "paired_extra_distance_vs_R0_m": 1.9967331800693726
+    }
+  },
+  "r2_minus_r0_effective_pp": 0.1914241960183749,
+  "r2_minus_r1_effective_pp": -0.0957120980091819,
+  "goal_verdict": {
+    "effective_5pp": false,
+    "paired_extra_distance_100m": true
+  },
+  "interpretation": "Constructed archived origin/time queries; available quantity at a later source record is a proxy, not observed rider rental success."
+}

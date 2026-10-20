@@ -1,0 +1,13 @@
+{
+  "scope": "Post-result descriptive probability diagnostics on already opened development folds; no fitting, retuning or held-back labels.",
+  "models": ["lightgbm_basic", "lightgbm_full", "M2_no_weather"],
+  "folds": ["A", "B", "C"],
+  "groups": ["overall", "current_positive"],
+  "uniform_bins": 10,
+  "bin_boundaries": "[0,0.1], (0.1,0.2], ..., (0.9,1]; empty bins remain NaN and counts are saved",
+  "calibrators": "Reuse frozen calibration-window estimators; never fit to validation labels",
+  "metrics": "Native binary Brier mean squared error before/after calibration; ten-bin ECE is descriptive only",
+  "saved_score_tolerance": 1e-7,
+  "limitations": ["Brier mixes reliability and discrimination", "ECE depends on bin choice", "few rows in some bins", "development-selection bias", "stored raw probabilities use float32", "no deployment probability guarantee"],
+  "sources": ["https://scikit-learn.org/stable/modules/calibration.html", "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.brier_score_loss.html"]
+}

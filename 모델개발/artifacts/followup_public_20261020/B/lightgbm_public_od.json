@@ -1,0 +1,366 @@
+{
+  "name": "lightgbm_public_od",
+  "status": "ok",
+  "fold": "B",
+  "spec": {
+    "name": "lightgbm_public_od",
+    "extra_features": 7,
+    "base_features": 105,
+    "group": "od",
+    "kind": "lgb",
+    "leaves": 127,
+    "rounds": 900,
+    "window": 56,
+    "seed": 20261020
+  },
+  "features": [
+    "station_code",
+    "hour",
+    "weekday",
+    "weekend",
+    "quantity",
+    "log_quantity",
+    "q_lag_1",
+    "q_lag_2",
+    "q_lag_24",
+    "q_lag_168",
+    "q_mean_3",
+    "q_known_3",
+    "q_mean_24",
+    "q_known_24",
+    "q_change_1",
+    "q_change_3",
+    "neighbor_mean",
+    "neighbor_std",
+    "neighbor_zero_fraction",
+    "neighbor_low2_fraction",
+    "neighbor_observed_count",
+    "neighbor_degree",
+    "neighbor_coverage",
+    "neighbor_min",
+    "neighbor_change_1",
+    "neighbor_change_3",
+    "own_minus_neighbor",
+    "q_lag_3",
+    "q_lag_4",
+    "q_lag_5",
+    "q_lag_6",
+    "q_lag_8",
+    "q_lag_12",
+    "q_lag_23",
+    "q_lag_25",
+    "q_lag_47",
+    "q_lag_48",
+    "q_lag_49",
+    "q_lag_72",
+    "q_lag_96",
+    "q_lag_120",
+    "q_lag_144",
+    "q_lag_167",
+    "q_lag_169",
+    "q_lag_192",
+    "q_lag_336",
+    "t_std_3",
+    "t_zero_fraction_3",
+    "t_std_6",
+    "t_mean_6",
+    "t_zero_fraction_6",
+    "t_low2_fraction_6",
+    "t_std_12",
+    "t_mean_12",
+    "t_zero_fraction_12",
+    "t_std_24",
+    "t_zero_fraction_24",
+    "t_low2_fraction_24",
+    "t_std_48",
+    "t_mean_48",
+    "t_zero_fraction_48",
+    "t_std_168",
+    "t_mean_168",
+    "t_zero_fraction_168",
+    "t_low2_fraction_168",
+    "t_zero_run",
+    "t_low3_run",
+    "t_positive_run",
+    "t_delta2",
+    "t_delta6",
+    "t_acceleration",
+    "t_relative_change",
+    "t_samehour_mean7d",
+    "t_samehour_deviation",
+    "t_samehour_zero7d",
+    "t_nominal_capacity",
+    "t_capacity_ratio",
+    "t_hour_sin",
+    "t_hour_cos",
+    "t_week_sin",
+    "t_week_cos",
+    "t_latitude",
+    "t_longitude",
+    "t_district",
+    "g_250m_mean",
+    "g_250m_zero",
+    "g_250m_low2",
+    "g_250m_change",
+    "g_1000m_mean",
+    "g_1000m_zero",
+    "g_1000m_low2",
+    "g_1000m_change",
+    "g_knn5_mean",
+    "g_knn5_zero",
+    "g_knn5_low2",
+    "g_knn5_change",
+    "g_city_zero",
+    "g_district_zero",
+    "h_global",
+    "h_station",
+    "h_station_hour",
+    "h_station_weekday",
+    "h_station_duration",
+    "h_recent_station",
+    "h_station_known",
+    "od_log_reported_departures_mean",
+    "od_log_reported_arrivals_mean",
+    "od_departure_reported_day_fraction",
+    "od_arrival_reported_day_fraction",
+    "od_departure_report_present",
+    "od_arrival_report_present",
+    "od_current_crosswalk_linked"
+  ],
+  "fit": {
+    "iterations": 186
+  },
+  "actual_train_rows": 3661755,
+  "full_train_rows": 3661755,
+  "stage_rows": {
+    "stop": 456960,
+    "cal": 261120,
+    "policy": 391593,
+    "valid": 913584
+  },
+  "rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.38,
+    "positive_threshold": 0.36000000000000004,
+    "f1": 0.7318321392016377
+  },
+  "validation": {
+    "overall": {
+      "n": 913584,
+      "zero_cases": 108042,
+      "zero_rate": 0.11826170335732675,
+      "f1": 0.7233727810650887,
+      "precision": 0.6974310507775582,
+      "recall": 0.7513189315266285,
+      "average_precision": 0.8054340806727331,
+      "brier": 0.0456758588552475,
+      "tn": 770326,
+      "fp": 35216,
+      "fn": 26868,
+      "tp": 81174,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.38,
+        "positive_threshold": 0.36000000000000004,
+        "f1": 0.7318321392016377
+      }
+    },
+    "current_positive": {
+      "n": 805481,
+      "zero_cases": 32223,
+      "zero_rate": 0.040004668018240035,
+      "f1": 0.3405030987969377,
+      "precision": 0.44601387352970745,
+      "recall": 0.2753623188405797,
+      "average_precision": 0.3663374174450063,
+      "brier": 0.029923703521490097,
+      "tn": 762237,
+      "fp": 11021,
+      "fn": 23350,
+      "tp": 8873,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.38,
+        "positive_threshold": 0.36000000000000004,
+        "f1": 0.7318321392016377
+      }
+    },
+    "current_1_to_3": {
+      "n": 191859,
+      "zero_cases": 28651,
+      "zero_rate": 0.14933362521435012,
+      "f1": 0.3540924141130818,
+      "precision": 0.44735159330704466,
+      "recall": 0.29300897001849846,
+      "average_precision": 0.38253620983981523,
+      "brier": 0.1092892661690712,
+      "tn": 152837,
+      "fp": 10371,
+      "fn": 20256,
+      "tp": 8395,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.38,
+        "positive_threshold": 0.36000000000000004,
+        "f1": 0.7318321392016377
+      }
+    }
+  },
+  "raw_validation": {
+    "overall": {
+      "n": 913584,
+      "zero_cases": 108042,
+      "zero_rate": 0.11826170335732675,
+      "f1": 0.7235278537213865,
+      "precision": 0.7024958373652047,
+      "recall": 0.7458580922233946,
+      "average_precision": 0.8054340922453675,
+      "brier": 0.045688495762546535,
+      "tn": 771415,
+      "fp": 34127,
+      "fn": 27458,
+      "tp": 80584,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.38,
+        "positive_threshold": 0.37,
+        "f1": 0.7318136134408937
+      }
+    },
+    "current_positive": {
+      "n": 805481,
+      "zero_cases": 32223,
+      "zero_rate": 0.040004668018240035,
+      "f1": 0.3293507932112197,
+      "precision": 0.4541487098357973,
+      "recall": 0.258355832790243,
+      "average_precision": 0.36633742093888766,
+      "brier": 0.02992723847035768,
+      "tn": 763252,
+      "fp": 10006,
+      "fn": 23898,
+      "tp": 8325,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.38,
+        "positive_threshold": 0.37,
+        "f1": 0.7318136134408937
+      }
+    },
+    "current_1_to_3": {
+      "n": 191859,
+      "zero_cases": 28651,
+      "zero_rate": 0.14933362521435012,
+      "f1": 0.3428558986195184,
+      "precision": 0.4557452966714906,
+      "recall": 0.2747897106558235,
+      "average_precision": 0.38253620493259227,
+      "brier": 0.10930703567935193,
+      "tn": 153806,
+      "fp": 9402,
+      "fn": 20778,
+      "tp": 7873,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.38,
+        "positive_threshold": 0.37,
+        "f1": 0.7318136134408937
+      }
+    }
+  },
+  "raw_rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.38,
+    "positive_threshold": 0.37,
+    "f1": 0.7318136134408937
+  },
+  "calibrated_on": "2025-05-22/2025-05-26",
+  "seconds": 420.8860985999927,
+  "memory": {
+    "rss_gib": 2.2839317321777344,
+    "peak_rss_gib": 6.889545440673828
+  },
+  "code_sha256": "8911aa28af7ca368c1bb5522541a959c58180bdafba1ab5df07a2636668255f0",
+  "protocol_sha256": "d46dda0183613a3b647e6625df37181b144e7ee42d651390b769395c81689e41",
+  "data_sha256": "d3c9895a41a39a52c9fe8e26f5d4333456c6b8d45c2e460d887d983a88c79233",
+  "completed_at_utc": "2026-10-20T15:15:20.083980+00:00",
+  "information_track": "public_archive_and_current_crosswalk_sensitivity",
+  "independent_final_test": false,
+  "public_extension_plan_sha256": "7d39ff6b19a08eaf60270d6aa37d5a87e77ee891e2635a1b0254137a91af2a3b",
+  "public_feature_metadata_sha256": "d63aef664f9a5933385ea366453b16590ee4821c034855b8dc4049ac9b7fffdb",
+  "public_runner_sha256": "58c964e9e78138ad31122224623aaa285a9aa2ef47c66204d5fe54eae9b49a03",
+  "historical_reception_verified": false,
+  "historical_station_ID_identity_verified": false,
+  "interpretation": "conditional prior archive and current crosswalk comparison; not proven historical live reception",
+  "public_checks": {
+    "all_passed": true,
+    "all_stage_raw_predictions_checked": true,
+    "entire_validation_counts_and_metrics_match": true,
+    "checks": [
+      {
+        "stage": "cal",
+        "rows": 261120,
+        "raw_maximum_absolute_error": 2.980191882162586e-08
+      },
+      {
+        "stage": "policy",
+        "rows": 391593,
+        "raw_maximum_absolute_error": 2.9802125434130744e-08
+      },
+      {
+        "stage": "valid",
+        "rows": 913584,
+        "raw_maximum_absolute_error": 2.9802236900522416e-08
+      }
+    ],
+    "artifact_hashes": [
+      {
+        "path": "B\\models\\lightgbm_public_od.txt",
+        "bytes": 7324364,
+        "sha256": "7e57d2c96a8ff475589e48f645dbf38f6fc1c8ddafe899dac5fdd46386e75310"
+      },
+      {
+        "path": "B\\models\\lightgbm_public_od_calibrator.joblib",
+        "bytes": 847,
+        "sha256": "de11a8b0576eff6dede65fafdd31eb5adbfce6d3325f2cabc5a05f5796af88e9"
+      },
+      {
+        "path": "predictions\\B\\lightgbm_public_od_cal.npy",
+        "bytes": 1044608,
+        "sha256": "99d48328568696cea7b724ee128cf99978c14626789d08c7e3c845069f6ca153"
+      },
+      {
+        "path": "predictions\\B\\lightgbm_public_od_cal_exact.npy",
+        "bytes": 2089088,
+        "sha256": "1bd7427eecd9089af27e542049af0ff0bfc634432beb33c03fd49035946272e6"
+      },
+      {
+        "path": "predictions\\B\\lightgbm_public_od_policy.npy",
+        "bytes": 1566500,
+        "sha256": "9f019214d64224c5956974d6b403825bb984cd7004bd7b35059aae938b81654a"
+      },
+      {
+        "path": "predictions\\B\\lightgbm_public_od_policy_exact.npy",
+        "bytes": 3132872,
+        "sha256": "367a99c502e50bf06c0d9153aeb4e716c22feac977529d0c92da4549e1f0adbf"
+      },
+      {
+        "path": "predictions\\B\\lightgbm_public_od_valid.npy",
+        "bytes": 3654464,
+        "sha256": "b10c7f74dde66a0334a18031571ad041f58bc27cc5a7a500bf8ac9a38020f9a6"
+      },
+      {
+        "path": "predictions\\B\\lightgbm_public_od_valid_exact.npy",
+        "bytes": 7308800,
+        "sha256": "0be31bb7299cbd545973b3eada5f8174e859feda6f45d9a9383d223b9553805a"
+      }
+    ],
+    "verified_at_utc": "2026-10-20T15:15:51.768160+00:00"
+  }
+}

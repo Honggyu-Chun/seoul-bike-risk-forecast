@@ -1,0 +1,15 @@
+{
+  "purpose": "Exploratory development sensitivity of frozen model-minus-baseline metrics",
+  "registered_after_some_development_scores": true,
+  "selection_adjusted_inference": false,
+  "unit": "whole target day, including every eligible station and hour",
+  "block_lengths_days": [1, 7],
+  "resampling": "overlapping non-circular moving blocks; truncate concatenated blocks to original number of days",
+  "paired": "same sampled day indices for both candidates",
+  "repeats": 2000,
+  "seed": 20261020,
+  "metric": "sum sampled confusion counts then calculate F1, precision, recall; report difference in percentage points",
+  "groups": ["overall", "current_positive"],
+  "range": "empirical 2.5th to 97.5th percentiles; descriptive, not guaranteed 95% coverage",
+  "limitations": ["14 to 17 target days per fold", "stationarity unproven", "few weekly blocks", "end effects", "selection and multiple comparisons", "one model seed", "overlapping training periods", "not independent final test evidence"]
+}

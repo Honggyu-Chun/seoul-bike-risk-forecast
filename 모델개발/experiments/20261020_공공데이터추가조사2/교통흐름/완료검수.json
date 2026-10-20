@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-20T19:04:58.710082+09:00",
+  "candidate_rows": 24,
+  "columns": 21,
+  "duplicate_ids": false,
+  "status_counts": {
+    "조건부": 14,
+    "추가작업": 6,
+    "부적합": 4
+  },
+  "sample_files": 8,
+  "document_and_sample_checks": 68,
+  "no_training_or_bulk_processing": true,
+  "outputs": [
+    {
+      "path": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\조사보고서.md",
+      "bytes": 30061,
+      "sha256": "8042d902fc5c90e52b2bb747a12017aaed5449874ac1843ee817cd84b1d78373"
+    },
+    {
+      "path": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\후보목록.csv",
+      "bytes": 34688,
+      "sha256": "717734e1843d6b7a5faecf8768e0bee581416ba6699b544cc4422dca7ead5aa3"
+    },
+    {
+      "path": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\출처검증.json",
+      "bytes": 58705,
+      "sha256": "0e0929621e5bb044d6ac932229fd3633b3adfc9001bca1e46ed89a83d679adf3"
+    }
+  ]
+}

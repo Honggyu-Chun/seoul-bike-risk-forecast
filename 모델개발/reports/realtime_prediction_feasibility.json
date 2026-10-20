@@ -1,0 +1,92 @@
+{
+  "verified_on_kst": "2026-10-19",
+  "official_dataset": "https://data.seoul.go.kr/dataList/OA-15493/A/1/datasetView.do",
+  "official_guide": "https://data.seoul.go.kr/together/guide/useGuide.do",
+  "tested_public_endpoint": "http://openapi.seoul.go.kr:8088/sample/json/bikeList/1/5/",
+  "http_statuses": [
+    200,
+    200
+  ],
+  "api_result_codes": [
+    "INFO-000",
+    "INFO-000"
+  ],
+  "sample_rows": 5,
+  "first_requested_at_kst": "2026-10-19T21:26:58.642649+09:00",
+  "second_received_at_kst": "2026-10-19T21:28:30.361787+09:00",
+  "field_names": [
+    "rackTotCnt",
+    "stationName",
+    "parkingBikeTotCnt",
+    "shared",
+    "stationLatitude",
+    "stationLongitude",
+    "stationId"
+  ],
+  "station_observation_timestamp_in_sample": false,
+  "sample_rows_with_changed_quantity": 1,
+  "sample_ids_matched_by_name_numeric_prefix": 5,
+  "sample_rows_detail": [
+    {
+      "api_station_id": "ST-4",
+      "management_number_from_name": 102,
+      "name": "102. 망원역 1번출구 앞",
+      "matched_historical_location_id": true,
+      "first_quantity": 29,
+      "second_quantity": 30,
+      "changed": true
+    },
+    {
+      "api_station_id": "ST-5",
+      "management_number_from_name": 103,
+      "name": "103. 망원역 2번출구 앞",
+      "matched_historical_location_id": true,
+      "first_quantity": 11,
+      "second_quantity": 11,
+      "changed": false
+    },
+    {
+      "api_station_id": "ST-6",
+      "management_number_from_name": 104,
+      "name": "104. 합정역 1번출구 앞",
+      "matched_historical_location_id": true,
+      "first_quantity": 0,
+      "second_quantity": 0,
+      "changed": false
+    },
+    {
+      "api_station_id": "ST-7",
+      "management_number_from_name": 105,
+      "name": "105. 합정역 5번출구 앞",
+      "matched_historical_location_id": true,
+      "first_quantity": 0,
+      "second_quantity": 0,
+      "changed": false
+    },
+    {
+      "api_station_id": "ST-8",
+      "management_number_from_name": 106,
+      "name": "106. 합정역 7번출구 앞",
+      "matched_historical_location_id": true,
+      "first_quantity": 0,
+      "second_quantity": 0,
+      "changed": false
+    }
+  ],
+  "official_maximum_rows_per_call": 1000,
+  "sample_key_limit_rows": 5,
+  "bike_specific_daily_request_quota_verified": false,
+  "production_key_call_verified": false,
+  "all_city_pagination_verified": false,
+  "periodic_collection_verified": false,
+  "short_horizon_forecast_accuracy_verified": false,
+  "conclusion": "Live input route works and changing quantities were directly observed in two public sample calls; operational forecasting requires production access, timestamp/ID mapping checks, collection and horizon-specific testing.",
+  "limitations": [
+    "The sample count of 5 is not a citywide station count.",
+    "Request/receipt timestamps are not per-station observation timestamps.",
+    "ID correspondence was checked for 5 sample rows only, not all stations.",
+    "Successful repeated reads do not prove a guaranteed refresh interval or operational SLA.",
+    "The guide daily limit of 1000 explicitly refers to subway APIs; no bike-specific daily limit was established.",
+    "HTTPS port 8088 returned 503 in this check; the official HTTP path worked."
+  ]
+}

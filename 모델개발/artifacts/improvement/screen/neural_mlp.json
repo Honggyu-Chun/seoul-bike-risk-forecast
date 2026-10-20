@@ -1,0 +1,119 @@
+{
+  "name": "neural_mlp",
+  "kind": "neural",
+  "spec": {
+    "kind": "neural",
+    "group": "sequence",
+    "name": "neural_mlp",
+    "architecture": "mlp",
+    "positive_weight": 1.0
+  },
+  "status": "ok",
+  "rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.3,
+    "positive_threshold": 0.31,
+    "f1": 0.7458413533452622
+  },
+  "validation": {
+    "n": 916608,
+    "zero_cases": 87281,
+    "zero_rate": 0.09522173055439184,
+    "f1": 0.7458413533452622,
+    "precision": 0.735057854917668,
+    "recall": 0.7569459561645719,
+    "average_precision": 0.7917665337999698,
+    "brier": 0.036779120564460754,
+    "tn": 805514,
+    "fp": 23813,
+    "fn": 21214,
+    "tp": 66067,
+    "threshold": 0.5,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.3,
+      "positive_threshold": 0.31,
+      "f1": 0.7458413533452622
+    }
+  },
+  "fit": {
+    "paths": [
+      "neural_mlp.pt"
+    ],
+    "epochs": 4,
+    "sampled_train_rows": 1200000,
+    "threads": 1,
+    "sequence_hours": 24,
+    "channels": [
+      "log_quantity",
+      "observed_flag",
+      "neighbor_log_mean",
+      "neighbor_zero_fraction"
+    ]
+  },
+  "features": [],
+  "learning_curves": [
+    {
+      "epoch": 1,
+      "train_loss": 0.19375170482506932,
+      "validation_f1": 0.7440199401568186
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.10872254457083172,
+      "validation_f1": 0.7447044827955595
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.10431116633752914,
+      "validation_f1": 0.7452082627836099
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.10241433060108192,
+      "validation_f1": 0.7458413533452622
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.10087070947214198,
+      "validation_f1": 0.7453471045817918
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.09998462234747695,
+      "validation_f1": 0.7456883671893059
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.09945274098639602,
+      "validation_f1": 0.7456457834191432
+    }
+  ],
+  "seconds": 47.06956180099951,
+  "test_used": false,
+  "selection_rule": {
+    "kind": "global",
+    "threshold": 0.3,
+    "f1": 0.7458275656391731
+  },
+  "selection_validation": {
+    "n": 916608,
+    "zero_cases": 87281,
+    "zero_rate": 0.09522173055439184,
+    "f1": 0.7458275656391731,
+    "precision": 0.7328298298187609,
+    "recall": 0.7592946918573343,
+    "average_precision": 0.7917665337999698,
+    "brier": 0.036779120564460754,
+    "tn": 805166,
+    "fp": 24161,
+    "fn": 21009,
+    "tp": 66272,
+    "threshold": 0.3,
+    "rule": {
+      "kind": "global",
+      "threshold": 0.3,
+      "f1": 0.7458275656391731
+    }
+  }
+}

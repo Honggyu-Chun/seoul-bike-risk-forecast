@@ -1,0 +1,320 @@
+[
+  {
+    "a": "catboost_depth_8",
+    "b": "causal_weather_spatial",
+    "weight_a": 0.5,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.4,
+      "positive_threshold": 0.34,
+      "f1": 0.7585918753352342
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.4,
+      "positive_threshold": 0.34,
+      "f1": 0.7585918753352342
+    },
+    "f1": 0.7585918753352342
+  },
+  {
+    "a": "causal_weather_spatial",
+    "b": "catboost_depth_6",
+    "weight_a": 0.5,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.35000000000000003,
+      "f1": 0.7585512281515767
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.35000000000000003,
+      "f1": 0.7585512281515767
+    },
+    "f1": 0.7585512281515767
+  },
+  {
+    "a": "catboost_depth_8",
+    "b": "causal_weather_spatial",
+    "weight_a": 0.75,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.37,
+      "positive_threshold": 0.34,
+      "f1": 0.7581893650437515
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.37,
+      "positive_threshold": 0.34,
+      "f1": 0.7581893650437515
+    },
+    "f1": 0.7581893650437515
+  },
+  {
+    "a": "catboost_depth_8",
+    "b": "causal_weather_own",
+    "weight_a": 0.5,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.36000000000000004,
+      "positive_threshold": 0.34,
+      "f1": 0.757734326853045
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.36000000000000004,
+      "positive_threshold": 0.34,
+      "f1": 0.757734326853045
+    },
+    "f1": 0.757734326853045
+  },
+  {
+    "a": "catboost_depth_8",
+    "b": "causal_weather_spatial",
+    "weight_a": 0.25,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.34,
+      "positive_threshold": 0.36000000000000004,
+      "f1": 0.7576862540818784
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.34,
+      "positive_threshold": 0.36000000000000004,
+      "f1": 0.7576862540818784
+    },
+    "f1": 0.7576862540818784
+  },
+  {
+    "a": "causal_weather_spatial",
+    "b": "catboost_depth_6",
+    "weight_a": 0.25,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.37,
+      "positive_threshold": 0.34,
+      "f1": 0.7576717914775946
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.37,
+      "positive_threshold": 0.34,
+      "f1": 0.7576717914775946
+    },
+    "f1": 0.7576717914775946
+  },
+  {
+    "a": "catboost_depth_8",
+    "b": "causal_weather_own",
+    "weight_a": 0.75,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.38,
+      "positive_threshold": 0.33,
+      "f1": 0.7576146182750838
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.38,
+      "positive_threshold": 0.33,
+      "f1": 0.7576146182750838
+    },
+    "f1": 0.7576146182750838
+  },
+  {
+    "a": "causal_weather_spatial",
+    "b": "catboost_depth_6",
+    "weight_a": 0.75,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.36000000000000004,
+      "positive_threshold": 0.37,
+      "f1": 0.7575343085166513
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.36000000000000004,
+      "positive_threshold": 0.37,
+      "f1": 0.7575343085166513
+    },
+    "f1": 0.7575343085166513
+  },
+  {
+    "a": "catboost_depth_6",
+    "b": "causal_weather_own",
+    "weight_a": 0.5,
+    "rule": {
+      "kind": "global",
+      "threshold": 0.36000000000000004,
+      "f1": 0.7574674957603166
+    },
+    "unconstrained_rule": {
+      "kind": "global",
+      "threshold": 0.36000000000000004,
+      "f1": 0.7574674957603166
+    },
+    "f1": 0.7574674957603166
+  },
+  {
+    "a": "catboost_depth_6",
+    "b": "causal_weather_own",
+    "weight_a": 0.75,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.35000000000000003,
+      "positive_threshold": 0.33,
+      "f1": 0.7570911923440716
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.35000000000000003,
+      "positive_threshold": 0.33,
+      "f1": 0.7570911923440716
+    },
+    "f1": 0.7570911923440716
+  },
+  {
+    "a": "catboost_depth_8",
+    "b": "causal_weather_own",
+    "weight_a": 0.25,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.36000000000000004,
+      "positive_threshold": 0.37,
+      "f1": 0.7566991491074415
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.36000000000000004,
+      "positive_threshold": 0.37,
+      "f1": 0.7566991491074415
+    },
+    "f1": 0.7566991491074415
+  },
+  {
+    "a": "catboost_depth_8",
+    "b": "catboost_depth_6",
+    "weight_a": 0.75,
+    "rule": {
+      "kind": "global",
+      "threshold": 0.37,
+      "f1": 0.7564483591419235
+    },
+    "unconstrained_rule": {
+      "kind": "global",
+      "threshold": 0.37,
+      "f1": 0.7564483591419235
+    },
+    "f1": 0.7564483591419235
+  },
+  {
+    "a": "catboost_depth_8",
+    "b": "catboost_depth_6",
+    "weight_a": 0.5,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.37,
+      "positive_threshold": 0.35000000000000003,
+      "f1": 0.7564380766651073
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.37,
+      "positive_threshold": 0.35000000000000003,
+      "f1": 0.7564380766651073
+    },
+    "f1": 0.7564380766651073
+  },
+  {
+    "a": "catboost_depth_6",
+    "b": "causal_weather_own",
+    "weight_a": 0.25,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.35000000000000003,
+      "positive_threshold": 0.37,
+      "f1": 0.7564316550018954
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.35000000000000003,
+      "positive_threshold": 0.37,
+      "f1": 0.7564316550018954
+    },
+    "f1": 0.7564316550018954
+  },
+  {
+    "a": "causal_weather_spatial",
+    "b": "causal_weather_own",
+    "weight_a": 0.75,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.34,
+      "positive_threshold": 0.39,
+      "f1": 0.7561749376841151
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.34,
+      "positive_threshold": 0.39,
+      "f1": 0.7561749376841151
+    },
+    "f1": 0.7561749376841151
+  },
+  {
+    "a": "causal_weather_spatial",
+    "b": "causal_weather_own",
+    "weight_a": 0.5,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.35000000000000003,
+      "positive_threshold": 0.38,
+      "f1": 0.7560982519760886
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.35000000000000003,
+      "positive_threshold": 0.38,
+      "f1": 0.7560982519760886
+    },
+    "f1": 0.7560982519760886
+  },
+  {
+    "a": "catboost_depth_8",
+    "b": "catboost_depth_6",
+    "weight_a": 0.25,
+    "rule": {
+      "kind": "global",
+      "threshold": 0.36000000000000004,
+      "f1": 0.7560960462503458
+    },
+    "unconstrained_rule": {
+      "kind": "global",
+      "threshold": 0.36000000000000004,
+      "f1": 0.7560960462503458
+    },
+    "f1": 0.7560960462503458
+  },
+  {
+    "a": "causal_weather_spatial",
+    "b": "causal_weather_own",
+    "weight_a": 0.25,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.35000000000000003,
+      "positive_threshold": 0.38,
+      "f1": 0.7557141479409779
+    },
+    "unconstrained_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.35000000000000003,
+      "positive_threshold": 0.38,
+      "f1": 0.7557141479409779
+    },
+    "f1": 0.7557141479409779
+  }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "source_url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.978&start_date=2025-01-01&end_date=2025-06-30&timezone=Asia%2FSeoul&hourly=temperature_2m_previous_day1%2Cprecipitation_previous_day1%2Crelative_humidity_2m_previous_day1%2Cwind_speed_10m_previous_day1%2Ccloud_cover_previous_day1&models=gfs_global&wind_speed_unit=ms",
+    "path": "data\\raw\\followup_v4_extra\\gfs_day1_center_2025h1.json",
+    "bytes": 173078,
+    "sha256": "7dc22b4ebc128d3408b49746cdada823ca5e1a429b0589c246dd21c89c7983d2",
+    "received_at_utc": "2026-10-20T06:53:40.454190+00:00",
+    "point_id": "center",
+    "request_latitude": 37.5665,
+    "request_longitude": 126.978,
+    "grid_latitude": 37.54637,
+    "grid_longitude": 127.03125,
+    "model": "gfs_global",
+    "fixed_lead_hours": 24,
+    "n_hours": 4344,
+    "null_counts": {
+      "temperature_2m_previous_day1": 0,
+      "precipitation_previous_day1": 0,
+      "relative_humidity_2m_previous_day1": 0,
+      "wind_speed_10m_previous_day1": 0,
+      "cloud_cover_previous_day1": 0
+    },
+    "timezone": "Asia/Seoul",
+    "units": {
+      "time": "iso8601",
+      "temperature_2m_previous_day1": "°C",
+      "precipitation_previous_day1": "mm",
+      "relative_humidity_2m_previous_day1": "%",
+      "wind_speed_10m_previous_day1": "m/s",
+      "cloud_cover_previous_day1": "%"
+    },
+    "individual_run_initialization_and_publication_timestamp_available": false
+  },
+  {
+    "source_url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=37.65&longitude=126.85&start_date=2025-01-01&end_date=2025-06-30&timezone=Asia%2FSeoul&hourly=temperature_2m_previous_day1%2Cprecipitation_previous_day1%2Crelative_humidity_2m_previous_day1%2Cwind_speed_10m_previous_day1%2Ccloud_cover_previous_day1&models=gfs_global&wind_speed_unit=ms",
+    "path": "data\\raw\\followup_v4_extra\\gfs_day1_northwest_2025h1.json",
+    "bytes": 173097,
+    "sha256": "de42d15560d792a585c52d3151235af2089fdaa1a19b2d82b74d3add4dd37b15",
+    "received_at_utc": "2026-10-20T06:53:47.572427+00:00",
+    "point_id": "northwest",
+    "request_latitude": 37.65,
+    "request_longitude": 126.85,
+    "grid_latitude": 37.66352,
+    "grid_longitude": 126.796875,
+    "model": "gfs_global",
+    "fixed_lead_hours": 24,
+    "n_hours": 4344,
+    "null_counts": {
+      "temperature_2m_previous_day1": 0,
+      "precipitation_previous_day1": 0,
+      "relative_humidity_2m_previous_day1": 0,
+      "wind_speed_10m_previous_day1": 0,
+      "cloud_cover_previous_day1": 0
+    },
+    "timezone": "Asia/Seoul",
+    "units": {
+      "time": "iso8601",
+      "temperature_2m_previous_day1": "°C",
+      "precipitation_previous_day1": "mm",
+      "relative_humidity_2m_previous_day1": "%",
+      "wind_speed_10m_previous_day1": "m/s",
+      "cloud_cover_previous_day1": "%"
+    },
+    "individual_run_initialization_and_publication_timestamp_available": false
+  },
+  {
+    "source_url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=37.65&longitude=127.1&start_date=2025-01-01&end_date=2025-06-30&timezone=Asia%2FSeoul&hourly=temperature_2m_previous_day1%2Cprecipitation_previous_day1%2Crelative_humidity_2m_previous_day1%2Cwind_speed_10m_previous_day1%2Ccloud_cover_previous_day1&models=gfs_global&wind_speed_unit=ms",
+    "path": "data\\raw\\followup_v4_extra\\gfs_day1_northeast_2025h1.json",
+    "bytes": 173251,
+    "sha256": "dc1fac35056c932cdd2fdc6e53751b3b15aa14cb01f7913500ca92ba95ea5a28",
+    "received_at_utc": "2026-10-20T06:53:51.590731+00:00",
+    "point_id": "northeast",
+    "request_latitude": 37.65,
+    "request_longitude": 127.1,
+    "grid_latitude": 37.66352,
+    "grid_longitude": 127.14844,
+    "model": "gfs_global",
+    "fixed_lead_hours": 24,
+    "n_hours": 4344,
+    "null_counts": {
+      "temperature_2m_previous_day1": 0,
+      "precipitation_previous_day1": 0,
+      "relative_humidity_2m_previous_day1": 0,
+      "wind_speed_10m_previous_day1": 0,
+      "cloud_cover_previous_day1": 0
+    },
+    "timezone": "Asia/Seoul",
+    "units": {
+      "time": "iso8601",
+      "temperature_2m_previous_day1": "°C",
+      "precipitation_previous_day1": "mm",
+      "relative_humidity_2m_previous_day1": "%",
+      "wind_speed_10m_previous_day1": "m/s",
+      "cloud_cover_previous_day1": "%"
+    },
+    "individual_run_initialization_and_publication_timestamp_available": false
+  },
+  {
+    "source_url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=37.45&longitude=126.85&start_date=2025-01-01&end_date=2025-06-30&timezone=Asia%2FSeoul&hourly=temperature_2m_previous_day1%2Cprecipitation_previous_day1%2Crelative_humidity_2m_previous_day1%2Cwind_speed_10m_previous_day1%2Ccloud_cover_previous_day1&models=gfs_global&wind_speed_unit=ms",
+    "path": "data\\raw\\followup_v4_extra\\gfs_day1_southwest_2025h1.json",
+    "bytes": 173009,
+    "sha256": "b4e4ff5ddc8510d67af4b7db1b642a1b13d3c4c2a311bf69560d716d3c065e0e",
+    "received_at_utc": "2026-10-20T06:53:54.951775+00:00",
+    "point_id": "southwest",
+    "request_latitude": 37.45,
+    "request_longitude": 126.85,
+    "grid_latitude": 37.429222,
+    "grid_longitude": 126.796875,
+    "model": "gfs_global",
+    "fixed_lead_hours": 24,
+    "n_hours": 4344,
+    "null_counts": {
+      "temperature_2m_previous_day1": 0,
+      "precipitation_previous_day1": 0,
+      "relative_humidity_2m_previous_day1": 0,
+      "wind_speed_10m_previous_day1": 0,
+      "cloud_cover_previous_day1": 0
+    },
+    "timezone": "Asia/Seoul",
+    "units": {
+      "time": "iso8601",
+      "temperature_2m_previous_day1": "°C",
+      "precipitation_previous_day1": "mm",
+      "relative_humidity_2m_previous_day1": "%",
+      "wind_speed_10m_previous_day1": "m/s",
+      "cloud_cover_previous_day1": "%"
+    },
+    "individual_run_initialization_and_publication_timestamp_available": false
+  },
+  {
+    "source_url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=37.45&longitude=127.1&start_date=2025-01-01&end_date=2025-06-30&timezone=Asia%2FSeoul&hourly=temperature_2m_previous_day1%2Cprecipitation_previous_day1%2Crelative_humidity_2m_previous_day1%2Cwind_speed_10m_previous_day1%2Ccloud_cover_previous_day1&models=gfs_global&wind_speed_unit=ms",
+    "path": "data\\raw\\followup_v4_extra\\gfs_day1_southeast_2025h1.json",
+    "bytes": 173108,
+    "sha256": "c748b9c9c1e3d5a739d094338ffda00c5b4dc79fb171a8e485ef24917ae90145",
+    "received_at_utc": "2026-10-20T06:53:58.182971+00:00",
+    "point_id": "southeast",
+    "request_latitude": 37.45,
+    "request_longitude": 127.1,
+    "grid_latitude": 37.429222,
+    "grid_longitude": 127.14844,
+    "model": "gfs_global",
+    "fixed_lead_hours": 24,
+    "n_hours": 4344,
+    "null_counts": {
+      "temperature_2m_previous_day1": 0,
+      "precipitation_previous_day1": 0,
+      "relative_humidity_2m_previous_day1": 0,
+      "wind_speed_10m_previous_day1": 0,
+      "cloud_cover_previous_day1": 0
+    },
+    "timezone": "Asia/Seoul",
+    "units": {
+      "time": "iso8601",
+      "temperature_2m_previous_day1": "°C",
+      "precipitation_previous_day1": "mm",
+      "relative_humidity_2m_previous_day1": "%",
+      "wind_speed_10m_previous_day1": "m/s",
+      "cloud_cover_previous_day1": "%"
+    },
+    "individual_run_initialization_and_publication_timestamp_available": false
+  }
+]

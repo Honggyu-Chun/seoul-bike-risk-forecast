@@ -1,0 +1,52 @@
+{
+  "recorded_at_utc": "2026-10-20T09:07:51.254972+00:00",
+  "passed": 31,
+  "warnings": 132,
+  "pytest_seconds": 7.21,
+  "exit_code": 0,
+  "source": "observed pytest execution output on 2026-10-20; includes CatBoost resume equivalence",
+  "test_files": {
+    "test_followup_v4.py": "9b11827a772f7bfcaf4aad6854204d5b0908dbb01a82707943716b97ba262aed",
+    "test_followup_v4_extensions.py": "d42d47d67aa250d4e79783f4ba0326537a0bad4429f180823b9ebac4115eb786",
+    "test_fast_frame.py": "002053fb7d3a24942f19113980f34b24d66a4035f9bf80bc091c786bcc6753d5",
+    "test_operational_inputs.py": "63f5185022579c5bbc6e834d3e49c9be010f63b9bc5dba1b700902681cf8028c",
+    "test_air_runtime_features.py": "eaa575a6aa094c358948be3406926156e64fff0b830c3301c558b5401a128038",
+    "test_catboost_snapshot.py": "d84111defcc2601adf53748ef1aa94b8d97b79979b218621555f805a4c6f67d1"
+  },
+  "additional_runs": [
+    {
+      "test_file": "test_followup_uncertainty.py",
+      "passed": 3,
+      "pytest_seconds": 7.19,
+      "junit_xml": "uncertainty_tests.xml",
+      "test_file_sha256": "5b139f310915486d559c98ba9285fe25414384cab7daacef92fd306bf1e2e6e3"
+    }
+  ],
+  "total_distinct_test_cases_passed": 39,
+  "updated_at_utc": "2026-10-20T09:21:22.038643+00:00",
+  "final_combined_run": {
+    "recorded_at_utc": "2026-10-20T15:46:49.013722+00:00",
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "39",
+    "time": "6.169",
+    "timestamp": "2026-10-21T00:44:43.098960+09:00",
+    "hostname": "HG-Gram",
+    "junit_xml": "final_combined_tests.xml",
+    "warnings": 135,
+    "test_files": {
+      "test_air_runtime_features.py": "eaa575a6aa094c358948be3406926156e64fff0b830c3301c558b5401a128038",
+      "test_calibration_bins.py": "ddf05f7a408f515f3355fff1dce2714b89f2ffe5449d672beff08c513dcb624f",
+      "test_catboost_snapshot.py": "d84111defcc2601adf53748ef1aa94b8d97b79979b218621555f805a4c6f67d1",
+      "test_fast_frame.py": "002053fb7d3a24942f19113980f34b24d66a4035f9bf80bc091c786bcc6753d5",
+      "test_followup_uncertainty.py": "5b139f310915486d559c98ba9285fe25414384cab7daacef92fd306bf1e2e6e3",
+      "test_followup_v4.py": "9b11827a772f7bfcaf4aad6854204d5b0908dbb01a82707943716b97ba262aed",
+      "test_followup_v4_extensions.py": "d42d47d67aa250d4e79783f4ba0326537a0bad4429f180823b9ebac4115eb786",
+      "test_operational_inputs.py": "63f5185022579c5bbc6e834d3e49c9be010f63b9bc5dba1b700902681cf8028c",
+      "test_public_feature_join.py": "833b98a682637da05781075bd5cf1cf5d766c261a2fc66967c684e3068b46660",
+      "test_public_runner_isolation.py": "7a1a9bdc2ad92e6f890f0c62b8ac61c969f681e5b9e3f1fa41f07946343e9497"
+    }
+  }
+}

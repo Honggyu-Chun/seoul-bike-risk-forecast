@@ -1,0 +1,17 @@
+{
+  "status": "registered_before_forecast_model_scores",
+  "candidate": "lightgbm_gfs_prior_day",
+  "purpose": "Compare five forecast variables with the same availability/spatial/hazard LightGBM",
+  "model": {"leaves": 127, "rounds": 900, "window_days": 56, "seed": 20261020},
+  "features": ["temperature", "precipitation", "relative humidity", "wind", "cloud cover"],
+  "target_weather_valid_time": "bicycle input t+1h",
+  "forecast_product": "Open-Meteo GFS previous_day1, prior-day offset product",
+  "do_not_invent_issue_time_from_offset": true,
+  "live_path_and_current_metadata_verified": true,
+  "historical_per_row_issue_publication_reception_verified": false,
+  "information_track": "live_source_backed_forecast_archive",
+  "pilot_fold": "A",
+  "confirmation_extension": "Add this candidate to the existing A gain >=0.002, maximum two candidates B/C confirmation rule before scoring the forecast pilot",
+  "main_operational_champion_eligible": false,
+  "reason": "Current source is usable; 2025 as-issued timing remains unverified, so this is a conditional development ablation"
+}

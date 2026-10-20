@@ -1,0 +1,117 @@
+[
+  {
+    "path": "config/improvement_v3.json",
+    "bytes": 5043,
+    "sha256": "582467b7515edb12c242193183b89cc2e3f59a5eb62dc312b424c5df11bf284c"
+  },
+  {
+    "path": "bike_demo/research.py",
+    "bytes": 23588,
+    "sha256": "571d268de75301ccf9c5a219116a65138434b5339c51efb8be2dbaf57178ba1b"
+  },
+  {
+    "path": "bike_demo/research_features.py",
+    "bytes": 12301,
+    "sha256": "86b5d2f4c825c54bf89b79dde773b18134c4b5c8e4c3f14f9f2a12b38d7d28b0"
+  },
+  {
+    "path": "bike_demo/neural_research.py",
+    "bytes": 8095,
+    "sha256": "80a42e1d31bf826c21acaaf95fff3e7d6ab4f2dce749f4b075f1d272b3735a3d"
+  },
+  {
+    "path": "bike_demo/evaluate_research.py",
+    "bytes": 21552,
+    "sha256": "d13986833fed843f948b2045e2ab03dd58752b2dff3d3c40983fa5ff30c621db"
+  },
+  {
+    "path": "artifacts/improvement/final/results.json",
+    "bytes": 12274,
+    "sha256": "e3edb17f58e34f59cb58d58aeea3a0fbf52b6ecb42bc9cb9e44ee556bcc93bf8"
+  },
+  {
+    "path": "artifacts/improvement/final/selection_frozen_before_test.json",
+    "bytes": 15803,
+    "sha256": "13ac29d689bda0c3ef9464d3c917bfb93212ae1eddab9f9dbf3fb0457f8bad0f"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/B1_original_31.txt",
+    "bytes": 2120764,
+    "sha256": "bc3009eeae19f955ef6e01ec2835ecfe36d125d393994f393426b0bce72c06f7"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/B1_original_63.txt",
+    "bytes": 4621549,
+    "sha256": "bf63405e4d8a92540190e5ce6208f5da83cb608c5593089de6c8d8c81edbb2e9"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/B1_tuned_127.txt",
+    "bytes": 10924764,
+    "sha256": "5a54b33db6f867873a63002a760781ed1dd20279b61686368286d2cbc0f45e65"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/catboost_depth_8.cbm",
+    "bytes": 801502292,
+    "sha256": "13dde02de11fb035aff2560a8bc67c688b5075dc39a2b45f65d0e23f2ea9dc51"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/causal_transition_63.txt",
+    "bytes": 2393040,
+    "sha256": "62fcca76376afd6542d0413a90f14977d7de9220d8e62581a0929a6abe2d0826"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/causal_transition_spatial.txt",
+    "bytes": 5030551,
+    "sha256": "da06487516aee4a867770f4a399df1beaabb35adc0e6c5ee0f2120ce2b52346c"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/causal_weather_own.txt",
+    "bytes": 4910284,
+    "sha256": "af7e6fca3514d7973dc8a5f48d064a98526af5a624fedd3611e6f9837c988bee"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/causal_weather_spatial.txt",
+    "bytes": 5917096,
+    "sha256": "42fdd469ee5f74b8a235ccf76a4e97efb9184c889f9ef6cd1441eb41b544d00f"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/neural_gru.pt",
+    "bytes": 112930,
+    "sha256": "6890d8f49890b5c7b297c6d476f4361167667aa0d39d3a8220e760db2ef9517c"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/neural_mlp.pt",
+    "bytes": 131618,
+    "sha256": "ffef3ec54d2c5d2e5877c490cd7c0a61950ffb14da9ff2b326689a62d24ef1f8"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/neural_tcn.pt",
+    "bytes": 116578,
+    "sha256": "163f800d6da87470b4902653cbc584a4d22447ca54d6aaf73579b414612ac192"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/neural_tcn_weighted.pt",
+    "bytes": 116795,
+    "sha256": "0c7084335378f83ab952646383d2a41a380e4e16a1c214b89caa995bb3ad9d7e"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/spatial_multiscale_63.txt",
+    "bytes": 5204570,
+    "sha256": "9f54f6dd5b16cb695ff401d75b154d0cbb60e5a795ebcd98b0e34eeb95236423"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/state_experts_spatial_positive.txt",
+    "bytes": 5474029,
+    "sha256": "b7ccbadd37cdb373153cff37f8a9a51e20f5b58dfe2e5ffb64f729309a079712"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/state_experts_spatial_zero.txt",
+    "bytes": 2495492,
+    "sha256": "54db12b653aac17336a0e3fdbc1772a00fad747d34dab082ce2ee26e3727d222"
+  },
+  {
+    "path": "artifacts/improvement/forward/models/xgboost_depth_9.ubj",
+    "bytes": 99685367,
+    "sha256": "f878232a5c8b45e81882dc0651125b667ee8c0b57355a2abf7952b7d168792ab"
+  }
+]

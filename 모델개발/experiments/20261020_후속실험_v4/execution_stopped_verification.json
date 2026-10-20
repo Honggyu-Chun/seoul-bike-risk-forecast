@@ -1,0 +1,13 @@
+{
+  "checked_at_utc": "2026-10-20T15:48:41.8171423Z",
+  "active_training_processes": [],
+  "active_training_count": 0,
+  "former_controller_pid_exists": false,
+  "queue_state": {
+    "pid": 4928,
+    "phase": "completed_pending_manual_review",
+    "detail": "Nine fits and automated checks finished; complete final manual report and goal audit.",
+    "dependency_pid": 17224,
+    "updated_at_utc": "2026-10-20T15:44:13.554225Z"
+  }
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "source": "bike_trips",
+    "url": "https://data.seoul.go.kr/dataList/OA-15182/F/1/datasetView.do",
+    "retrieved_utc": "2026-10-19T06:15:35.398095+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "source": "bike_hourly",
+    "url": "https://data.seoul.go.kr/dataList/OA-15245/F/1/datasetView.do",
+    "retrieved_utc": "2026-10-19T06:15:35.398892+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "source": "stations",
+    "url": "https://data.seoul.go.kr/dataList/OA-13252/F/1/datasetView.do",
+    "retrieved_utc": "2026-10-19T06:15:35.399394+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "source": "events",
+    "url": "https://data.seoul.go.kr/dataList/OA-15486/S/1/datasetView.do",
+    "retrieved_utc": "2026-10-19T06:15:35.399959+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "source": "kopis",
+    "url": "https://kopis.or.kr/por/cs/openapi/openApiInfo.do?menuId=MNU_00077",
+    "retrieved_utc": "2026-10-19T06:15:35.400395+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "source": "weather",
+    "url": "https://data.kma.go.kr/data/grnd/selectAsosList.do?pgmNo=36",
+    "retrieved_utc": "2026-10-19T06:15:35.420380+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "source": "festival",
+    "url": "https://www.data.go.kr/data/15013104/standard.do",
+    "retrieved_utc": "2026-10-19T06:15:35.421540+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "source": "city",
+    "url": "https://data.seoul.go.kr/dataVisual/seoul/guide.do",
+    "retrieved_utc": "2026-10-19T06:15:35.423220+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "source": "availability",
+    "url": "https://data.seoul.go.kr/dataList/OA-22382/F/1/datasetView.do",
+    "retrieved_utc": "2026-10-19T06:15:35.424863+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "source": "realtime",
+    "url": "https://data.seoul.go.kr/dataList/OA-15493/A/1/datasetView.do",
+    "retrieved_utc": "2026-10-19T06:15:35.426480+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  }
+]

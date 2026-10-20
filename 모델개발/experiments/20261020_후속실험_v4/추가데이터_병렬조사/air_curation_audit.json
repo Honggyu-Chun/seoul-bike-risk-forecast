@@ -1,0 +1,133 @@
+{
+  "source_rows": 219000,
+  "invalid_timestamps": 0,
+  "source_sha256": "ccbcb2991a15ab4bc7523ca803689578146f11ff9d2c6ca0707bbdebfdedbbb8",
+  "timezone": "Asia/Seoul",
+  "provider_qc_column_available": false,
+  "historical_as_issued_verified": false,
+  "h1_source_rows": 108600,
+  "n_districts": 25,
+  "districts": [
+    "강남구",
+    "강동구",
+    "강북구",
+    "강서구",
+    "관악구",
+    "광진구",
+    "구로구",
+    "금천구",
+    "노원구",
+    "도봉구",
+    "동대문구",
+    "동작구",
+    "마포구",
+    "서대문구",
+    "서초구",
+    "성동구",
+    "성북구",
+    "송파구",
+    "양천구",
+    "영등포구",
+    "용산구",
+    "은평구",
+    "종로구",
+    "중구",
+    "중랑구"
+  ],
+  "min_timestamp": "2025-01-01 00:00:00",
+  "max_timestamp": "2025-06-30 23:00:00",
+  "values": {
+    "pm10_ug_m3": {
+      "source_missing": 3550,
+      "nonparseable": 0,
+      "invalid_negative_or_nonfinite": 0,
+      "nonparseable_examples": {},
+      "min": 3.0,
+      "max": 554.0
+    },
+    "pm10_24h_source_ug_m3": {
+      "source_missing": 1933,
+      "nonparseable": 0,
+      "invalid_negative_or_nonfinite": 0,
+      "nonparseable_examples": {},
+      "min": 3.0,
+      "max": 247.0
+    },
+    "pm25_ug_m3": {
+      "source_missing": 3403,
+      "nonparseable": 0,
+      "invalid_negative_or_nonfinite": 0,
+      "nonparseable_examples": {},
+      "min": 1.0,
+      "max": 148.0
+    },
+    "o3_ppm": {
+      "source_missing": 1988,
+      "nonparseable": 0,
+      "invalid_negative_or_nonfinite": 0,
+      "nonparseable_examples": {},
+      "min": 9.999999747378752e-05,
+      "max": 0.15889999270439148
+    },
+    "no2_ppm": {
+      "source_missing": 1531,
+      "nonparseable": 0,
+      "invalid_negative_or_nonfinite": 0,
+      "nonparseable_examples": {},
+      "min": 0.00039999998989515007,
+      "max": 0.08980000019073486
+    },
+    "co_ppm": {
+      "source_missing": 1629,
+      "nonparseable": 0,
+      "invalid_negative_or_nonfinite": 0,
+      "nonparseable_examples": {},
+      "min": 0.05999999865889549,
+      "max": 1.7899999618530273
+    },
+    "so2_ppm": {
+      "source_missing": 2147,
+      "nonparseable": 0,
+      "invalid_negative_or_nonfinite": 0,
+      "nonparseable_examples": {},
+      "min": 0.0010999999940395355,
+      "max": 0.010900000110268593
+    }
+  },
+  "duplicate_rows": 0,
+  "conflicting_duplicate_keys": 0,
+  "expected_rows": 108600,
+  "missing_hour_district_rows": 0,
+  "cohort_station_rows": 2729,
+  "cohort_district_matched_rows": 2729,
+  "unmatched_districts": [],
+  "coordinate_join": "Pre-existing station metadata district; air values are district-level, not point sensor measurements at bike stations",
+  "lag_table_timestamp": "Input t, sources exactly t-1h and t-24h; no forward fill or interpolation",
+  "outputs": {
+    "air_2025h1_input_lags.csv": {
+      "rows": 108600,
+      "bytes": 13537134,
+      "sha256": "a1ef23aa459d6f17e0788ecd542d7bf9096470866fff8dc87b28d3152a616c47"
+    },
+    "air_2025h1_input_lags.parquet": {
+      "rows": 108600,
+      "bytes": 1518461,
+      "sha256": "9635cae1889ab45417024ba3b0ae93b87f917df30ce9d52eb29bbcd34d3a8c7f"
+    },
+    "air_2025h1_observations.csv": {
+      "rows": 108600,
+      "bytes": 10527664,
+      "sha256": "85c74b3aaaf16d6774b1d2f259fba72630b7ccb079f8ea351c1073bf63b5fd05"
+    },
+    "air_2025h1_observations.parquet": {
+      "rows": 108600,
+      "bytes": 899647,
+      "sha256": "2f7bf2f2cc922c6bc68e6a4794ec53b79efa6f398de58041ab8d09edfabe2627"
+    },
+    "station_air_district_join.csv": {
+      "rows": 2729,
+      "bytes": 43744,
+      "sha256": "e87c187d22b4b5159dfa81f23862111a13398d84d7742735c5f9a44de632805c"
+    }
+  }
+}

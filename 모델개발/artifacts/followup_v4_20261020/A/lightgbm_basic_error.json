@@ -1,0 +1,14 @@
+{
+  "status": "error",
+  "message": "Model file D:\\P실무\\모델개발\\artifacts\\followup_v4_20261020\\A\\models\\lightgbm_basic.txt is not available for writes",
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\P실무\\모델개발\\bike_demo\\followup_v4\\runner.py\", line 248, in main\n    try:run_one(d,f,s)\n        ^^^^^^^^^^^^^^\n  File \"D:\\P실무\\모델개발\\bike_demo\\followup_v4\\runner.py\", line 194, in run_one\n    model,fit_info=fit(spec,tx,(d.target[train]==0).astype(np.uint8),sx,ys['stop'],d.tt[train],d.target[train],models)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\P실무\\모델개발\\bike_demo\\followup_v4\\runner.py\", line 106, in fit\n    model=one(tx,labels,sx,stop_labels,w=weights)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\P실무\\모델개발\\bike_demo\\followup_v4\\runner.py\", line 97, in one\n    model.save_model(str(model_dir/(spec['name']+suffix+'.txt')))\n  File \"D:\\P실무\\모델개발\\.venv\\Lib\\site-packages\\lightgbm\\basic.py\", line 4600, in save_model\n    _safe_call(\n  File \"D:\\P실무\\모델개발\\.venv\\Lib\\site-packages\\lightgbm\\basic.py\", line 297, in _safe_call\n    raise LightGBMError(_LIB.LGBM_GetLastError().decode(\"utf-8\"))\nlightgbm.basic.LightGBMError: Model file D:\\P실무\\모델개발\\artifacts\\followup_v4_20261020\\A\\models\\lightgbm_basic.txt is not available for writes\n",
+  "spec": {
+    "name": "lightgbm_basic",
+    "kind": "lgb",
+    "group": "basic",
+    "leaves": 63,
+    "rounds": 600,
+    "window": 56,
+    "seed": 20261020
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "status": "partial_provider_request_blocked",
+  "unique_performances": 3273,
+  "successful_pages": [
+    {
+      "file": "kopis_list_202501_01.xml",
+      "rows": 100,
+      "sha256": "6e88f94ef79493cce4982340e6e675e4b01af3ce6e6dd45ed7a02a5df5aec306"
+    },
+    {
+      "file": "kopis_list_202501_02.xml",
+      "rows": 100,
+      "sha256": "0f0afffc65f180fc85d839841a593ac6cf92e586121f54aa524095e2526ef113"
+    },
+    {
+      "file": "kopis_list_202501_03.xml",
+      "rows": 100,
+      "sha256": "bb26bec8697d7b62e4257df755e26d6b8e1f2fdb1cab237528156f472138b497"
+    },
+    {
+      "file": "kopis_list_202501_04.xml",
+      "rows": 100,
+      "sha256": "84df51c8631c4c0349391f65a8d01c9369d59578cf455d20891e654ba81e8857"
+    },
+    {
+      "file": "kopis_list_202501_05.xml",
+      "rows": 100,
+      "sha256": "1ea3237f12761183a833d0bd70a8ef730022490bb0d3f55dbed75d5f32bc63f7"
+    },
+    {
+      "file": "kopis_list_202501_06.xml",
+      "rows": 100,
+      "sha256": "5f04b725847c1fec327d6f275df2ea8cc831cce4c25a9d7f36381beff9ad2dd3"
+    },
+    {
+      "file": "kopis_list_202501_07.xml",
+      "rows": 39,
+      "sha256": "dcb85b5600d5ff6b78180ef98a0a4e73ab72aaf16fbb64ed8a4a2cafdc4b35e2"
+    },
+    {
+      "file": "kopis_list_202502_01.xml",
+      "rows": 100,
+      "sha256": "1997f1d8e39785e27049f3c27f338b7e4113e2065b3f5f7516d4beeb360772d6"
+    },
+    {
+      "file": "kopis_list_202502_02.xml",
+      "rows": 100,
+      "sha256": "7d6356cf3274069e45537b9ac5a9299693070a4d8bd241eeb20a859d178ca7c4"
+    },
+    {
+      "file": "kopis_list_202502_03.xml",
+      "rows": 100,
+      "sha256": "77cd140c6c3320b06ca217b44d08b05790f3824d79b0e51c664c3a5ac2a1a495"
+    },
+    {
+      "file": "kopis_list_202502_04.xml",
+      "rows": 100,
+      "sha256": "3b0ef8b59f13a18c5c910b5283486bc39c846b4b7cac5b7f1b3f2bd122cc173a"
+    },
+    {
+      "file": "kopis_list_202502_05.xml",
+      "rows": 100,
+      "sha256": "38dea8f47c68423c7aec0af75954cc17ffd57d8f2f807ece429058746c3bc8e4"
+    },
+    {
+      "file": "kopis_list_202502_06.xml",
+      "rows": 100,
+      "sha256": "7908e3260185262cefe959125c17a68a70c6a24a6f36785af8aba02176b03959"
+    },
+    {
+      "file": "kopis_list_202502_07.xml",
+      "rows": 100,
+      "sha256": "358a441e733bd4d48e0cc6397fe1a7fdbc65ec57e5db4a1e6b06b4f993d8de15"
+    },
+    {
+      "file": "kopis_list_202502_08.xml",
+      "rows": 100,
+      "sha256": "b88743d74284051d19610d99986da95bd06b64b396bffa6b292b7c8eca17fc77"
+    },
+    {
+      "file": "kopis_list_202502_09.xml",
+      "rows": 37,
+      "sha256": "eb01c4c72f955f5750e46278e87d14a7a9231e11a266e1693e1c6435737672ff"
+    },
+    {
+      "file": "kopis_list_202503_01.xml",
+      "rows": 100,
+      "sha256": "c94d3ba4177a20a5d79c182eb8fd0481a9e7da3c9da0c26bbfbaa2e946c51706"
+    },
+    {
+      "file": "kopis_list_202503_02.xml",
+      "rows": 100,
+      "sha256": "7e4c3d4b288432173e62cd5e5cc1239f302ae8f6dc1b1a94d29abfe00480d52f"
+    },
+    {
+      "file": "kopis_list_202503_03.xml",
+      "rows": 100,
+      "sha256": "59a6576fc4a8c1fa471a9c14603f0e1243760e9ccff9c5cf2d0c5cb38fb4b96a"
+    },
+    {
+      "file": "kopis_list_202503_04.xml",
+      "rows": 100,
+      "sha256": "64655e10c71ec7df5c511ccc155aed1c6c4b1a28fcbdb67fec8fa3093617bc55"
+    },
+    {
+      "file": "kopis_list_202503_05.xml",
+      "rows": 100,
+      "sha256": "cadec8ec2f4d090aca4bb11057d6034e35a51c5f4479bbb6edfcf1188768418c"
+    },
+    {
+      "file": "kopis_list_202503_06.xml",
+      "rows": 100,
+      "sha256": "a2e7419479d84fc767dc0c78368f686f530b7e2f060be036e6c9405b1949ed52"
+    },
+    {
+      "file": "kopis_list_202503_07.xml",
+      "rows": 100,
+      "sha256": "a35e49d75d6b79c318aff2e4c638f9f9a7f2d6cc9c978ee6012f625c1dd341e0"
+    },
+    {
+      "file": "kopis_list_202503_08.xml",
+      "rows": 100,
+      "sha256": "2ab1333244f416685c90674a4508b40714d9940dd9532cb0e7f9ea5cade4dd79"
+    },
+    {
+      "file": "kopis_list_202503_09.xml",
+      "rows": 100,
+      "sha256": "71b3d7c7f213f3d093a78688dcc5335f7aed667386b5ff9893b50b24f451e6c7"
+    },
+    {
+      "file": "kopis_list_202503_10.xml",
+      "rows": 100,
+      "sha256": "89d274a510492bb2531d0ea8ba83b1fbf4b0d2df9c554004741e3daf011a544e"
+    },
+    {
+      "file": "kopis_list_202503_11.xml",
+      "rows": 33,
+      "sha256": "0eb388462ffbdce7fb23dc8b7be841cd971307a409f0819e7db41f334f2994c5"
+    },
+    {
+      "file": "kopis_list_202504_01.xml",
+      "rows": 100,
+      "sha256": "9151809dabc0879405e4290715fc81a0ad9cafbf5f1c7c3cf1f3c27d6171c291"
+    },
+    {
+      "file": "kopis_list_202504_02.xml",
+      "rows": 100,
+      "sha256": "249070eede95698ad491677a0f30e005028c2c9494fa77720cd6f4052e5496b7"
+    },
+    {
+      "file": "kopis_list_202504_03.xml",
+      "rows": 100,
+      "sha256": "e1fc3dec66caf007543fd92f2265f6f9b8f292cc7c87e18598ef55d23003d399"
+    },
+    {
+      "file": "kopis_list_202504_04.xml",
+      "rows": 100,
+      "sha256": "ae52577f56576b3ea85442a2ba40c844d1e7e75dcb165e84f8bc97b565cef017"
+    },
+    {
+      "file": "kopis_list_202504_05.xml",
+      "rows": 100,
+      "sha256": "c2848d1a0ab3e2920248b9993b9b523b230658384282f9f2ffb561fef33934be"
+    },
+    {
+      "file": "kopis_list_202504_06.xml",
+      "rows": 100,
+      "sha256": "b2796a3ea63dcefb11e14aba00599bf8d60ddd777d77ef520885605c216a2636"
+    },
+    {
+      "file": "kopis_list_202504_07.xml",
+      "rows": 100,
+      "sha256": "7fee053a65e744216cc5cf81b76fee3ffe01240625d086cd2ab19c3889ccaf15"
+    },
+    {
+      "file": "kopis_list_202504_08.xml",
+      "rows": 100,
+      "sha256": "194770da90a3539e1e0ac0056208e4bbfeb2f267be5df7c788c3f45b78bb4ab4"
+    },
+    {
+      "file": "kopis_list_202504_09.xml",
+      "rows": 100,
+      "sha256": "da9b8e14cff4c2ed24ca475c6ea1590222e2d97f984c69639480869da89acb2f"
+    },
+    {
+      "file": "kopis_list_202504_10.xml",
+      "rows": 100,
+      "sha256": "7ea6a2431590e3de90ee861818fe7c90b6a7364adff3dcff3d6f4125d5ead6e9"
+    },
+    {
+      "file": "kopis_list_202504_11.xml",
+      "rows": 43,
+      "sha256": "13dbbe1a8d0a77945115a3102c186d9075e247755be1be9d43365c5af791a1e0"
+    },
+    {
+      "file": "kopis_list_202505_01.xml",
+      "rows": 100,
+      "sha256": "cc998c9fa48ae8b6a9957b82ae282df1e585553d89cf64f1fb2be2a729cb4d79"
+    },
+    {
+      "file": "kopis_list_202505_02.xml",
+      "rows": 100,
+      "sha256": "27b8d957c9702a85df3af06a304a62c1a38d8153217bd50e6e6107dfc6f2590d"
+    },
+    {
+      "file": "kopis_list_202505_03.xml",
+      "rows": 100,
+      "sha256": "86003512b6f9fed004a75d8866502fc6d61dc17efdae1e4b01434c930c833939"
+    }
+  ],
+  "full_h1_coverage": false,
+  "details_received": 0,
+  "venues_received": 0,
+  "credential_validated_by_successful_list_requests": true,
+  "automatic_block_retries": false,
+  "local_specification_used": true
+}

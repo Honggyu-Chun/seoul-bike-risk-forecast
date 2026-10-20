@@ -1,0 +1,190 @@
+{
+  "name": "seasonal_week",
+  "status": "ok",
+  "fold": "A",
+  "spec": {
+    "name": "seasonal_week",
+    "kind": "rule",
+    "rule": "q_lag_168",
+    "group": "basic",
+    "window": 56,
+    "seed": 20261020
+  },
+  "features": [
+    "station_code",
+    "hour",
+    "weekday",
+    "weekend",
+    "quantity",
+    "log_quantity",
+    "q_lag_1",
+    "q_lag_2",
+    "q_lag_24",
+    "q_lag_168",
+    "q_mean_3",
+    "q_known_3",
+    "q_mean_24",
+    "q_known_24",
+    "q_change_1",
+    "q_change_3"
+  ],
+  "fit": {},
+  "actual_train_rows": 3663966,
+  "full_train_rows": 3663966,
+  "stage_rows": {
+    "stop": 457283,
+    "cal": 195912,
+    "policy": 261202,
+    "valid": 1109673
+  },
+  "rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.06999999999999999,
+    "positive_threshold": 0.99,
+    "f1": 0.6959014332411365
+  },
+  "validation": {
+    "overall": {
+      "n": 1109673,
+      "zero_cases": 133319,
+      "zero_rate": 0.12014260056791505,
+      "f1": 0.721434141074856,
+      "precision": 0.7211259583461362,
+      "recall": 0.7217425873281378,
+      "average_precision": 0.20737406210658713,
+      "brier": 0.09851076453924179,
+      "tn": 939143,
+      "fp": 37211,
+      "fn": 37097,
+      "tp": 96222,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.06999999999999999,
+        "positive_threshold": 0.99,
+        "f1": 0.6959014332411365
+      }
+    },
+    "current_positive": {
+      "n": 976240,
+      "zero_cases": 37097,
+      "zero_rate": 0.037999877079406705,
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "average_precision": 0.05327535817253604,
+      "brier": 0.04055385664105415,
+      "tn": 939143,
+      "fp": 0,
+      "fn": 37097,
+      "tp": 0,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.06999999999999999,
+        "positive_threshold": 0.99,
+        "f1": 0.6959014332411365
+      }
+    },
+    "current_1_to_3": {
+      "n": 235750,
+      "zero_cases": 32901,
+      "zero_rate": 0.13955885471898197,
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "average_precision": 0.150446067189622,
+      "brier": 0.12448029965162277,
+      "tn": 202849,
+      "fp": 0,
+      "fn": 32901,
+      "tp": 0,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.06999999999999999,
+        "positive_threshold": 0.99,
+        "f1": 0.6959014332411365
+      }
+    }
+  },
+  "raw_validation": {
+    "overall": {
+      "n": 1109673,
+      "zero_cases": 133319,
+      "zero_rate": 0.12014260056791505,
+      "f1": 0.3577352027247336,
+      "precision": 0.37555881819231596,
+      "recall": 0.3415267141217681,
+      "average_precision": 0.20737406210658713,
+      "brier": 0.14733439683914185,
+      "tn": 900648,
+      "fp": 75706,
+      "fn": 87787,
+      "tp": 45532,
+      "threshold": 0.99,
+      "rule": {
+        "kind": "global",
+        "threshold": 0.99,
+        "f1": 0.27347693330286854
+      }
+    },
+    "current_positive": {
+      "n": 976240,
+      "zero_cases": 37097,
+      "zero_rate": 0.037999877079406705,
+      "f1": 0.14460629850370024,
+      "precision": 0.10856076888762724,
+      "recall": 0.21648650834299268,
+      "average_precision": 0.05327535817253604,
+      "brier": 0.0973244309425354,
+      "tn": 873197,
+      "fp": 65946,
+      "fn": 29066,
+      "tp": 8031,
+      "threshold": 0.99,
+      "rule": {
+        "kind": "global",
+        "threshold": 0.99,
+        "f1": 0.27347693330286854
+      }
+    },
+    "current_1_to_3": {
+      "n": 235750,
+      "zero_cases": 32901,
+      "zero_rate": 0.13955885471898197,
+      "f1": 0.2061242583373116,
+      "precision": 0.18696491314890878,
+      "recall": 0.22965867298866297,
+      "average_precision": 0.150446067189622,
+      "brier": 0.24688440561294556,
+      "tn": 169991,
+      "fp": 32858,
+      "fn": 25345,
+      "tp": 7556,
+      "threshold": 0.99,
+      "rule": {
+        "kind": "global",
+        "threshold": 0.99,
+        "f1": 0.27347693330286854
+      }
+    }
+  },
+  "raw_rule": {
+    "kind": "global",
+    "threshold": 0.99,
+    "f1": 0.27347693330286854
+  },
+  "calibrated_on": "2025-05-08/2025-05-11",
+  "seconds": 6.2510470999986865,
+  "memory": {
+    "rss_gib": 1.0766258239746094,
+    "peak_rss_gib": 1.1594161987304688
+  },
+  "code_sha256": "3dc1725d1b321f383b66858e626296154c6ecfd91ae53f2f8ce20ec1982c1362",
+  "protocol_sha256": "b27638a47352bd26ed8c1b0dc34f3f434c9bb914ed3667f0f52ec1640ba362f8",
+  "data_sha256": "d3c9895a41a39a52c9fe8e26f5d4333456c6b8d45c2e460d887d983a88c79233",
+  "completed_at_utc": "2026-10-20T06:19:30.162659+00:00",
+  "information_track": "availability_timestamp_causal",
+  "independent_final_test": false
+}

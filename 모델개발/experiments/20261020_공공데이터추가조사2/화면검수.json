@@ -1,0 +1,16 @@
+{
+  "checked_date_kst": "2026-10-20",
+  "method": "Codex in-app browser, local HTTP served offline HTML",
+  "report": "공공데이터_추가조사_통합보고서.html",
+  "final_report_text_verified": true,
+  "initial_candidate_count": 62,
+  "spatial_filter_candidate_count": 19,
+  "spatial_filter_SF15_search_candidate_count": 1,
+  "SF15_visible_title": "기상청 초단기예보·단기예보(발표본)",
+  "nonexistent_query_candidate_count": 0,
+  "transport_filter_candidate_count": 24,
+  "initial_document_client_width": 1265,
+  "initial_document_scroll_width": 1265,
+  "screenshot_visual_review": "Opening paragraphs, priority card, search toolbar and one detailed candidate were visually checked. No horizontal overflow at the checked viewport.",
+  "limitations": "This is report layout and filter verification, not data/model performance validation. Mobile viewport and external-page link availability were not browser-tested here."
+}

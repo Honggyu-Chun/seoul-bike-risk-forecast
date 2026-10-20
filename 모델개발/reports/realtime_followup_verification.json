@@ -1,0 +1,80 @@
+[
+  {
+    "name": "api_schema",
+    "url": "https://data.seoul.go.kr/dataList/openApiView.do?infId=OA-15493",
+    "requested_utc": "2026-10-19T12:28:29.660922+00:00",
+    "error": "HTTPError: HTTP Error 404: Not Found"
+  },
+  {
+    "name": "http_repeat",
+    "url": "http://openapi.seoul.go.kr:8088/sample/json/bikeList/1/5/",
+    "requested_utc": "2026-10-19T12:28:29.661740+00:00",
+    "status": 200,
+    "received_utc": "2026-10-19T12:28:30.361787+00:00",
+    "bytes": 1064,
+    "sha256": "36cd97ef4bb9933cad5001870fe979804e9d8da6ba031a82d1a90f29c1cdbebd",
+    "headers": {
+      "Date": "Mon, 19 Oct 2026 12:28:30 GMT",
+      "Age": null,
+      "Last-Modified": null,
+      "Cache-Control": null
+    },
+    "local_file": "data/raw/realtime_review/http_repeat.body",
+    "response": {
+      "rentBikeStatus": {
+        "list_total_count": 5,
+        "RESULT": {
+          "CODE": "INFO-000",
+          "MESSAGE": "정상 처리되었습니다."
+        },
+        "row": [
+          {
+            "rackTotCnt": "15",
+            "stationName": "102. 망원역 1번출구 앞",
+            "parkingBikeTotCnt": "30",
+            "shared": "200",
+            "stationLatitude": "37.55564880",
+            "stationLongitude": "126.91062927",
+            "stationId": "ST-4"
+          },
+          {
+            "rackTotCnt": "14",
+            "stationName": "103. 망원역 2번출구 앞",
+            "parkingBikeTotCnt": "11",
+            "shared": "79",
+            "stationLatitude": "37.55495071",
+            "stationLongitude": "126.91083527",
+            "stationId": "ST-5"
+          },
+          {
+            "rackTotCnt": "13",
+            "stationName": "104. 합정역 1번출구 앞",
+            "parkingBikeTotCnt": "0",
+            "shared": "0",
+            "stationLatitude": "37.55073929",
+            "stationLongitude": "126.91508484",
+            "stationId": "ST-6"
+          },
+          {
+            "rackTotCnt": "5",
+            "stationName": "105. 합정역 5번출구 앞",
+            "parkingBikeTotCnt": "0",
+            "shared": "0",
+            "stationLatitude": "37.55000687",
+            "stationLongitude": "126.91482544",
+            "stationId": "ST-7"
+          },
+          {
+            "rackTotCnt": "12",
+            "stationName": "106. 합정역 7번출구 앞",
+            "parkingBikeTotCnt": "0",
+            "shared": "0",
+            "stationLatitude": "37.54864502",
+            "stationLongitude": "126.91282654",
+            "stationId": "ST-8"
+          }
+        ]
+      }
+    }
+  }
+]

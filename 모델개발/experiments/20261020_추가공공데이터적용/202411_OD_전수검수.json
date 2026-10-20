@@ -1,0 +1,86 @@
+{
+  "created_at_utc": "2026-10-20T10:25:23.442240+00:00",
+  "source_archive_sha256": "47c55849ebe695c4e7d89e53ad78e6a5ada29d4244d53052cb47dc369be854a4",
+  "preprocessing_plan_sha256": "c173da3740eac1cd75398fc6ebb57926b400047650c32860241b68056f801d6c",
+  "csv_members": 30,
+  "every_member_read_with_zip_crc_validation": true,
+  "source_rows": 6364061,
+  "date_range": [
+    "2024-11-01",
+    "2024-11-30"
+  ],
+  "basis_count_sums": {
+    "departure": 3349743,
+    "arrival": 3349743
+  },
+  "header_only_missing_dates": [
+    "20241127"
+  ],
+  "encoding_member_counts": {
+    "cp949": 29,
+    "utf-8-sig": 1
+  },
+  "nonempty_archive_days_by_weekday": {
+    "4": 5,
+    "5": 5,
+    "6": 4,
+    "0": 4,
+    "1": 4,
+    "2": 3,
+    "3": 4
+  },
+  "basis_added_together_as_trips": false,
+  "unique_source_ST_IDs": 2743,
+  "duplicate_aggregation_keys": 0,
+  "invalid_date_time_count_rows": 0,
+  "missing_auxiliary_values": {
+    "missing_start_name": 5513,
+    "missing_end_name": 31243,
+    "missing_duration": 141688,
+    "missing_distance": 141688
+  },
+  "profile_rows": 737219,
+  "departure_pair_rows": 369399,
+  "conditional_cohort_slot_rows": 458472,
+  "mapping": {
+    "current_crosswalk_path": "data\\raw\\followup_v4_external\\live_bikes_latest.csv",
+    "current_crosswalk_sha256": "f970cbb3221944b4d518706f80e31e8889f2fb6c8c465410933c71934a66a060",
+    "cohort_rows": 2729,
+    "current_number_matches": 2618,
+    "exact_name_and_within_50m_matches": 2500,
+    "allowed_and_present_in_prior_archive": 2493,
+    "historical_identity_proven": false
+  },
+  "unreported_flow_filled_as_zero": false,
+  "unreported_flow_mean": "NaN; reported-day coverage is separate",
+  "historical_first_publication_and_reception_proven": false,
+  "model_training_performed": false,
+  "new_2025_targets_or_held_back_labels_read": false,
+  "outputs": [
+    {
+      "path": "정제본\\202411_ST-ID_요일시간_수록프로필.parquet",
+      "bytes": 3902333,
+      "sha256": "f042fac623265001c554e82c95bd242b50270e9bf9418fa342fdac3a97a81926"
+    },
+    {
+      "path": "정제본\\202411_일별검수.csv",
+      "bytes": 3407,
+      "sha256": "fc3ae96427acca54f2be239272b69370acfc9c8f25ded9a80f59605d99d45701"
+    },
+    {
+      "path": "정제본\\202411_출발기준_이동관계.parquet",
+      "bytes": 1483195,
+      "sha256": "5578c2fe01b9b57b3a7450895cf27b48289b0a284edc29c7b40bb09a35426d4f"
+    },
+    {
+      "path": "정제본\\202411_코호트_요일시간_조건부프로필.parquet",
+      "bytes": 1590402,
+      "sha256": "21939446fc4f461e3017506af639a748efee02f3cd8c03c4a0bc5613d8e3fe39"
+    },
+    {
+      "path": "정제본\\대여소_ST-ID_현재교차표_과거미검증.csv",
+      "bytes": 416781,
+      "sha256": "8e480786aa1732413556812155821ce2a63c70a66c0063b2377f41d55bdbc896"
+    }
+  ]
+}

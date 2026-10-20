@@ -1,0 +1,89 @@
+{
+  "mode": "live",
+  "source_kind": "api_current_snapshot",
+  "scope": "public_sample_5",
+  "requested_at": "2026-10-19T15:17:36.933406+00:00",
+  "received_at": "2026-10-19T15:17:38.486445+00:00",
+  "received_kst": "2026-10-20T00:17:38.486445+09:00",
+  "source_observed_at": null,
+  "pages": 1,
+  "rows": [
+    {
+      "station_id": 102,
+      "api_station_id": "ST-4",
+      "name": "102. 망원역 1번출구 앞",
+      "quantity": 23,
+      "latitude": 37.5556488,
+      "longitude": 126.91062927,
+      "risk_score": 0.0,
+      "risk_signal": false,
+      "prediction_model": "B1S snapshot-only baseline",
+      "proposal_prediction": null,
+      "prediction_status": "실시간 수량 입력·기본 모형 실행 확인. 현재 정확도는 미검증."
+    },
+    {
+      "station_id": 103,
+      "api_station_id": "ST-5",
+      "name": "103. 망원역 2번출구 앞",
+      "quantity": 5,
+      "latitude": 37.55495071,
+      "longitude": 126.91083527,
+      "risk_score": 0.0005,
+      "risk_signal": false,
+      "prediction_model": "B1S snapshot-only baseline",
+      "proposal_prediction": null,
+      "prediction_status": "실시간 수량 입력·기본 모형 실행 확인. 현재 정확도는 미검증."
+    },
+    {
+      "station_id": 104,
+      "api_station_id": "ST-6",
+      "name": "104. 합정역 1번출구 앞",
+      "quantity": 0,
+      "latitude": 37.55073929,
+      "longitude": 126.91508484,
+      "risk_score": 0.7634,
+      "risk_signal": true,
+      "prediction_model": "B1S snapshot-only baseline",
+      "proposal_prediction": null,
+      "prediction_status": "실시간 수량 입력·기본 모형 실행 확인. 현재 정확도는 미검증."
+    },
+    {
+      "station_id": 105,
+      "api_station_id": "ST-7",
+      "name": "105. 합정역 5번출구 앞",
+      "quantity": 0,
+      "latitude": 37.55000687,
+      "longitude": 126.91482544,
+      "risk_score": 0.8941,
+      "risk_signal": true,
+      "prediction_model": "B1S snapshot-only baseline",
+      "proposal_prediction": null,
+      "prediction_status": "실시간 수량 입력·기본 모형 실행 확인. 현재 정확도는 미검증."
+    },
+    {
+      "station_id": 106,
+      "api_station_id": "ST-8",
+      "name": "106. 합정역 7번출구 앞",
+      "quantity": 0,
+      "latitude": 37.54864502,
+      "longitude": 126.91282654,
+      "risk_score": 0.8399,
+      "risk_signal": true,
+      "prediction_model": "B1S snapshot-only baseline",
+      "proposal_prediction": null,
+      "prediction_status": "실시간 수량 입력·기본 모형 실행 확인. 현재 정확도는 미검증."
+    }
+  ],
+  "count": 5,
+  "reused_cache": false,
+  "source_url": "https://data.seoul.go.kr/dataList/OA-15493/A/1/datasetView.do",
+  "limitations": [
+    "대여소별 원천 관측시각은 응답에 없어 수신시각과 구분합니다.",
+    "공개 샘플은 5곳만 제공하며 서울 전체로 해석하지 않습니다.",
+    "실시간 기본 모형의 입력 실행 시연이며 현재 계절·5~10분 뒤 정확도 검증이 아닙니다."
+  ],
+  "preview_model": "B1S",
+  "threshold": 0.35,
+  "proposal_status": "M1의 서울 전체·과거 이력 입력은 아직 충족되지 않아 실시간 제안 모델 결과로 표시하지 않습니다.",
+  "nominal_target_hour": "2026-10-20T01:00:00+09:00"
+}

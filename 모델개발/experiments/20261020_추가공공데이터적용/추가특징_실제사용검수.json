@@ -1,0 +1,163 @@
+{
+  "checked_at_utc": "2026-10-20T15:45:06.505496+00:00",
+  "result_sha256": {
+    "A/lightgbm_public_bus": "b76a0485eaf7cae3438ca0314b2b3d59ad03ad2e13dd5971a129a9faea086e07",
+    "A/lightgbm_public_od": "77d51d4f755765fa134d4e81625c9cb9038947a1fd9628daf977c4031a596e5e",
+    "A/lightgbm_public_bus_od": "b13f771318469dfb44da69ce0810ce1b6ccfa65fae4b352c871e2af40b1a192c",
+    "B/lightgbm_public_bus": "74d4d4e90ea0d72001c3e0a753c1f83e0e2fcac3da0aa2fd6aeafbe42f541cf2",
+    "B/lightgbm_public_od": "c1345860c589b237a51201544fe3b67d92f265344c407b79958c8d24a9ff200e",
+    "B/lightgbm_public_bus_od": "20a18a2500358ce8ec671ed2e79ac25f8398a65475bb80c1209d3289c741bc03",
+    "C/lightgbm_public_bus": "8e2424794f8ba1294146669dcc10d0edc55f97b45f42c1441ee5d5bd7f2857dd",
+    "C/lightgbm_public_od": "8528662e7826ad7ff1de6b352e0501846478f455a85c6c020dee600ecc41ab87",
+    "C/lightgbm_public_bus_od": "83a67d94898e2cd8e8b92cc17a65be2e61a51faa95d5d7b4e181b87d3321588c"
+  },
+  "extra_feature_rows": 66,
+  "comparisons": [
+    {
+      "fold": "A",
+      "model": "lightgbm_public_bus",
+      "control": "lightgbm_full",
+      "stage": "cal",
+      "rows": 195912,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_public_bus",
+      "control": "lightgbm_full",
+      "stage": "policy",
+      "rows": 261202,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_public_bus",
+      "control": "lightgbm_full",
+      "stage": "valid",
+      "rows": 1109673,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_public_bus_od",
+      "control": "lightgbm_public_od",
+      "stage": "cal",
+      "rows": 195912,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_public_bus_od",
+      "control": "lightgbm_public_od",
+      "stage": "policy",
+      "rows": 261202,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "A",
+      "model": "lightgbm_public_bus_od",
+      "control": "lightgbm_public_od",
+      "stage": "valid",
+      "rows": 1109673,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_bus",
+      "control": "lightgbm_full",
+      "stage": "cal",
+      "rows": 261120,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_bus",
+      "control": "lightgbm_full",
+      "stage": "policy",
+      "rows": 391593,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_bus",
+      "control": "lightgbm_full",
+      "stage": "valid",
+      "rows": 913584,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_bus_od",
+      "control": "lightgbm_public_od",
+      "stage": "cal",
+      "rows": 261120,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_bus_od",
+      "control": "lightgbm_public_od",
+      "stage": "policy",
+      "rows": 391593,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "B",
+      "model": "lightgbm_public_bus_od",
+      "control": "lightgbm_public_od",
+      "stage": "valid",
+      "rows": 913584,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_bus",
+      "control": "lightgbm_full",
+      "stage": "cal",
+      "rows": 195768,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_bus",
+      "control": "lightgbm_full",
+      "stage": "policy",
+      "rows": 261024,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_bus",
+      "control": "lightgbm_full",
+      "stage": "valid",
+      "rows": 1044096,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_bus_od",
+      "control": "lightgbm_public_od",
+      "stage": "cal",
+      "rows": 195768,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_bus_od",
+      "control": "lightgbm_public_od",
+      "stage": "policy",
+      "rows": 261024,
+      "raw_float32_predictions_equal": true
+    },
+    {
+      "fold": "C",
+      "model": "lightgbm_public_bus_od",
+      "control": "lightgbm_public_od",
+      "stage": "valid",
+      "rows": 1044096,
+      "raw_float32_predictions_equal": true
+    }
+  ],
+  "scope": "Post-fit descriptive inspection only; split use does not prove causality or general usefulness.",
+  "training_or_tuning_performed": false
+}

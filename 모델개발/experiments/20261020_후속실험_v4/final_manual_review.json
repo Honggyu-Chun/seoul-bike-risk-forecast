@@ -1,0 +1,90 @@
+{
+  "reviewed_at_utc": "2026-10-20T15:49:38.872575+00:00",
+  "analysis_scope_complete": true,
+  "independent_final_test": false,
+  "operational_validation_complete": false,
+  "proposal_updated_in_this_followup": false,
+  "checks": {
+    "registered_core_53_complete": true,
+    "public_9_complete_and_all_controls_verified": true,
+    "public_report_code_identity": true,
+    "all_7_stage_folders_present": true,
+    "all_13_core_figures_have_svg": true,
+    "39_tests_pass_without_fail_error_or_skip": true,
+    "calibration_180_bins_18_scores_verified": true,
+    "18_examples_and_net_changes_verified": true,
+    "bus_unused_and_prediction_equality_verified": true,
+    "23_protected_files_unchanged": true,
+    "training_and_controller_ended": true,
+    "final_report_flag_and_code_identity": true,
+    "heldback_archives_unchanged_and_no_scoring_artifacts": true,
+    "all_local_report_resources_and_anchors_exist": true,
+    "manual_browser_and_plot_inspection": true
+  },
+  "core_comparisons": 53,
+  "public_comparisons": 9,
+  "public_candidate_catalog_rows": 62,
+  "protected_files": 23,
+  "final_tests": 39,
+  "report_sha256": "f87dc4eb559e12140dbeed77ecb2e72fe490164d806356e36d83a1942820d62d",
+  "public_report_sha256": "b487acb94ba69a1aba8ce90bff62cdf5f240585f81a45264a670fbcc091280b5",
+  "process_evidence_sha256": "a57d49a81c6644e26e2a137113323b5608ff71a7acfda5164372e3c32aee310b",
+  "test_xml_sha256": "62f1c04d533b76cbe13c22c83fa96de86488f930f5f4fba35e946e972280e93a",
+  "browser_review": {
+    "core_images_loaded": 13,
+    "core_tables": 8,
+    "core_document_width_equals_scroll_width": true,
+    "public_images_loaded": 1,
+    "public_tables": 1,
+    "toc_and_decision_anchor_work": true,
+    "final_public_delta_plot_labels_visually_checked": true,
+    "calibration_delta_plot_visually_checked": true
+  },
+  "local_link_checks": [
+    {
+      "path": "D:\\P실무\\모델개발\\experiments\\20261020_후속실험_v4\\쉬운보고서.html",
+      "local_references": 39,
+      "missing": []
+    },
+    {
+      "path": "D:\\P실무\\모델개발\\experiments\\20261020_추가공공데이터적용\\추가공공데이터_비교보고서.html",
+      "local_references": 5,
+      "missing": []
+    },
+    {
+      "path": "D:\\P실무\\모델개발\\experiments\\20261020_추가공공데이터적용\\데이터준비_쉬운설명.html",
+      "local_references": 7,
+      "missing": []
+    },
+    {
+      "path": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\공공데이터_추가조사_통합보고서.html",
+      "local_references": 2,
+      "missing": []
+    }
+  ],
+  "heldback_evidence": [
+    {
+      "path": "D:\\P실무\\모델개발\\data\\raw\\research_20261020\\availability_2025q3.zip",
+      "unchanged": true,
+      "target_values_inspected_in_download_manifest": false
+    },
+    {
+      "path": "D:\\P실무\\모델개발\\data\\raw\\research_20261020\\availability_2025q4.zip",
+      "unchanged": true,
+      "target_values_inspected_in_download_manifest": false
+    }
+  ],
+  "remaining_in_registered_scope": [],
+  "future_work_outside_completed_scope": [
+    "KMA credential/account and historic issuance validation",
+    "historic traffic/population release and quality checks",
+    "prospective source-reception logs and live outcome validation",
+    "new frozen selection before unopened Q3/Q4 scoring"
+  ],
+  "limitations": [
+    "Development A/B/C results, single random seed and unequal computation budgets",
+    "Public archives and current crosswalk do not prove historical reception or station identity",
+    "Next-grid zero classification does not measure actual rental success",
+    "18 probability diagnostics include 10 Brier deteriorations after calibration"
+  ]
+}

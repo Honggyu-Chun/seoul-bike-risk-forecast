@@ -1,0 +1,15 @@
+{
+  "updated_at_utc": "2026-10-20T06:53:08.519421+00:00",
+  "stages_completed": [
+    "01_문제정의",
+    "02_탐색",
+    "03_큐레이션",
+    "04_전처리"
+  ],
+  "source_hashes": {
+    "panel_2024": "dfa34751caee5e120c79632f62fbdd763fc2984f4daead5bce11fe5e9f89381b",
+    "panel_2025": "d3c9895a41a39a52c9fe8e26f5d4333456c6b8d45c2e460d887d983a88c79233"
+  },
+  "analysis_code_sha256": "123ced43a3d94db0b517a48ac4fc374086a75eb79072a68477b4184a8eab8ae2",
+  "sample_seed": 20261020
+}

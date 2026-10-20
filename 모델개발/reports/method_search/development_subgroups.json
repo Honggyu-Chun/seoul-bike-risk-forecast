@@ -1,0 +1,91 @@
+{
+  "scope": "March1-14 development validation only; NOT the new final test",
+  "groups": {
+    "B1_original_63": {
+      "current_positive": {
+        "n": 829428,
+        "zero_cases": 22480,
+        "zero_rate": 0.027103015572177452,
+        "f1": 0.16142061788144535,
+        "precision": 0.4435112977404519,
+        "recall": 0.09866548042704626,
+        "average_precision": 0.29353614812532997,
+        "brier": 0.0217388104647398,
+        "tn": 804165,
+        "fp": 2783,
+        "fn": 20262,
+        "tp": 2218,
+        "threshold": 0.35000000000000003,
+        "rule": {
+          "kind": "global",
+          "threshold": 0.35000000000000003,
+          "f1": 0.7476633400243137
+        }
+      },
+      "current_1_to_3": {
+        "n": 181687,
+        "zero_cases": 20564,
+        "zero_rate": 0.11318366201214176,
+        "f1": 0.16745506149479658,
+        "precision": 0.4421315570358035,
+        "recall": 0.10328729819101343,
+        "average_precision": 0.30423460296147625,
+        "brier": 0.08947445452213287,
+        "tn": 158443,
+        "fp": 2680,
+        "fn": 18440,
+        "tp": 2124,
+        "threshold": 0.35000000000000003,
+        "rule": {
+          "kind": "global",
+          "threshold": 0.35000000000000003,
+          "f1": 0.7476633400243137
+        }
+      }
+    },
+    "causal_transition_spatial": {
+      "current_positive": {
+        "n": 829428,
+        "zero_cases": 22480,
+        "zero_rate": 0.027103015572177452,
+        "f1": 0.23195979899497488,
+        "precision": 0.46974219810040707,
+        "recall": 0.1540035587188612,
+        "average_precision": 0.3268084021456359,
+        "brier": 0.02110789343714714,
+        "tn": 803040,
+        "fp": 3908,
+        "fn": 19018,
+        "tp": 3462,
+        "threshold": null,
+        "rule": {
+          "kind": "current_state",
+          "zero_threshold": 0.34,
+          "positive_threshold": 0.38,
+          "f1": 0.7549605465471892
+        }
+      },
+      "current_1_to_3": {
+        "n": 181687,
+        "zero_cases": 20564,
+        "zero_rate": 0.11318366201214176,
+        "f1": 0.2397743300423131,
+        "precision": 0.46775786651615636,
+        "recall": 0.16120404590546586,
+        "average_precision": 0.3372059228475268,
+        "brier": 0.0869048684835434,
+        "tn": 157351,
+        "fp": 3772,
+        "fn": 17249,
+        "tp": 3315,
+        "threshold": null,
+        "rule": {
+          "kind": "current_state",
+          "zero_threshold": 0.34,
+          "positive_threshold": 0.38,
+          "f1": 0.7549605465471892
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "started_at_utc": "2026-10-20T07:00:07.223088+00:00",
+  "credential_values_omitted": true,
+  "http_status": 200,
+  "server_date_header": "Tue, 20 Oct 2026 07:00:10 GMT",
+  "cache_control": null,
+  "age_header": null,
+  "received_at_utc": "2026-10-20T07:00:08.853585+00:00",
+  "status": "live_forecast_response_verified",
+  "bytes": 2514,
+  "sha256": "a1aa130e043cdec34a391692ac8124696db1e06686bada3560bc96ba86b09d37",
+  "file": "data\\raw\\followup_v4_extra\\gfs_day1_live_20261020.json",
+  "source_url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.978&timezone=Asia%2FSeoul&models=gfs_global&forecast_days=2&wind_speed_unit=ms&hourly=temperature_2m_previous_day1%2Cprecipitation_previous_day1%2Crelative_humidity_2m_previous_day1%2Cwind_speed_10m_previous_day1%2Ccloud_cover_previous_day1",
+  "model": "gfs_global",
+  "fixed_lead_hours": 24,
+  "publication_time_field_available": false,
+  "run_initialization_field_available": false,
+  "received_at_kst": "2026-10-20 16:00:08.853585+09:00",
+  "future_hours_received_at_least_1h_before_target": 30,
+  "first_future_example": [
+    {
+      "temperature_2m_previous_day1": 20.4,
+      "precipitation_previous_day1": 0.0,
+      "relative_humidity_2m_previous_day1": 38,
+      "wind_speed_10m_previous_day1": 4.1,
+      "cloud_cover_previous_day1": 100,
+      "valid_time": "2026-10-20 18:00:00+09:00"
+    }
+  ],
+  "null_counts": {
+    "temperature_2m_previous_day1": 0,
+    "precipitation_previous_day1": 0,
+    "relative_humidity_2m_previous_day1": 0,
+    "wind_speed_10m_previous_day1": 0,
+    "cloud_cover_previous_day1": 0,
+    "valid_time": 0
+  },
+  "response_fields": [
+    "latitude",
+    "longitude",
+    "generationtime_ms",
+    "utc_offset_seconds",
+    "timezone",
+    "timezone_abbreviation",
+    "elevation",
+    "hourly_units",
+    "hourly"
+  ],
+  "response_units": {
+    "time": "iso8601",
+    "temperature_2m_previous_day1": "°C",
+    "precipitation_previous_day1": "mm",
+    "relative_humidity_2m_previous_day1": "%",
+    "wind_speed_10m_previous_day1": "m/s",
+    "cloud_cover_previous_day1": "%"
+  },
+  "caution": "This capture proves present future-target availability, not 2025 as-issued publication or exact model-run replacement time"
+}

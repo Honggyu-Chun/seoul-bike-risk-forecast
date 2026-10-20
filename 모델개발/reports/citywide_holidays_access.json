@@ -1,0 +1,5 @@
+{
+  "url": "https://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo?solYear=2025&numOfRows=100&pageNo=1",
+  "purpose": "unauthenticated check of documented official holiday API; no credential supplied",
+  "error": "HTTP Error 400: Bad Request"
+}

@@ -1,0 +1,21 @@
+{
+  "updated_at_utc": "2026-10-20T14:34:34.805667+00:00",
+  "successful_fold_candidates": 53,
+  "unique_candidate_names": 29,
+  "three_fold_candidates": [
+    "M2_no_weather",
+    "catboost_temporal",
+    "lightgbm_basic",
+    "lightgbm_full",
+    "lightgbm_temporal",
+    "logistic",
+    "persistence",
+    "random_forest",
+    "seasonal_day",
+    "seasonal_week",
+    "smoothed_markov",
+    "xgboost_temporal"
+  ],
+  "independent_final_test_opened": false,
+  "old_artifacts_changed": []
+}

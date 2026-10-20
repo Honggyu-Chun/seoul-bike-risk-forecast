@@ -1,0 +1,126 @@
+{
+  "name": "neural_tcn_weighted",
+  "kind": "neural",
+  "spec": {
+    "kind": "neural",
+    "group": "sequence",
+    "name": "neural_tcn_weighted",
+    "architecture": "tcn",
+    "positive_weight": 4.0
+  },
+  "status": "ok",
+  "rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.25,
+    "positive_threshold": 0.77,
+    "f1": 0.7442797329410433
+  },
+  "validation": {
+    "n": 916608,
+    "zero_cases": 87281,
+    "zero_rate": 0.09522173055439184,
+    "f1": 0.7442797329410433,
+    "precision": 0.7352194860215294,
+    "recall": 0.7535660682164503,
+    "average_precision": 0.7711936692339488,
+    "brier": 0.04617316648364067,
+    "tn": 805640,
+    "fp": 23687,
+    "fn": 21509,
+    "tp": 65772,
+    "threshold": 0.5,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.25,
+      "positive_threshold": 0.77,
+      "f1": 0.7442797329410433
+    }
+  },
+  "fit": {
+    "paths": [
+      "neural_tcn_weighted.pt"
+    ],
+    "epochs": 8,
+    "sampled_train_rows": 1200000,
+    "threads": 1,
+    "sequence_hours": 24,
+    "channels": [
+      "log_quantity",
+      "observed_flag",
+      "neighbor_log_mean",
+      "neighbor_zero_fraction"
+    ]
+  },
+  "features": [],
+  "learning_curves": [
+    {
+      "epoch": 1,
+      "train_loss": 0.47214058295858596,
+      "validation_f1": 0.7429993706013618
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.2871705607444353,
+      "validation_f1": 0.7433444449518243
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.2505923805078142,
+      "validation_f1": 0.743378619459311
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.2342389384634259,
+      "validation_f1": 0.743473681213881
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.22615478322571048,
+      "validation_f1": 0.74341985428051
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.22058067966646708,
+      "validation_f1": 0.7436675072127945
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.2175316519196123,
+      "validation_f1": 0.7436003701537955
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.21438196372660354,
+      "validation_f1": 0.7442797329410433
+    }
+  ],
+  "seconds": 239.05090882100194,
+  "test_used": false,
+  "selection_rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.25,
+    "positive_threshold": 0.74,
+    "f1": 0.7439885892698705
+  },
+  "selection_validation": {
+    "n": 916608,
+    "zero_cases": 87281,
+    "zero_rate": 0.09522173055439184,
+    "f1": 0.7439885892698705,
+    "precision": 0.729583576549886,
+    "recall": 0.7589738889334449,
+    "average_precision": 0.7711936692339488,
+    "brier": 0.04617316648364067,
+    "tn": 804774,
+    "fp": 24553,
+    "fn": 21037,
+    "tp": 66244,
+    "threshold": null,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.25,
+      "positive_threshold": 0.74,
+      "f1": 0.7439885892698705
+    }
+  }
+}

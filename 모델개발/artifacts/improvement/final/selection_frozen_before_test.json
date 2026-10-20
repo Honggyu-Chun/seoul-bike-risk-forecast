@@ -1,0 +1,597 @@
+{
+  "frozen_at_utc": "2026-10-19T19:46:46.573764+00:00",
+  "protocol_sha256": "582467b7515edb12c242193183b89cc2e3f59a5eb62dc312b424c5df11bf284c",
+  "baseline": {
+    "name": "B1_original_63",
+    "kind": "lgb",
+    "spec": {
+      "name": "B1_original_63",
+      "kind": "lgb",
+      "group": "basic",
+      "rounds": 240,
+      "leaves": 63,
+      "leaf": 500,
+      "coarse": true
+    },
+    "status": "ok",
+    "validation": {
+      "n": 915936,
+      "zero_cases": 79549,
+      "zero_rate": 0.08684995458197953,
+      "f1": 0.7656334964654704,
+      "precision": 0.7702309013421538,
+      "recall": 0.7610906485310941,
+      "average_precision": 0.8470116459560952,
+      "brier": 0.029365306720137596,
+      "tn": 818326,
+      "fp": 18061,
+      "fn": 19005,
+      "tp": 60544,
+      "threshold": 0.4,
+      "rule": {
+        "kind": "global",
+        "threshold": 0.4,
+        "f1": 0.7656334964654704
+      }
+    },
+    "rule": {
+      "kind": "global",
+      "threshold": 0.4,
+      "f1": 0.7656334964654704
+    },
+    "fit": {
+      "paths": [
+        "B1_original_63.txt"
+      ],
+      "iterations": [
+        238
+      ]
+    },
+    "features": [
+      "station_code",
+      "hour",
+      "weekday",
+      "weekend",
+      "quantity",
+      "log_quantity",
+      "q_lag_1",
+      "q_lag_2",
+      "q_lag_24",
+      "q_lag_168",
+      "q_mean_3",
+      "q_known_3",
+      "q_mean_24",
+      "q_known_24",
+      "q_change_1",
+      "q_change_3"
+    ],
+    "seconds": 251.63281507600186,
+    "resource_threads": 1,
+    "test_used": false
+  },
+  "proposal": {
+    "kind": "blend",
+    "members": [
+      "causal_weather_spatial",
+      "catboost_depth_8"
+    ],
+    "weights": [
+      0.5,
+      0.5
+    ],
+    "rule": {
+      "kind": "global",
+      "threshold": 0.39,
+      "f1": 0.7770409416387991
+    },
+    "validation_f1": 0.7770409416387991
+  },
+  "tuned_control": {
+    "name": "B1_tuned_127",
+    "kind": "lgb",
+    "spec": {
+      "name": "B1_tuned_127",
+      "kind": "lgb",
+      "group": "basic",
+      "rounds": 1000,
+      "leaves": 127,
+      "leaf": 200,
+      "select_f1": true
+    },
+    "status": "ok",
+    "validation": {
+      "n": 915936,
+      "zero_cases": 79549,
+      "zero_rate": 0.08684995458197953,
+      "f1": 0.7670925065643305,
+      "precision": 0.7703307429991253,
+      "recall": 0.7638813812870054,
+      "average_precision": 0.846823722822048,
+      "brier": 0.02932135947048664,
+      "tn": 818270,
+      "fp": 18117,
+      "fn": 18783,
+      "tp": 60766,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.39,
+        "positive_threshold": 0.4,
+        "f1": 0.7670925065643305
+      }
+    },
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.4,
+      "f1": 0.7670925065643305
+    },
+    "fit": {
+      "paths": [
+        "B1_tuned_127.txt"
+      ],
+      "iterations": [
+        269
+      ]
+    },
+    "features": [
+      "station_code",
+      "hour",
+      "weekday",
+      "weekend",
+      "quantity",
+      "log_quantity",
+      "q_lag_1",
+      "q_lag_2",
+      "q_lag_24",
+      "q_lag_168",
+      "q_mean_3",
+      "q_known_3",
+      "q_mean_24",
+      "q_known_24",
+      "q_change_1",
+      "q_change_3"
+    ],
+    "seconds": 429.5281447689995,
+    "resource_threads": 1,
+    "test_used": false,
+    "selection_rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.4,
+      "f1": 0.7670925065643305
+    },
+    "selection_validation": {
+      "n": 915936,
+      "zero_cases": 79549,
+      "zero_rate": 0.08684995458197953,
+      "f1": 0.7670925065643305,
+      "precision": 0.7703307429991253,
+      "recall": 0.7638813812870054,
+      "average_precision": 0.846823722822048,
+      "brier": 0.02932135947048664,
+      "tn": 818270,
+      "fp": 18117,
+      "fn": 18783,
+      "tp": 60766,
+      "threshold": null,
+      "rule": {
+        "kind": "current_state",
+        "zero_threshold": 0.39,
+        "positive_threshold": 0.4,
+        "f1": 0.7670925065643305
+      }
+    }
+  },
+  "weather_used_by_proposal": true,
+  "weather_assumptions_if_used": {
+    "source": "KMA ASOS Seoul 108 archived hourly observations",
+    "rows": 8760,
+    "source_start": "2025-01-01 00:00:00",
+    "source_end": "2025-12-31 23:00:00",
+    "source_zip_sha256": "8ee85fb216c1537b96c84423986f742968ba3e9c65d10fd978b04ae436eaf1cc",
+    "timezone_assumption": "Both archive timestamps interpreted as Asia/Seoul local time",
+    "features": [
+      "w_temperature_lag1",
+      "w_temperature_lag24",
+      "w_rain_lag1",
+      "w_rain_lag24",
+      "w_wind_lag1",
+      "w_humidity_lag1",
+      "w_pressure_lag1",
+      "w_cloud_lag1",
+      "w_visibility_lag1",
+      "w_snow_lag1",
+      "w_temperature_change23"
+    ],
+    "lags_hours": [
+      1,
+      24
+    ],
+    "observation_time_is_before_input": true,
+    "unknown_rain_snow_stay_missing": true,
+    "limitation": "Historical archive may contain later quality corrections; publication delay and matching live-vintage values are not verified. This is an archived-weather sensitivity experiment, not a verified real-time weather service."
+  },
+  "recommendation_policies": {
+    "utility": {
+      "kind": "utility",
+      "weight": 4000,
+      "model": "proposal"
+    },
+    "base_utility": {
+      "kind": "utility",
+      "weight": 4000,
+      "model": "base_utility"
+    },
+    "quantity_utility": {
+      "kind": "quantity_utility",
+      "weight": 4000
+    }
+  },
+  "validation_policy_search": [
+    {
+      "search_id": "utility",
+      "policy": {
+        "kind": "utility",
+        "weight": 0,
+        "model": "proposal"
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2302,
+        "recommended": 2394,
+        "effective_rate": 0.9615705931495405,
+        "hit_rate": 0.9615705931495405,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 0.0
+      }
+    },
+    {
+      "search_id": "base_utility",
+      "policy": {
+        "kind": "utility",
+        "weight": 0,
+        "model": "base_utility"
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2302,
+        "recommended": 2394,
+        "effective_rate": 0.9615705931495405,
+        "hit_rate": 0.9615705931495405,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 0.0
+      }
+    },
+    {
+      "search_id": "quantity_utility",
+      "policy": {
+        "kind": "quantity_utility",
+        "weight": 0
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2302,
+        "recommended": 2394,
+        "effective_rate": 0.9615705931495405,
+        "hit_rate": 0.9615705931495405,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 0.0
+      }
+    },
+    {
+      "search_id": "utility",
+      "policy": {
+        "kind": "utility",
+        "weight": 100,
+        "model": "proposal"
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2308,
+        "recommended": 2394,
+        "effective_rate": 0.9640768588137009,
+        "hit_rate": 0.9640768588137009,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 0.15881056075290342
+      }
+    },
+    {
+      "search_id": "base_utility",
+      "policy": {
+        "kind": "utility",
+        "weight": 100,
+        "model": "base_utility"
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2305,
+        "recommended": 2394,
+        "effective_rate": 0.9628237259816207,
+        "hit_rate": 0.9628237259816207,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 0.19421556894205627
+      }
+    },
+    {
+      "search_id": "quantity_utility",
+      "policy": {
+        "kind": "quantity_utility",
+        "weight": 100
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2309,
+        "recommended": 2394,
+        "effective_rate": 0.9644945697577276,
+        "hit_rate": 0.9644945697577276,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 0.2718617798275743
+      }
+    },
+    {
+      "search_id": "utility",
+      "policy": {
+        "kind": "utility",
+        "weight": 250,
+        "model": "proposal"
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2312,
+        "recommended": 2394,
+        "effective_rate": 0.9657477025898078,
+        "hit_rate": 0.9657477025898078,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 0.5658914948440029
+      }
+    },
+    {
+      "search_id": "base_utility",
+      "policy": {
+        "kind": "utility",
+        "weight": 250,
+        "model": "base_utility"
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2310,
+        "recommended": 2394,
+        "effective_rate": 0.9649122807017544,
+        "hit_rate": 0.9649122807017544,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 0.5300948977861785
+      }
+    },
+    {
+      "search_id": "quantity_utility",
+      "policy": {
+        "kind": "quantity_utility",
+        "weight": 250
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2309,
+        "recommended": 2394,
+        "effective_rate": 0.9644945697577276,
+        "hit_rate": 0.9644945697577276,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 1.6457847035865563
+      }
+    },
+    {
+      "search_id": "utility",
+      "policy": {
+        "kind": "utility",
+        "weight": 500,
+        "model": "proposal"
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2326,
+        "recommended": 2394,
+        "effective_rate": 0.9715956558061821,
+        "hit_rate": 0.9715956558061821,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 3.4888384920887563
+      }
+    },
+    {
+      "search_id": "base_utility",
+      "policy": {
+        "kind": "utility",
+        "weight": 500,
+        "model": "base_utility"
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2325,
+        "recommended": 2394,
+        "effective_rate": 0.9711779448621554,
+        "hit_rate": 0.9711779448621554,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 3.2981358658536823
+      }
+    },
+    {
+      "search_id": "quantity_utility",
+      "policy": {
+        "kind": "quantity_utility",
+        "weight": 500
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2318,
+        "recommended": 2394,
+        "effective_rate": 0.9682539682539683,
+        "hit_rate": 0.9682539682539683,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 6.88360202633729
+      }
+    },
+    {
+      "search_id": "utility",
+      "policy": {
+        "kind": "utility",
+        "weight": 1000,
+        "model": "proposal"
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2339,
+        "recommended": 2394,
+        "effective_rate": 0.9770258980785297,
+        "hit_rate": 0.9770258980785297,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 8.289432054421486
+      }
+    },
+    {
+      "search_id": "base_utility",
+      "policy": {
+        "kind": "utility",
+        "weight": 1000,
+        "model": "base_utility"
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2334,
+        "recommended": 2394,
+        "effective_rate": 0.974937343358396,
+        "hit_rate": 0.974937343358396,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 8.22254752453021
+      }
+    },
+    {
+      "search_id": "quantity_utility",
+      "policy": {
+        "kind": "quantity_utility",
+        "weight": 1000
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2346,
+        "recommended": 2394,
+        "effective_rate": 0.9799498746867168,
+        "hit_rate": 0.9799498746867168,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 22.450809909175085
+      }
+    },
+    {
+      "search_id": "utility",
+      "policy": {
+        "kind": "utility",
+        "weight": 2000,
+        "model": "proposal"
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2361,
+        "recommended": 2394,
+        "effective_rate": 0.9862155388471178,
+        "hit_rate": 0.9862155388471178,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 17.115040950601045
+      }
+    },
+    {
+      "search_id": "base_utility",
+      "policy": {
+        "kind": "utility",
+        "weight": 2000,
+        "model": "base_utility"
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2354,
+        "recommended": 2394,
+        "effective_rate": 0.9832915622389307,
+        "hit_rate": 0.9832915622389307,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 16.48934634463145
+      }
+    },
+    {
+      "search_id": "quantity_utility",
+      "policy": {
+        "kind": "quantity_utility",
+        "weight": 2000
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2358,
+        "recommended": 2394,
+        "effective_rate": 0.9849624060150376,
+        "hit_rate": 0.9849624060150376,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 45.32749850579726
+      }
+    },
+    {
+      "search_id": "utility",
+      "policy": {
+        "kind": "utility",
+        "weight": 4000,
+        "model": "proposal"
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2368,
+        "recommended": 2394,
+        "effective_rate": 0.9891395154553049,
+        "hit_rate": 0.9891395154553049,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 26.83562015587406
+      }
+    },
+    {
+      "search_id": "base_utility",
+      "policy": {
+        "kind": "utility",
+        "weight": 4000,
+        "model": "base_utility"
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2361,
+        "recommended": 2394,
+        "effective_rate": 0.9862155388471178,
+        "hit_rate": 0.9862155388471178,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 27.702279131123692
+      }
+    },
+    {
+      "search_id": "quantity_utility",
+      "policy": {
+        "kind": "quantity_utility",
+        "weight": 4000
+      },
+      "metrics": {
+        "requests": 2394,
+        "valid_recommendations": 2368,
+        "recommended": 2394,
+        "effective_rate": 0.9891395154553049,
+        "hit_rate": 0.9891395154553049,
+        "abstention_rate": 0.0,
+        "extra_distance_m": 73.35234279472645
+      }
+    }
+  ],
+  "model_hashes": {
+    "/workspace/P_Project/artifacts/improvement/forward/models/causal_weather_spatial.txt": "42fdd469ee5f74b8a235ccf76a4e97efb9184c889f9ef6cd1441eb41b544d00f",
+    "/workspace/P_Project/artifacts/improvement/forward/models/catboost_depth_8.cbm": "13dde02de11fb035aff2560a8bc67c688b5075dc39a2b45f65d0e23f2ea9dc51",
+    "/workspace/P_Project/artifacts/improvement/forward/models/B1_tuned_127.txt": "5a54b33db6f867873a63002a760781ed1dd20279b61686368286d2cbc0f45e65",
+    "/workspace/P_Project/artifacts/improvement/forward/models/B1_original_63.txt": "bf63405e4d8a92540190e5ce6208f5da83cb608c5593089de6c8d8c81edbb2e9"
+  },
+  "calibration_sha256": "bd719744558427c037ca16d0391bd87ea6ccf9358c54a5ee753d91d2afac179b",
+  "baseline_calibration_sha256": "3facb5f92fb924f10be1f014b66efa462e2f380d87786a26a24d6803b53e6d44",
+  "code_hashes": {
+    "bike_demo/research.py": "571d268de75301ccf9c5a219116a65138434b5339c51efb8be2dbaf57178ba1b",
+    "bike_demo/research_features.py": "86b5d2f4c825c54bf89b79dde773b18134c4b5c8e4c3f14f9f2a12b38d7d28b0",
+    "bike_demo/evaluate_research.py": "d13986833fed843f948b2045e2ab03dd58752b2dff3d3c40983fa5ff30c621db"
+  },
+  "test_used_for_selection": false
+}

@@ -1,0 +1,18 @@
+{
+  "source_url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?useCache=false&infId=OA-2221&infSeq=3&seq=36",
+  "path": "data\\raw\\followup_v4_extra\\seoul_air_2025.zip",
+  "bytes": 2910118,
+  "sha256": "ccbcb2991a15ab4bc7523ca803689578146f11ff9d2c6ca0707bbdebfdedbbb8",
+  "received_at_utc": "2026-10-20T06:52:38.111351+00:00",
+  "catalog_url": "https://data.seoul.go.kr/dataList/OA-2221/S/1/datasetView.do",
+  "crc_passed": true,
+  "members": [
+    {
+      "name": "서울시_기간별_시간평균_대기환경_정보_2025.csv",
+      "bytes": 17233543,
+      "crc32": "3077adda"
+    }
+  ],
+  "catalog_file_modified": "2026-04-01",
+  "historical_as_issued_verified": false
+}

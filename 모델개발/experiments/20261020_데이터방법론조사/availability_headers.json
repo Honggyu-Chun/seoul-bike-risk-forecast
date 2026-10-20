@@ -1,0 +1,218 @@
+[
+  {
+    "file": "data\\raw\\research_20261020\\availability_2024q1.zip",
+    "member_month": "2401",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2024q1.zip",
+    "member_month": "2402",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2024q1.zip",
+    "member_month": "2403",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2024q2.zip",
+    "member_month": "2404",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2024q2.zip",
+    "member_month": "2405",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2024q2.zip",
+    "member_month": "2406",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2024q3.zip",
+    "member_month": "2407",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2024q3.zip",
+    "member_month": "2408",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2024q3.zip",
+    "member_month": "2409",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2024q4.zip",
+    "member_month": "2410",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2024q4.zip",
+    "member_month": "2411",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2024q4.zip",
+    "member_month": "2412",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2025q3.zip",
+    "member_month": "2507",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2025q3.zip",
+    "member_month": "2508",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2025q3.zip",
+    "member_month": "2509",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2025q4.zip",
+    "member_month": "2510",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2025q4.zip",
+    "member_month": "2511",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  },
+  {
+    "file": "data\\raw\\research_20261020\\availability_2025q4.zip",
+    "member_month": "2512",
+    "columns": [
+      "일시",
+      "대여소번호",
+      "대여소명",
+      "시간대",
+      "거치대수량"
+    ],
+    "target_values_inspected": false
+  }
+]

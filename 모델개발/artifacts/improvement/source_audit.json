@@ -1,0 +1,20 @@
+{
+  "new_source_zip_sha256": "bd6c09e0785e45618635870c95a7fb86cbf41cc47dbe902d7f54753b13ffda1a",
+  "cohort_stations": 2729,
+  "input_start": "2025-01-01 00:00:00",
+  "input_end": "2025-05-14 23:00:00",
+  "monthly": [
+    {
+      "member": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2025년도_2분기/data_2504.csv",
+      "source_rows_read": 1992907,
+      "matched_window_rows": 1961980
+    },
+    {
+      "member": "서울특별시_대여소별 공공자전거 대여가능 수량(1시간 단위)_2025년도_2분기/data_2505.csv",
+      "source_rows_read": 2061695,
+      "matched_window_rows": 914397
+    }
+  ],
+  "missing_are_not_zero": true,
+  "new_test_scores_computed": false
+}

@@ -1,0 +1,22 @@
+{
+  "source_url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?&useCache=false",
+  "post_fields": {
+    "infId": "OA-15964",
+    "seq": "20250120",
+    "infSeq": "3"
+  },
+  "status": 200,
+  "headers": {
+    "Date": "Tue, 20 Oct 2026 09:38:11 GMT",
+    "Server": "Apache",
+    "Content-Disposition": "attachment; filename=\"S-DoT_WALK_2025.01.06-01.12.csv\"",
+    "Cache-Control": "no-cache",
+    "Pragma": "no-cache",
+    "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "Content-Length": "11605258",
+    "Connection": "close",
+    "Content-Type": "application/x-msdownload"
+  },
+  "partial_bytes": 8192,
+  "received_at": "2026-10-20T18:38:08.538525+09:00"
+}

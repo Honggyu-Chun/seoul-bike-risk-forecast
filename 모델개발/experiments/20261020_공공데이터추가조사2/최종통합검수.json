@@ -1,0 +1,17 @@
+{
+  "checked_at_utc": "2026-10-20T10:09:16.396669+00:00",
+  "candidate_rows": 62,
+  "domain_rows": {
+    "교통흐름": 24,
+    "공간시설": 19,
+    "인구행사": 19
+  },
+  "common_fields_per_domain": 21,
+  "empty_required_fields": [],
+  "compiler_input_hashes_match": true,
+  "bus_independent_check_passed": true,
+  "private_credential_matches": 0,
+  "new_model_training_for_this_research": false,
+  "performance_improvement_proven": false,
+  "files_checked": 196
+}

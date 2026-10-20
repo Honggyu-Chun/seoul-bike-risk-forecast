@@ -1,0 +1,11 @@
+{
+  "observed_hours": 11700878,
+  "eligible_next_hour_rows": 11689962,
+  "next_zero_cases": 1136905,
+  "next_zero_rate": 0.09725480715848349,
+  "current_positive_zero_cases": 290970,
+  "stations": 2729,
+  "start": "2025-01-01 00:00:00",
+  "end": "2025-06-30 23:00:00",
+  "new_test_quarters_read": false
+}

@@ -1,0 +1,25 @@
+{
+  "scope": "조회·캐시 확보와 과학적 재현을 구분한다. HTTP 200만으로 전문 검토·사용 가능성을 입증하지 않는다.",
+  "kopis": {
+    "static_body": "JavaScript 중심으로 정적 본문 추출에 제약이 있다.",
+    "official_search_verified": [
+      "공식 API 설명",
+      "인증키 필요 안내",
+      "출처 표시 안내"
+    ],
+    "authenticated_api_called": false
+  },
+  "kma_api": {
+    "initial_request": "TLS handshake timeout",
+    "retry": "HTTP 200으로 페이지를 확보한다.",
+    "authenticated_api_called": false
+  },
+  "seoul_stations": {
+    "initial_request": "작은 오류 페이지를 받는다.",
+    "retry": "정식 목록 본문을 확보하며 과거 스냅샷 목록을 웹으로도 확인한다."
+  },
+  "all_models": {
+    "implementation_executed": false,
+    "paper_results_reproduced": false
+  }
+}

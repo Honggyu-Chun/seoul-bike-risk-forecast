@@ -1,0 +1,63 @@
+[
+  {
+    "file": "subway_daily_202501.csv",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?infId=OA-12914&infSeq=3&seq=138",
+    "form": null,
+    "retrieved_utc": "2026-10-19T07:05:32.833419+00:00",
+    "status": 200,
+    "bytes": 1229769,
+    "truncated": false,
+    "content_type": "application/x-msdownload",
+    "sha256": "8e9e648f870ff5a28d67c0dcde1d515d9ca3ae9e637662ea7210812db45a4b87",
+    "final_url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?infId=OA-12914&infSeq=3&seq=138"
+  },
+  {
+    "file": "parks_2026h2.xlsx",
+    "url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?infId=OA-394&infSeq=3&seq=6",
+    "form": null,
+    "retrieved_utc": "2026-10-19T07:05:32.834341+00:00",
+    "status": 200,
+    "bytes": 153429,
+    "truncated": false,
+    "content_type": "application/x-msdownload",
+    "sha256": "9a64b315997327f4d2d60519daeb5b0df044c781f9dc4d6d45626f94f8ecad28",
+    "final_url": "https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?infId=OA-394&infSeq=3&seq=6"
+  },
+  {
+    "file": "subway_monthhour_sheet.html",
+    "url": "https://data.seoul.go.kr/dataList/sheetView.do?infId=OA-12252&srvType=S",
+    "form": {
+      "infId": "OA-12252",
+      "serviceKind": "1",
+      "srvType": "S"
+    },
+    "retrieved_utc": "2026-10-19T07:05:32.834823+00:00",
+    "status": 200,
+    "bytes": 25373,
+    "truncated": false,
+    "content_type": "text/html;charset=UTF-8",
+    "sha256": "04671fb8264a2c14a6bbd19f38862fe51e43ad0b86dd121dec93d7ab8b651cd4",
+    "final_url": "https://data.seoul.go.kr/dataList/sheetView.do?infId=OA-12252&srvType=S"
+  },
+  {
+    "file": "noaa_seoul_2025.csv",
+    "url": "https://www.ncei.noaa.gov/data/global-hourly/access/2025/47108099999.csv",
+    "form": null,
+    "retrieved_utc": "2026-10-19T07:05:32.835253+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "file": "noaa_docs.html",
+    "url": "https://www.ncei.noaa.gov/products/land-based-station/integrated-surface-database",
+    "form": null,
+    "retrieved_utc": "2026-10-19T07:05:32.854133+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "file": "kasi_calendar.html",
+    "url": "https://astro.kasi.re.kr/life/post/calendarData/",
+    "form": null,
+    "retrieved_utc": "2026-10-19T07:05:32.858440+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  }
+]

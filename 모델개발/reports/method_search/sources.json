@@ -1,0 +1,118 @@
+[
+  {
+    "id": "lightgbm",
+    "url": "https://lightgbm.readthedocs.io/en/stable/Parameters.html",
+    "received_at_utc": "2026-10-19T16:18:56.994598+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "catboost",
+    "url": "https://catboost.ai/docs/en/concepts/algorithm-main-stages_cat-to-numberic",
+    "received_at_utc": "2026-10-19T16:18:56.995654+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "xgboost",
+    "url": "https://xgboost.readthedocs.io/en/stable/parameter.html",
+    "received_at_utc": "2026-10-19T16:18:56.996144+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "threshold_f1",
+    "url": "https://arxiv.org/abs/1402.1892",
+    "received_at_utc": "2026-10-19T16:18:56.996563+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "focal_loss",
+    "url": "https://arxiv.org/abs/1708.02002",
+    "received_at_utc": "2026-10-19T16:18:56.997715+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "dcrnn",
+    "url": "https://arxiv.org/abs/1707.01926",
+    "received_at_utc": "2026-10-19T16:18:57.015108+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "stgcn",
+    "url": "https://arxiv.org/abs/1709.04875",
+    "received_at_utc": "2026-10-19T16:18:57.017276+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "graph_wavenet",
+    "url": "https://arxiv.org/abs/1906.00121",
+    "received_at_utc": "2026-10-19T16:18:57.019890+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "agcrn",
+    "url": "https://arxiv.org/abs/2007.02842",
+    "received_at_utc": "2026-10-19T16:18:57.022475+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "dlinear",
+    "url": "https://arxiv.org/abs/2205.13504",
+    "received_at_utc": "2026-10-19T16:18:57.024782+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "patchtst",
+    "url": "https://arxiv.org/abs/2211.14730",
+    "received_at_utc": "2026-10-19T16:18:57.027135+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "chronos",
+    "url": "https://arxiv.org/abs/2403.07815",
+    "received_at_utc": "2026-10-19T16:18:57.029366+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "timeseries_cv",
+    "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html",
+    "received_at_utc": "2026-10-19T16:18:57.031889+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "calibration",
+    "url": "https://scikit-learn.org/stable/modules/calibration.html",
+    "received_at_utc": "2026-10-19T16:18:57.035262+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "histgradient",
+    "url": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html",
+    "received_at_utc": "2026-10-19T16:18:57.036019+00:00",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "id": "catboost_primary",
+    "url": "https://raw.githubusercontent.com/catboost/catboost/master/README.md",
+    "received_at_utc": "2026-10-19T16:18:57.038182+00:00",
+    "status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "bytes": 5279,
+    "sha256": "9c874adb3b5ce9e14a0de3f6b646b11b13532b37c84a16450315d017ac47333e",
+    "excerpt": "<img src=http://storage.mds.yandex.net/get-devtools-opensource/250854/catboost-logo.png width=300/>\n\n[Website](https://catboost.ai) |\n[Documentation](https://catboost.ai/docs/) |\n[Tutorials](https://catboost.ai/docs/concepts/tutorials.html) |\n[Instal"
+  },
+  {
+    "id": "agcrn_primary",
+    "url": "https://raw.githubusercontent.com/LeiBAI/AGCRN/master/README.md",
+    "received_at_utc": "2026-10-19T16:18:57.040619+00:00",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "id": "graphwavenet_primary",
+    "url": "https://raw.githubusercontent.com/nnzhan/Graph-WaveNet/master/README.md",
+    "received_at_utc": "2026-10-19T16:18:57.045456+00:00",
+    "status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "bytes": 1256,
+    "sha256": "2a8a15d0667c9d59b1fe98a9257cda4378b65dba3690df7f777936515f56eac9",
+    "excerpt": "# Graph WaveNet for Deep Spatial-Temporal Graph Modeling\n\nThis is the original pytorch implementation of Graph WaveNet in the following paper: \n[Graph WaveNet for Deep Spatial-Temporal Graph Modeling, IJCAI 2019] (https://arxiv.org/abs/1906.00121).  "
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "registered_at_utc": "2026-10-20T08:27:51.723902+00:00",
+  "plan_sha256": "69252c51dbb4462612b4be859992adac1a9cdf64812fab48d74736f7e3820d21",
+  "unscored_pilots": [
+    "lightgbm_full_112d",
+    "lightgbm_full_recency28",
+    "lightgbm_full_63",
+    "lightgbm_ordinal",
+    "lightgbm_poisson",
+    "lightgbm_state_experts",
+    "lightgbm_calendar",
+    "lightgbm_prior_year",
+    "lightgbm_kbo",
+    "temporal_mlp24",
+    "temporal_mlp168",
+    "tcn24",
+    "graph_tcn24",
+    "lightgbm_air_lag2",
+    "lightgbm_air_lag3"
+  ],
+  "eligible_count": 15,
+  "all_eligible_unscored": true
+}

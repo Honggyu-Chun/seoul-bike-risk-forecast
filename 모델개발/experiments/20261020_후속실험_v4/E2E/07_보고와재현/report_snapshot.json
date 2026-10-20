@@ -1,0 +1,8 @@
+{
+  "created_at_utc": "2026-10-20T15:45:07.400071+00:00",
+  "final": true,
+  "comparisons": 53,
+  "best_three_fold_main_candidate": "M2_no_weather",
+  "report_code_sha256": "ad9ed7108148c015ffda7ab94732d9af639ab299a9d7a04d3d834d925907de1e",
+  "main_comparison_excludes_archive_tracks": true
+}

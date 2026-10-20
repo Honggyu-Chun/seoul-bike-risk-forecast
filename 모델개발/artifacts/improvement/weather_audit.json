@@ -1,0 +1,28 @@
+{
+  "source": "KMA ASOS Seoul 108 archived hourly observations",
+  "rows": 8760,
+  "source_start": "2025-01-01 00:00:00",
+  "source_end": "2025-12-31 23:00:00",
+  "source_zip_sha256": "8ee85fb216c1537b96c84423986f742968ba3e9c65d10fd978b04ae436eaf1cc",
+  "timezone_assumption": "Both archive timestamps interpreted as Asia/Seoul local time",
+  "features": [
+    "w_temperature_lag1",
+    "w_temperature_lag24",
+    "w_rain_lag1",
+    "w_rain_lag24",
+    "w_wind_lag1",
+    "w_humidity_lag1",
+    "w_pressure_lag1",
+    "w_cloud_lag1",
+    "w_visibility_lag1",
+    "w_snow_lag1",
+    "w_temperature_change23"
+  ],
+  "lags_hours": [
+    1,
+    24
+  ],
+  "observation_time_is_before_input": true,
+  "unknown_rain_snow_stay_missing": true,
+  "limitation": "Historical archive may contain later quality corrections; publication delay and matching live-vintage values are not verified. This is an archived-weather sensitivity experiment, not a verified real-time weather service."
+}

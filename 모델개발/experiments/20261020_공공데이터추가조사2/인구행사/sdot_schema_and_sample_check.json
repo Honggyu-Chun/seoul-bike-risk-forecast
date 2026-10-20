@@ -1,0 +1,13 @@
+{
+  "partial_rows": 68,
+  "source_file_label": "S-DoT_WALK_2025.01.06-01.12.csv",
+  "first_sensing_time": "2025-01-05_23:54:00",
+  "first_registration_time": "2025-01-06 00:08:03",
+  "sensing_to_registration_min_minutes": 11.066666666666666,
+  "sensing_to_registration_max_minutes": 18.116666666666667,
+  "duplicate_sensor_measurement_keys": 17,
+  "location_matched_rows": 68,
+  "location_list_rows": 108,
+  "location_join_rule": "numeric SERIAL_NO string to 방문자 센서코드; raw strings retained",
+  "scope": "first8192bytes only; not representative; registration is not publication"
+}

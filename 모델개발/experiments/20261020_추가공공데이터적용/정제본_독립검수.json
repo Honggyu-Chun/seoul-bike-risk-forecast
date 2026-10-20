@@ -1,0 +1,14 @@
+{
+  "checked_at_utc": "2026-10-20T15:43:49.850331+00:00",
+  "all_prepared_hashes_match": true,
+  "profile_mass_conservation": true,
+  "departure_graph_mass_conservation": true,
+  "observed_day_denominators_valid": true,
+  "header_only_day_not_filled_zero": true,
+  "fixed_2729_cohort_preserved": true,
+  "unlinked_values_remain_missing": true,
+  "unreported_means_remain_missing": true,
+  "independent_csv_reader_first_day_sums_match": true,
+  "cross_midnight_source_date_semantics_verified": false,
+  "new_model_performance_verified": false
+}

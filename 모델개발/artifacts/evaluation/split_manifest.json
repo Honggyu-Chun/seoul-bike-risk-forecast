@@ -1,0 +1,30 @@
+{
+  "protocol_sha256": "8f9ce76e32e9764f715e7ca185e3d75b1ef785f782156cb43913c11b381393b2",
+  "split_on": "target_time",
+  "splits": {
+    "train": {
+      "rows": 3716886,
+      "zero_cases": 320686,
+      "zero_rate": 0.08627813712876854,
+      "target_start": "2025-01-01T01:00:00.000000000",
+      "target_end": "2025-02-28T23:00:00.000000000"
+    },
+    "validation": {
+      "rows": 916608,
+      "zero_cases": 87281,
+      "zero_rate": 0.09522173055439184,
+      "target_start": "2025-03-01T00:00:00.000000000",
+      "target_end": "2025-03-14T23:00:00.000000000"
+    },
+    "test": {
+      "rows": 1112738,
+      "zero_cases": 112433,
+      "zero_rate": 0.1010417546628227,
+      "target_start": "2025-03-15T00:00:00.000000000",
+      "target_end": "2025-03-31T23:00:00.000000000"
+    }
+  },
+  "cohort_stations": 2729,
+  "missing_labels_excluded": 148408,
+  "test_not_used_for_selection": true
+}

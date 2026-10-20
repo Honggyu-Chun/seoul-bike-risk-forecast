@@ -1,0 +1,50 @@
+{
+  "objective": "폭넓은 데이터와 방법론 조사 및 승인 범위 내 실제 성능 개선 검증",
+  "status": "complete_research_and_design",
+  "phase": "research_and_design_delivered",
+  "scope_question": null,
+  "model_training_started": false,
+  "service_development_started": false,
+  "previous_goal_turn_classification": "직전 턴의 이전 재확인은 연구 목표에 직접 진전이 없었으므로 이번 턴에서 출처·원본·기존 오류를 다시 확인하고 조사·설계를 완성함",
+  "authoritative_current_state": {
+    "root": "D:\\P실무\\모델개발",
+    "existing_screen_candidates": 45,
+    "existing_forward_candidates": 15,
+    "already_opened_final_test": "2025-04-15/2025-05-14",
+    "existing_B1_f1": 0.72959334,
+    "existing_M2_f1": 0.74070223,
+    "prepared_panel_end": "2025-05-14T23:00",
+    "locally_available_but_not_in_prepared_panel": "2025-05-15/2025-06-30",
+    "cpu": "Intel Core i7-1195G7, 4 cores / 8 logical processors",
+    "physical_memory_bytes": 16873869312,
+    "gpu": "Intel Iris Xe; CUDA GPU not detected",
+    "old_protocol_memory_limit_gib": 32,
+    "resource_plan_needs_revision": true
+  },
+  "verified_new_evidence": [
+    "공식 OA-22382 목록에서 2025년 3분기 및 4분기 자료의 존재를 확인함",
+    "로컬 2025년 2분기 ZIP에 4월, 5월, 6월 CSV가 들어 있음을 확인함",
+    "prepare_panel()이 2025-05-14까지만 사용함을 소스에서 확인함",
+    "기존 신경망은 24시간, 4채널, 최대 120만 학습 표본, 최대 8에포크, CPU 1스레드의 제한된 비교임을 확인함"
+  ],
+  "next_actions": [
+    "현재 범위에서 필수 남은 작업 없음",
+    "향후 사용자가 모델 실험을 요청하면 데이터 정의·사용 이력·제공 시점을 E0에서 점검하고 설계를 확정함"
+  ],
+  "scope_resolution": "사용자가 이번에는 조사와 실험 설계까지만 진행한다고 확정함",
+  "completed_at_utc": "2026-10-20T06:06:13.230666+00:00",
+  "model_implementation_started": false,
+  "new_performance_evaluated": false,
+  "artifacts": [
+    "README.md",
+    "데이터조사.md",
+    "방법론비교.md",
+    "기존오류와우선순위.md",
+    "핵심논문검토.md",
+    "후속검증계획.md",
+    "sources.tsv",
+    "methods_catalog.csv",
+    "research_audit.json"
+  ],
+  "scope_audit": "사용자의 후속 범위 확정에 따라 실제 성능 개선 실험은 이번 완료 요건에서 제외함"
+}

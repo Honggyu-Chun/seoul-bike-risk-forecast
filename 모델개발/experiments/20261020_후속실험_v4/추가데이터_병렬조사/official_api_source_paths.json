@@ -1,0 +1,78 @@
+{
+  "source_url": "https://api.github.com/repos/open-meteo/open-meteo/git/trees/main?recursive=1",
+  "tree_sha": "7afe0fdbab87fe7948518a17346af9df907680b4",
+  "paths": [
+    {
+      "path": "Sources/App/Gfs/GfsDomain.swift",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "23e125ca20f28179e5756c3c96bff2d3a509fda0",
+      "size": 13541,
+      "url": "https://api.github.com/repos/open-meteo/open-meteo/git/blobs/23e125ca20f28179e5756c3c96bff2d3a509fda0"
+    },
+    {
+      "path": "Sources/App/Gfs/GfsDomainVariable.swift",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "351acb58f73e5253ead001b2cfc549fae227ef8e",
+      "size": 4055,
+      "url": "https://api.github.com/repos/open-meteo/open-meteo/git/blobs/351acb58f73e5253ead001b2cfc549fae227ef8e"
+    },
+    {
+      "path": "Sources/App/Helper/OmFileSplitter.swift",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1cef1e3338d76703fc6af25f9304bcb0114d173d",
+      "size": 44083,
+      "url": "https://api.github.com/repos/open-meteo/open-meteo/git/blobs/1cef1e3338d76703fc6af25f9304bcb0114d173d"
+    },
+    {
+      "path": "Sources/App/Helper/Reader/GenericReader.swift",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "097e48439f6a0589317829bcbc20cb7f1e8d21a6",
+      "size": 11991,
+      "url": "https://api.github.com/repos/open-meteo/open-meteo/git/blobs/097e48439f6a0589317829bcbc20cb7f1e8d21a6"
+    },
+    {
+      "path": "Sources/App/Helper/Reader/GenericReaderCached.swift",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0c211e67e0d7e19931a755f910cfecc8fabe3bc1",
+      "size": 1902,
+      "url": "https://api.github.com/repos/open-meteo/open-meteo/git/blobs/0c211e67e0d7e19931a755f910cfecc8fabe3bc1"
+    },
+    {
+      "path": "Sources/App/Helper/Reader/GenericReaderDerived.swift",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "368d7d06ddcc62e7734de8ed933c06afcf1561d6",
+      "size": 4564,
+      "url": "https://api.github.com/repos/open-meteo/open-meteo/git/blobs/368d7d06ddcc62e7734de8ed933c06afcf1561d6"
+    },
+    {
+      "path": "Sources/App/Helper/Reader/GenericReaderMixerRaw.swift",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7a5d1c697dc29e0ba3b1662549d47d26b52ac3f3",
+      "size": 6998,
+      "url": "https://api.github.com/repos/open-meteo/open-meteo/git/blobs/7a5d1c697dc29e0ba3b1662549d47d26b52ac3f3"
+    },
+    {
+      "path": "Sources/App/Helper/Reader/GenericReaderMulti.swift",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4dedd0c3c19b235aea59e22c530d521425381026",
+      "size": 5369,
+      "url": "https://api.github.com/repos/open-meteo/open-meteo/git/blobs/4dedd0c3c19b235aea59e22c530d521425381026"
+    },
+    {
+      "path": "Tests/AppTests/GenericReaderMissingRunTests.swift",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a28fc8ba8810c2b208de896d538b5a3e2a50e449",
+      "size": 11409,
+      "url": "https://api.github.com/repos/open-meteo/open-meteo/git/blobs/a28fc8ba8810c2b208de896d538b5a3e2a50e449"
+    }
+  ]
+}

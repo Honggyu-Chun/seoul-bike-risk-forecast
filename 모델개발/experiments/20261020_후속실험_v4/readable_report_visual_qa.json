@@ -1,0 +1,30 @@
+{
+  "reviewed_at_utc": "2026-10-20T09:26:58.130887+00:00",
+  "report_sha256": "326b8e1d68a62a0035a5af2810a46ca5ccb543884a62ac17299064c41db5d3de",
+  "review_scope": "25-result progress report, not final completed experiment report",
+  "browser": "in-app browser, local readonly review",
+  "sections_visually_inspected": [
+    "opening summary",
+    "additional AI performance and transition false-positive table",
+    "paired day-block table"
+  ],
+  "rendered_images_loaded": 11,
+  "rendered_tables_checked": 4,
+  "table_css_widths_px": [
+    1080,
+    1080,
+    1080,
+    1080
+  ],
+  "table_available_widths_px": [
+    1080,
+    1080,
+    1080,
+    1080
+  ],
+  "missing_images": 0,
+  "table_overflow_observed": false,
+  "scatter_overlapping_labels_fixed": true,
+  "visible_timestamp_timezone": "Asia/Seoul",
+  "final_report_review": false
+}

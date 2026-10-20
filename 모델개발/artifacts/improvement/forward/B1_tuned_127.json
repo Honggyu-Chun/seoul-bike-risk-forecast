@@ -1,0 +1,97 @@
+{
+  "name": "B1_tuned_127",
+  "kind": "lgb",
+  "spec": {
+    "name": "B1_tuned_127",
+    "kind": "lgb",
+    "group": "basic",
+    "rounds": 1000,
+    "leaves": 127,
+    "leaf": 200,
+    "select_f1": true
+  },
+  "status": "ok",
+  "validation": {
+    "n": 915936,
+    "zero_cases": 79549,
+    "zero_rate": 0.08684995458197953,
+    "f1": 0.7670925065643305,
+    "precision": 0.7703307429991253,
+    "recall": 0.7638813812870054,
+    "average_precision": 0.846823722822048,
+    "brier": 0.02932135947048664,
+    "tn": 818270,
+    "fp": 18117,
+    "fn": 18783,
+    "tp": 60766,
+    "threshold": null,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.4,
+      "f1": 0.7670925065643305
+    }
+  },
+  "rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.39,
+    "positive_threshold": 0.4,
+    "f1": 0.7670925065643305
+  },
+  "fit": {
+    "paths": [
+      "B1_tuned_127.txt"
+    ],
+    "iterations": [
+      269
+    ]
+  },
+  "features": [
+    "station_code",
+    "hour",
+    "weekday",
+    "weekend",
+    "quantity",
+    "log_quantity",
+    "q_lag_1",
+    "q_lag_2",
+    "q_lag_24",
+    "q_lag_168",
+    "q_mean_3",
+    "q_known_3",
+    "q_mean_24",
+    "q_known_24",
+    "q_change_1",
+    "q_change_3"
+  ],
+  "seconds": 429.5281447689995,
+  "resource_threads": 1,
+  "test_used": false,
+  "selection_rule": {
+    "kind": "current_state",
+    "zero_threshold": 0.39,
+    "positive_threshold": 0.4,
+    "f1": 0.7670925065643305
+  },
+  "selection_validation": {
+    "n": 915936,
+    "zero_cases": 79549,
+    "zero_rate": 0.08684995458197953,
+    "f1": 0.7670925065643305,
+    "precision": 0.7703307429991253,
+    "recall": 0.7638813812870054,
+    "average_precision": 0.846823722822048,
+    "brier": 0.02932135947048664,
+    "tn": 818270,
+    "fp": 18117,
+    "fn": 18783,
+    "tp": 60766,
+    "threshold": null,
+    "rule": {
+      "kind": "current_state",
+      "zero_threshold": 0.39,
+      "positive_threshold": 0.4,
+      "f1": 0.7670925065643305
+    }
+  }
+}

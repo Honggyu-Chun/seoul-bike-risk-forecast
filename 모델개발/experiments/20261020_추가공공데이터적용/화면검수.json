@@ -1,0 +1,18 @@
+{
+  "checked_at_utc": "2026-10-20T10:36:09.882323+00:00",
+  "method": "in-app browser, local HTTP reports and direct PNG visual inspection",
+  "new_data_report_sha256": "c7e0e2211880ae2f0d10d71bba0b5b1a3d9950eedb81014ce777c69ce78cd043",
+  "new_data_images_loaded": 2,
+  "new_data_table_rows": 8,
+  "new_data_linked_stations_display": "2493/2729 (91.35%)",
+  "main_report_successful_results": 28,
+  "main_report_sha256": "246bb83832d73f48e2aca486f5b1b63dfc168088cf6bf413656bc8f714f6f88d",
+  "main_report_images_loaded": 11,
+  "main_report_tables": 4,
+  "new_data_explanation_link_clicked_and_destination_verified": true,
+  "document_client_width": 1265,
+  "document_scroll_width": 1265,
+  "horizontal_overflow": false,
+  "plot_title_clipping_repaired_and_visually_reviewed": true,
+  "scope": "Progress reports, not final model completion or mobile-layout validation"
+}

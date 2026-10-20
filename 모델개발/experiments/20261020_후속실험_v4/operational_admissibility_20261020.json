@@ -1,0 +1,11 @@
+{
+  "reason": "User added the requirement that inputs support real-time prediction",
+  "supersedes": "Unverified archive-only external inputs in the main comparison queue",
+  "preserve_completed_results": true,
+  "main_information": ["quantity observed by input time", "retained past quantity", "pre-announced calendar", "pre-announced event schedule with reliable timestamps"],
+  "required_for_new_external_inputs": ["working live access", "historical training fields correspond to live fields", "measurement or forecast issue time and received_at recorded", "conservative availability lag", "missing data fallback"],
+  "exclude_from_new_main_queue_until_verified": ["archived ASOS weather without a verified live acquisition path", "culture interval snapshot without historical revision timing", "KOPIS features before details and venue connection complete", "forecast archive without issue-time and operational access evidence"],
+  "strong_ensemble_control": "M2_no_weather: 50:50 lightgbm_full and catboost_temporal, same fold refits",
+  "M2_refit_archived_weather_status": "not a completed live-admissible control; existing v3 result preserved separately",
+  "new_Q3_Q4_scores_opened": false
+}

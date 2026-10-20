@@ -1,0 +1,61 @@
+[
+  {
+    "source_id": "tdata_hour_speed",
+    "url": "https://t-data.seoul.go.kr/dataprovide/trafficdataviewopenapi.do?data_id=1015",
+    "checked_at": "2026-10-20T18:40:52.992583+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 40541,
+    "sha256": "bdcb90f383d728b98a49db583d54e9da2e98289b8a645b0591f4017693cf04b9",
+    "final_url": "https://t-data.seoul.go.kr/dataprovide/trafficdataviewopenapi.do?data_id=1015",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\tdata_hour_speed.txt"
+  },
+  {
+    "source_id": "tdata_bus_detour",
+    "url": "https://t-data.seoul.go.kr/dataprovide/trafficdataviewopenapi.do?data_id=1076",
+    "checked_at": "2026-10-20T18:40:52.995659+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 39271,
+    "sha256": "80882429bfd43cbe67e5d462a17840a8eab0525a657a19284f5d30a56fb545a8",
+    "final_url": "https://t-data.seoul.go.kr/dataprovide/trafficdataviewopenapi.do?data_id=1076",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\tdata_bus_detour.txt"
+  },
+  {
+    "source_id": "tdata_smart_intersection",
+    "url": "https://t-data.seoul.go.kr/dataprovide/trafficdataviewfile.do?data_id=20001",
+    "checked_at": "2026-10-20T18:40:52.997675+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 56258,
+    "sha256": "6f8bd13debbd0b269d340e150732ee87f6f0b3c8537803c73d17bf876324b13f",
+    "final_url": "https://t-data.seoul.go.kr/dataprovide/trafficdataviewfile.do?data_id=20001",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\tdata_smart_intersection.txt"
+  },
+  {
+    "source_id": "tdata_sub_arrival_file",
+    "url": "https://t-data.seoul.go.kr/dataprovide/trafficdataviewfile.do?data_id=20007",
+    "checked_at": "2026-10-20T18:40:53.410722+09:00",
+    "method": "urllib.request GET; single attempt; public documentation",
+    "http_status": 200,
+    "bytes": 62986,
+    "sha256": "c2b1bfe6adf7e14e72fffc18ab1e077d35787f66b81606986a83b077b2e14822",
+    "final_url": "https://t-data.seoul.go.kr/dataprovide/trafficdataviewfile.do?data_id=20007",
+    "access_result": "success",
+    "text_file": "D:\\P실무\\모델개발\\experiments\\20261020_공공데이터추가조사2\\교통흐름\\공식문서\\tdata_sub_arrival_file.txt"
+  },
+  {
+    "source_id": "topis_volume_2025_file_list",
+    "url": "https://topis.seoul.go.kr/refroom/selectRefRoomListASC.do?blbdDivCd=08&bdwrDivCd=2025&mainBdwrRowNum=12",
+    "checked_at": "2026-10-20T18:40:53.912614+09:00",
+    "method": "GET public endpoint directly referenced in official public HTML",
+    "http_status": 200,
+    "bytes": 367,
+    "sha256": "871d9e4869e429d407f61d925cd7f875f14bbdf8680cb670e431274eb794f05d",
+    "access_result": "failed; no retry or bypass",
+    "error_type": "JSONDecodeError"
+  }
+]

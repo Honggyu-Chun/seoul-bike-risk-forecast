@@ -1,0 +1,5 @@
+{
+  "pid": 41702,
+  "started_at_utc": "2026-10-19T17:17:14.279176+00:00",
+  "checkpoint_change": "Unfinished non-baseline LightGBM cases select by validation F1; completed trials remain unchanged. No new test used."
+}

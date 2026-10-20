@@ -1,0 +1,842 @@
+[
+  {
+    "station_id":1388,
+    "name":" 돈암초교입구 버스정류장(한성대입구역 방면)",
+    "latitude":37.5906040896,
+    "longitude":127.0106135519,
+    "origin_id":0
+  },
+  {
+    "station_id":1191,
+    "name":" 마곡역 버스정류장(마곡나루역1번출구, 웰튼병원 방면)",
+    "latitude":37.5607902769,
+    "longitude":126.8271478558,
+    "origin_id":1
+  },
+  {
+    "station_id":1139,
+    "name":" 용문사 버스정류장",
+    "latitude":37.5389464509,
+    "longitude":126.8641083209,
+    "origin_id":2
+  },
+  {
+    "station_id":4271,
+    "name":" 충정로역 1번 출구",
+    "latitude":37.5584545311,
+    "longitude":126.9623426069,
+    "origin_id":3
+  },
+  {
+    "station_id":4345,
+    "name":"반포역 4번출구",
+    "latitude":37.5074339838,
+    "longitude":127.0105946679,
+    "origin_id":4
+  },
+  {
+    "station_id":1925,
+    "name":" 동양미래대학교 정문 옆",
+    "latitude":37.5008510648,
+    "longitude":126.8683065277,
+    "origin_id":5
+  },
+  {
+    "station_id":1654,
+    "name":" 당고개입구 오거리",
+    "latitude":37.6646237262,
+    "longitude":127.0753649548,
+    "origin_id":6
+  },
+  {
+    "station_id":3671,
+    "name":" 둔촌동역교차로",
+    "latitude":37.528803295,
+    "longitude":127.1368893042,
+    "origin_id":7
+  },
+  {
+    "station_id":1730,
+    "name":" 도봉산역 교차로 앞",
+    "latitude":37.6874757112,
+    "longitude":127.0466392811,
+    "origin_id":8
+  },
+  {
+    "station_id":1170,
+    "name":" 강서구보건소",
+    "latitude":37.5491947467,
+    "longitude":126.8682134542,
+    "origin_id":9
+  },
+  {
+    "station_id":539,
+    "name":" 군자교교차로",
+    "latitude":37.560483071,
+    "longitude":127.074650642,
+    "origin_id":10
+  },
+  {
+    "station_id":1180,
+    "name":" 마곡엠밸리 15단지(1502동) 건너편",
+    "latitude":37.5564209971,
+    "longitude":126.829909011,
+    "origin_id":11
+  },
+  {
+    "station_id":1825,
+    "name":" 한신아파트 앞 육교 아래",
+    "latitude":37.4543130107,
+    "longitude":126.8899449303,
+    "origin_id":12
+  },
+  {
+    "station_id":664,
+    "name":" 서울시립대 건설공학관",
+    "latitude":37.5852332721,
+    "longitude":127.0573102509,
+    "origin_id":13
+  },
+  {
+    "station_id":1410,
+    "name":" 면목 대원칸타빌아파트",
+    "latitude":37.5777618346,
+    "longitude":127.0916628061,
+    "origin_id":14
+  },
+  {
+    "station_id":5860,
+    "name":"어울림병원 앞",
+    "latitude":37.5127656615,
+    "longitude":126.9203249763,
+    "origin_id":15
+  },
+  {
+    "station_id":590,
+    "name":" 건국대학교 (입학정보관)",
+    "latitude":37.5397894926,
+    "longitude":127.074729187,
+    "origin_id":16
+  },
+  {
+    "station_id":4855,
+    "name":" 거여5단지 503동 앞",
+    "latitude":37.4899740899,
+    "longitude":127.1465183586,
+    "origin_id":17
+  },
+  {
+    "station_id":4583,
+    "name":" 의정관",
+    "latitude":37.5316898687,
+    "longitude":126.9180422644,
+    "origin_id":18
+  },
+  {
+    "station_id":5506,
+    "name":"월드컵참누리아파트",
+    "latitude":37.5723900065,
+    "longitude":126.9053266871,
+    "origin_id":19
+  },
+  {
+    "station_id":4599,
+    "name":" 대림우성아파트 사거리",
+    "latitude":37.4959227209,
+    "longitude":126.9001645707,
+    "origin_id":20
+  },
+  {
+    "station_id":5315,
+    "name":" 당고개역 앞",
+    "latitude":37.6709402115,
+    "longitude":127.0802214796,
+    "origin_id":21
+  },
+  {
+    "station_id":1543,
+    "name":" 수유1동 주민센터",
+    "latitude":37.6305106469,
+    "longitude":127.0192328455,
+    "origin_id":22
+  },
+  {
+    "station_id":342,
+    "name":" 대학로 마로니에공원",
+    "latitude":37.5788763154,
+    "longitude":127.0028881305,
+    "origin_id":23
+  },
+  {
+    "station_id":3651,
+    "name":" 개포동역 4번출구",
+    "latitude":37.4888398413,
+    "longitude":127.0664223234,
+    "origin_id":24
+  },
+  {
+    "station_id":2420,
+    "name":"학여울역 사거리(LG베스트샵 앞)",
+    "latitude":37.4959045258,
+    "longitude":127.0696003888,
+    "origin_id":25
+  },
+  {
+    "station_id":823,
+    "name":" 효창동주민센터 앞",
+    "latitude":37.5424808317,
+    "longitude":126.9607309995,
+    "origin_id":26
+  },
+  {
+    "station_id":2173,
+    "name":" 당곡사거리",
+    "latitude":37.4899079142,
+    "longitude":126.9281142076,
+    "origin_id":27
+  },
+  {
+    "station_id":769,
+    "name":"CBS방송국 앞",
+    "latitude":37.52828503,
+    "longitude":126.8737787586,
+    "origin_id":28
+  },
+  {
+    "station_id":2189,
+    "name":" 봉천역 4번출구",
+    "latitude":37.4821364429,
+    "longitude":126.9415351886,
+    "origin_id":29
+  },
+  {
+    "station_id":498,
+    "name":"연남동주민센터 앞",
+    "latitude":37.5641499369,
+    "longitude":126.9226138069,
+    "origin_id":30
+  },
+  {
+    "station_id":299,
+    "name":"여의도 순복음교회",
+    "latitude":37.532174435,
+    "longitude":126.9238581126,
+    "origin_id":31
+  },
+  {
+    "station_id":1006,
+    "name":" 롯데캐슬 115동앞",
+    "latitude":37.5553715818,
+    "longitude":127.1437316208,
+    "origin_id":32
+  },
+  {
+    "station_id":2305,
+    "name":" MCM 본사 직영점 앞",
+    "latitude":37.5206460178,
+    "longitude":127.0329920067,
+    "origin_id":33
+  },
+  {
+    "station_id":1998,
+    "name":" 고척교 교차로",
+    "latitude":37.4988012473,
+    "longitude":126.8724738858,
+    "origin_id":34
+  },
+  {
+    "station_id":2605,
+    "name":" 복정역 1번 출구 앞",
+    "latitude":37.4706906294,
+    "longitude":127.1275000063,
+    "origin_id":35
+  },
+  {
+    "station_id":447,
+    "name":" 신영동삼거리",
+    "latitude":37.6044042962,
+    "longitude":126.9616167793,
+    "origin_id":36
+  },
+  {
+    "station_id":1843,
+    "name":" 독산고등학교",
+    "latitude":37.4763787058,
+    "longitude":126.9101172088,
+    "origin_id":37
+  },
+  {
+    "station_id":5780,
+    "name":"송파세무서",
+    "latitude":37.5259025829,
+    "longitude":127.1128653746,
+    "origin_id":38
+  },
+  {
+    "station_id":755,
+    "name":" 목동1단지아파트 상가 앞",
+    "latitude":37.5371050776,
+    "longitude":126.8814327354,
+    "origin_id":39
+  },
+  {
+    "station_id":1516,
+    "name":" 우이초등학교 후문 옆",
+    "latitude":37.6387837428,
+    "longitude":127.0166435559,
+    "origin_id":40
+  },
+  {
+    "station_id":1394,
+    "name":"길음뉴타운 래미안9단지",
+    "latitude":37.6019606223,
+    "longitude":127.0206445263,
+    "origin_id":41
+  },
+  {
+    "station_id":5332,
+    "name":"마들역 4번 출구",
+    "latitude":37.6631200402,
+    "longitude":127.0584998447,
+    "origin_id":42
+  },
+  {
+    "station_id":2335,
+    "name":" 3호선 매봉역 3번출구앞",
+    "latitude":37.4869362937,
+    "longitude":127.0458053577,
+    "origin_id":43
+  },
+  {
+    "station_id":2190,
+    "name":"도원맨션",
+    "latitude":37.4827114768,
+    "longitude":126.9393270166,
+    "origin_id":44
+  },
+  {
+    "station_id":794,
+    "name":"양천문화회관",
+    "latitude":37.5165276688,
+    "longitude":126.8618451347,
+    "origin_id":45
+  },
+  {
+    "station_id":1437,
+    "name":" 늘푸른공원 앞",
+    "latitude":37.5839567236,
+    "longitude":127.0788265229,
+    "origin_id":46
+  },
+  {
+    "station_id":1132,
+    "name":" 등촌역 7번출구",
+    "latitude":37.551302304,
+    "longitude":126.8625547731,
+    "origin_id":47
+  },
+  {
+    "station_id":1503,
+    "name":" 강북구청사거리(수유역 8번출구)",
+    "latitude":37.6383823244,
+    "longitude":127.0258068961,
+    "origin_id":48
+  },
+  {
+    "station_id":4809,
+    "name":" 동성1,2차 아파트 앞",
+    "latitude":37.6097980073,
+    "longitude":127.0969073235,
+    "origin_id":49
+  },
+  {
+    "station_id":1328,
+    "name":" 월곡역 3번출구",
+    "latitude":37.6037739973,
+    "longitude":127.0422429407,
+    "origin_id":50
+  },
+  {
+    "station_id":1513,
+    "name":" 강북구청 뒷편",
+    "latitude":37.6384586361,
+    "longitude":127.0256196554,
+    "origin_id":51
+  },
+  {
+    "station_id":1836,
+    "name":" 금천구립 독산도서관",
+    "latitude":37.4673357376,
+    "longitude":126.9075401202,
+    "origin_id":52
+  },
+  {
+    "station_id":309,
+    "name":" 광화문역 6번출구 옆 B",
+    "latitude":37.5693066661,
+    "longitude":126.9758856586,
+    "origin_id":53
+  },
+  {
+    "station_id":2263,
+    "name":" 바우뫼문화복지회관",
+    "latitude":37.4722805534,
+    "longitude":127.0260362256,
+    "origin_id":54
+  },
+  {
+    "station_id":268,
+    "name":" 그랜드컨벤션센터 앞",
+    "latitude":37.5351113903,
+    "longitude":126.9014651286,
+    "origin_id":55
+  },
+  {
+    "station_id":1366,
+    "name":" 일신초등학교 옆",
+    "latitude":37.5992635888,
+    "longitude":127.0407098343,
+    "origin_id":56
+  },
+  {
+    "station_id":1322,
+    "name":" 래미안라센트아파트 103동 앞",
+    "latitude":37.598902335,
+    "longitude":127.0381505328,
+    "origin_id":57
+  },
+  {
+    "station_id":2381,
+    "name":" 언주역 6번출구앞",
+    "latitude":37.5068605015,
+    "longitude":127.0350744764,
+    "origin_id":58
+  },
+  {
+    "station_id":1416,
+    "name":" 상봉역 3번출구",
+    "latitude":37.595672073,
+    "longitude":127.0854750777,
+    "origin_id":59
+  },
+  {
+    "station_id":1172,
+    "name":" 가양3동 주민센터",
+    "latitude":37.5604501938,
+    "longitude":126.859619436,
+    "origin_id":60
+  },
+  {
+    "station_id":855,
+    "name":"이촌역5번출구 앞",
+    "latitude":37.5225198402,
+    "longitude":126.9720833571,
+    "origin_id":61
+  },
+  {
+    "station_id":165,
+    "name":" 중앙근린공원",
+    "latitude":37.5743930851,
+    "longitude":126.9130691294,
+    "origin_id":62
+  },
+  {
+    "station_id":1564,
+    "name":"4.19민주묘지역 1번출구",
+    "latitude":37.6496991703,
+    "longitude":127.0149660924,
+    "origin_id":63
+  },
+  {
+    "station_id":4453,
+    "name":" 위례중앙푸르지오 201동 앞",
+    "latitude":37.4750818817,
+    "longitude":127.1439978151,
+    "origin_id":64
+  },
+  {
+    "station_id":781,
+    "name":"신정보도육교 아래",
+    "latitude":37.5183973016,
+    "longitude":126.8761440621,
+    "origin_id":65
+  },
+  {
+    "station_id":1041,
+    "name":" 묘곡초등학교",
+    "latitude":37.5594024034,
+    "longitude":127.1542320547,
+    "origin_id":66
+  },
+  {
+    "station_id":674,
+    "name":"고대앞사거리 교통섬",
+    "latitude":37.587004368,
+    "longitude":127.0345833087,
+    "origin_id":67
+  },
+  {
+    "station_id":579,
+    "name":" 마장역 4번출구",
+    "latitude":37.565695937,
+    "longitude":127.0421173087,
+    "origin_id":68
+  },
+  {
+    "station_id":2824,
+    "name":"미래사랑어린이공원 앞",
+    "latitude":37.509454309,
+    "longitude":126.8889637934,
+    "origin_id":69
+  },
+  {
+    "station_id":3770,
+    "name":" 남부순환로 205",
+    "latitude":37.5469209075,
+    "longitude":126.8200945259,
+    "origin_id":70
+  },
+  {
+    "station_id":167,
+    "name":" 연가초등학교 옆",
+    "latitude":37.5797996862,
+    "longitude":126.9163530469,
+    "origin_id":71
+  },
+  {
+    "station_id":1167,
+    "name":" 마곡수명산파크3단지 교차로",
+    "latitude":37.5536381888,
+    "longitude":126.8273885102,
+    "origin_id":72
+  },
+  {
+    "station_id":1999,
+    "name":" 수궁동 성당 주변",
+    "latitude":37.4948824929,
+    "longitude":126.8313584665,
+    "origin_id":73
+  },
+  {
+    "station_id":4830,
+    "name":" 신내 우디안 111동 앞",
+    "latitude":37.6163156385,
+    "longitude":127.1082643348,
+    "origin_id":74
+  },
+  {
+    "station_id":384,
+    "name":" 종로학원본원",
+    "latitude":37.5593501163,
+    "longitude":126.9691713865,
+    "origin_id":75
+  },
+  {
+    "station_id":4514,
+    "name":" 목동성당 앞",
+    "latitude":37.5238215117,
+    "longitude":126.8701176917,
+    "origin_id":76
+  },
+  {
+    "station_id":348,
+    "name":" 독립문역 사거리",
+    "latitude":37.5710838105,
+    "longitude":126.9606192461,
+    "origin_id":77
+  },
+  {
+    "station_id":2187,
+    "name":" 현대시장사거리",
+    "latitude":37.4869548286,
+    "longitude":126.9468585238,
+    "origin_id":78
+  },
+  {
+    "station_id":4643,
+    "name":"한가람아파트 앞",
+    "latitude":37.519284064,
+    "longitude":126.9724347409,
+    "origin_id":79
+  },
+  {
+    "station_id":2145,
+    "name":" 은천초등학교 육교",
+    "latitude":37.4857010945,
+    "longitude":126.9421994204,
+    "origin_id":80
+  },
+  {
+    "station_id":1295,
+    "name":" 잠실역 8번출구",
+    "latitude":37.5132956227,
+    "longitude":127.1008863541,
+    "origin_id":81
+  },
+  {
+    "station_id":199,
+    "name":" 서울 월드컵 경기장",
+    "latitude":37.5660811788,
+    "longitude":126.8954644942,
+    "origin_id":82
+  },
+  {
+    "station_id":3688,
+    "name":" 상일동산(동아아파트앞 교차로)",
+    "latitude":37.5452649254,
+    "longitude":127.1663448433,
+    "origin_id":83
+  },
+  {
+    "station_id":785,
+    "name":"양천구청, 보건소 사잇길",
+    "latitude":37.5174473622,
+    "longitude":126.867422175,
+    "origin_id":84
+  },
+  {
+    "station_id":3588,
+    "name":"세종대학교(영실관)",
+    "latitude":37.5517680228,
+    "longitude":127.0722966733,
+    "origin_id":85
+  },
+  {
+    "station_id":4703,
+    "name":" 쌍용아파트2단지 정문",
+    "latitude":37.582302552,
+    "longitude":127.0122389631,
+    "origin_id":86
+  },
+  {
+    "station_id":3971,
+    "name":" 순흥안씨묘 건너편",
+    "latitude":37.4571885885,
+    "longitude":126.9085702186,
+    "origin_id":87
+  },
+  {
+    "station_id":2340,
+    "name":" 삼호물산버스정류장(23370) 옆",
+    "latitude":37.4766829336,
+    "longitude":127.0461133145,
+    "origin_id":88
+  },
+  {
+    "station_id":1108,
+    "name":" 공항시장역 2번출구 뒤",
+    "latitude":37.5642977819,
+    "longitude":126.8097445759,
+    "origin_id":89
+  },
+  {
+    "station_id":854,
+    "name":"HID 유족동지회 앞",
+    "latitude":37.5393498235,
+    "longitude":127.0005259612,
+    "origin_id":90
+  },
+  {
+    "station_id":2707,
+    "name":"한강아파트",
+    "latitude":37.5698692426,
+    "longitude":126.843912226,
+    "origin_id":91
+  },
+  {
+    "station_id":4348,
+    "name":"사당역 1번출구",
+    "latitude":37.4757709174,
+    "longitude":126.9832183737,
+    "origin_id":92
+  },
+  {
+    "station_id":4399,
+    "name":"더리브 세종타워 앞",
+    "latitude":37.5436702721,
+    "longitude":127.0568036198,
+    "origin_id":93
+  },
+  {
+    "station_id":3429,
+    "name":"HW컨벤션센터 앞",
+    "latitude":37.5977409332,
+    "longitude":126.9627748384,
+    "origin_id":94
+  },
+  {
+    "station_id":1008,
+    "name":" 암사역 3번출구(국민은행앞)",
+    "latitude":37.5492487502,
+    "longitude":127.1256479654,
+    "origin_id":95
+  },
+  {
+    "station_id":971,
+    "name":" 역촌 센트레빌 아파트",
+    "latitude":37.6028887596,
+    "longitude":126.9071549518,
+    "origin_id":96
+  },
+  {
+    "station_id":1759,
+    "name":"서울북부지방법원 앞",
+    "latitude":37.6783179028,
+    "longitude":127.0486833892,
+    "origin_id":97
+  },
+  {
+    "station_id":2616,
+    "name":" 거여동 사거리",
+    "latitude":37.4977946257,
+    "longitude":127.1399782478,
+    "origin_id":98
+  },
+  {
+    "station_id":1611,
+    "name":" 과기대 입구(우)",
+    "latitude":37.6295695598,
+    "longitude":127.0779478997,
+    "origin_id":99
+  },
+  {
+    "station_id":414,
+    "name":" 상암동주민센터 옆",
+    "latitude":37.5786474526,
+    "longitude":126.8948819846,
+    "origin_id":100
+  },
+  {
+    "station_id":2084,
+    "name":"e편한세상 상도노빌리티 앞",
+    "latitude":37.504026696,
+    "longitude":126.9460014786,
+    "origin_id":101
+  },
+  {
+    "station_id":3654,
+    "name":" 강동리버스트4단지아파트 405동 앞",
+    "latitude":37.5718370035,
+    "longitude":127.1735857162,
+    "origin_id":102
+  },
+  {
+    "station_id":4860,
+    "name":" 가락쌍용2차아파트 103동",
+    "latitude":37.5027808762,
+    "longitude":127.1220970286,
+    "origin_id":103
+  },
+  {
+    "station_id":3935,
+    "name":"고대구로병원 앞",
+    "latitude":37.4921974738,
+    "longitude":126.8842705182,
+    "origin_id":104
+  },
+  {
+    "station_id":1034,
+    "name":" 고덕동 래미안 힐스테이트",
+    "latitude":37.561715108,
+    "longitude":127.1521520525,
+    "origin_id":105
+  },
+  {
+    "station_id":5865,
+    "name":"더리브오피스텔 앞",
+    "latitude":37.5183902215,
+    "longitude":126.9123156475,
+    "origin_id":106
+  },
+  {
+    "station_id":5100,
+    "name":"강서도로사업소",
+    "latitude":37.5725560312,
+    "longitude":126.8305824521,
+    "origin_id":107
+  },
+  {
+    "station_id":4906,
+    "name":" 섬유센터 앞",
+    "latitude":37.5080111318,
+    "longitude":127.0607326385,
+    "origin_id":108
+  },
+  {
+    "station_id":233,
+    "name":" 양평1동 YP센터 앞",
+    "latitude":37.5294544218,
+    "longitude":126.8910037577,
+    "origin_id":109
+  },
+  {
+    "station_id":1526,
+    "name":" 강북종합시장 앞",
+    "latitude":37.6411838594,
+    "longitude":127.024351093,
+    "origin_id":110
+  },
+  {
+    "station_id":3407,
+    "name":"안국동사거리(신)",
+    "latitude":37.5752667988,
+    "longitude":126.9831815786,
+    "origin_id":111
+  },
+  {
+    "station_id":1452,
+    "name":" 겸재교 진입부",
+    "latitude":37.5853099872,
+    "longitude":127.075532472,
+    "origin_id":112
+  },
+  {
+    "station_id":1076,
+    "name":" 천동초교입구사거리 버스정류장(십자성마을 방면)",
+    "latitude":37.5410209542,
+    "longitude":127.1410712777,
+    "origin_id":113
+  },
+  {
+    "station_id":4713,
+    "name":" 현대 뜨레비앙 아파트 앞",
+    "latitude":37.5746965299,
+    "longitude":126.9914652231,
+    "origin_id":114
+  },
+  {
+    "station_id":2069,
+    "name":" 숭실대 입구역3번 출구 앞",
+    "latitude":37.496932474,
+    "longitude":126.9529938537,
+    "origin_id":115
+  },
+  {
+    "station_id":1258,
+    "name":" 가락미륭아파트 앞",
+    "latitude":37.4935037931,
+    "longitude":127.1300200317,
+    "origin_id":116
+  },
+  {
+    "station_id":969,
+    "name":" 은평 지웰테라스",
+    "latitude":37.6432901415,
+    "longitude":126.9332672808,
+    "origin_id":117
+  },
+  {
+    "station_id":353,
+    "name":" 재동초교 앞 삼거리",
+    "latitude":37.5788893468,
+    "longitude":126.9850211406,
+    "origin_id":118
+  },
+  {
+    "station_id":2321,
+    "name":" 학여울역 사거리",
+    "latitude":37.4959636743,
+    "longitude":127.0699892559,
+    "origin_id":119
+  }
+]
