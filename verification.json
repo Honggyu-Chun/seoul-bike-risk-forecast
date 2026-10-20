@@ -1,0 +1,64 @@
+{
+  "verified_at_utc": "2026-10-20T00:39:11.676335+00:00",
+  "repository": "Honggyu-Chun/P_Project",
+  "branch": "transfer/local-codex-20261020",
+  "verified_snapshot_commit": "e56e9b719ccb88955150e369d91523235efbbc54",
+  "fresh_github_clone": true,
+  "git_fsck_full": "passed",
+  "archive_bytes": 1313671858,
+  "archive_sha256": "3f153b2e5f77103c317b8adfc236ffbeffd7336451bbfff0eda95c9e76962abc",
+  "verified_downloaded_parts": 27,
+  "restored_project_files": 593,
+  "manifest_file_sha256_matches": 592,
+  "frozen_protocol_and_research_code": "unchanged",
+  "frozen_calibration_files": "unchanged",
+  "fresh_dependency_install": {
+    "status": "passed",
+    "new_virtual_environment": true,
+    "mode": "frozen lock, research group, package downloads enabled for missing cache entries",
+    "versions": {
+      "python": "3.12.14",
+      "packages": {
+        "numpy": "2.5.4",
+        "scikit-learn": "1.9.1",
+        "lightgbm": "4.7.0",
+        "torch": "2.6.0+cpu",
+        "catboost": "1.2.10",
+        "xgboost-cpu": "3.4.1",
+        "fastapi": "0.148.0"
+      }
+    },
+    "initial_offline_attempt": "cache missing Playwright wheel; retried frozen install with package network access"
+  },
+  "restored_tests": {
+    "status": "passed",
+    "counts": {
+      "tests": 40,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "newly_installed_environment": true
+  },
+  "restored_http_checks": {
+    "passed": 8,
+    "checks": [
+      "actual restored Uvicorn server health and data/model readiness",
+      "HTML frontend served",
+      "archived data loaded: 2729 stations",
+      "actual replay candidate search and all three recommendations",
+      "frozen new-period research results and report readiness",
+      "real Word report downloaded via restored server",
+      "exact self-contained offline HTML served",
+      "frontend application JavaScript served"
+    ],
+    "server_process_stopped": true
+  },
+  "limits": [
+    "Verification runs on Linux in this cloud; Windows/macOS installation is not verified.",
+    "No models were retrained or final test metrics recomputed."
+  ],
+  "verified_at_kst": "2026-10-20T09:39:11.676349+09:00",
+  "validation_platform": "Linux x86_64; new Python 3.12.14 virtual environment in a fresh GitHub clone",
+  "pytest_junit_sha256": "936a08d5d834d22ced89808b8b399dad2acde32c910cb8bbbf31057bb9acdbed"
+}
