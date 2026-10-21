@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "release_tag": "runtime-20261021",
+  "scope": "Archived 1-hour demo and research starter; not a completed 1/2/3-hour service.",
+  "sources": [
+    "https://data.seoul.go.kr/dataList/OA-22382/F/1/datasetView.do",
+    "https://data.seoul.go.kr/dataList/OA-13252/F/1/datasetView.do"
+  ],
+  "profiles": {
+    "demo": {
+      "description": "기존 1시간 시제품 실행",
+      "depends_on": [],
+      "archive": {
+        "name": "demo-runtime-20261021.zip",
+        "url": "https://github.com/Honggyu-Chun/seoul-bike-risk-forecast/releases/download/runtime-20261021/demo-runtime-20261021.zip",
+        "bytes": 28553133,
+        "sha256": "961232219e168a579be70a2fb0694ae65ab80fd4a3a57583e6348d85728efd49"
+      },
+      "files": [
+        {
+          "path": "data/processed/rider_stations.parquet",
+          "bytes": 192078,
+          "sha256": "4273bd8b07d31868381f5e186c2cb039166bc3ed01e3a714bf41404cc2d099e4"
+        },
+        {
+          "path": "data/processed/rider_q1_panel.npz",
+          "bytes": 3432410,
+          "sha256": "b0314ce9ba827ac9d53d73774fb161f505759a712379d7fe74dd520bff72128d"
+        },
+        {
+          "path": "artifacts/evaluation/test_predictions.parquet",
+          "bytes": 19143477,
+          "sha256": "8344ad32dfb98b59bc7b73fe1c6c91022393acf06f01515e839f6d6748345e60"
+        },
+        {
+          "path": "artifacts/evaluation/recommendation_queries.parquet",
+          "bytes": 64296,
+          "sha256": "c8094e828b22b669287d38df171294ae0589fcb80d213e62a5c2c58efe59bc09"
+        },
+        {
+          "path": "artifacts/evaluation/station_metrics.parquet",
+          "bytes": 240353,
+          "sha256": "d5dd00408ae0a906f02df6e94d5402c96050f89d72feb8e1af73a7d39fb15227"
+        },
+        {
+          "path": "artifacts/models/metadata.json",
+          "bytes": 32672,
+          "sha256": "5c98886c4cc17c59b5c1dabc320cb4ae87df13b6c05c78e35d1f8ac0277e5bde"
+        },
+        {
+          "path": "artifacts/models/B1.txt",
+          "bytes": 4724183,
+          "sha256": "f51d3c6694c8bb099c58363c169bd192b2d6622075fee57906ec4268d32dce61"
+        },
+        {
+          "path": "artifacts/models/M1.txt",
+          "bytes": 3193250,
+          "sha256": "1f171b93aa8d64d647fcb260054262bafac3c5397067793ef7febd8dc213e4cb"
+        },
+        {
+          "path": "artifacts/models/B1S.txt",
+          "bytes": 3397562,
+          "sha256": "bf6afc52319383de1a92a230b2549cc9232f320b6404cac0ab5481c91d24f49d"
+        },
+        {
+          "path": "deliverables/따릉이_시민용_오프라인데모.html",
+          "bytes": 4961509,
+          "sha256": "82bc3ae628795e276847d7568e166dd81aa0efa5307ce4ba7964d18a3efe0cdd"
+        },
+        {
+          "path": "deliverables/따릉이_성능개선_실제실험결과_쉬운보고서.docx",
+          "bytes": 78333,
+          "sha256": "16ec854c346f7140063fe24a48aaf0b2e2ee99d8fc97ecd2180240e7a570cafc"
+        },
+        {
+          "path": "deliverables/따릉이_성능개선_실제실험결과_쉬운보고서.pdf",
+          "bytes": 558075,
+          "sha256": "2bd7c2dca2f6e131f4b239e652f678e9dbdcaf0d6b1afc5d5aaf7976ec82f914"
+        }
+      ]
+    },
+    "research": {
+      "description": "2024·2025 상반기 패널과 A 구간 LightGBM 기준 모델",
+      "depends_on": [
+        "demo"
+      ],
+      "archive": {
+        "name": "research-runtime-20261021.zip",
+        "url": "https://github.com/Honggyu-Chun/seoul-bike-risk-forecast/releases/download/runtime-20261021/research-runtime-20261021.zip",
+        "bytes": 36105809,
+        "sha256": "e03620319b9a363e4f753550b4112041a003a4dcba558d647d6e9731bfbbcfbb"
+      },
+      "files": [
+        {
+          "path": "artifacts/followup_v4_20261020/data/panel_2024.npz",
+          "bytes": 19891786,
+          "sha256": "dfa34751caee5e120c79632f62fbdd763fc2984f4daead5bce11fe5e9f89381b"
+        },
+        {
+          "path": "artifacts/followup_v4_20261020/data/panel_2025.npz",
+          "bytes": 12009837,
+          "sha256": "d3c9895a41a39a52c9fe8e26f5d4333456c6b8d45c2e460d887d983a88c79233"
+        },
+        {
+          "path": "artifacts/followup_v4_20261020/data/audit_2024.json",
+          "bytes": 5832,
+          "sha256": "05c4ddccd342edeb58f5051a30e886899dc414852d93669751cd24c9f82f4b54"
+        },
+        {
+          "path": "artifacts/followup_v4_20261020/data/audit_2025.json",
+          "bytes": 3355,
+          "sha256": "7e091b95c82011049a0850593260000ae923a599255c4d4d2e2b6e5dc2052299"
+        },
+        {
+          "path": "artifacts/followup_v4_20261020/A/models/lightgbm_basic.txt",
+          "bytes": 8631653,
+          "sha256": "775872bb8cac1cb13e742ff753bdf7177d2c035577e6c398f73f1d8c36c16d88"
+        },
+        {
+          "path": "artifacts/followup_v4_20261020/A/models/lightgbm_basic_calibrator.joblib",
+          "bytes": 847,
+          "sha256": "6bff7a7241265cc411aa48de299bfe22546e9c5bd2c24a54d84919979cd530b6"
+        },
+        {
+          "path": "artifacts/followup_v4_20261020/A/models/lightgbm_full.txt",
+          "bytes": 5198509,
+          "sha256": "c772772fc22c7d7c60b549cdfd92a1b7976c167987cbfba28c0a91cbb8cc4b4e"
+        },
+        {
+          "path": "artifacts/followup_v4_20261020/A/models/lightgbm_full_calibrator.joblib",
+          "bytes": 847,
+          "sha256": "b3fcd298c06a07e1f33c5cc523dfec3ed4a5971fa0fb2a38d9312185394bcbd2"
+        }
+      ]
+    }
+  }
+}

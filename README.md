@@ -6,6 +6,8 @@
 
 가천대학교 AI P-실무프로젝트의 팀 **따릉이**가 수행한다. 수행 기간은 **2026.9.1~2026.12.21**로 한다. 프로젝트 범위는 [최신 과제제안서](과제제안서/AI%20P-실무프로젝트_과제계획서_원본양식작성본_20261020.docx)를 기준으로 설명한다.
 
+처음 참여한 팀원은 **[첫 실행 안내](모델개발/docs/TEAM_SETUP.md)**를 먼저 따른다. Windows에서는 클론 뒤 `SETUP_P_PROJECT.cmd`와 `START_P_PROJECT.cmd`를 순서대로 실행한다. 모델 담당자는 `SETUP_P_PROJECT.cmd research`로 연구 기초 자료도 준비한다.
+
 ## 해결하려는 문제
 
 현재 자전거가 있는 대여소도 이용자가 도착할 때는 비어 있을 수 있다. 가까운 대여소의 수량만으로 판단하기 어려운 상황에서, **같은 이용 예정 시각의 부족 위험과 거리**를 함께 비교하는 선택 도구를 제안한다.
@@ -111,26 +113,22 @@ flowchart LR
    └─ uv.lock                 고정 의존성
 ```
 
-원본 데이터·가공 행렬·학습 가중치·백업·API 키는 일반 Git 파일에 포함하지 않는다. 실제 모델을 실행하려면 필요한 자료를 별도 준비한다. [데이터와 모델 준비 안내](모델개발/docs/DATA_AND_ARTIFACTS.md)에서 공개 범위와 기존 실행 조건을 확인한다.
+원본 전체·대용량 특징 행렬·학습 가중치·백업·API 키는 일반 Git 파일에 포함하지 않는다. 첫 실행에 필요한 데이터·모델은 [릴리스 실행 묶음](https://github.com/Honggyu-Chun/seoul-bike-risk-forecast/releases/tag/runtime-20261021)으로 배포하고 준비 명령이 자동으로 내려받아 해시를 검사한다. 정확한 범위는 [데이터와 모델 준비 안내](모델개발/docs/DATA_AND_ARTIFACTS.md)에서 확인한다.
 
 ## 시작하기
 
-Python **3.12**와 [uv](https://docs.astral.sh/uv/)를 사용한다. 이전 대용량 전달 브랜치를 함께 내려받지 않도록 협업용 `main`만 복제한다.
+Git과 [uv](https://docs.astral.sh/uv/)를 설치한다. 필요한 Python **3.12**와 의존성은 준비 도구가 구성한다. 이전 대용량 전달 브랜치를 함께 내려받지 않도록 협업용 `main`만 복제한다.
 
-```bash
+```powershell
 git clone --single-branch --branch main https://github.com/Honggyu-Chun/seoul-bike-risk-forecast.git
-cd seoul-bike-risk-forecast/모델개발
-uv sync --frozen --group research
-uv run --frozen --no-sync pytest tests/test_followup_v4.py tests/test_public_feature_join.py -q
+cd seoul-bike-risk-forecast
+.\SETUP_P_PROJECT.cmd
+.\START_P_PROJECT.cmd
 ```
 
-위 검사는 작은 검증용 자료로 특징의 시간 조건과 입력 연결을 확인한다. 원본·모델을 준비한 뒤 기존 시제품 서버를 실행한다.
+기본 준비는 약 28.6MB의 실행 데이터·모델을 받아 기존 시제품을 재학습 없이 실행한다. 모델 담당자는 `SETUP_P_PROJECT.cmd research`로 CatBoost·XGBoost·CPU PyTorch와 약 36.1MB의 추가 패널·기준 모델을 준비한다. 기본 과거 재생에는 API 키가 필요하지 않다.
 
-```bash
-uv run --frozen --no-sync uvicorn bike_demo.api:app --host 127.0.0.1 --port 8000
-```
-
-브라우저에서 `http://127.0.0.1:8000`으로 접속한다. 선택적으로 `모델개발/.env.example`을 `.env`로 복사하고 필요한 키만 로컬에서 입력한다. 환경설정만으로 현재 모델이 전체 서울 실시간 운영 검증을 마친 것으로 간주하지 않는다.
+브라우저에서 `http://127.0.0.1:8000`으로 접속한다. 준비 상태 확인·직접 실행·다운로드 실패·모델 실험 준비는 [첫 실행 안내](모델개발/docs/TEAM_SETUP.md)를 따른다. 환경설정만으로 현재 모델이 전체 서울 실시간 운영 검증을 마친 것으로 간주하지 않는다.
 
 ## 협업
 
