@@ -2,15 +2,40 @@
 
 ## 브랜치와 변경 검토
 
-`main`을 협업 기준으로 사용한다. `feature/`, `model/`, `data/`, `docs/` 아래에 작업 목적을 드러내는 브랜치를 만든다. 이전 `transfer/local-codex-20261020`은 백업 전달 이력으로 보존하며 새 개발의 출발점으로 사용하지 않는다.
+`main`을 협업 기준으로 사용한다. **`종류/짧은-영문-작업명`**으로 브랜치를 만든다. 사람·도구 이름 대신 실제 작업 내용을 사용한다. 이전 `transfer/local-codex-20261020`은 백업 전달 이력으로 보존하며 새 개발의 출발점으로 사용하지 않는다.
+
+| 종류 | 용도 | 예시 |
+| --- | --- | --- |
+| `feature/` | 사용자 기능·화면 | `feature/station-time-selector` |
+| `model/` | 모델·특징·평가 | `model/three-hour-baseline` |
+| `data/` | 수집·정제·데이터 연결 | `data/station-location-mapping` |
+| `fix/` | 오류 수정 | `fix/missing-station-history` |
+| `docs/` | 설명·계획서·발표 자료 | `docs/team-guide` |
+| `chore/` | 설치·실행·설정 정비 | `chore/team-setup` |
 
 ```bash
+git config --replace-all remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+git config --add remote.origin.fetch "^refs/heads/transfer/*"
 git switch main
 git pull --ff-only
 git switch -c feature/station-time-selector
 ```
 
+처음 두 줄은 `main`만 클론한 팀원이 작업 브랜치도 동기화하도록 한 번 설정한다. 대용량 `transfer/` 백업은 기본 동기화에서 제외한다. 이미 다른 목적의 fetch 설정을 쓰는 팀원은 자신의 설정을 확인하고 필요한 브랜치만 추가한다.
+
 구현·문서·실험 결과를 필요한 단위로 커밋하고 작업 브랜치를 push한 뒤 `main` 대상으로 Pull Request를 작성한다. 해결하는 문제, 최종 동작, 확인 방법과 남은 제약을 설명한다. 팀원이 검토할 수 있도록 실제 표·화면·검사 결과를 연결한다.
+
+## 커밋 메시지
+
+**한국어 한 줄로 변경 내용만 간단히 작성한다.** 예를 들어 `실행 데이터 준비 명령 추가`, `대여소 검색 오류 수정`, `3시간 기준 모델 비교`, `팀원 실행 안내 정리`처럼 작성한다. 제목에 도구명·자동 생성 문구를 붙이지 않으며 불필요한 접두사와 서명 꼬리말을 추가하지 않는다. 이미 있던 커밋의 작성자·날짜·검증 기록은 바꾸지 않는다.
+
+```bash
+git add README.md
+git commit -m "팀원 실행 안내 정리"
+git push -u origin docs/team-guide
+```
+
+Git 작성자 이름·이메일은 각 팀원의 본인 계정으로 설정한다. API 키·개인 문서·다른 사람의 미완료 변경을 한꺼번에 추가하지 않고 이번 작업의 파일만 명시한다. PR 제목과 병합 커밋도 짧은 한국어로 작성한다.
 
 ## 프로젝트 범위
 

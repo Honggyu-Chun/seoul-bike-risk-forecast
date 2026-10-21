@@ -39,6 +39,7 @@ artifacts/**/report_review_server.json
 *.tfevents
 tmp/
 *.pid
+data/runtime_cache/
 
 # Raw source captures and local backup/runtime state are not collaboration inputs
 experiments/**/source_cache/
