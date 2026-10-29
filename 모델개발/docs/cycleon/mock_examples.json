@@ -1,0 +1,404 @@
+{
+  "_meta": {
+    "kind": "synthetic_fixture",
+    "not_model_performance": true,
+    "fixed_clock_KST": "2026-10-29T14:40:00+09:00"
+  },
+  "status_response": {
+    "service": "CycleOn",
+    "status": "ready",
+    "server_at": "2026-10-29T05:40:00.000000+00:00",
+    "base_at": "2026-10-29T05:00:00.000000+00:00",
+    "supported_targets": [
+      "2026-10-29T06:00:00.000000+00:00",
+      "2026-10-29T07:00:00.000000+00:00",
+      "2026-10-29T08:00:00.000000+00:00"
+    ],
+    "model_bundle_id": "mock-contract-v1",
+    "model_stage": "mock_no_model_no_live_data",
+    "last_precompute_at": "2026-10-29T05:40:00.000000+00:00",
+    "precompute_error": null,
+    "data": {
+      "mode": "synthetic_fixture",
+      "fixed_clock": true,
+      "scenario": "policy-pending"
+    },
+    "latest_inventory_age_limit_seconds": 300,
+    "time_policy": "latest_exact_hour_base; latest_inventory_separate"
+  },
+  "prediction_request": {
+    "station_ids": [
+      "ST-MOCK-1",
+      "ST-MOCK-2",
+      "ST-UNKNOWN"
+    ],
+    "horizons_hours": [
+      1,
+      2,
+      3
+    ]
+  },
+  "prediction_response": {
+    "base_at": "2026-10-29T05:00:00.000000+00:00",
+    "requested_at": "2026-10-29T05:40:00.000000+00:00",
+    "items": [
+      {
+        "station_id": "ST-MOCK-1",
+        "horizon_hours": 1,
+        "target_at": "2026-10-29T06:00:00.000000+00:00",
+        "risk_probability": 0.2,
+        "is_risk": false,
+        "model_id": "mock-fixture",
+        "input_group": "C",
+        "reason": null,
+        "latest_inventory": 2,
+        "latest_inventory_received_at": "2026-10-29T05:39:30.000000+00:00",
+        "latest_inventory_age_seconds": 30,
+        "latest_inventory_observed_at": null
+      },
+      {
+        "station_id": "ST-MOCK-1",
+        "horizon_hours": 2,
+        "target_at": "2026-10-29T07:00:00.000000+00:00",
+        "risk_probability": 0.2,
+        "is_risk": false,
+        "model_id": "mock-fixture",
+        "input_group": "C",
+        "reason": null,
+        "latest_inventory": 2,
+        "latest_inventory_received_at": "2026-10-29T05:39:30.000000+00:00",
+        "latest_inventory_age_seconds": 30,
+        "latest_inventory_observed_at": null
+      },
+      {
+        "station_id": "ST-MOCK-1",
+        "horizon_hours": 3,
+        "target_at": "2026-10-29T08:00:00.000000+00:00",
+        "risk_probability": 0.2,
+        "is_risk": false,
+        "model_id": "mock-fixture",
+        "input_group": "C",
+        "reason": null,
+        "latest_inventory": 2,
+        "latest_inventory_received_at": "2026-10-29T05:39:30.000000+00:00",
+        "latest_inventory_age_seconds": 30,
+        "latest_inventory_observed_at": null
+      },
+      {
+        "station_id": "ST-MOCK-2",
+        "horizon_hours": 1,
+        "target_at": "2026-10-29T06:00:00.000000+00:00",
+        "risk_probability": 0.8,
+        "is_risk": true,
+        "model_id": "mock-fixture",
+        "input_group": "C",
+        "reason": null,
+        "latest_inventory": 0,
+        "latest_inventory_received_at": "2026-10-29T05:39:30.000000+00:00",
+        "latest_inventory_age_seconds": 30,
+        "latest_inventory_observed_at": null
+      },
+      {
+        "station_id": "ST-MOCK-2",
+        "horizon_hours": 2,
+        "target_at": "2026-10-29T07:00:00.000000+00:00",
+        "risk_probability": 0.8,
+        "is_risk": true,
+        "model_id": "mock-fixture",
+        "input_group": "C",
+        "reason": null,
+        "latest_inventory": 0,
+        "latest_inventory_received_at": "2026-10-29T05:39:30.000000+00:00",
+        "latest_inventory_age_seconds": 30,
+        "latest_inventory_observed_at": null
+      },
+      {
+        "station_id": "ST-MOCK-2",
+        "horizon_hours": 3,
+        "target_at": "2026-10-29T08:00:00.000000+00:00",
+        "risk_probability": 0.8,
+        "is_risk": true,
+        "model_id": "mock-fixture",
+        "input_group": "C",
+        "reason": null,
+        "latest_inventory": 0,
+        "latest_inventory_received_at": "2026-10-29T05:39:30.000000+00:00",
+        "latest_inventory_age_seconds": 30,
+        "latest_inventory_observed_at": null
+      },
+      {
+        "station_id": "ST-UNKNOWN",
+        "horizon_hours": 1,
+        "target_at": "2026-10-29T06:00:00.000000+00:00",
+        "risk_probability": null,
+        "is_risk": null,
+        "model_id": null,
+        "input_group": null,
+        "reason": "station_unknown_or_ineligible",
+        "latest_inventory": null,
+        "latest_inventory_received_at": null,
+        "latest_inventory_age_seconds": null,
+        "latest_inventory_observed_at": null
+      },
+      {
+        "station_id": "ST-UNKNOWN",
+        "horizon_hours": 2,
+        "target_at": "2026-10-29T07:00:00.000000+00:00",
+        "risk_probability": null,
+        "is_risk": null,
+        "model_id": null,
+        "input_group": null,
+        "reason": "station_unknown_or_ineligible",
+        "latest_inventory": null,
+        "latest_inventory_received_at": null,
+        "latest_inventory_age_seconds": null,
+        "latest_inventory_observed_at": null
+      },
+      {
+        "station_id": "ST-UNKNOWN",
+        "horizon_hours": 3,
+        "target_at": "2026-10-29T08:00:00.000000+00:00",
+        "risk_probability": null,
+        "is_risk": null,
+        "model_id": null,
+        "input_group": null,
+        "reason": "station_unknown_or_ineligible",
+        "latest_inventory": null,
+        "latest_inventory_received_at": null,
+        "latest_inventory_age_seconds": null,
+        "latest_inventory_observed_at": null
+      }
+    ]
+  },
+  "recommendation_request": {
+    "latitude": 37.5665,
+    "longitude": 126.978,
+    "horizon_hours": 1,
+    "radius_m": 500
+  },
+  "recommendation_policy_pending": {
+    "base_at": "2026-10-29T05:00:00.000000+00:00",
+    "requested_at": "2026-10-29T05:40:00.000000+00:00",
+    "horizon_hours": 1,
+    "radius_m": 500,
+    "distance_type": "straight_line",
+    "automatic_radius_expansion": false,
+    "recommended": null,
+    "alternatives": [],
+    "abstained": true,
+    "reason": "recommendation_policy_not_selected",
+    "nearby_count": 2,
+    "eligible_count": 0
+  },
+  "recommendation_demo_only": {
+    "base_at": "2026-10-29T05:00:00.000000+00:00",
+    "requested_at": "2026-10-29T05:40:00.000000+00:00",
+    "horizon_hours": 1,
+    "radius_m": 500,
+    "distance_type": "straight_line",
+    "automatic_radius_expansion": false,
+    "recommended": {
+      "station_id": "ST-MOCK-1",
+      "horizon_hours": 1,
+      "target_at": "2026-10-29T06:00:00.000000+00:00",
+      "risk_probability": 0.2,
+      "is_risk": false,
+      "model_id": "mock-fixture",
+      "input_group": "C",
+      "reason": null,
+      "latest_inventory": 2,
+      "latest_inventory_received_at": "2026-10-29T05:39:30.000000+00:00",
+      "latest_inventory_age_seconds": 30,
+      "latest_inventory_observed_at": null,
+      "name": "모의 대여소 1",
+      "latitude": 37.5665,
+      "longitude": 126.978,
+      "distance_m": 0.0,
+      "score": 0.2
+    },
+    "alternatives": [],
+    "abstained": false,
+    "reason": null,
+    "nearby_count": 2,
+    "eligible_count": 1
+  },
+  "status_not_ready": {
+    "service": "CycleOn",
+    "status": "not_ready",
+    "server_at": "2026-10-29T05:40:00.000000+00:00",
+    "base_at": "2026-10-29T05:00:00.000000+00:00",
+    "supported_targets": [
+      "2026-10-29T06:00:00.000000+00:00",
+      "2026-10-29T07:00:00.000000+00:00",
+      "2026-10-29T08:00:00.000000+00:00"
+    ],
+    "model_bundle_id": "mock-contract-v1",
+    "model_stage": "mock_no_model_no_live_data",
+    "last_precompute_at": "2026-10-29T05:40:00.000000+00:00",
+    "precompute_error": null,
+    "data": {
+      "mode": "synthetic_fixture",
+      "fixed_clock": true,
+      "scenario": "not-ready"
+    },
+    "latest_inventory_age_limit_seconds": 300,
+    "time_policy": "latest_exact_hour_base; latest_inventory_separate"
+  },
+  "prediction_not_ready": {
+    "base_at": "2026-10-29T05:00:00.000000+00:00",
+    "requested_at": "2026-10-29T05:40:00.000000+00:00",
+    "items": [
+      {
+        "station_id": "ST-MOCK-1",
+        "horizon_hours": 1,
+        "target_at": "2026-10-29T06:00:00.000000+00:00",
+        "risk_probability": null,
+        "is_risk": null,
+        "model_id": null,
+        "input_group": null,
+        "reason": "base_not_precomputed",
+        "latest_inventory": 2,
+        "latest_inventory_received_at": "2026-10-29T05:39:30.000000+00:00",
+        "latest_inventory_age_seconds": 30,
+        "latest_inventory_observed_at": null
+      }
+    ]
+  },
+  "backend_station_page": {
+    "items": [
+      {
+        "cursor": 1,
+        "conflict": false,
+        "record": {
+          "station_id": "ST-MOCK-1",
+          "source_station_id": "ST-MOCK-1",
+          "name": "모의 대여소 1",
+          "latitude": 37.5665,
+          "longitude": 126.978,
+          "valid_from": "2026-10-28T05:00:00Z",
+          "valid_to": null,
+          "received_at": "2026-10-28T05:00:00Z",
+          "source": "seoul_bike",
+          "revision": "mock-v1",
+          "identity_status": "verified",
+          "validity_basis": "first_seen_receipt",
+          "source_valid_from": null,
+          "source_valid_to": null
+        },
+        "capture_id": null
+      },
+      {
+        "cursor": 2,
+        "conflict": false,
+        "record": {
+          "station_id": "ST-MOCK-2",
+          "source_station_id": "ST-MOCK-2",
+          "name": "모의 대여소 2",
+          "latitude": 37.567499999999995,
+          "longitude": 126.978,
+          "valid_from": "2026-10-28T05:00:00Z",
+          "valid_to": null,
+          "received_at": "2026-10-28T05:00:00Z",
+          "source": "seoul_bike",
+          "revision": "mock-v1",
+          "identity_status": "verified",
+          "validity_basis": "first_seen_receipt",
+          "source_valid_from": null,
+          "source_valid_to": null
+        },
+        "capture_id": null
+      }
+    ],
+    "next_cursor": 2,
+    "watermark": 2,
+    "has_more": false,
+    "captures": []
+  },
+  "backend_observation_page": {
+    "items": [
+      {
+        "cursor": 1,
+        "conflict": false,
+        "record": {
+          "source": "seoul_bike",
+          "entity_id": "ST-MOCK-1",
+          "event_key": "mock-capture-v1",
+          "variable": "inventory",
+          "value": 2.0,
+          "unit": "bikes",
+          "raw_value": null,
+          "received_at": "2026-10-29T05:39:30Z",
+          "observed_at": null,
+          "issued_at": null,
+          "valid_at": null,
+          "revision": "mock-v1",
+          "quality": "valid",
+          "timing_basis": "received"
+        },
+        "capture_id": "mock-capture-v1"
+      },
+      {
+        "cursor": 2,
+        "conflict": false,
+        "record": {
+          "source": "seoul_bike",
+          "entity_id": "ST-MOCK-2",
+          "event_key": "mock-capture-v1",
+          "variable": "inventory",
+          "value": 0.0,
+          "unit": "bikes",
+          "raw_value": null,
+          "received_at": "2026-10-29T05:39:30Z",
+          "observed_at": null,
+          "issued_at": null,
+          "valid_at": null,
+          "revision": "mock-v1",
+          "quality": "valid",
+          "timing_basis": "received"
+        },
+        "capture_id": "mock-capture-v1"
+      }
+    ],
+    "next_cursor": 2,
+    "watermark": 2,
+    "has_more": false,
+    "captures": [
+      {
+        "capture_id": "mock-capture-v1",
+        "source": "seoul_bike",
+        "started_at": "2026-10-29T05:39:28.000000+00:00",
+        "completed_at": "2026-10-29T05:39:31.000000+00:00",
+        "expected_rows": 2,
+        "actual_rows": 2,
+        "state": "complete",
+        "summary_json": "{}"
+      }
+    ]
+  },
+  "backend_forecast_page": {
+    "items": [
+      {
+        "cursor": 1,
+        "conflict": false,
+        "record": {
+          "source": "kma_forecast",
+          "grid_id": "60,127",
+          "variable": "T1H",
+          "value": 15.0,
+          "unit": "degC",
+          "raw_value": null,
+          "issued_at": "2026-10-29T04:30:00Z",
+          "valid_at": "2026-10-29T06:00:00Z",
+          "received_at": "2026-10-29T04:40:00Z",
+          "revision": "0",
+          "quality": "valid"
+        },
+        "capture_id": null
+      }
+    ],
+    "next_cursor": 1,
+    "watermark": 1,
+    "has_more": false,
+    "captures": []
+  }
+}

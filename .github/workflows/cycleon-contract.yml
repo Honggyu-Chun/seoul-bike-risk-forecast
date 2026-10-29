@@ -1,0 +1,23 @@
+name: CycleOn API contract
+on:
+  pull_request:
+    paths: ['모델개발/cycleon/**', '모델개발/docs/cycleon/**', '모델개발/docs/cycleon_*openapi.json', '모델개발/scripts/cycleon_contract_check.py', '모델개발/requirements-contract.txt', '.github/workflows/cycleon-contract.yml']
+  push:
+    branches: [main, 'docs/model-api-handoff']
+    paths: ['모델개발/cycleon/**', '모델개발/docs/cycleon/**', '모델개발/docs/cycleon_*openapi.json', '모델개발/scripts/cycleon_contract_check.py', '모델개발/requirements-contract.txt', '.github/workflows/cycleon-contract.yml']
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-contract.txt
+        working-directory: 모델개발
+      - run: python scripts/cycleon_contract_check.py
+        working-directory: 모델개발
