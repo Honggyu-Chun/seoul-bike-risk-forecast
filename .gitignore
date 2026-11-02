@@ -48,3 +48,6 @@
 # Isolated collaboration / serving environments
 **/.venv-contract/
 **/.venv-serving/
+
+# IDE settings (machine specific)
+.idea/
