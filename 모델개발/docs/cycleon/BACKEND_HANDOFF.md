@@ -1,6 +1,6 @@
 # 백엔드 인수 명세
 
-> Draft v0.1 · 데이터 조회 계약과 AI 호출을 구현할 담당자를 위한 문서다. SQLite는 참조 구현이며 팀 DB 선택을 제한하지 않는다.
+> Draft v0.2 · 데이터 인계 기준 2026-11-02. SQLite는 참조 구현이며 팀 DB 선택을 제한하지 않는다. 로컬 갱신이며 원격 Git 반영과 구분한다.
 
 ## 1. 제공해야 할 경계
 
@@ -86,7 +86,7 @@ cursor는 관측 시각/record ID가 아니라 테이블별 **커밋된 수신·
 
 | 필드 | 타입·기본 | 설명 |
 | --- | --- | --- |
-| `source`, `grid_id`, `variable`, `unit` | string, 필수 | 현재 source=kma_forecast, 격자 nx,ny |
+| `source`, `grid_id`, `variable`, `unit` | string, 필수 | 현재 코드 source=kma_ultra_forecast, 격자 nx,ny |
 | `value` | number 또는 null, 필수 키 | valid이면 null 불가 |
 | `issued_at`, `valid_at`, `received_at` | datetime, 필수 | 발표·목표·수신 시각을 별도 보존 |
 | `revision`, `quality`, `raw_value` | Observation과 동일 | 수정 버전·품질 |
@@ -131,3 +131,65 @@ async function predictStations(stationIds: string[]) {
 - 추가 응답 필드나 계약 변경은 PR로 합의하고 코드·OpenAPI·예시를 함께 수정.
 
 자료 계약 구현·모의 호출은 지금 진행할 수 있다. 최종 모델·추천정책·독립평가 결과는 모델 담당이 후속 번들로 전달한다.
+
+## 9. 현재 학습 자료와 백엔드 공급 기준 — 2026-11-02
+
+모델 연구는 확보한 과거 자료로 진행한다. 서비스용 최신 자료의 수집·저장은 백엔드 운영 범위다. 실시간 수집은 현재 모델 연구의 선행 조건이 아니며 이 문서 갱신으로 수집기나 서비스를 재시작하지 않았다.
+
+| 자료·공식 출처 | 확보 방법·현재 모델 사용 | 백엔드 공급 업무 |
+| --- | --- | --- |
+| [따릉이 시간별 대여가능 수량 OA-22382](https://data.seoul.go.kr/dataList/OA-22382/F/1/datasetView.do) | 분기 ZIP 안 CSV를 다운로드·전량 검수. 2022~2024 학습, 2025상반기 개발. 하반기 정답은 동결 전 미개봉 | 이미 받은 과거 원본을 요청 때마다 전송하지 않는다. 서비스용 정각 재고 이력은 실제 수신 자료로 보존 |
+| [대여소 정보 OA-13252](https://data.seoul.go.kr/dataList/OA-13252/F/1/datasetView.do) | XLSX/CSV. 2021.6~2024.12 공식8종을 게시 다음날부터 조건부 적용, 좌표·이웃·기상격자 생성 | API ID·과거 번호·이름·좌표 매핑과 변경 이력을 검수하여 Station 제공 |
+| [실시간 대여정보 OA-15493](https://data.seoul.go.kr/dataList/OA-15493/A/1/datasetView.do) | bikeList 소량/수집 시험 이력과 참조 수집기 있음. 현재 상시 수집은 미가동 | stationId, stationName, stationLatitude/Longitude, parkingBikeTotCnt를 서울 전체 완전 캡처로 저장. 키는 서버 환경변수 |
+| [기상 실황 파일](https://data.kma.go.kr/data/rmt/rmtList.do?code=400&pgmNo=570)·[초단기예보 파일](https://data.kma.go.kr/data/rmt/rmtList.do?code=410&pgmNo=571) | 인증된 curl ZIP 다운로드·일부 API 대조. 유효한 월/조각은 사용하고 공급자 공백은 결측으로 보존 | 과거 재수신 시각을 과거 실제 수신 시각으로 생성하지 않는다 |
+| [기상청 API허브 격자](https://apihub.kma.go.kr/apiList.do?seqApi=10) | 실제 격자 응답과 포털 대조로 kma_completed_hour_v2를 고정. W/F/E 오프라인 특징 및 공유 추론 재생 검증 | 아래 두 raw-grid 제품과 고정 발표본을 받아 같은 파서·표시 정밀도로 공급. 전체 실서비스 연동은 후속 검증 필요 |
+| 에어코리아·버스·열차시간표·관광 | 소량 API 응답 확인 이력. 교통·관광은 현 고정모델 학습 입력 미반영. E의 과거 대기질5열은 전부 NaN | 첫 필수 연동 범위에서 제외. 학습·시점·위치 검증 전 현재 값의 소급이나 임의 입력을 추가하지 않음 |
+
+과거 개발 패널은30648시간×역사상3170개 대여소의 결측 포함 격자다. 현재 운영 대여소 개수나 유효 학습행 수와 같지 않다. NEIS·SGIS·DEM은 제외한다.
+
+### 9.1 공급할 원시 값
+
+| 계열 | 필드·표준 값 | 시간·품질 |
+| --- | --- | --- |
+| 대여소 | station_id, source_station_id, name, latitude, longitude, revision, 적용 기간 | 검증 identity, 실제 수신 시각, 최초수신 적용과 실제 개소일 구분 |
+| 재고 Observation | source=seoul_bike, entity_id=station_id, variable=inventory, unit=bikes, value=0이상 정수 | received_at 실제 수신, observed_at은 미제공 시null, capture_id/quality 보존 |
+| 실황 Observation | source=kma_current, entity_id="nx,ny", T1H/degC, RN1/mm(1시간누적), REH/%, WSD/m/s, PTY/code | issued_at·received_at 별도, observed_at은 실제 미제공 시null |
+| Forecast | source=kma_ultra_forecast, grid_id="nx,ny", 위5변수·단위 | issued_at 발표본, valid_at 목표정각, received_at 실제수신 모두 필수 |
+
+결측은value=null/quality=missing, 실제0은value=0/quality=valid다. JSON에NaN 문자열이나0대 대치를 보내지 않는다. lag/증감/주변 평균/보정/추천 점수는 AI 공유 특징 코드가 생성한다.
+
+### 9.2 현재 기상 모델의 정확한 제품·시각 계약
+
+- 실황: `/api/typ01/cgi-bin/url/nph-dfs_odam_grd`, 예보: `/api/typ01/cgi-bin/url/nph-dfs_vsrt_grd`.
+- 변수는T1H/RN1/REH/WSD/PTY의5개다. 현재 POP를 임의 추가하지 않는다. 응답 격자에서 대여소 좌표의 nx,ny를 추출하고 같은 격자를 공유한다. 과거 개발 범위는34격자다.
+- 기준정각t의 현재 API 발표본은2024-03-04 10KST 이후 `t-2h+50m`; 이전은 `t-2h`다. 예보는 `t-70m` 발표본의 `t+h` 목표다.
+- 예: 기준14:00은 실황12:50 및 예보12:50 발표본에서 목표15/16/17시를 사용한다. 포털 대응은 실황12:00, 예보12:30의lead3/4/5다. 포털 표기·API 발표·목표·실제 수신 시각을 각각 보존한다.
+- 모든 운영 입력은 실제received_at<=기준t를 만족해야 한다. 최신 재고14:40을14시 모델 입력으로 넣지 않으며, 화면/추천 자격의 최신 수량으로 별도 전달한다.
+- `cycleon/hourly_weather.py`의hourly_job/canonical_grid와 `cycleon/history_weather.py`의parse_grid를 사용한다. 실황 REH는ASCII float64에서floor(x+.5), T1H/RN1/WSD는소수1자리np.round, PTY와예보는해당고정규칙을유지한다. 원본 바이트를 별도 보존한다.
+- 검증한 raw-grid 변환을 통과한 자료의revision은 `kma_completed_hour_v2_<원본SHA앞16자>`다. LiveFeatures는계약revision·정확한발표본·수신기준을검사한다. 접두사만붙여일반point제품을같다고선언하지않는다.
+- 기존 `Collector.weather()`의 공공데이터포털 point 제품은 이 raw-grid 계약과 별도다. 이전 접근 성공이나 source 문자열 일치만으로 새 W/F/E 운영 연결을 완료 처리하지 않는다. 실제20응답 공유재생은 합성 재고를 쓴306행 코드검증이며 전체 서비스 운영검증은 남아 있다.
+
+### 9.3 검수에서 발견한 문제와 구현 요구
+
+| 발생 문제 | 현재 처리·백엔드 요구 |
+| --- | --- |
+| 2023재고CSV에헤더없음 | 첫 행을관측으로보존. 파일별헤더판별·CP949/열형식검사 후읽기 |
+| 중복키의값충돌·음수/잘못된시각 | 원본·검수건수보존, 동일값중복과값충돌구분, 충돌/비정상은결측/invalid로전달 |
+| API ST-ID와과거숫자번호차이·대여소이전 | 명칭숫자만으로추정하지말고공식메타데이터로매핑검증, 좌표revision/적용기간보존 |
+| bikeList의list_total_count가페이지건수인응답 | 첫1000건을서울전체로판정하지않음. 모든페이지완료를확인한후원자적complete공개 |
+| 일부페이지실패 | 이전정상완전캡처보존, 부분자료로덮어쓰지않음 |
+| 포털UTC/API KST, 발표주기변경·표시정밀도차이 | 고정v2변환사용, 발표·목표·수신시각분리. 과거수신시각위장금지 |
+| 빈ZIP·헤더만존재·기상날짜충돌 | 실패/공백원본보존, 유효부분사용, 미확보셀은결측. 파일수와기간완료수를혼동하지않음 |
+| HTTP200 안의dfs_file_read 오류문자열 | 상태코드이외본문격자형식/개수/수치/결측표식검사. 같은실패키무한재시도금지 |
+| 공급자/계정별호출예산불확실 | 소량응답성공과지속수집허용량구분. 전체페이지×주기로예산산정 후팀운영주기확정 |
+
+별도 날짜 대조2568건은 고정오차0.11 이내였고146건에는0이아닌차이가있다. 비교불가152건과원천공백은통과로세지않는다. 역사상실제수신시각·정확한대여소이전시점은미입증이며과거성능은조건부평가다.
+
+### 9.4 첫 인수 검증
+
+1. 모의18012의stations/observations/forecasts를같은페이지계약으로끝까지동기화한다.
+2. 팀DB의실제ST-ID 1곳을원천재고및AI코드북과대조한다. 시간은UTC저장/KST표시를일관되게변환한다.
+3. 실제재고한완전캡처의expected/actual건수·중복·수신시각을검사한다.
+4. 모델담당과기상1격자×5변수×h1/2/3의원본·발표·목표·수신·공유특징값을대조한다.
+5. 정규이력은t-168h실제관측및최근24h최소12개관측을요구한다. 초기이력부족은검증된C로전환하고부족을숨기지않는다.
+6. 같은AI호출형식으로정상/일부null/추천보류/서버장애를프론트까지연결해확인한다.

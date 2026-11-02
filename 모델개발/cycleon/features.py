@@ -174,12 +174,25 @@ class LiveFeatures:
         return {"stations": stations, "ids": ids, "history": q, "neighbors": neighborhoods(coords),
                 "grid_ids": [",".join(map(str, kma_grid(s["latitude"], s["longitude"]))) for s in stations]}
 
-    def external(self, view, base, horizon):
+    def external(self, view, base, horizon, *, weather_contract=None):
         with self.store.connection() as db:
             obs = [json.loads(r["payload"]) | {"conflict": bool(r["conflict"])} for r in db.execute(
                 "SELECT payload,conflict FROM observations WHERE source!='seoul_bike' AND received_at>=? AND received_at<=?", (stamp(base - timedelta(hours=12)), stamp(base)))]
             fc = [json.loads(r["payload"]) | {"conflict": bool(r["conflict"])} for r in db.execute(
                 "SELECT payload,conflict FROM forecasts WHERE received_at>=? AND received_at<=? AND valid_at=?", (stamp(base - timedelta(hours=12)), stamp(base), stamp(base + timedelta(hours=horizon))))]
+        if weather_contract is not None:
+            from .hourly_weather import CONTRACT,hourly_job
+            if weather_contract != CONTRACT:
+                raise ValueError('Unknown weather feature contract')
+            # A newer point-product revision must not silently replace the
+            # specifically audited hourly-grid product used by this model.
+            current_issue=instant(hourly_job(base,'T1H')['requested_issue_at'])
+            forecast_issue=instant(hourly_job(base,'T1H',horizon)['requested_issue_at'])
+            def matches(record,issue):
+                return (str(record.get('revision','')).startswith(CONTRACT+'_')
+                    and record.get('issued_at') and instant(record['issued_at'])==issue)
+            obs=[r for r in obs if r['source']!='kma_current' or matches(r,current_issue)]
+            fc=[r for r in fc if matches(r,forecast_issue)]
         current = select_asof([r for r in obs if r["source"] == "kma_current"], base)
         forecast = select_asof(fc, base, target=base + timedelta(hours=horizon), forecast=True, max_age_hours=6)
         out = {}

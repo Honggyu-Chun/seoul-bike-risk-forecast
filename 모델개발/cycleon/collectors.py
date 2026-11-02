@@ -205,6 +205,7 @@ class Client:
             if int(body["totalCount"]) != len(items):
                 raise CollectionError("weather_truncated")
             rows = []
+            returned_issues = set()
             units = {"T1H": "degC", "TMP": "degC", "RN1": "mm", "REH": "%", "WSD": "m/s", "VEC": "degrees", "UUU": "m/s", "VVV": "m/s", "PTY": "code", "SKY": "code", "LGT": "code"}
             for r in items:
                 variable = r["category"]
@@ -216,6 +217,11 @@ class Client:
                 value = weather_number(variable, raw)
                 quality = "valid" if value is not None else "missing"
                 issue = datetime.strptime(r["baseDate"] + r["baseTime"], "%Y%m%d%H%M").replace(tzinfo=KST)
+                if (int(r['nx']),int(r['ny'])) != grid:
+                    raise CollectionError('weather_grid_mismatch')
+                if issue > received:
+                    raise CollectionError('weather_publication_after_receipt')
+                returned_issues.add(stamp(issue))
                 gid = f"{grid[0]},{grid[1]}"
                 if forecast:
                     target = datetime.strptime(r["fcstDate"] + r["fcstTime"], "%Y%m%d%H%M").replace(tzinfo=KST)
@@ -233,7 +239,9 @@ class Client:
             self.store.append_forecasts(rows)
         else:
             self.store.append_observations(rows)
-        return {"grid_id": f"{grid[0]},{grid[1]}", "kind": endpoint, "rows": len(rows), "received_at": stamp(received)}
+        return {"grid_id": f"{grid[0]},{grid[1]}", "kind": endpoint, "rows": len(rows), "received_at": stamp(received),
+                "requested_issue_at": stamp(base), "returned_issue_times": sorted(returned_issues),
+                "requested_issue_matches_all_returned": bool(returned_issues) and returned_issues == {stamp(base)}}
 
     def air(self):
         key = self.values.get("DATA_GO_KR_SERVICE_KEY")

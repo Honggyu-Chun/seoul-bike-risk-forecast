@@ -6,6 +6,7 @@ import numpy as np
 
 from .common import digest
 from .features import FEATURE_COLUMNS
+from .catboost_contract import prediction_input, validate_model_contract
 
 
 class ModelBundle:
@@ -20,6 +21,10 @@ class ModelBundle:
                 continue
             if route["columns"] != FEATURE_COLUMNS[route["group"]]:
                 raise ValueError("Feature schema mismatch")
+            if route['group'] in ('W','F','E'):
+                from .hourly_weather import CONTRACT
+                if route.get('weather_contract') != CONTRACT:
+                    raise ValueError('Weather route requires its audited feature contract')
             loaded = []
             for spec in route["members"]:
                 path = (directory / spec["file"]).resolve()
@@ -31,6 +36,8 @@ class ModelBundle:
                 elif spec["kind"] == "catboost":
                     from catboost import CatBoostClassifier
                     model = CatBoostClassifier(); model.load_model(str(path))
+                    categories = spec.get("categorical_columns", route.get("categorical_columns", []))
+                    validate_model_contract(model, route["columns"], categories)
                 else:
                     raise ValueError("Unknown model kind")
                 loaded.append((spec, model))
@@ -47,18 +54,8 @@ class ModelBundle:
             if spec["kind"] == "lightgbm":
                 p = model.predict(matrix, num_threads=4)
             else:
-                from catboost import Pool
-                # All categorical columns are finite integer codes in the kernel.
-                cats = [route["columns"].index(c) for c in route.get("categorical_columns", [])]
-                if cats:
-                    import pandas as pd
-                    frame = pd.DataFrame(matrix, columns=route["columns"])
-                    for i in cats:
-                        frame.iloc[:, i] = frame.iloc[:, i].fillna(0).astype(int)
-                    frame = frame.astype({route["columns"][i]: "int64" for i in cats})
-                    p = model.predict_proba(Pool(frame, cat_features=cats), thread_count=4)[:, 1]
-                else:
-                    p = model.predict_proba(matrix, thread_count=4)[:, 1]
+                categories = spec.get("categorical_columns", route.get("categorical_columns", []))
+                p = model.predict_proba(prediction_input(matrix, route["columns"], categories), thread_count=4)[:, 1]
             members.append(np.asarray(p))
         if not members:
             raise ValueError("Horizon unavailable in model route")

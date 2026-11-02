@@ -1,23 +1,72 @@
-# CycleOn · Seoul Bike Risk Forecast
+# CycleOn 모델 API 협업
 
-## 모델·백엔드·프론트 협업 시작 — 2026-10-29
+서울 따릉이의 **목표 정각 0대 위험**을 1·2·3시간 간격으로 예측하고, 현재 수량과 거리를 함께 비교하는 서비스다.
 
-**백엔드·프론트는 [개발 연동 가이드](모델개발/docs/cycleon/README.md)와 [모델 없는 빠른 시작](모델개발/docs/cycleon/QUICKSTART.md)에서 시작한다.** 이 브랜치의 초안은 API 계약·참조 런타임·모의 서버·호출 모음을 제공한다. 모델 담당은 특징·학습·보정·평가·AI 서비스, 백엔드는 수집·저장·중계와 인증, 프론트는 위치·예정 정각·위험·거리 비교 화면을 맡는다. 각 팀은 최종 학습을 기다리지 않고 같은 계약으로 병렬 개발할 수 있다.
+**백엔드·프론트 개발자는 이 페이지와 [빠른 시작](모델개발/docs/cycleon/QUICKSTART.md)에서 시작한다.** 모델·연구 데이터·공공 API 키 없이 목업을 실행하고 같은 API 규격으로 개발할 수 있다.
 
-| 모델·연동 항목 | 2026-10-29 작성 기준 상태 |
-| --- | --- |
-| 제공 계약 | [AI OpenAPI](모델개발/docs/cycleon_ai_openapi.json), [내부 데이터 OpenAPI](모델개발/docs/cycleon_backend_openapi.json), [Postman](모델개발/docs/cycleon/CycleOn.postman_collection.json) |
-| 개발 모델 | `development_TC_20261027_v2`, T/C LightGBM h1/h2/h3. 실제 3간격 확률 응답 확인 이력 있음 |
-| 전체 모델 비교 | 13:41 KST 저장 집계 **8/64 설정·16회 적합**. 최종 비교 미완료 |
-| 입력 준비 | T/C/S 준비. W/F/E는 과거 기상 출처 대조·결합 검수 대기 |
-| 추천 | 정책 미선정. 실서버는 `abstained=true`와 사유 반환 가능 |
-| 공유 서버 | **13:47 KST 확인에서 8001/8002 listener 없음**. 재기동·SSH/토큰 인계 전에는 모의 API 사용 |
-| 즉시 가능한 개발 | 각 PC의 합성 모의 AI(18011)·데이터 API(18012). 데이터·모델 파일·실제 키 불필요 |
-| 남은 완료 조건 | 64개 비교·기상 QA·모델/정책 고정·독립 하반기 평가·성능/24시간 운영/복구 검증 |
+## 처음 실행하기
 
-상세 [모델 상태와 입출력](모델개발/docs/cycleon/MODEL_STATUS.md), [백엔드 명세](모델개발/docs/cycleon/BACKEND_HANDOFF.md), [프론트 명세](모델개발/docs/cycleon/FRONTEND_HANDOFF.md)를 확인한다. 문서 수치는 스냅샷이며 실시간 운영 상태가 아니다. 실제 모델 파일·키·실행 DB·연구 산출물은 Git에서 제외한다. 계약 검사는 `모델개발`에서 `python scripts/cycleon_contract_check.py`로 실행하며 실제 학습·데이터 수집을 시작하지 않는다.
+Git과 Python 3.12를 준비한다. Windows PowerShell에서:
 
-과거 기상은 인증된 포털 파일과 API 대조를 사용하며 값 불일치·공급자 공백이 남아 있다. 전주 특징은 실제 168시간 이력 조건을 지킨다. 추천 요청은 제안서의 120위치·평일 출퇴근 시간으로 고정했으나 모델·정책은 아직 고정하지 않았다. 11/9는 완료 목표이며 현재 완료를 뜻하지 않는다. 기존 8000 시제품과 완료한 1시간 실험은 새 서비스와 구분한다.
+```powershell
+git clone --depth 1 https://github.com/Honggyu-Chun/seoul-bike-risk-forecast.git
+cd seoul-bike-risk-forecast
+git switch -c feature/my-integration
+.\SETUP_CYCLEON_MOCK.cmd
+.\RUN_CYCLEON_MOCK.cmd
+```
+
+설치 명령은 `모델개발/.venv-contract`를 만들고 계약 검사 33개를 실행한다. 실행 파일의 토큰 `local-mock-only-change-this-token-123456`은 로컬 목업 전용 공개 예시다. 실행 후 <http://127.0.0.1:18011/docs>에서 Bearer 토큰을 입력해 호출한다. 주소는 본인 PC이며 목업의 시각·확률은 합성값이다.
+
+두 번째 터미널에서 `모델개발`로 이동해:
+
+```powershell
+$env:CYCLEON_MOCK_TOKEN = 'local-mock-only-change-this-token-123456'
+.\.venv-contract\Scripts\python.exe scripts/cycleon_http_check.py
+```
+
+Linux/macOS 명령과 실제 호출 예시는 [빠른 시작](모델개발/docs/cycleon/QUICKSTART.md)에 있다. Windows에서는 루트 `SETUP_CYCLEON_MOCK.cmd`, `RUN_CYCLEON_MOCK.cmd`도 사용할 수 있다.
+
+## 담당별 개발 시작점
+
+| 담당 | 읽을 내용 | 지금 개발할 수 있는 것 |
+| --- | --- | --- |
+| 백엔드 | [백엔드 인수 명세](모델개발/docs/cycleon/BACKEND_HANDOFF.md), [파트 간 계약](모델개발/docs/cycleon/INTEGRATION_CONTRACT.md) | 데이터 저장·내부 API, AI 호출 중계, 대여소 목록, 인증·예외 처리 |
+| 프론트 | [프론트 명세](모델개발/docs/cycleon/FRONTEND_HANDOFF.md), [API 레퍼런스](모델개발/docs/cycleon/API_REFERENCE.md) | 위치·목표 정각·지도·목록·위험·추천과 보류 화면 |
+| 모델 | [모델 상태](모델개발/docs/cycleon/MODEL_STATUS.md), [실모델 인수](모델개발/docs/cycleon/REAL_MODEL_HANDOFF.md) | 번들·특징·보정·정책 검증과 AI 런타임 연결 |
+| QA | [빠른 시작](모델개발/docs/cycleon/QUICKSTART.md), [합성 예시](모델개발/docs/cycleon/mock_examples.json) | 성공·보류·미준비, 인증·입력 오류·null·시간대 검증 |
+
+기계 명세는 [AI OpenAPI](모델개발/docs/cycleon_ai_openapi.json)와 [내부 데이터 OpenAPI](모델개발/docs/cycleon_backend_openapi.json)다. [Postman](모델개발/docs/cycleon/CycleOn.postman_collection.json)과 [Node 서버 호출 예제](모델개발/examples/cycleon_backend_client.mjs)를 제공한다.
+
+## 연결 경계
+
+```mermaid
+flowchart LR
+    F[프론트] --> B[앱 백엔드]
+    B --> A[AI 상태 예측 추천 API]
+    D[백엔드 데이터 저장] --> I[내부 데이터 API]
+    I --> A
+```
+
+프론트는 앱 백엔드만 호출한다. 대여소 ID·이름·좌표 목록은 앱 백엔드가 제공하며 AI 예측 응답의 ID로 연결한다. 사용자 조회에는 대여소 ID·간격 또는 위치·반경을 보낸다. 재고 이력·기상은 별도 내부 데이터 API로 동기화하고 AI가 학습과 같은 특징을 만든다.
+
+앱의 공개 API 경로·사용자 인증·갱신 주기는 팀이 합의할 항목이다. 기존 AI의 요청·응답 의미와 타입은 유지한다. 상세 결정 항목과 고정 규칙은 [파트 간 계약](모델개발/docs/cycleon/INTEGRATION_CONTRACT.md)에 모았다.
+
+## 모델과 실제 접속 상태
+
+2026-11-02 기준 기존 기반 모델은 **22개 설정·44회 적합**이며, 후속 신경망·결합·보정 연구와 그 적합 횟수는 별도로 기록한다. 64개를 채우는 조건은 폐기했다. 후속 4차 비교까지 최종 채택·운영 교체는 없고 최종 모델·추천 정책·독립 평가가 남아 있다.
+
+개발용 실모델 번들 `development_TC_20261027_v2`에는 T/C LightGBM 세 간격이 있다. **가중치·실제 데이터·키·DB는 Git에 포함되지 않는다.** 이 저장소만으로 목업 기반 개발은 가능하며, 실제 모델 추론에는 별도 번들 또는 접속 인수가 필요하다. [실모델 인수 절차](모델개발/docs/cycleon/REAL_MODEL_HANDOFF.md)를 따른다.
+
+11월 2일 접속 확인에서는 새 AI 8001·데이터 8002가 미가동이었다. `127.0.0.1:18011` 목업 주소와 공용 실서버 주소를 혼동하지 않는다. S/C는 연동 후보 제안이며 현재 제공 번들·최종 선정본과 다르다. 연구 현황은 [모델 상태](모델개발/docs/cycleon/MODEL_STATUS.md)를 기준으로 읽는다.
+
+## 협업 중 변경하기
+
+각자 `feature/`, `fix/`, `model/`, `data/`, `docs/` 등의 작업 브랜치를 사용한다. [CONTRIBUTING](CONTRIBUTING.md)의 계약 변경·로컬 확인 절차를 따른다. API를 바꾸면 코드·OpenAPI·예시·호출 측을 같이 수정하며, GitHub Actions가 모델 없는 계약 검사를 실행한다.
+
+## 이전 시제품과 연구 기록
+
+아래는 이전 제안·시제품·연구 설명이다. 과거 날짜의 계획·성과는 현재 운영 상태가 아니다. 신규 1~3시간 연동은 위 빠른 시작을 따른다. 기존 `SETUP_P_PROJECT.cmd`와 8000은 이전 1시간 시제품용이다.
 
 **사용자 지정 시각의 따릉이 부족 위험 예측 및 대여소 선택 지원**
 

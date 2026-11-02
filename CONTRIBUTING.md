@@ -1,63 +1,30 @@
-# 협업 안내
+# CycleOn 협업 개발
 
-## 브랜치와 변경 검토
+팀별 프레임워크·코드 구성은 각자 선택한다. 서로 연결되는 요청·응답·시간·대여소 ID·오류 의미는 같은 계약을 사용한다.
 
-CycleOn 다중 시간 간격 연동 초안은 [모델 API 가이드](모델개발/docs/cycleon/README.md)에서 시작한다. `docs/model-api-handoff` 초안을 main에 병합하기 전까지는 해당 브랜치에서 자신의 기능 브랜치를 만든다. 병합 후에는 main을 기준으로 한다. 문서만 보고 실서버가 가동 중이라고 가정하지 말고 로컬 모의 API 또는 현재 연결 상태를 확인한다.
+## 시작과 브랜치
 
-`main`을 협업 기준으로 사용한다. **`종류/짧은-영문-작업명`**으로 브랜치를 만든다. 사람·도구 이름 대신 실제 작업 내용을 사용한다. 이전 `transfer/local-codex-20261020`은 백업 전달 이력으로 보존하며 새 개발의 출발점으로 사용하지 않는다.
+`main`을 받은 뒤 `feature/backend-ai`, `feature/frontend-map`, `fix/prediction-null`처럼 실제 작업 이름으로 브랜치를 만든다. 이미 작업한 저장소는 미커밋 변경을 보존한 뒤 fetch/pull한다. 기존 파일을 reset/clean으로 덮어쓰지 않는다.
 
-| 종류 | 용도 | 예시 |
-| --- | --- | --- |
-| `feature/` | 사용자 기능·화면 | `feature/station-time-selector` |
-| `model/` | 모델·특징·평가 | `model/three-hour-baseline` |
-| `data/` | 수집·정제·데이터 연결 | `data/station-location-mapping` |
-| `fix/` | 오류 수정 | `fix/missing-station-history` |
-| `docs/` | 설명·계획서·발표 자료 | `docs/team-guide` |
-| `chore/` | 설치·실행·설정 정비 | `chore/team-setup` |
+신규 팀원은 [빠른 시작](모델개발/docs/cycleon/QUICKSTART.md)으로 목업을 실행한다. 실제 모델·자료·API 키는 화면과 중계 개발의 선행 조건이 아니다.
 
-```bash
-git config --replace-all remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-git config --add remote.origin.fetch "^refs/heads/transfer/*"
-git switch main
-git pull --ff-only
-git switch -c feature/station-time-selector
+## 계약을 바꿀 때
+
+1. [파트 간 계약](모델개발/docs/cycleon/INTEGRATION_CONTRACT.md)과 AI/데이터 OpenAPI를 먼저 확인한다.
+2. 요청·응답 타입이나 의미를 바꾸면 `contracts.py`·`api.py`, mock과 예시를 함께 갱신한다.
+3. `모델개발`에서 `.venv-contract`의 Python으로 `scripts/cycleon_contract_check.py --export`를 실행하고 생성 diff를 확인한다. 검사는 `--export` 없이 다시 실행한다.
+4. 영향을 받는 프론트·백엔드의 호출 방식과 호환성을 PR에 설명한다. 단순 모델 ID·가중치 교체와 API 파괴 변경을 구분한다.
+
+개별 파트는 필요한 검증과 병합을 진행한다. CI는 API 계약만 확인하며 실제 프론트·DB·운영 성공을 대신하지 않는다. 의미가 바뀌는 변경은 연결되는 파트와 먼저 합의한다.
+
+## 로컬 확인
+
+```powershell
+cd 모델개발
+.\.venv-contract\Scripts\python.exe scripts/cycleon_contract_check.py
+# 다른 터미널에서 목업을 실행한 후
+$env:CYCLEON_MOCK_TOKEN = 'local-mock-only-change-this-token-123456'
+.\.venv-contract\Scripts\python.exe scripts/cycleon_http_check.py
 ```
 
-처음 두 줄은 `main`만 클론한 팀원이 작업 브랜치도 동기화하도록 한 번 설정한다. 대용량 `transfer/` 백업은 기본 동기화에서 제외한다. 이미 다른 목적의 fetch 설정을 쓰는 팀원은 자신의 설정을 확인하고 필요한 브랜치만 추가한다.
-
-구현·문서·실험 결과를 필요한 단위로 커밋하고 작업 브랜치를 push한 뒤 `main` 대상으로 Pull Request를 작성한다. 해결하는 문제, 최종 동작, 확인 방법과 남은 제약을 설명한다. 팀원이 검토할 수 있도록 실제 표·화면·검사 결과를 연결한다.
-
-## 커밋 메시지
-
-**한국어 한 줄로 변경 내용만 간단히 작성한다.** 예를 들어 `실행 데이터 준비 명령 추가`, `대여소 검색 오류 수정`, `3시간 기준 모델 비교`, `팀원 실행 안내 정리`처럼 작성한다. 제목에 도구명·자동 생성 문구를 붙이지 않으며 불필요한 접두사와 서명 꼬리말을 추가하지 않는다. 이미 있던 커밋의 작성자·날짜·검증 기록은 바꾸지 않는다.
-
-```bash
-git add README.md
-git commit -m "팀원 실행 안내 정리"
-git push -u origin docs/team-guide
-```
-
-Git 작성자 이름·이메일은 각 팀원의 본인 계정으로 설정한다. API 키·개인 문서·다른 사람의 미완료 변경을 한꺼번에 추가하지 않고 이번 작업의 파일만 명시한다. PR 제목과 병합 커밋도 짧은 한국어로 작성한다.
-
-## 프로젝트 범위
-
-[최신 제안서](과제제안서/AI%20P-실무프로젝트_과제계획서_원본양식작성본_20261020.docx)를 기준으로 이용 예정 시각 1·2·3시간의 위험·수량·거리 비교를 개발한다. 현재 보관한 1시간 시제품과 연구 결과는 참고 기준으로 활용한다. 기존 숫자를 새 다중 시간 간격·전체 기간 성과로 제시하지 않는다.
-
-## 모델·데이터 작업
-
-- `모델개발/experiments/날짜_실험명/`에 목적·가설·입력 자료·변경점·실행 방법을 기록한다.
-- 학습·종료 선택·보정·정책 선택·평가의 시간 구간과 정답 시각 경계를 먼저 고정한다.
-- 자료 처리마다 선택 이유·문헌 또는 공식 근거·검사·한계를 남긴다. 미래 정보와 사후 수정본의 공개 시점을 구분한다.
-- 같은 기간·코호트·표본에서 기준과 비교하고 F1·정밀도·재현율·오경보·놓침을 함께 저장한다.
-- 현재 양수→목표 0대와 현재 1~3대 구간을 따로 확인한다. 평균·합산·%·%p와 분모를 명시한다.
-- 기존 고정 모델·시험 결과를 덮어쓰지 않는다. 2025년 3·4분기 점수를 열기 전에는 새 선택·검증 계획을 고정한다.
-
-## 검증과 저장소 관리
-
-Python 프로젝트 작업 위치는 `모델개발`로 한다. `uv.lock`을 기준으로 설치하고 변경에 관련된 검사부터 수행한다. 기존 서비스 통합 검사는 로컬 가공자료·모델이 필요한 경우를 구분한다.
-
-키는 `.env`와 서버 환경변수에서 읽는다. `.env.example`에는 빈 변수명만 기록한다. 원본 데이터·모델 가중치·중간 행렬·실행 로그·캐시·개인별 로컬 경로는 커밋에서 제외하고 필요한 출처·설정·성과표·해시를 남긴다. 데이터 이용조건과 외부 코드의 라이선스는 각 출처를 따른다.
-
-CycleOn API·계약 변경은 `모델개발/scripts/cycleon_contract_check.py --export`로 명세·합성 예시를 생성한 뒤 diff를 검토한다. 이어 `python scripts/cycleon_contract_check.py`를 실행한다. GitHub `CycleOn API contract`는 실제 원본/모델/공공 API 없이 동일 라우터를 검사한다. 계약 변경 PR에는 요청·응답 예시, null/보류/HTTP 오류, 호환성, 클라이언트 수정 필요 여부를 적는다. 실제 서비스 토큰은 이슈·PR·Postman 공유 값·프론트 빌드에 넣지 않는다.
-
-과제제안서를 수정할 때는 `과제제안서`의 현재 DOCX를 갱신하고 학교 양식을 유지한다. 완료한 연구와 앞으로 할 계획을 구분하고 역할·멘토링·실측 성과를 확인 없이 작성하지 않는다.
+공유 대상은 코드·명세·합성 예시·검증 결과 요약이다. 실제 키·토큰·세션·`.env`·가중치·원본 데이터·실행 DB·개인별 런타임은 커밋하지 않는다. 실제 모델 연결 인수는 [별도 절차](모델개발/docs/cycleon/REAL_MODEL_HANDOFF.md)를 따른다.

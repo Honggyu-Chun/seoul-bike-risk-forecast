@@ -47,9 +47,13 @@ class Engine:
                 for h in (1, 2, 3):
                     outputs[ids[j], h]["reason"] = "station_identity_not_verified_for_model"
             for h in (1, 2, 3):
-                external = features.external(view, base, h)
+                external_cache={}
                 for route_index, (route, _) in enumerate(self.bundle.routes):
                     group = route["group"]
+                    contract=route.get('weather_contract')
+                    if contract not in external_cache:
+                        external_cache[contract]=features.external(view,base,h,weather_contract=contract)
+                    external=external_cache[contract]
                     eligible = history_eligible(view["history"], group) & identity_ok
                     if group != "C":
                         for j in np.flatnonzero(np.isfinite(view["history"][-1]) & identity_ok & ~eligible):
