@@ -1,0 +1,109 @@
+{
+  "info": {
+    "name": "CycleOn v1 collaboration (mock defaults)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Draft. Defaults target local synthetic APIs. token is deliberately empty."
+  },
+  "variable": [
+    {
+      "key": "ai_base_url",
+      "value": "http://127.0.0.1:18011"
+    },
+    {
+      "key": "backend_base_url",
+      "value": "http://127.0.0.1:18012"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "AI status",
+      "request": {
+        "method": "GET",
+        "url": "{{ai_base_url}}/v1/status",
+        "header": []
+      }
+    },
+    {
+      "name": "AI predictions",
+      "request": {
+        "method": "POST",
+        "url": "{{ai_base_url}}/v1/predictions",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"station_ids\": [\n    \"ST-MOCK-1\",\n    \"ST-MOCK-2\",\n    \"ST-UNKNOWN\"\n  ],\n  \"horizons_hours\": [\n    1,\n    2,\n    3\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "AI recommendations",
+      "request": {
+        "method": "POST",
+        "url": "{{ai_base_url}}/v1/recommendations",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"latitude\": 37.5665,\n  \"longitude\": 126.978,\n  \"horizon_hours\": 1,\n  \"radius_m\": 500\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Backend stations",
+      "request": {
+        "method": "GET",
+        "url": "{{backend_base_url}}/internal/ai-data/v1/stations?cursor=0&limit=1",
+        "header": []
+      }
+    },
+    {
+      "name": "Backend observations",
+      "request": {
+        "method": "GET",
+        "url": "{{backend_base_url}}/internal/ai-data/v1/observations?cursor=0&limit=1",
+        "header": []
+      }
+    },
+    {
+      "name": "Backend forecasts",
+      "request": {
+        "method": "GET",
+        "url": "{{backend_base_url}}/internal/ai-data/v1/forecasts?cursor=0&limit=1",
+        "header": []
+      }
+    }
+  ]
+}

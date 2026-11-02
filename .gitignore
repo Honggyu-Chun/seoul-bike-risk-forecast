@@ -44,3 +44,7 @@
 /transfer_manifest.json
 /verification.json
 /verification_tests.xml
+
+# Isolated collaboration / serving environments
+**/.venv-contract/
+**/.venv-serving/

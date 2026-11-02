@@ -1,4 +1,5 @@
 .venv/
+.venv-contract/
 __pycache__/
 .pytest_cache/
 .cache/
@@ -40,6 +41,13 @@ artifacts/**/report_review_server.json
 tmp/
 *.pid
 data/runtime_cache/
+artifacts/cycleon_service_v1/data/
+artifacts/cycleon_service_v1/training/
+artifacts/cycleon_service_v1/recommendation_requests/
+artifacts/cycleon_service_v1/data_access/*.txt
+artifacts/cycleon_service_v1/
+reports/cycleon_service/
+cycleon-ranking-test-*/
 
 # Raw source captures and local backup/runtime state are not collaboration inputs
 experiments/**/source_cache/

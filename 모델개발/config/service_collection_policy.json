@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "inventory_interval_seconds": 60,
+  "inventory_max_capture_duration_seconds": 45,
+  "quota_policy": "Conservative local caps; these numbers are NOT a claim about granted account quotas. Stop on access/quota errors. No load test.",
+  "seoul_official_evidence": {
+    "checked_kst_date": "2026-10-26",
+    "url": "https://data.seoul.go.kr/together/guide/useGuide.do",
+    "maximum_rows_per_request": 1000,
+    "daily_1000_documented_for": "realtime_subway",
+    "bike_daily_limit": "not_specified_on_official_guide",
+    "bike_requests_per_second": "not_specified_on_official_guide"
+  },
+  "providers": {
+    "seoul": {"local_daily_budget": 9000, "minimum_interval_seconds": 1.1},
+    "kma_portal": {"local_daily_budget": 8000, "minimum_interval_seconds": 1.1},
+    "airkorea": {"local_daily_budget": 400, "minimum_interval_seconds": 1.1},
+    "bus": {"local_daily_budget": 800, "minimum_interval_seconds": 1.1},
+    "rail": {"local_daily_budget": 1000, "minimum_interval_seconds": 1.1},
+    "tourism": {"local_daily_budget": 800, "minimum_interval_seconds": 1.1}
+  },
+  "weather_interval_seconds": 3600,
+  "air_interval_seconds": 3600,
+  "excluded_sources": ["NEIS", "SGIS", "DEM"]
+}

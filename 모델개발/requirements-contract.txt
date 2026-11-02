@@ -1,0 +1,6 @@
+# Lightweight collaboration tools; no training/data dependencies.
+fastapi==0.148.0
+pydantic==2.14.1
+httpx==0.28.1
+uvicorn==0.54.0
+tzdata==2025.2; platform_system == "Windows"
