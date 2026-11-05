@@ -23,6 +23,27 @@ class TargetNotSupported(AppError):
                          supported_targets=[iso_utc(t) for t in targets])
 
 
+class AIUnavailable(AppError):
+    """AI 연결 실패·시간 초과. 상태·예측 API는 잡아서 ai_available=false로 바꾸고, 추천 API는 그대로 503."""
+
+    def __init__(self):
+        super().__init__(503, "ai_unavailable", "추천 기능을 잠시 사용할 수 없습니다.")
+
+
+class AIAuthFailed(AppError):
+    """AI가 401. 프론트가 로그아웃으로 오해하지 않도록 502로 내린다."""
+
+    def __init__(self):
+        super().__init__(502, "ai_auth_failed", "잠시 조회할 수 없습니다.")
+
+
+class AIError(AppError):
+    """AI가 401 외의 오류를 주거나, 응답 모양·기준 시각이 맞지 않음."""
+
+    def __init__(self):
+        super().__init__(502, "ai_error", "잠시 조회할 수 없습니다.")
+
+
 def error_response(status_code: int, code: str, message: str, **extra) -> JSONResponse:
     return JSONResponse(status_code=status_code, content={"error": {"code": code, "message": message, **extra}})
 

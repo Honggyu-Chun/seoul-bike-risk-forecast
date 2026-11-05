@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     ai_base_url: str = Field("http://127.0.0.1:18011", validation_alias="CYCLEON_AI_BASE_URL")
     service_token: SecretStr = Field(SecretStr(""), validation_alias="CYCLEON_SERVICE_TOKEN")
     ai_timeout_seconds: float = Field(5.0, gt=0, validation_alias="CYCLEON_AI_TIMEOUT_SECONDS")
+    # AI 응답의 base_at이 백엔드 기준 정각과 같은지 확인. 시계가 고정된 목업을 쓸 때만 false
+    ai_clock_check: bool = Field(True, validation_alias="CYCLEON_AI_CLOCK_CHECK")
     cors_origins: list[str] = Field(
         ["http://localhost:5173", "http://127.0.0.1:5173"], validation_alias="CORS_ORIGINS")
     debug_enabled: bool = Field(True, validation_alias="CYCLEON_DEBUG_ENABLED")
