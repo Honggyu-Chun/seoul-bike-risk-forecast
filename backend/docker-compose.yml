@@ -1,0 +1,22 @@
+# 개발용 PostgreSQL. backend 폴더에서: docker compose up -d
+services:
+  postgres:
+    image: postgres:17
+    container_name: cycleon-postgres
+    environment:
+      POSTGRES_USER: cycleon
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cycleon-local}  # 개발용 기본값. 운영에서는 다른 값을 쓴다
+      POSTGRES_DB: cycleon
+    ports:
+      - "127.0.0.1:5432:5432"  # 이 PC에서만 접속
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # postgres 17 이미지의 데이터 경로(바꾸면 데이터가 볼륨에 저장되지 않음)
+      - ./docker/init-test-db.sql:/docker-entrypoint-initdb.d/init-test-db.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cycleon -d cycleon"]
+      interval: 5s
+      retries: 10
+
+volumes:
+  pgdata:
+    name: cycleon-pgdata  # docker run으로 만든 볼륨을 그대로 이어서 쓴다

@@ -8,19 +8,25 @@ from app.api.public import predictions, recommendations, stations, status
 from app.clients.ai import AIClient
 from app.core.config import Settings, get_settings
 from app.core.errors import register_error_handlers
+from app.db.session import make_engine, make_sessionmaker
 
 
 def create_app(settings: Settings | None = None, ai_client: AIClient | None = None) -> FastAPI:
     settings = settings or get_settings()
 
+    engine = make_engine(settings.database_url) if settings.database_url else None
+
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         yield
         await app.state.ai.aclose()
+        if engine is not None:
+            await engine.dispose()
 
     app = FastAPI(title="CycleOn backend", lifespan=lifespan)
     app.state.settings = settings
     app.state.ai = ai_client or AIClient(settings)
+    app.state.db = make_sessionmaker(engine) if engine is not None else None
     app.add_middleware(CORSMiddleware, allow_origins=settings.cors_origins,
                        allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
     register_error_handlers(app)
