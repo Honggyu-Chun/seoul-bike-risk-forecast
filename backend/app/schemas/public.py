@@ -61,3 +61,77 @@ class RecommendationResponse(BaseModel):
     recommended: RecommendedStation | None
     alternatives: list[RecommendedStation]
     debug: RecommendationDebug | None = None
+
+
+# GET /api/stations
+
+class StationItem(BaseModel):
+    station_id: str
+    name: str
+    latitude: float
+    longitude: float
+    distance_m: float | None   # lat·lon을 주지 않으면 null
+
+
+class StationsResponse(BaseModel):
+    count: int
+    items: list[StationItem]
+
+
+# GET /api/stations/nearby, POST /api/predictions 공통
+
+class PredictionDebug(BaseModel):
+    model_id: str | None
+    input_group: str | None
+    latest_inventory_age_seconds: float | None
+
+
+class NearbyItem(BaseModel):
+    station_id: str
+    name: str
+    latitude: float
+    longitude: float
+    distance_m: float
+    latest_inventory: int | None
+    latest_inventory_received_at: UtcDatetime | None
+    inventory_fresh: bool          # 수량이 300초 안의 값이면 true
+    risk_probability: float | None
+    is_risk: bool | None
+    reason: str | None             # 확률이 null인 이유. AI 원문 그대로, AI 접속 실패만 ai_unavailable
+    debug: PredictionDebug | None = None
+
+
+class NearbyResponse(BaseModel):
+    base_at: UtcDatetime
+    target_at: UtcDatetime
+    radius_m: float
+    ai_available: bool
+    count: int
+    items: list[NearbyItem]
+
+
+class PredictionRequest(BaseModel):
+    station_ids: list[Annotated[str, Field(min_length=1, max_length=80)]] = Field(min_length=1, max_length=100)
+    target_at: AwareDatetime | None = None
+    all_targets: bool = False  # target_at과 all_targets=true 중 정확히 하나 (서비스에서 확인, fields를 알려주기 위해)
+
+
+class PredictionItem(BaseModel):
+    station_id: str
+    target_at: UtcDatetime
+    name: str | None               # DB에 없는 ID면 null
+    latitude: float | None
+    longitude: float | None
+    latest_inventory: int | None
+    latest_inventory_received_at: UtcDatetime | None
+    inventory_fresh: bool
+    risk_probability: float | None
+    is_risk: bool | None
+    reason: str | None
+    debug: PredictionDebug | None = None
+
+
+class PredictionsResponse(BaseModel):
+    base_at: UtcDatetime
+    ai_available: bool
+    items: list[PredictionItem]

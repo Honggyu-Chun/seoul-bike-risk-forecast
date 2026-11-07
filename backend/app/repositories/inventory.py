@@ -15,16 +15,16 @@ cursor_seq 붙이는 방법
   다른 출처(과거 자료 재적재 등)를 넣게 되면 그때 재발행 규칙을 추가한다.
 """
 import json
-import math
 from dataclasses import dataclass
 from datetime import datetime
 
 from sqlalchemy import delete, func, insert, select
-from sqlalchemy.dialects.postgresql import distinct_on
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.collectors.seoul_bike import BikeRow, CaptureData
+from app.core.geo import distance_m
 from app.db.models import Capture, Observation, Station
+from app.repositories.stations import latest_stations
 
 SOURCE = "seoul_bike"
 LOCK_STATIONS = 7_101       # pg_advisory_xact_lock 키 (테이블별 고정 번호)
@@ -44,20 +44,6 @@ async def _next_cursor(session: AsyncSession, model: type[Station] | type[Observ
     return (await session.scalar(select(func.coalesce(func.max(model.cursor_seq), 0)))) + 1
 
 
-async def latest_stations(session: AsyncSession) -> dict[str, Station]:
-    """대여소별 가장 최근 revision (cursor_seq가 가장 큰 행)."""
-    rows = await session.scalars(
-        select(Station).ext(distinct_on(Station.station_id)).order_by(Station.station_id, Station.cursor_seq.desc()))
-    return {row.station_id: row for row in rows}
-
-
-def _distance_m(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
-    """두 좌표 사이 직선거리(m, 하버사인)."""
-    a, b = math.radians(lat1), math.radians(lat2)
-    h = math.sin((b - a) / 2) ** 2 + math.cos(a) * math.cos(b) * math.sin(math.radians(lon2 - lon1) / 2) ** 2
-    return 6_371_008.8 * 2 * math.asin(min(1.0, math.sqrt(h)))
-
-
 def revision_valid_from(previous: Station | None, row: BikeRow) -> datetime | None:
     """이번 수집에서 새 revision이 필요하면 그 valid_from을, 필요 없으면 None을 돌려준다.
 
@@ -75,7 +61,7 @@ def revision_valid_from(previous: Station | None, row: BikeRow) -> datetime | No
     if same:
         return None
     if None not in (previous.latitude, previous.longitude, row.latitude, row.longitude) and \
-            _distance_m(previous.latitude, previous.longitude, row.latitude, row.longitude) > MOVED_METERS:
+            distance_m(previous.latitude, previous.longitude, row.latitude, row.longitude) > MOVED_METERS:
         return row.received_at
     return previous.valid_from
 

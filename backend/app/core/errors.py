@@ -23,6 +23,13 @@ class TargetNotSupported(AppError):
                          supported_targets=[iso_utc(t) for t in targets])
 
 
+class InvalidRequest(AppError):
+    """여러 인자를 함께 봐야 하는 입력 오류. FastAPI 기본 검증과 같은 422 invalid_request 모양으로 낸다."""
+
+    def __init__(self, fields: list[str]):
+        super().__init__(422, "invalid_request", "요청 값을 확인해 주세요.", fields=fields)
+
+
 class AIUnavailable(AppError):
     """AI 연결 실패·시간 초과. 상태·예측 API는 잡아서 ai_available=false로 바꾸고, 추천 API는 그대로 503."""
 

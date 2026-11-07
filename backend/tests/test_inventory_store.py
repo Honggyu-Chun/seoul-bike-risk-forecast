@@ -10,7 +10,8 @@ from sqlalchemy import func, select, text
 from app.collectors.seoul_bike import BikeRow, CaptureData
 from app.db.models import Capture, Observation, Station
 from app.db.session import make_engine, make_sessionmaker
-from app.repositories.inventory import latest_stations, prune, save_capture
+from app.repositories.inventory import prune, save_capture
+from app.repositories.stations import latest_stations
 
 T0 = datetime(2026, 11, 6, 5, 0, tzinfo=timezone.utc)
 
