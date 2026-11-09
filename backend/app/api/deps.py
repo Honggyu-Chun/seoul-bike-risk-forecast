@@ -6,6 +6,7 @@ from fastapi import Depends, Query, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.clients.ai import AIClient
+from app.clients.mailer import Mailer
 from app.core.config import Settings
 from app.core.errors import OriginNotAllowed, UnsupportedMediaType
 from app.core.time import utc_now
@@ -18,6 +19,10 @@ def get_app_settings(request: Request) -> Settings:
 
 def get_ai(request: Request) -> AIClient:
     return request.app.state.ai
+
+
+def get_mailer(request: Request) -> Mailer:
+    return request.app.state.mailer
 
 
 async def get_session(request: Request) -> AsyncIterator[AsyncSession]:

@@ -118,6 +118,25 @@ class PlaceSearchUnavailable(AppError):
         super().__init__(503, "place_search_unavailable", "장소 검색을 잠시 사용할 수 없습니다.")
 
 
+class InvalidToken(AppError):
+    """메일 링크의 토큰이 없거나, 만료됐거나, 이미 쓰였거나, 그 뒤 이메일이 바뀜"""
+
+    def __init__(self):
+        super().__init__(400, "invalid_token", "링크가 만료됐거나 이미 사용됐습니다. 다시 요청해 주세요.")
+
+
+class EmailTaken(AppError):
+    def __init__(self):
+        super().__init__(409, "email_taken", "다른 계정에서 이미 인증한 이메일입니다.")
+
+
+class MailUnavailable(AppError):
+    """메일 발송 실패(SMTP 접속·인증 실패) 또는 SMTP가 설정되지 않음"""
+
+    def __init__(self):
+        super().__init__(503, "mail_unavailable", "메일을 보내지 못했습니다. 잠시 후 다시 시도해 주세요.")
+
+
 class FavoritesLimit(AppError):
     def __init__(self, limit: int):
         super().__init__(409, "favorites_limit", f"즐겨찾기는 {limit}개까지 저장할 수 있습니다.", limit=limit)

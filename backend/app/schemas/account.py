@@ -41,13 +41,44 @@ class SignupRequest(BaseModel):
     @field_validator("email")
     @classmethod
     def _email(cls, value: str | None) -> str | None:
-        value = _blank_to_none(value)
-        if value is None:
-            return None
-        value = value.lower()
-        if len(value) > 254 or not EMAIL_PATTERN.fullmatch(value):
-            raise ValueError("이메일 형식")
-        return value
+        return normalize_email(value)
+
+
+def normalize_email(value: str | None) -> str | None:
+    """앞뒤 공백 제거·소문자. 빈 값은 이메일 없음(None). 형식이 틀리면 ValueError(→ 422 fields: email)"""
+    value = _blank_to_none(value)
+    if value is None:
+        return None
+    value = value.lower()
+    if len(value) > 254 or not EMAIL_PATTERN.fullmatch(value):
+        raise ValueError("이메일 형식")
+    return value
+
+
+class EmailUpdate(BaseModel):
+    """복구용 이메일 등록·변경·삭제(null). 비밀번호를 한 번 더 받는다. 바꾸면 인증 전 상태가 된다."""
+    email: str | None = Field(max_length=300)
+    password: str = Field(max_length=PASSWORD_INPUT_MAX)
+
+    @field_validator("email")
+    @classmethod
+    def _email(cls, value: str | None) -> str | None:
+        return normalize_email(value)
+
+
+class TokenRequest(BaseModel):
+    """메일 링크에 담긴 토큰(이메일 인증)"""
+    token: str = Field(min_length=1, max_length=200)
+
+
+class PasswordResetRequest(BaseModel):
+    """아이디 또는 인증된 이메일. 계정이 있든 없든 응답은 똑같다."""
+    login_id_or_email: str = Field(min_length=1, max_length=300)
+
+
+class PasswordResetConfirm(BaseModel):
+    token: str = Field(min_length=1, max_length=200)
+    new_password: str = Field(max_length=PASSWORD_INPUT_MAX)
 
 
 class LoginRequest(BaseModel):

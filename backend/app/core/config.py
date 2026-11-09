@@ -28,6 +28,17 @@ class Settings(BaseSettings):
     kakao_rest_api_key: SecretStr = Field(SecretStr(""), validation_alias="KAKAO_REST_API_KEY")
     kakao_base_url: str = Field("https://dapi.kakao.com", validation_alias="KAKAO_BASE_URL")
     kakao_timeout_seconds: float = Field(3.0, gt=0, validation_alias="KAKAO_TIMEOUT_SECONDS")
+    # 메일 발송(이메일 인증, 비밀번호 재설정). 일반 SMTP라 Gmail·Resend·SES 어느 것이든 값만 바꿔 쓴다.
+    # 로컬 개발은 Mailpit(docker compose, 127.0.0.1:1025, STARTTLS 없음)으로 실제 발송 없이 확인한다.
+    smtp_host: str = Field("", validation_alias="SMTP_HOST")
+    smtp_port: int = Field(587, validation_alias="SMTP_PORT")
+    smtp_username: str = Field("", validation_alias="SMTP_USERNAME")
+    smtp_password: SecretStr = Field(SecretStr(""), validation_alias="SMTP_PASSWORD")
+    smtp_starttls: bool = Field(True, validation_alias="SMTP_STARTTLS")
+    smtp_timeout_seconds: float = Field(10.0, gt=0, validation_alias="SMTP_TIMEOUT_SECONDS")
+    mail_from: str = Field("CycleOn <no-reply@localhost>", validation_alias="MAIL_FROM")
+    # 메일 속 링크가 열 프론트 주소(끝에 / 없이). 링크: <주소>/verify-email?token=..., <주소>/reset-password?token=...
+    public_base_url: str = Field("http://localhost:5173", validation_alias="CYCLEON_PUBLIC_BASE_URL")
     debug_enabled: bool = Field(True, validation_alias="CYCLEON_DEBUG_ENABLED")
     database_url: str = Field("", validation_alias="DATABASE_URL")
     seoul_api_key: SecretStr = Field(SecretStr(""), validation_alias="SEOUL_COLLECTION_API_KEY")

@@ -1,4 +1,4 @@
-# 개발용 PostgreSQL. backend 폴더에서: docker compose up -d
+# 개발용 PostgreSQL과 가짜 메일 서버(Mailpit). backend 폴더에서: docker compose up -d
 services:
   postgres:
     image: postgres:17
@@ -16,6 +16,14 @@ services:
       test: ["CMD-SHELL", "pg_isready -U cycleon -d cycleon"]
       interval: 5s
       retries: 10
+
+  # 개발용 가짜 메일 서버. 백엔드가 보낸 메일을 실제로 보내지 않고 http://localhost:8025 화면에 모아 보여 준다
+  mailpit:
+    image: axllent/mailpit:v1.21.8
+    container_name: cycleon-mailpit
+    ports:
+      - "127.0.0.1:1025:1025"  # SMTP (SMTP_HOST=127.0.0.1, SMTP_PORT=1025, SMTP_STARTTLS=false)
+      - "127.0.0.1:8025:8025"  # 받은 메일 보기
 
 volumes:
   pgdata:

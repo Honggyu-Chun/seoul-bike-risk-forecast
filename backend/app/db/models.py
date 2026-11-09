@@ -1,7 +1,7 @@
 """테이블 정의.
 
 stations·captures·observations는 내부 데이터 API(AI가 커서로 이어 받는 경로)의 record 모양을 컬럼으로 그대로 갖는다.
-users·sessions·login_attempts·favorites는 로그인·회원 기능용이다(맨 아래).
+users·sessions·login_attempts·favorites·email_tokens는 로그인·회원 기능용이다(맨 아래).
 JSON 덩어리(payload)로 저장하지 않고 컬럼으로 나눠, 제약 조건으로 잘못된 값을 DB 단계에서 막는다.
 
 cursor_seq
@@ -210,4 +210,27 @@ class Favorite(Base):
 
     __table_args__ = (
         CheckConstraint("position >= 0", name="position_nonnegative"),
+    )
+
+
+class EmailToken(Base):
+    """메일 링크용 일회성 토큰(이메일 인증, 비밀번호 재설정). 링크에는 원문을, DB에는 SHA-256 해시만 둔다.
+
+    - 30분 유효, 한 번만 쓴다(used_at). email은 토큰을 만들 때의 주소로, 그 뒤 회원이 이메일을 바꾸면 무효가 된다.
+    - 만료 후 하루가 지나면 지운다. 회원을 지우면 함께 지워진다.
+    """
+    __tablename__ = "email_tokens"
+
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    purpose: Mapped[str] = mapped_column(String(10))
+    email: Mapped[str] = mapped_column(String(254))
+    token_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_at: Mapped[datetime] = mapped_column(Timestamp)
+    expires_at: Mapped[datetime] = mapped_column(Timestamp)
+    used_at: Mapped[datetime | None] = mapped_column(Timestamp)
+
+    __table_args__ = (
+        CheckConstraint("purpose IN ('verify', 'reset')", name="purpose"),
+        Index(None, "user_id", "purpose", "created_at"),
     )

@@ -9,6 +9,7 @@ from app.api.internal import ai_data
 from app.api.public import places, predictions, recommendations, stations, status
 from app.clients.ai import AIClient
 from app.clients.kakao import KakaoLocalClient
+from app.clients.mailer import Mailer, SmtpMailer
 from app.core.config import Settings, get_settings
 from app.core.errors import register_error_handlers
 from app.core.log_filters import install_privacy_filters
@@ -16,7 +17,7 @@ from app.db.session import make_engine, make_sessionmaker
 
 
 def create_app(settings: Settings | None = None, ai_client: AIClient | None = None,
-               kakao_client: KakaoLocalClient | None = None) -> FastAPI:
+               kakao_client: KakaoLocalClient | None = None, mailer: Mailer | None = None) -> FastAPI:
     settings = settings or get_settings()
     install_privacy_filters()
 
@@ -34,6 +35,7 @@ def create_app(settings: Settings | None = None, ai_client: AIClient | None = No
     app.state.settings = settings
     app.state.ai = ai_client or AIClient(settings)
     app.state.kakao = kakao_client or KakaoLocalClient(settings)
+    app.state.mailer = mailer or SmtpMailer(settings)
     app.state.db = make_sessionmaker(engine) if engine is not None else None
     # allow_credentials: 프론트가 다른 출처(다른 서브도메인)일 때 세션 쿠키를 주고받게 한다.
     # 리버스 프록시·Vite 프록시로 같은 출처에서 부르면 CORS 자체가 쓰이지 않는다.

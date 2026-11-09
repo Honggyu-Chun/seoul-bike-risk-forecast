@@ -10,6 +10,7 @@
 | 내부 데이터 API | AI 서비스 → 백엔드 | `/internal/ai-data/v1/...` (3개, 서비스 토큰 필요) |
 | 재고 수집기 | 백엔드 → 서울시 API | 별도 프로세스, 2분마다 |
 | 장소 검색 중계 | 백엔드 → 카카오 로컬 API | `GET /api/places`가 부를 때만 |
+| 메일 발송 | 백엔드 → SMTP 서버 | 이메일 인증·비밀번호 재설정 링크 (로컬은 Mailpit) |
 
 ```text
 [프론트] ──/api──> [백엔드] ──/v1──> [AI 서비스]
@@ -41,7 +42,7 @@ backend/
 │  │  ├─ public/            공개 API 라우터
 │  │  ├─ account/           로그인·회원 API 라우터 (auth, me, favorites)
 │  │  └─ internal/          내부 데이터 API 라우터
-│  ├─ clients/              AI 호출(ai.py), 카카오 로컬 API 호출(kakao.py)과 오류 변환
+│  ├─ clients/              AI 호출(ai.py), 카카오 로컬 API 호출(kakao.py), SMTP 메일 발송(mailer.py)
 │  ├─ services/             판단 로직 (AI·DB 합치기, 장애 대체, 정각 경계)
 │  ├─ repositories/         DB 읽기·쓰기 (수집분 저장 규칙, 커서 페이지)
 │  ├─ schemas/              요청·응답 모델 (public: 프론트, ai: AI 응답, ai_data: 내부 API)
@@ -49,7 +50,7 @@ backend/
 │  └─ collectors/           따릉이 재고 수집기
 ├─ migrations/              Alembic 마이그레이션
 ├─ docker/                  DB 초기화 스크립트 (테스트 DB 생성)
-├─ docker-compose.yml       개발용 PostgreSQL 17
+├─ docker-compose.yml       개발용 PostgreSQL 17, 가짜 메일 서버 Mailpit
 └─ tests/
 ```
 
@@ -80,6 +81,8 @@ PyCharm은 인터프리터를 `backend\.venv\Scripts\python.exe`로, 소스 루�
 | `CYCLEON_COOKIE_SECURE` | 세션 쿠키에 `Secure`를 붙일지. **https 운영은 `true`**, http 로컬 개발은 `false` |
 | `CYCLEON_BCRYPT_ROUNDS` | bcrypt 비용. 기본 12(1회 약 0.2~0.3초). 테스트만 4로 낮춘다 |
 | `KAKAO_REST_API_KEY` | 장소 검색용 카카오 **REST API 키**(developers.kakao.com의 앱 → 앱 키). 서버에만 둔다. 지도 표시용 JavaScript 키는 프론트에서 쓰고, 앱 설정에 사이트 도메인을 등록한다. 비어 있으면 `/api/places`만 503 |
+| `SMTP_HOST`·`SMTP_PORT`·`SMTP_STARTTLS`·`SMTP_USERNAME`·`SMTP_PASSWORD`·`MAIL_FROM` | 메일 발송(일반 SMTP). 로컬은 Mailpit(`127.0.0.1`, `1025`, STARTTLS `false`, 계정 없음), 실제 발송은 프로젝트용 Gmail(`smtp.gmail.com`, `587`, `true`, 주소, 앱 비밀번호). Resend·SES도 SMTP 값만 바꿔 쓴다. `SMTP_HOST`가 비어 있으면 인증 메일은 503 |
+| `CYCLEON_PUBLIC_BASE_URL` | 메일 속 링크가 열 프론트 주소. 링크는 `<주소>/verify-email?token=...`, `<주소>/reset-password?token=...` |
 | `CYCLEON_DEBUG_ENABLED` | `?debug=true` 허용 여부. 운영에서는 `false` |
 | `DATABASE_URL` | 개발 DB. `postgresql+asyncpg://...` 형식 (드라이버는 asyncpg) |
 | `TEST_DATABASE_URL` | pytest 전용 DB. 테스트가 테이블을 비우므로 **개발 DB와 다른 DB**여야 한다 |
@@ -93,7 +96,7 @@ PyCharm은 인터프리터를 `backend\.venv\Scripts\python.exe`로, 소스 루�
 
 ```powershell
 # 1. DB (한 번 띄워 두면 됨)
-docker compose start                 # 처음이면 docker compose up -d
+docker compose start                 # 처음이면 docker compose up -d (PostgreSQL, Mailpit)
 
 # 2. 수집기 (2분마다 서울 전체 재고 저장, Ctrl+C로 종료)
 .\.venv\Scripts\python -m app.collectors.seoul_bike
@@ -150,6 +153,9 @@ AI 동기화 캐시는 `모델개발/data/runtime_cache/`에 생긴다(Git 제�
 | `POST /api/auth/signup`·`login`·`logout` | 가입(바로 로그인)·로그인·로그아웃. 세션 쿠키 발급·삭제 | 영향 없음 |
 | `GET`·`PATCH`·`DELETE /api/me` | 프로필 조회·닉네임/소개 변경·탈퇴(비밀번호 확인) | 영향 없음 |
 | `PUT /api/me/password`, `POST /api/me/logout-all` | 비밀번호 변경(다른 기기 로그아웃), 모든 기기 로그아웃 | 영향 없음 |
+| `PUT /api/me/email`, `POST /api/me/email/verification` | 복구용 이메일 등록·변경(비밀번호 확인), 인증 메일 보내기 | 영향 없음 |
+| `POST /api/auth/email/verify` | 인증 메일 링크의 토큰으로 인증 완료(로그인 불필요) | 영향 없음 |
+| `POST /api/auth/password-reset`·`/confirm` | 재설정 메일 요청(항상 202), 토큰과 새 비밀번호로 변경(모든 기기 로그아웃) | 영향 없음 |
 | `GET /api/me/favorites` | 즐겨찾기 목록. `target_at`을 주면 예측·현재 수량을 붙임(`/api/predictions`와 같은 항목 + `alias`·`position`) | 200, 확률 `null`, 수량은 DB 최신 수집분 |
 | `POST`·`PATCH`·`DELETE /api/me/favorites...` | 추가(20개까지, 운영 중인 대여소만)·별칭 변경·삭제, `PUT .../order` 순서 변경, `POST .../import` 게스트 즐겨찾기 옮기기 | 영향 없음 |
 | `GET /internal/ai-data/v1/stations`·`observations`·`forecasts` | AI 동기화 (커서 페이지) | — |
@@ -202,6 +208,7 @@ docker compose start                 # DB 테스트에 필요
 ## 남은 일
 
 - uvicorn 접속 로그는 쿼리를 지우고 경로만 남긴다(`app/core/log_filters.py`). 위치(`lat`, `lon`)·검색어가 로그에 쌓이지 않는다. 앞단 리버스 프록시(nginx 등)의 접속 로그는 배포 때 따로 맞춘다.
+- 비밀번호 재설정 요청은 계정당 15분 3통으로만 막는다(IP별 제한 없음). 배포 때 IP별 제한을 검토한다.
 - `/api/places`에는 호출 횟수 제한이 없다. 카카오 하루 호출 한도를 넘기면 그날은 503이 난다. 배포 때 IP별 제한을 검토한다.
 - 폐소 감지(`valid_to`), 수집기 중복 실행 방지가 없다.
 - 기상 자료(`/forecasts`)는 기상을 쓰는 모델 번들이 나올 때까지 빈 페이지다.

@@ -16,11 +16,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.responses import Response
 
 from app.core.config import Settings
-from app.core.errors import (InvalidCredentials, InvalidPassword, InvalidRequest, LoginIdTaken, NotAuthenticated,
-                             TooManyAttempts)
+from app.core.errors import (EmailTaken, InvalidCredentials, InvalidPassword, InvalidRequest, LoginIdTaken,
+                             NotAuthenticated, TooManyAttempts)
 from app.core.passwords import hash_password, password_is_acceptable, spend_verify_time, verify_password
 from app.db.models import AuthSession, User
 from app.repositories import accounts as repo
+from app.repositories import email_tokens as email_repo
 from app.schemas.account import (LoginRequest, PasswordChange, ProfileUpdate, SignupRequest,
                                  normalize_login_id)
 
@@ -115,6 +116,8 @@ async def signup(session: AsyncSession, settings: Settings, request: SignupReque
         raise InvalidRequest(["password"])
     if await repo.login_id_exists(session, request.login_id):
         raise LoginIdTaken()
+    if request.email is not None and await email_repo.verified_email_owner(session, request.email) is not None:
+        raise EmailTaken()
 
     repo.record_attempt(session, "signup", None, ip, now, succeeded=True)
     user = User(login_id=request.login_id, password_hash=await hash_password(request.password, settings.bcrypt_rounds),
