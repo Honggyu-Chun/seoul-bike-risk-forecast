@@ -1,6 +1,7 @@
 """테이블 정의.
 
-세 테이블 모두 내부 데이터 API(AI가 커서로 이어 받는 경로)의 record 모양을 컬럼으로 그대로 갖는다.
+stations·captures·observations는 내부 데이터 API(AI가 커서로 이어 받는 경로)의 record 모양을 컬럼으로 그대로 갖는다.
+users·sessions·login_attempts는 로그인 기능용이다(맨 아래).
 JSON 덩어리(payload)로 저장하지 않고 컬럼으로 나눠, 제약 조건으로 잘못된 값을 DB 단계에서 막는다.
 
 cursor_seq
@@ -13,7 +14,7 @@ cursor_seq
 from datetime import datetime
 
 from sqlalchemy import (BigInteger, Boolean, CheckConstraint, DateTime, Double, ForeignKey, Index, Integer,
-                        String, Text, UniqueConstraint, false)
+                        String, Text, UniqueConstraint, false, func, text)
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -123,4 +124,71 @@ class Observation(Base):
                         "'historical_proxy')", name="timing_basis"),
         Index(None, "capture_id"),       # capture 하나의 재고 전체 조회
         Index(None, "received_at"),      # 보관 기간이 지난 행 삭제, start 필터
+    )
+
+
+class User(Base):
+    """회원. 로그인은 아이디·비밀번호로 하고, 이메일은 선택(인증하면 비밀번호 복구에 쓴다).
+
+    - login_id는 소문자로 바꿔 저장하고 바꿀 수 없다.
+    - password_hash는 bcrypt 해시(60자). 원문은 어디에도 저장하지 않는다.
+    - email은 인증 전에는 남의 것일 수 있어 중복을 허용하고, 인증된 이메일만 계정끼리 겹치지 않게 한다.
+    """
+    __tablename__ = "users"
+
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    login_id: Mapped[str] = mapped_column(String(20), unique=True)
+    password_hash: Mapped[str] = mapped_column(String(60))
+    nickname: Mapped[str | None] = mapped_column(String(12))
+    bio: Mapped[str | None] = mapped_column(String(50))
+    email: Mapped[str | None] = mapped_column(String(254))
+    email_verified_at: Mapped[datetime | None] = mapped_column(Timestamp)
+    created_at: Mapped[datetime] = mapped_column(Timestamp, server_default=func.now())
+    password_changed_at: Mapped[datetime] = mapped_column(Timestamp, server_default=func.now())
+
+    __table_args__ = (
+        CheckConstraint("login_id ~ '^[a-z0-9_]{4,20}$'", name="login_id_format"),
+        CheckConstraint("email_verified_at IS NULL OR email IS NOT NULL", name="verified_has_email"),
+        Index("uq_users_verified_email", "email", unique=True, postgresql_where=text("email_verified_at IS NOT NULL")),
+    )
+
+
+class AuthSession(Base):
+    """로그인 세션. 쿠키에는 무작위 토큰을, DB에는 그 SHA-256 해시만 둔다(DB가 새도 로그인할 수 없게).
+
+    만료: 마지막 사용 후 14일(last_seen_at) 또는 로그인 후 30일(expires_at) 중 먼저 오는 때.
+    회원을 지우면 세션도 함께 지워진다(ON DELETE CASCADE).
+    """
+    __tablename__ = "sessions"
+
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    token_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    created_at: Mapped[datetime] = mapped_column(Timestamp)
+    last_seen_at: Mapped[datetime] = mapped_column(Timestamp)
+    expires_at: Mapped[datetime] = mapped_column(Timestamp)
+
+    __table_args__ = (
+        Index(None, "user_id"),
+    )
+
+
+class LoginAttempt(Base):
+    """로그인·가입 시도 기록. 횟수 제한(비밀번호 대입, 대량 가입)에만 쓰고 1일 지나면 지운다.
+
+    IP는 개인정보라 제한에 필요한 기간만 둔다. 가입 시도는 login_id를 비워 둔다.
+    """
+    __tablename__ = "login_attempts"
+
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    kind: Mapped[str] = mapped_column(String(10))
+    login_id: Mapped[str | None] = mapped_column(String(64))
+    ip: Mapped[str] = mapped_column(String(45))
+    attempted_at: Mapped[datetime] = mapped_column(Timestamp)
+    succeeded: Mapped[bool] = mapped_column(Boolean)
+
+    __table_args__ = (
+        CheckConstraint("kind IN ('login', 'signup')", name="kind"),
+        Index(None, "login_id", "ip", "attempted_at"),
+        Index(None, "ip", "attempted_at"),
     )

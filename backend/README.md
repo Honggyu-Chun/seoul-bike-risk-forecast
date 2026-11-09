@@ -1,10 +1,11 @@
 # CycleOn 백엔드
 
-따릉이 대여소의 **1~3시간 뒤 0대 위험 예측** 서비스의 앱 백엔드(FastAPI)다. 하는 일은 네 가지다.
+따릉이 대여소의 **1~3시간 뒤 0대 위험 예측** 서비스의 앱 백엔드(FastAPI)다. 하는 일은 다섯 가지다.
 
 | 역할 | 호출 방향 | 경로 |
 | --- | --- | --- |
 | 공개 API | 프론트 → 백엔드 | `/api/...` (5개) |
+| 로그인·회원 API | 프론트 → 백엔드 | `/api/auth/...`, `/api/me...` (세션 쿠키) |
 | AI 중계 | 백엔드 → AI 서비스 | AI의 `/v1/status`, `/v1/predictions`, `/v1/recommendations` |
 | 내부 데이터 API | AI 서비스 → 백엔드 | `/internal/ai-data/v1/...` (3개, 서비스 토큰 필요) |
 | 재고 수집기 | 백엔드 → 서울시 API | 별도 프로세스, 2분마다 |
@@ -31,10 +32,12 @@ backend/
 │  │  ├─ time.py            기준 정각(KST), target_at → 간격(1·2·3) 변환
 │  │  ├─ errors.py          오류 응답 {"error": {"code", "message", ...}}
 │  │  ├─ security.py        내부 API 서비스 토큰 확인
+│  │  ├─ passwords.py       비밀번호 규칙, bcrypt 해시(스레드풀)
 │  │  └─ geo.py             직선거리 계산
 │  ├─ api/
-│  │  ├─ deps.py            공통 의존성 (세션, AI, 현재 시각, debug)
+│  │  ├─ deps.py            공통 의존성 (세션, AI, 현재 시각, debug, IP, Origin 확인)
 │  │  ├─ public/            공개 API 라우터
+│  │  ├─ account/           로그인·회원 API 라우터 (auth, me)
 │  │  └─ internal/          내부 데이터 API 라우터
 │  ├─ clients/ai.py         AI 호출과 오류 변환
 │  ├─ services/             판단 로직 (AI·DB 합치기, 장애 대체, 정각 경계)
@@ -71,7 +74,9 @@ PyCharm은 인터프리터를 `backend\.venv\Scripts\python.exe`로, 소스 루�
 | `CYCLEON_SERVICE_TOKEN` | 백엔드와 AI가 **같은 값**으로 쓰는 32자 이상 비밀 문자열. JWT가 아니다. 만들기: `.\.venv\Scripts\python -c "import secrets; print(secrets.token_urlsafe(32))"` |
 | `CYCLEON_AI_TIMEOUT_SECONDS` | AI 응답 대기 시간(초) |
 | `CYCLEON_AI_CLOCK_CHECK` | AI 응답의 기준 정각이 백엔드와 같은지 확인. **실제 AI는 `true`, 목업은 `false`** (목업 시계가 고정이라) |
-| `CORS_ORIGINS` | 브라우저 호출을 허용할 프론트 주소 (JSON 배열) |
+| `CORS_ORIGINS` | 브라우저 호출을 허용할 프론트 주소 (JSON 배열). 로그인·회원 API의 Origin 확인도 이 목록을 쓴다. 리버스 프록시로 한 사이트에서 서비스하면 그 사이트 주소(`https://...`)를 넣는다 |
+| `CYCLEON_COOKIE_SECURE` | 세션 쿠키에 `Secure`를 붙일지. **https 운영은 `true`**, http 로컬 개발은 `false` |
+| `CYCLEON_BCRYPT_ROUNDS` | bcrypt 비용. 기본 12(1회 약 0.2~0.3초). 테스트만 4로 낮춘다 |
 | `CYCLEON_DEBUG_ENABLED` | `?debug=true` 허용 여부. 운영에서는 `false` |
 | `DATABASE_URL` | 개발 DB. `postgresql+asyncpg://...` 형식 (드라이버는 asyncpg) |
 | `TEST_DATABASE_URL` | pytest 전용 DB. 테스트가 테이블을 비우므로 **개발 DB와 다른 DB**여야 한다 |
@@ -138,10 +143,21 @@ AI 동기화 캐시는 `모델개발/data/runtime_cache/`에 생긴다(Git 제�
 | `GET /api/stations/nearby` | 반경 안 대여소 + 0대 확률 + 현재 수량 | 200, 확률 `null`, 수량은 DB 최신 수집분 |
 | `POST /api/predictions` | 선택·즐겨찾기 대여소 예측 (`all_targets`로 3개 시각) | 위와 같음 |
 | `POST /api/recommendations` | 추천 1곳 + 대안 최대 2곳 | 503 `ai_unavailable` |
+| `POST /api/auth/signup`·`login`·`logout` | 가입(바로 로그인)·로그인·로그아웃. 세션 쿠키 발급·삭제 | 영향 없음 |
+| `GET`·`PATCH`·`DELETE /api/me` | 프로필 조회·닉네임/소개 변경·탈퇴(비밀번호 확인) | 영향 없음 |
+| `PUT /api/me/password`, `POST /api/me/logout-all` | 비밀번호 변경(다른 기기 로그아웃), 모든 기기 로그아웃 | 영향 없음 |
 | `GET /internal/ai-data/v1/stations`·`observations`·`forecasts` | AI 동기화 (커서 페이지) | — |
 
 - `target_at`은 `GET /api/status`의 `supported_targets` 중 하나를 **그대로** 보낸다. 지난 정각이나 정각이 아닌 시각은 409 `target_not_supported`.
 - 오류는 모두 `{"error": {"code", "message", ...}}`. AI 401은 502 `ai_auth_failed`, AI 422·5xx는 502 `ai_error`.
+
+### 로그인과 세션
+
+- 로그인하면 `cycleon_session` 쿠키(HttpOnly, SameSite=Lax, Path=/api)를 준다. DB에는 토큰의 SHA-256 해시만 둔다. 마지막 사용 후 14일, 로그인 후 30일 중 먼저 오는 때 끝난다.
+- 프론트는 백엔드와 **같은 사이트**에서 불러야 쿠키가 실린다. 개발은 Vite 프록시(`/api` → `http://127.0.0.1:8100`), 운영은 리버스 프록시(nginx·Caddy)가 프론트 파일과 `/api`를 함께 서비스하는 구성을 권장한다.
+- 로그인·가입·회원 변경 요청은 `Origin`이 `CORS_ORIGINS`에 있어야 하고(403 `origin_not_allowed`), 본문은 JSON만 받는다(415).
+- 횟수 제한: 같은 아이디+IP 로그인 실패 15분 5회, 같은 IP 실패 15분 30회, 같은 IP 가입 1시간 10회. 넘으면 429 `too_many_attempts`(`retry_after_seconds`, `Retry-After`).
+- **리버스 프록시 뒤에서는 실제 IP를 받아야 한다.** 프록시가 `X-Forwarded-For`를 붙이고, uvicorn은 믿는 프록시 주소만 지정한다: `uvicorn app.main:app --forwarded-allow-ips <프록시 IP>`(같은 서버의 nginx면 기본값 `127.0.0.1`로 충분). `*`는 쓰지 않는다. 아무나 보낸 헤더를 믿게 되어 횟수 제한을 피할 수 있다.
 
 ## 테스트
 
@@ -183,3 +199,4 @@ docker compose start                 # DB 테스트에 필요
 - 폐소 감지(`valid_to`), 수집기 중복 실행 방지가 없다.
 - 기상 자료(`/forecasts`)는 기상을 쓰는 모델 번들이 나올 때까지 빈 페이지다.
 - 배포용 Dockerfile·운영 설정은 배포 서버가 정해지면 추가한다.
+- 만료된 세션과 하루 지난 로그인 시도 기록은 로그인할 때 지운다. 로그인이 드문 기간에는 남아 있을 수 있다(정기 정리는 배포 때 추가).

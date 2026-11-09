@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.account import auth, me
 from app.api.internal import ai_data
 from app.api.public import predictions, recommendations, stations, status
 from app.clients.ai import AIClient
@@ -27,11 +28,13 @@ def create_app(settings: Settings | None = None, ai_client: AIClient | None = No
     app.state.settings = settings
     app.state.ai = ai_client or AIClient(settings)
     app.state.db = make_sessionmaker(engine) if engine is not None else None
-    app.add_middleware(CORSMiddleware, allow_origins=settings.cors_origins,
-                       allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
+    # allow_credentials: 프론트가 다른 출처(다른 서브도메인)일 때 세션 쿠키를 주고받게 한다.
+    # 리버스 프록시·Vite 프록시로 같은 출처에서 부르면 CORS 자체가 쓰이지 않는다.
+    app.add_middleware(CORSMiddleware, allow_origins=settings.cors_origins, allow_credentials=True,
+                       allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"], allow_headers=["Content-Type"])
     register_error_handlers(app)
     app.include_router(ai_data.router)
-    for module in (status, stations, predictions, recommendations):
+    for module in (status, stations, predictions, recommendations, auth, me):
         app.include_router(module.router, prefix="/api")
 
     @app.get("/health")

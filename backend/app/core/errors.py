@@ -11,9 +11,12 @@ logger = logging.getLogger(__name__)
 
 
 class AppError(Exception):
-    def __init__(self, status_code: int, code: str, message: str, **extra):
+    """headers: 응답에 붙일 헤더(Retry-After, 쿠키 삭제 등). 본문에는 나가지 않는다."""
+
+    def __init__(self, status_code: int, code: str, message: str, headers: dict[str, str] | None = None, **extra):
         super().__init__(code)
         self.status_code, self.code, self.message, self.extra = status_code, code, message, extra
+        self.headers = headers or {}
 
 
 class TargetNotSupported(AppError):
@@ -51,8 +54,55 @@ class AIError(AppError):
         super().__init__(502, "ai_error", "잠시 조회할 수 없습니다.")
 
 
-def error_response(status_code: int, code: str, message: str, **extra) -> JSONResponse:
-    return JSONResponse(status_code=status_code, content={"error": {"code": code, "message": message, **extra}})
+class NotAuthenticated(AppError):
+    """로그인하지 않았거나 세션이 끝남. 무효한 쿠키가 왔으면 지우는 Set-Cookie를 함께 보낸다."""
+
+    def __init__(self, clear_cookie_header: str | None = None):
+        super().__init__(401, "not_authenticated", "로그인이 필요합니다.",
+                         headers={"set-cookie": clear_cookie_header} if clear_cookie_header else None)
+
+
+class InvalidCredentials(AppError):
+    """아이디가 없든 비밀번호가 틀리든 같은 응답. 가입된 아이디를 알아낼 수 없게 한다."""
+
+    def __init__(self):
+        super().__init__(401, "invalid_credentials", "아이디 또는 비밀번호가 맞지 않습니다.")
+
+
+class InvalidPassword(AppError):
+    """로그인한 상태에서 비밀번호 확인(변경·탈퇴)이 틀림. 401이면 프론트가 로그아웃으로 오해하므로 403."""
+
+    def __init__(self):
+        super().__init__(403, "invalid_password", "비밀번호가 맞지 않습니다.")
+
+
+class LoginIdTaken(AppError):
+    def __init__(self):
+        super().__init__(409, "login_id_taken", "이미 사용 중인 아이디입니다.")
+
+
+class TooManyAttempts(AppError):
+    def __init__(self, retry_after_seconds: int):
+        super().__init__(429, "too_many_attempts", "시도 횟수가 너무 많습니다. 잠시 후 다시 시도해 주세요.",
+                         headers={"retry-after": str(retry_after_seconds)}, retry_after_seconds=retry_after_seconds)
+
+
+class OriginNotAllowed(AppError):
+    """로그인·회원 변경 요청이 허용하지 않은 사이트에서 옴(CSRF 방지)."""
+
+    def __init__(self):
+        super().__init__(403, "origin_not_allowed", "허용되지 않은 출처의 요청입니다.")
+
+
+class UnsupportedMediaType(AppError):
+    def __init__(self):
+        super().__init__(415, "unsupported_media_type", "JSON 본문만 받습니다.")
+
+
+def error_response(status_code: int, code: str, message: str, headers: dict[str, str] | None = None,
+                   **extra) -> JSONResponse:
+    return JSONResponse(status_code=status_code, content={"error": {"code": code, "message": message, **extra}},
+                        headers=headers)
 
 
 def _field_names(error: RequestValidationError) -> list[str]:
@@ -68,7 +118,7 @@ def _field_names(error: RequestValidationError) -> list[str]:
 def register_error_handlers(app: FastAPI) -> None:
     @app.exception_handler(AppError)
     async def app_error(_: Request, exc: AppError):
-        return error_response(exc.status_code, exc.code, exc.message, **exc.extra)
+        return error_response(exc.status_code, exc.code, exc.message, headers=exc.headers, **exc.extra)
 
     @app.exception_handler(RequestValidationError)
     async def validation_error(_: Request, exc: RequestValidationError):

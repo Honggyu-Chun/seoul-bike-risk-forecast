@@ -16,8 +16,14 @@ class Settings(BaseSettings):
     ai_timeout_seconds: float = Field(5.0, gt=0, validation_alias="CYCLEON_AI_TIMEOUT_SECONDS")
     # AI 응답의 base_at이 백엔드 기준 정각과 같은지 확인. 시계가 고정된 목업을 쓸 때만 false
     ai_clock_check: bool = Field(True, validation_alias="CYCLEON_AI_CLOCK_CHECK")
+    # 브라우저 호출을 허용할 프론트 주소. 로그인·회원 API의 Origin 확인(CSRF 방지)도 이 목록을 쓴다.
+    # 리버스 프록시로 같은 출처에서 서비스할 때도 그 사이트 주소(https://...)를 넣어야 한다.
     cors_origins: list[str] = Field(
         ["http://localhost:5173", "http://127.0.0.1:5173"], validation_alias="CORS_ORIGINS")
+    # bcrypt 비용. 운영 12(해시 1회 약 0.2~0.3초). 테스트만 4로 낮춘다
+    bcrypt_rounds: int = Field(12, ge=4, le=15, validation_alias="CYCLEON_BCRYPT_ROUNDS")
+    # 세션 쿠키 Secure 속성. https로 서비스하는 운영에서는 true, http인 로컬 개발은 false
+    cookie_secure: bool = Field(False, validation_alias="CYCLEON_COOKIE_SECURE")
     debug_enabled: bool = Field(True, validation_alias="CYCLEON_DEBUG_ENABLED")
     database_url: str = Field("", validation_alias="DATABASE_URL")
     seoul_api_key: SecretStr = Field(SecretStr(""), validation_alias="SEOUL_COLLECTION_API_KEY")
