@@ -71,6 +71,10 @@ class StationItem(BaseModel):
     latitude: float
     longitude: float
     distance_m: float | None   # lat·lon을 주지 않으면 null
+    # 지도 마커 색용 지금 수량(가장 최근 완료 수집분). 그 수집분에 없거나 비정상 값이면 null
+    latest_inventory: int | None
+    latest_inventory_received_at: UtcDatetime | None
+    inventory_fresh: bool          # 수량이 300초 안의 값이면 true
 
 
 class StationsResponse(BaseModel):

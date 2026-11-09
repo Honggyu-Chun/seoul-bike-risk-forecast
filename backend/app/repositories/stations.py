@@ -45,21 +45,23 @@ class Inventory:
     received_at: datetime
 
 
-async def latest_inventory(session: AsyncSession, station_ids: list[str]) -> dict[str, Inventory]:
-    """가장 최근 완료 수집분에서 요청한 대여소들의 재고. AI가 꺼져 있을 때 수량 표시에 쓴다.
+async def latest_inventory(session: AsyncSession, station_ids: list[str] | None) -> dict[str, Inventory]:
+    """가장 최근 완료 수집분에서 요청한 대여소들의 재고. station_ids=None이면 그 수집분의 전체 대여소.
 
+    AI가 꺼졌을 때의 수량 대체와 지도 마커 색(GET /api/stations)에 쓴다.
     수집분이 하나도 없거나, 그 수집분에 없는 대여소는 결과에 없다.
     """
-    if not station_ids:
+    if station_ids is not None and not station_ids:
         return {}
     capture_id = await session.scalar(
         select(Capture.capture_id).where(Capture.source == "seoul_bike", Capture.state == "complete")
         .order_by(Capture.completed_at.desc()).limit(1))
     if capture_id is None:
         return {}
-    rows = await session.execute(
-        select(Observation.entity_id, Observation.value, Observation.received_at)
-        .where(Observation.capture_id == capture_id, Observation.entity_id.in_(station_ids),
-               Observation.variable == "inventory"))
+    query = (select(Observation.entity_id, Observation.value, Observation.received_at)
+             .where(Observation.capture_id == capture_id, Observation.variable == "inventory"))
+    if station_ids is not None:
+        query = query.where(Observation.entity_id.in_(station_ids))
+    rows = await session.execute(query)
     return {sid: Inventory(int(value) if value is not None else None, received_at)
             for sid, value, received_at in rows}

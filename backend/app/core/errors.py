@@ -111,6 +111,13 @@ class FavoriteNotFound(AppError):
         super().__init__(404, "favorite_not_found", "즐겨찾기에 없는 대여소입니다.")
 
 
+class PlaceSearchUnavailable(AppError):
+    """카카오 로컬 API 접속 실패·오류, 또는 REST API 키가 설정되지 않음"""
+
+    def __init__(self):
+        super().__init__(503, "place_search_unavailable", "장소 검색을 잠시 사용할 수 없습니다.")
+
+
 class FavoritesLimit(AppError):
     def __init__(self, limit: int):
         super().__init__(409, "favorites_limit", f"즐겨찾기는 {limit}개까지 저장할 수 있습니다.", limit=limit)
@@ -125,7 +132,9 @@ def error_response(status_code: int, code: str, message: str, headers: dict[str,
 def _field_names(error: RequestValidationError) -> list[str]:
     names = []
     for item in error.errors():
-        loc = [part for part in item.get("loc", ()) if part not in ("body", "query", "path", "header")]
+        loc = list(item.get("loc", ()))
+        if loc and loc[0] in ("body", "query", "path", "header", "cookie"):
+            loc = loc[1:]  # 맨 앞의 위치 표시만 뺀다(이름이 query인 쿼리 인자도 있으므로)
         name = next((str(part) for part in loc if isinstance(part, str)), None)
         if name and name not in names:
             names.append(name)

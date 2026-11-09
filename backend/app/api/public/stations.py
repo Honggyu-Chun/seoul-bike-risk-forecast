@@ -18,9 +18,9 @@ TARGET_AT_HELP = "GET /api/status의 supported_targets 중 하나(정각). 다�
 @router.get("/stations", response_model=StationsResponse)
 async def get_stations(lat: float | None = Query(None, ge=33, le=39), lon: float | None = Query(None, ge=124, le=132),
                        radius_m: float | None = Query(None, ge=1, le=1500),
-                       session: AsyncSession = Depends(get_session)):
-    """지도에 표시할 현재 운영 대여소. 예측은 없고 AI 상태와 관계없이 동작한다."""
-    return await service.list_stations(session, lat, lon, radius_m)
+                       session: AsyncSession = Depends(get_session), now: datetime = Depends(get_now)):
+    """지도에 표시할 현재 운영 대여소와 지금 수량(마커 색). 예측은 없고 AI 상태와 관계없이 동작한다."""
+    return await service.list_stations(session, now, lat, lon, radius_m)
 
 
 @router.get("/stations/nearby", response_model=NearbyResponse, response_model_exclude_unset=True)

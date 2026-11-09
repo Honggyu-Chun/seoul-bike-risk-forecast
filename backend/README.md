@@ -9,6 +9,7 @@
 | AI 중계 | 백엔드 → AI 서비스 | AI의 `/v1/status`, `/v1/predictions`, `/v1/recommendations` |
 | 내부 데이터 API | AI 서비스 → 백엔드 | `/internal/ai-data/v1/...` (3개, 서비스 토큰 필요) |
 | 재고 수집기 | 백엔드 → 서울시 API | 별도 프로세스, 2분마다 |
+| 장소 검색 중계 | 백엔드 → 카카오 로컬 API | `GET /api/places`가 부를 때만 |
 
 ```text
 [프론트] ──/api──> [백엔드] ──/v1──> [AI 서비스]
@@ -33,13 +34,14 @@ backend/
 │  │  ├─ errors.py          오류 응답 {"error": {"code", "message", ...}}
 │  │  ├─ security.py        내부 API 서비스 토큰 확인
 │  │  ├─ passwords.py       비밀번호 규칙, bcrypt 해시(스레드풀)
+│  │  ├─ log_filters.py     접속 로그에서 쿼리(위치·검색어) 지우기
 │  │  └─ geo.py             직선거리 계산
 │  ├─ api/
 │  │  ├─ deps.py            공통 의존성 (세션, AI, 현재 시각, debug, IP, Origin 확인)
 │  │  ├─ public/            공개 API 라우터
 │  │  ├─ account/           로그인·회원 API 라우터 (auth, me, favorites)
 │  │  └─ internal/          내부 데이터 API 라우터
-│  ├─ clients/ai.py         AI 호출과 오류 변환
+│  ├─ clients/              AI 호출(ai.py), 카카오 로컬 API 호출(kakao.py)과 오류 변환
 │  ├─ services/             판단 로직 (AI·DB 합치기, 장애 대체, 정각 경계)
 │  ├─ repositories/         DB 읽기·쓰기 (수집분 저장 규칙, 커서 페이지)
 │  ├─ schemas/              요청·응답 모델 (public: 프론트, ai: AI 응답, ai_data: 내부 API)
@@ -77,6 +79,7 @@ PyCharm은 인터프리터를 `backend\.venv\Scripts\python.exe`로, 소스 루�
 | `CORS_ORIGINS` | 브라우저 호출을 허용할 프론트 주소 (JSON 배열). 로그인·회원 API의 Origin 확인도 이 목록을 쓴다. 리버스 프록시로 한 사이트에서 서비스하면 그 사이트 주소(`https://...`)를 넣는다 |
 | `CYCLEON_COOKIE_SECURE` | 세션 쿠키에 `Secure`를 붙일지. **https 운영은 `true`**, http 로컬 개발은 `false` |
 | `CYCLEON_BCRYPT_ROUNDS` | bcrypt 비용. 기본 12(1회 약 0.2~0.3초). 테스트만 4로 낮춘다 |
+| `KAKAO_REST_API_KEY` | 장소 검색용 카카오 **REST API 키**(developers.kakao.com의 앱 → 앱 키). 서버에만 둔다. 지도 표시용 JavaScript 키는 프론트에서 쓰고, 앱 설정에 사이트 도메인을 등록한다. 비어 있으면 `/api/places`만 503 |
 | `CYCLEON_DEBUG_ENABLED` | `?debug=true` 허용 여부. 운영에서는 `false` |
 | `DATABASE_URL` | 개발 DB. `postgresql+asyncpg://...` 형식 (드라이버는 asyncpg) |
 | `TEST_DATABASE_URL` | pytest 전용 DB. 테스트가 테이블을 비우므로 **개발 DB와 다른 DB**여야 한다 |
@@ -139,10 +142,11 @@ AI 동기화 캐시는 `모델개발/data/runtime_cache/`에 생긴다(Git 제�
 | 메서드·경로 | 용도 | AI가 꺼졌을 때 |
 | --- | --- | --- |
 | `GET /api/status` | 기준 정각, 선택 가능한 이용 시각 3개 | 200, `ai_available=false` |
-| `GET /api/stations` | 지도용 대여소 목록 (위치를 주면 거리순) | 영향 없음 |
+| `GET /api/stations` | 지도용 대여소 목록과 지금 수량(마커 색, DB 최신 수집분). 위치를 주면 거리순. 캐시 없이 매번, gzip 압축 | 영향 없음 |
 | `GET /api/stations/nearby` | 반경 안 대여소 + 0대 확률 + 현재 수량 | 200, 확률 `null`, 수량은 DB 최신 수집분 |
 | `POST /api/predictions` | 선택·즐겨찾기 대여소 예측 (`all_targets`로 3개 시각) | 위와 같음 |
 | `POST /api/recommendations` | 추천 1곳 + 대안 최대 2곳 | 503 `ai_unavailable` |
+| `GET /api/places?query=` | 장소·주소 검색 → 서울 안 후보 최대 5개(이름·주소·좌표). 카카오 장애·키 없음은 503 `place_search_unavailable` | 영향 없음 |
 | `POST /api/auth/signup`·`login`·`logout` | 가입(바로 로그인)·로그인·로그아웃. 세션 쿠키 발급·삭제 | 영향 없음 |
 | `GET`·`PATCH`·`DELETE /api/me` | 프로필 조회·닉네임/소개 변경·탈퇴(비밀번호 확인) | 영향 없음 |
 | `PUT /api/me/password`, `POST /api/me/logout-all` | 비밀번호 변경(다른 기기 로그아웃), 모든 기기 로그아웃 | 영향 없음 |
@@ -197,7 +201,8 @@ docker compose start                 # DB 테스트에 필요
 
 ## 남은 일
 
-- 사용자 위치(`lat`, `lon`)가 쿼리로 오는 GET API는 uvicorn 접속 로그에 위치가 남는다. 배포 전에 로그 처리 방식을 정한다.
+- uvicorn 접속 로그는 쿼리를 지우고 경로만 남긴다(`app/core/log_filters.py`). 위치(`lat`, `lon`)·검색어가 로그에 쌓이지 않는다. 앞단 리버스 프록시(nginx 등)의 접속 로그는 배포 때 따로 맞춘다.
+- `/api/places`에는 호출 횟수 제한이 없다. 카카오 하루 호출 한도를 넘기면 그날은 503이 난다. 배포 때 IP별 제한을 검토한다.
 - 폐소 감지(`valid_to`), 수집기 중복 실행 방지가 없다.
 - 기상 자료(`/forecasts`)는 기상을 쓰는 모델 번들이 나올 때까지 빈 페이지다.
 - 배포용 Dockerfile·운영 설정은 배포 서버가 정해지면 추가한다.

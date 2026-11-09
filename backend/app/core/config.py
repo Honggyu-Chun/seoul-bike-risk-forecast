@@ -24,6 +24,10 @@ class Settings(BaseSettings):
     bcrypt_rounds: int = Field(12, ge=4, le=15, validation_alias="CYCLEON_BCRYPT_ROUNDS")
     # 세션 쿠키 Secure 속성. https로 서비스하는 운영에서는 true, http인 로컬 개발은 false
     cookie_secure: bool = Field(False, validation_alias="CYCLEON_COOKIE_SECURE")
+    # 장소 검색(카카오 로컬 API). REST API 키는 서버에만 둔다(브라우저용 JavaScript 키와 다르다)
+    kakao_rest_api_key: SecretStr = Field(SecretStr(""), validation_alias="KAKAO_REST_API_KEY")
+    kakao_base_url: str = Field("https://dapi.kakao.com", validation_alias="KAKAO_BASE_URL")
+    kakao_timeout_seconds: float = Field(3.0, gt=0, validation_alias="KAKAO_TIMEOUT_SECONDS")
     debug_enabled: bool = Field(True, validation_alias="CYCLEON_DEBUG_ENABLED")
     database_url: str = Field("", validation_alias="DATABASE_URL")
     seoul_api_key: SecretStr = Field(SecretStr(""), validation_alias="SEOUL_COLLECTION_API_KEY")

@@ -77,9 +77,20 @@ def _prediction_fields(prediction: AIPrediction | None, fallback: repo.Inventory
     return fields
 
 
-async def list_stations(session: AsyncSession, lat: float | None, lon: float | None,
+def _station_item(station, distance: float | None, inventory: repo.Inventory | None,
+                  now: datetime) -> StationItem:
+    received = inventory.received_at if inventory else None
+    return StationItem(station_id=station.station_id, name=station.name, latitude=station.latitude,
+                       longitude=station.longitude, distance_m=distance,
+                       latest_inventory=inventory.value if inventory else None,
+                       latest_inventory_received_at=received, inventory_fresh=_fresh(received, now))
+
+
+async def list_stations(session: AsyncSession, now: datetime, lat: float | None, lon: float | None,
                         radius_m: float | None) -> StationsResponse:
-    """GET /api/stations. 지도 마커용 현재 운영 대여소. AI를 부르지 않는다.
+    """GET /api/stations. 지도 마커용 현재 운영 대여소와 지금 수량(마커 색). AI를 부르지 않는다.
+
+    수량은 DB의 가장 최근 완료 수집분이다. 캐시 헤더 없이 매번 새로 준다(응답은 gzip 압축).
 
     lat·lon을 주면 거리를 계산해 가까운 순으로, radius_m까지 주면 반경 안만. 안 주면 ID 순.
     lat·lon 중 하나만 주거나, 위치 없이 radius_m만 주면 422.
@@ -89,13 +100,13 @@ async def list_stations(session: AsyncSession, lat: float | None, lon: float | N
     if radius_m is not None and lat is None:
         raise InvalidRequest(["lat", "lon"])
     stations = await repo.current_stations(session)
+    inventory = await repo.latest_inventory(session, None)
     if lat is None:
-        items = [StationItem(station_id=s.station_id, name=s.name, latitude=s.latitude, longitude=s.longitude,
-                             distance_m=None) for s in sorted(stations, key=lambda s: _sort_key(s.station_id))]
+        items = [_station_item(s, None, inventory.get(s.station_id), now)
+                 for s in sorted(stations, key=lambda s: _sort_key(s.station_id))]
     else:
         measured = [(distance_m(lat, lon, s.latitude, s.longitude), s) for s in stations]
-        items = [StationItem(station_id=s.station_id, name=s.name, latitude=s.latitude, longitude=s.longitude,
-                             distance_m=d)
+        items = [_station_item(s, d, inventory.get(s.station_id), now)
                  for d, s in sorted(measured, key=lambda pair: (pair[0], _sort_key(pair[1].station_id)))
                  if radius_m is None or d <= radius_m]
     return StationsResponse(count=len(items), items=items)

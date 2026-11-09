@@ -111,6 +111,33 @@ def test_stations_lists_verified_only_by_id(make_client, test_database_url):
     assert body["items"][0]["distance_m"] is None
 
 
+def test_stations_include_latest_inventory_for_marker_color(make_client, test_database_url):
+    seed(test_database_url)
+    first = make_client().get("/api/stations").json()["items"][0]
+    assert first == {"station_id": "ST-2", "name": "ST-2 대여소", "latitude": first["latitude"], "longitude": CENTER[1],
+                     "distance_m": None, "latest_inventory": 0, "latest_inventory_received_at": "2026-11-04T05:39:00Z",
+                     "inventory_fresh": True}   # 실제 0대는 0
+
+
+def test_stations_inventory_stale_or_missing(make_client, test_database_url):
+    seed(test_database_url, received_at=NOW - timedelta(minutes=10))
+    first = make_client().get("/api/stations").json()["items"][0]
+    assert (first["latest_inventory"], first["inventory_fresh"]) == (0, False)
+    asyncio.run(_drop_captures(test_database_url))
+    first = make_client().get("/api/stations").json()["items"][0]
+    assert (first["latest_inventory"], first["latest_inventory_received_at"], first["inventory_fresh"]) == \
+        (None, None, False)   # 완료 수집분이 없으면 수량 없음(목록은 그대로)
+
+
+async def _drop_captures(url):
+    engine = make_engine(url)
+    try:
+        async with engine.begin() as conn:
+            await conn.execute(text("UPDATE captures SET state = 'partial'"))
+    finally:
+        await engine.dispose()
+
+
 def test_stations_with_location_sorted_and_radius(make_client, test_database_url):
     seed(test_database_url)
     client = make_client()
