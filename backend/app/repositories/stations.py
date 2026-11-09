@@ -21,8 +21,12 @@ async def current_stations(session: AsyncSession) -> list[Station]:
 
     최신 revision이 verified이고, 끝난 구간(valid_to)이 아니고, 충돌 표시가 없는 것만 남긴다.
     """
-    return [s for s in (await latest_stations(session)).values()
-            if s.identity_status == "verified" and s.valid_to is None and not s.conflict]
+    return [s for s in (await latest_stations(session)).values() if is_current(s)]
+
+
+def is_current(station: Station) -> bool:
+    """지금 운영 중이고 좌표가 확인된 대여소인지 (최신 revision 기준)"""
+    return station.identity_status == "verified" and station.valid_to is None and not station.conflict
 
 
 async def stations_by_ids(session: AsyncSession, station_ids: list[str]) -> dict[str, Station]:

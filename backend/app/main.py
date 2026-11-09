@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.account import auth, me
+from app.api.account import auth, favorites, me
 from app.api.internal import ai_data
 from app.api.public import predictions, recommendations, stations, status
 from app.clients.ai import AIClient
@@ -34,7 +34,7 @@ def create_app(settings: Settings | None = None, ai_client: AIClient | None = No
                        allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"], allow_headers=["Content-Type"])
     register_error_handlers(app)
     app.include_router(ai_data.router)
-    for module in (status, stations, predictions, recommendations, auth, me):
+    for module in (status, stations, predictions, recommendations, auth, me, favorites):
         app.include_router(module.router, prefix="/api")
 
     @app.get("/health")

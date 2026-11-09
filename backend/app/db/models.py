@@ -1,7 +1,7 @@
 """테이블 정의.
 
 stations·captures·observations는 내부 데이터 API(AI가 커서로 이어 받는 경로)의 record 모양을 컬럼으로 그대로 갖는다.
-users·sessions·login_attempts는 로그인 기능용이다(맨 아래).
+users·sessions·login_attempts·favorites는 로그인·회원 기능용이다(맨 아래).
 JSON 덩어리(payload)로 저장하지 않고 컬럼으로 나눠, 제약 조건으로 잘못된 값을 DB 단계에서 막는다.
 
 cursor_seq
@@ -191,4 +191,23 @@ class LoginAttempt(Base):
         CheckConstraint("kind IN ('login', 'signup')", name="kind"),
         Index(None, "login_id", "ip", "attempted_at"),
         Index(None, "ip", "attempted_at"),
+    )
+
+
+class Favorite(Base):
+    """회원의 즐겨찾기 대여소. 한 사람당 20개까지, position 순서로 보여 준다.
+
+    station_id는 stations가 revision 이력 테이블이라 외래 키를 걸 수 없다. 추가할 때 현재 운영 대여소인지 확인하고,
+    나중에 폐소돼도 지우지 않는다(응답에서 이름·좌표가 null이 된다). 회원을 지우면 함께 지워진다.
+    """
+    __tablename__ = "favorites"
+
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    station_id: Mapped[str] = mapped_column(String(80), primary_key=True)
+    alias: Mapped[str | None] = mapped_column(String(20))     # "집 앞" 같은 별칭(선택)
+    position: Mapped[int] = mapped_column(Integer)
+    created_at: Mapped[datetime] = mapped_column(Timestamp)
+
+    __table_args__ = (
+        CheckConstraint("position >= 0", name="position_nonnegative"),
     )

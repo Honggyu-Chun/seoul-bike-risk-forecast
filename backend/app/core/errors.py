@@ -99,6 +99,23 @@ class UnsupportedMediaType(AppError):
         super().__init__(415, "unsupported_media_type", "JSON 본문만 받습니다.")
 
 
+class StationNotFound(AppError):
+    """지금 운영 중이 아닌(모르는·폐소·좌표 미확인) 대여소를 즐겨찾기에 넣으려 함"""
+
+    def __init__(self):
+        super().__init__(404, "station_not_found", "운영 중인 대여소가 아닙니다.")
+
+
+class FavoriteNotFound(AppError):
+    def __init__(self):
+        super().__init__(404, "favorite_not_found", "즐겨찾기에 없는 대여소입니다.")
+
+
+class FavoritesLimit(AppError):
+    def __init__(self, limit: int):
+        super().__init__(409, "favorites_limit", f"즐겨찾기는 {limit}개까지 저장할 수 있습니다.", limit=limit)
+
+
 def error_response(status_code: int, code: str, message: str, headers: dict[str, str] | None = None,
                    **extra) -> JSONResponse:
     return JSONResponse(status_code=status_code, content={"error": {"code": code, "message": message, **extra}},

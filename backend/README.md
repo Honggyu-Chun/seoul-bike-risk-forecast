@@ -37,7 +37,7 @@ backend/
 │  ├─ api/
 │  │  ├─ deps.py            공통 의존성 (세션, AI, 현재 시각, debug, IP, Origin 확인)
 │  │  ├─ public/            공개 API 라우터
-│  │  ├─ account/           로그인·회원 API 라우터 (auth, me)
+│  │  ├─ account/           로그인·회원 API 라우터 (auth, me, favorites)
 │  │  └─ internal/          내부 데이터 API 라우터
 │  ├─ clients/ai.py         AI 호출과 오류 변환
 │  ├─ services/             판단 로직 (AI·DB 합치기, 장애 대체, 정각 경계)
@@ -146,6 +146,8 @@ AI 동기화 캐시는 `모델개발/data/runtime_cache/`에 생긴다(Git 제�
 | `POST /api/auth/signup`·`login`·`logout` | 가입(바로 로그인)·로그인·로그아웃. 세션 쿠키 발급·삭제 | 영향 없음 |
 | `GET`·`PATCH`·`DELETE /api/me` | 프로필 조회·닉네임/소개 변경·탈퇴(비밀번호 확인) | 영향 없음 |
 | `PUT /api/me/password`, `POST /api/me/logout-all` | 비밀번호 변경(다른 기기 로그아웃), 모든 기기 로그아웃 | 영향 없음 |
+| `GET /api/me/favorites` | 즐겨찾기 목록. `target_at`을 주면 예측·현재 수량을 붙임(`/api/predictions`와 같은 항목 + `alias`·`position`) | 200, 확률 `null`, 수량은 DB 최신 수집분 |
+| `POST`·`PATCH`·`DELETE /api/me/favorites...` | 추가(20개까지, 운영 중인 대여소만)·별칭 변경·삭제, `PUT .../order` 순서 변경, `POST .../import` 게스트 즐겨찾기 옮기기 | 영향 없음 |
 | `GET /internal/ai-data/v1/stations`·`observations`·`forecasts` | AI 동기화 (커서 페이지) | — |
 
 - `target_at`은 `GET /api/status`의 `supported_targets` 중 하나를 **그대로** 보낸다. 지난 정각이나 정각이 아닌 시각은 409 `target_not_supported`.
