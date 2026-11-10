@@ -1,3 +1,5 @@
+> **최신 팀 연결 기준(2026-11-10):** 실제 C 모델 호출·입력 방식은 [팀 모델 실행 안내](TEAM_MODEL_GUIDE.md), [백엔드](BACKEND_MODEL_INTEGRATION.md), [프론트](FRONTEND_MODEL_INTEGRATION.md), [현재 OpenAPI](team_model_openapi.json)를 사용합니다. 아래는 이전 참조·모의 API 기록입니다. 새 최종 집계는 [11월 10일 결과](RESULTS_20261110.md)를 보세요.
+
 # 모델 없이 개발 시작하기
 
 Git과 **Python 3.12**가 필요하다. 모델·과거 데이터·공공 API 키 없이 AI/데이터 목업과 호출 검사를 실행한다. Windows PowerShell과 Linux/macOS 터미널에서 아래 중 해당 경로를 따른다.

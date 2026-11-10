@@ -1,0 +1,1116 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CycleOn team C model service",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/status": {
+      "get": {
+        "summary": "Status",
+        "operationId": "status_v1_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceStatus"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/predictions": {
+      "post": {
+        "summary": "Predictions",
+        "operationId": "predictions_v1_predictions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PredictionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredictionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/recommendations": {
+      "post": {
+        "summary": "Recommendations",
+        "operationId": "recommendations_v1_recommendations_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecommendationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecommendationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/internal/ai-data/v1/snapshot": {
+      "post": {
+        "summary": "Snapshot",
+        "operationId": "snapshot_internal_ai_data_v1_snapshot_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snapshot"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SnapshotAccepted"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Prediction": {
+        "properties": {
+          "station_id": {
+            "type": "string",
+            "title": "Station Id"
+          },
+          "horizon_hours": {
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3
+            ],
+            "title": "Horizon Hours"
+          },
+          "target_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Target At"
+          },
+          "risk_probability": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Risk Probability"
+          },
+          "available_probability": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Available Probability"
+          },
+          "is_risk": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Risk"
+          },
+          "model_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Id"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "input_group": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input Group"
+          },
+          "latest_inventory": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Inventory"
+          },
+          "latest_inventory_received_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Inventory Received At"
+          },
+          "latest_inventory_age_seconds": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Inventory Age Seconds"
+          },
+          "latest_inventory_observed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Inventory Observed At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "station_id",
+          "horizon_hours",
+          "target_at",
+          "risk_probability",
+          "available_probability",
+          "is_risk",
+          "model_id",
+          "reason",
+          "input_group",
+          "latest_inventory",
+          "latest_inventory_received_at",
+          "latest_inventory_age_seconds",
+          "latest_inventory_observed_at"
+        ],
+        "title": "Prediction"
+      },
+      "PredictionRequest": {
+        "properties": {
+          "station_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 500,
+            "minItems": 1,
+            "title": "Station Ids"
+          },
+          "horizons_hours": {
+            "items": {
+              "type": "integer",
+              "enum": [
+                1,
+                2,
+                3
+              ]
+            },
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 1,
+            "title": "Horizons Hours"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "station_ids"
+        ],
+        "title": "PredictionRequest"
+      },
+      "PredictionResponse": {
+        "properties": {
+          "base_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Base At"
+          },
+          "requested_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Requested At"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Prediction"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "base_at",
+          "requested_at",
+          "items"
+        ],
+        "title": "PredictionResponse"
+      },
+      "RankedPrediction": {
+        "properties": {
+          "station_id": {
+            "type": "string",
+            "title": "Station Id"
+          },
+          "horizon_hours": {
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3
+            ],
+            "title": "Horizon Hours"
+          },
+          "target_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Target At"
+          },
+          "risk_probability": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Risk Probability"
+          },
+          "available_probability": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Available Probability"
+          },
+          "is_risk": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Risk"
+          },
+          "model_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Id"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "input_group": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input Group"
+          },
+          "latest_inventory": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Inventory"
+          },
+          "latest_inventory_received_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Inventory Received At"
+          },
+          "latest_inventory_age_seconds": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Inventory Age Seconds"
+          },
+          "latest_inventory_observed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Inventory Observed At"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "latitude": {
+            "type": "number",
+            "title": "Latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "title": "Longitude"
+          },
+          "distance_m": {
+            "type": "number",
+            "title": "Distance M"
+          },
+          "score": {
+            "type": "number",
+            "title": "Score"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "station_id",
+          "horizon_hours",
+          "target_at",
+          "risk_probability",
+          "available_probability",
+          "is_risk",
+          "model_id",
+          "reason",
+          "input_group",
+          "latest_inventory",
+          "latest_inventory_received_at",
+          "latest_inventory_age_seconds",
+          "latest_inventory_observed_at",
+          "name",
+          "latitude",
+          "longitude",
+          "distance_m",
+          "score"
+        ],
+        "title": "RankedPrediction"
+      },
+      "RecommendationRequest": {
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "maximum": 39.0,
+            "minimum": 33.0,
+            "title": "Latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "maximum": 132.0,
+            "minimum": 124.0,
+            "title": "Longitude"
+          },
+          "horizon_hours": {
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3
+            ],
+            "title": "Horizon Hours"
+          },
+          "radius_m": {
+            "type": "number",
+            "maximum": 1500.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Radius M",
+            "default": 500
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "latitude",
+          "longitude",
+          "horizon_hours"
+        ],
+        "title": "RecommendationRequest"
+      },
+      "RecommendationResponse": {
+        "properties": {
+          "base_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Base At"
+          },
+          "requested_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Requested At"
+          },
+          "horizon_hours": {
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3
+            ],
+            "title": "Horizon Hours"
+          },
+          "radius_m": {
+            "type": "number",
+            "title": "Radius M"
+          },
+          "distance_type": {
+            "type": "string",
+            "const": "straight_line",
+            "title": "Distance Type",
+            "default": "straight_line"
+          },
+          "automatic_radius_expansion": {
+            "type": "boolean",
+            "const": false,
+            "title": "Automatic Radius Expansion",
+            "default": false
+          },
+          "recommended": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RankedPrediction"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "alternatives": {
+            "items": {
+              "$ref": "#/components/schemas/RankedPrediction"
+            },
+            "type": "array",
+            "maxItems": 2,
+            "title": "Alternatives"
+          },
+          "abstained": {
+            "type": "boolean",
+            "title": "Abstained"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "nearby_count": {
+            "type": "integer",
+            "title": "Nearby Count"
+          },
+          "eligible_count": {
+            "type": "integer",
+            "title": "Eligible Count"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "base_at",
+          "requested_at",
+          "horizon_hours",
+          "radius_m",
+          "recommended",
+          "alternatives",
+          "abstained",
+          "reason",
+          "nearby_count",
+          "eligible_count"
+        ],
+        "title": "RecommendationResponse"
+      },
+      "ServiceData": {
+        "properties": {
+          "model_route": {
+            "type": "string",
+            "const": "C_only",
+            "title": "Model Route",
+            "default": "C_only"
+          },
+          "real_model_loaded": {
+            "type": "boolean",
+            "const": true,
+            "title": "Real Model Loaded",
+            "default": true
+          },
+          "primary_weather_routes_enabled": {
+            "type": "boolean",
+            "const": false,
+            "title": "Primary Weather Routes Enabled",
+            "default": false
+          },
+          "whole_service_approved": {
+            "type": "boolean",
+            "const": false,
+            "title": "Whole Service Approved",
+            "default": false
+          },
+          "station_count": {
+            "type": "integer",
+            "title": "Station Count"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "station_count"
+        ],
+        "title": "ServiceData"
+      },
+      "ServiceStatus": {
+        "properties": {
+          "service": {
+            "type": "string",
+            "const": "CycleOn",
+            "title": "Service",
+            "default": "CycleOn"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ready",
+              "not_ready"
+            ],
+            "title": "Status"
+          },
+          "server_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Server At"
+          },
+          "base_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Base At"
+          },
+          "supported_targets": {
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "type": "array",
+            "title": "Supported Targets"
+          },
+          "model_bundle_id": {
+            "type": "string",
+            "title": "Model Bundle Id"
+          },
+          "model_stage": {
+            "type": "string",
+            "const": "team_C_reference_requires_live_acceptance",
+            "title": "Model Stage"
+          },
+          "last_precompute_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Precompute At"
+          },
+          "precompute_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Precompute Error"
+          },
+          "latest_inventory_age_limit_seconds": {
+            "type": "integer",
+            "const": 300,
+            "title": "Latest Inventory Age Limit Seconds",
+            "default": 300
+          },
+          "time_policy": {
+            "type": "string",
+            "title": "Time Policy"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ServiceData"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "server_at",
+          "base_at",
+          "supported_targets",
+          "model_bundle_id",
+          "model_stage",
+          "last_precompute_at",
+          "precompute_error",
+          "time_policy",
+          "data"
+        ],
+        "title": "ServiceStatus"
+      },
+      "Snapshot": {
+        "properties": {
+          "capture_complete": {
+            "type": "boolean",
+            "const": true,
+            "title": "Capture Complete"
+          },
+          "source_capture_id": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Source Capture Id"
+          },
+          "base_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Base At"
+          },
+          "materialized_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Materialized At"
+          },
+          "stations": {
+            "items": {
+              "$ref": "#/components/schemas/StationInput"
+            },
+            "type": "array",
+            "maxItems": 5000,
+            "title": "Stations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "capture_complete",
+          "source_capture_id",
+          "base_at",
+          "materialized_at",
+          "stations"
+        ],
+        "title": "Snapshot"
+      },
+      "SnapshotAccepted": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "accepted",
+            "title": "Status",
+            "default": "accepted"
+          },
+          "base_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Base At"
+          },
+          "stations": {
+            "type": "integer",
+            "title": "Stations"
+          },
+          "qualified_stations": {
+            "type": "integer",
+            "title": "Qualified Stations"
+          },
+          "model_route": {
+            "type": "string",
+            "const": "C_only",
+            "title": "Model Route",
+            "default": "C_only"
+          },
+          "real_model_loaded": {
+            "type": "boolean",
+            "const": true,
+            "title": "Real Model Loaded",
+            "default": true
+          },
+          "primary_weather_routes_enabled": {
+            "type": "boolean",
+            "const": false,
+            "title": "Primary Weather Routes Enabled",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "base_at",
+          "stations",
+          "qualified_stations"
+        ],
+        "title": "SnapshotAccepted"
+      },
+      "StationInput": {
+        "properties": {
+          "station_id": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Station Id"
+          },
+          "model_station_code": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Model Station Code"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "latitude": {
+            "type": "number",
+            "maximum": 39.0,
+            "minimum": 33.0,
+            "title": "Latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "maximum": 132.0,
+            "minimum": 124.0,
+            "title": "Longitude"
+          },
+          "identity_verified": {
+            "type": "boolean",
+            "title": "Identity Verified"
+          },
+          "identity_verified_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Identity Verified At"
+          },
+          "identity_evidence": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Identity Evidence"
+          },
+          "identity_revision": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Identity Revision"
+          },
+          "inventory_at_base": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inventory At Base"
+          },
+          "base_inventory_received_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Base Inventory Received At"
+          },
+          "latest_inventory": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Inventory"
+          },
+          "latest_inventory_received_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Inventory Received At"
+          },
+          "latest_inventory_observed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Inventory Observed At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "station_id",
+          "model_station_code",
+          "name",
+          "latitude",
+          "longitude",
+          "identity_verified",
+          "identity_verified_at",
+          "identity_evidence",
+          "identity_revision",
+          "inventory_at_base",
+          "base_inventory_received_at",
+          "latest_inventory",
+          "latest_inventory_received_at"
+        ],
+        "title": "StationInput"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

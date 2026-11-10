@@ -1,0 +1,24 @@
+{
+  "base_at": "2026-11-10T05:00:00Z",
+  "materialized_at": "2026-11-10T05:39:59Z",
+  "stations": [
+    {
+      "station_id": "ST-DEMO-102",
+      "model_station_code": 102,
+      "name": "합성 예시 대여소",
+      "latitude": 37.5665,
+      "longitude": 126.978,
+      "identity_verified": true,
+      "identity_verified_at": "2026-11-09T05:00:00Z",
+      "identity_evidence": "synthetic_example_not_real_identity",
+      "identity_revision": "example-v1",
+      "inventory_at_base": 2,
+      "base_inventory_received_at": "2026-11-10T04:59:30Z",
+      "latest_inventory": 2,
+      "latest_inventory_received_at": "2026-11-10T05:39:30Z",
+      "latest_inventory_observed_at": null
+    }
+  ],
+  "capture_complete": true,
+  "source_capture_id": "synthetic-structure-example"
+}
