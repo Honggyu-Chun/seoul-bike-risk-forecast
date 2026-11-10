@@ -1,3 +1,5 @@
+> **최신 팀 연결 기준(2026-11-10):** 실제 C 모델 호출·입력 방식은 [팀 모델 실행 안내](TEAM_MODEL_GUIDE.md), [백엔드](BACKEND_MODEL_INTEGRATION.md), [프론트](FRONTEND_MODEL_INTEGRATION.md), [현재 OpenAPI](team_model_openapi.json)를 사용합니다. 아래는 이전 참조·모의 API 기록입니다. 새 최종 집계는 [11월 10일 결과](RESULTS_20261110.md)를 보세요.
+
 # 모델 개발 상태와 사용 범위
 
 2026-11-02 개발 기록 기준. 모델·추천 정책 최종 고정과 2025년 하반기 독립 평가는 아직 하지 않았다.

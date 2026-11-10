@@ -27,4 +27,8 @@ $env:CYCLEON_MOCK_TOKEN = 'local-mock-only-change-this-token-123456'
 .\.venv-contract\Scripts\python.exe scripts/cycleon_http_check.py
 ```
 
-공유 대상은 코드·명세·합성 예시·검증 결과 요약이다. 실제 키·토큰·세션·`.env`·가중치·원본 데이터·실행 DB·개인별 런타임은 커밋하지 않는다. 실제 모델 연결 인수는 [별도 절차](모델개발/docs/cycleon/REAL_MODEL_HANDOFF.md)를 따른다.
+공유 대상은 코드·명세·합성 예시·검증 결과 요약이다. 실제 키·토큰·세션·`.env`·원본 데이터·실행 DB·개인별 런타임은 커밋하지 않는다. 가중치는 아래 승인된 배포 묶음만 예외로 제공한다. 실제 모델 연결 인수는 [별도 절차](모델개발/docs/cycleon/REAL_MODEL_HANDOFF.md)를 따른다.
+
+## 승인된 팀 모델 배포 묶음
+
+2026년 11월 10일 실제 모델 연결 요청에 따라 releases/team-model-20261110의 검증된 모델 묶음과 SHA-256 명세는 버전 관리합니다. 이 예외는 지정한 9개 모델 배포 묶음에 한하며 원본 자료·API 키·토큰·세션·실행 DB·개인 런타임은 계속 제외합니다. 팀 연결은 모델개발/docs/cycleon/TEAM_MODEL_GUIDE.md를 기준으로 합니다.

@@ -1,3 +1,5 @@
+> **최신 팀 연결 기준(2026-11-10):** 실제 C 모델 호출·입력 방식은 [팀 모델 실행 안내](TEAM_MODEL_GUIDE.md), [백엔드](BACKEND_MODEL_INTEGRATION.md), [프론트](FRONTEND_MODEL_INTEGRATION.md), [현재 OpenAPI](team_model_openapi.json)를 사용합니다. 아래는 이전 참조·모의 API 기록입니다. 새 최종 집계는 [11월 10일 결과](RESULTS_20261110.md)를 보세요.
+
 # 프론트엔드 인수 명세
 
 > Draft v0.1 · 위치·예정 정각·위험·거리 비교 화면의 개발 기준이다. 최종 UI 디자인을 지정하지 않는다.

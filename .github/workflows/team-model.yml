@@ -1,0 +1,35 @@
+name: Team model inference
+on:
+  pull_request:
+    paths:
+      - '모델개발/team_model/**'
+      - '모델개발/releases/team-model-20261110/**'
+      - '모델개발/requirements-team-model.txt'
+      - '.github/workflows/team-model.yml'
+  push:
+    branches: [main, feature/team-model-serving]
+    paths:
+      - '모델개발/team_model/**'
+      - '모델개발/releases/team-model-20261110/**'
+      - '모델개발/requirements-team-model.txt'
+      - '.github/workflows/team-model.yml'
+permissions:
+  contents: read
+jobs:
+  saved-model-inference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: '모델개발/requirements-team-model.txt'
+      - run: python -m pip install -r requirements-team-model.txt
+        working-directory: 모델개발
+      - run: python -m team_model check
+        working-directory: 모델개발
+      - run: python -m unittest team_model.test_service -v
+        working-directory: 모델개발
+      - run: python -m team_model.smoke_http
+        working-directory: 모델개발
