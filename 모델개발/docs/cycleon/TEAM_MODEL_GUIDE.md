@@ -1,6 +1,6 @@
 # 팀 모델 실행 안내
 
-2026년 11월 10일 인계본입니다. 실제 저장 모델의 확률을 받아 개발할 수 있습니다. 기본 HTTP 서비스는 **C 대체 모델 1·2·3시간**을 사용합니다. P53/P51/P48와 S 모델도 함께 제공하지만 기상·대여소 소속·수신 journal 검증이 남아 기본 HTTP 경로에서 활성화하지 않습니다.
+2026년 11월 10일 main 기준 인계본입니다. 실제 저장 모델의 확률을 받아 개발할 수 있습니다. 기본 HTTP 서비스는 **C 대체 모델 1·2·3시간**을 사용합니다. P53/P51/P48와 S 모델도 함께 제공하지만 기상·대여소 소속·수신 journal 검증이 남아 기본 HTTP 경로에서 활성화하지 않습니다.
 
 ## 제공 내용
 
@@ -21,8 +21,6 @@ Python 3.12, Windows PowerShell 기준입니다. Linux/macOS는 python3.12와 .v
 ~~~powershell
 git clone https://github.com/Honggyu-Chun/seoul-bike-risk-forecast.git
 cd seoul-bike-risk-forecast
-# main 병합 전에는 아래 브랜치 사용
-git switch feature/team-model-serving
 cd 모델개발
 py -3.12 -m venv .venv-team
 .\.venv-team\Scripts\python.exe -m pip install -r requirements-team-model.txt
