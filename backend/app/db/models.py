@@ -1,7 +1,7 @@
 """테이블 정의.
 
 stations·captures·observations는 내부 데이터 API(AI가 커서로 이어 받는 경로)의 record 모양을 컬럼으로 그대로 갖는다.
-users·sessions·login_attempts·favorites·email_tokens는 로그인·회원 기능용이다(맨 아래).
+users·sessions·login_attempts·favorites·email_tokens·prediction_views는 로그인·회원 기능용이다(맨 아래).
 JSON 덩어리(payload)로 저장하지 않고 컬럼으로 나눠, 제약 조건으로 잘못된 값을 DB 단계에서 막는다.
 
 cursor_seq
@@ -233,4 +233,42 @@ class EmailToken(Base):
     __table_args__ = (
         CheckConstraint("purpose IN ('verify', 'reset')", name="purpose"),
         Index(None, "user_id", "purpose", "created_at"),
+    )
+
+
+class PredictionView(Base):
+    """회원이 확인한 예측(마이 리포트). 대여소 상세·추천에서 고른 대여소를 볼 때 프론트가 기록을 요청한다.
+
+    - (회원, 대여소, 이용 시각)당 한 행. 같은 예측을 다시 봐도 처음 기록을 그대로 둔다.
+    - 확률·판정은 백엔드가 AI에서 직접 받아 저장한다(프론트가 보낸 값을 믿지 않는다).
+    - 사용자 위치와 대여소까지의 거리는 저장하지 않는다. 거리가 여러 개 쌓이면 위치를 역산할 수 있어서다.
+    - station_name은 확인한 때의 이름(나중에 이름이 바뀌거나 폐소돼도 카드가 깨지지 않게).
+    - actual_inventory·outcome·judged_at은 이용 시각이 지난 뒤 판정해 채운다. 판정 전이면 모두 null.
+    - 이용 시각 기준 2주(이번 주와 지난 주, KST)가 지나면 지운다. 회원을 지우면 함께 지워진다.
+    """
+    __tablename__ = "prediction_views"
+
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    station_id: Mapped[str] = mapped_column(String(80))
+    station_name: Mapped[str] = mapped_column(Text)
+    base_at: Mapped[datetime] = mapped_column(Timestamp)          # 예측의 기준 정각
+    target_at: Mapped[datetime] = mapped_column(Timestamp)        # 이용 시각
+    viewed_at: Mapped[datetime] = mapped_column(Timestamp)        # 확인한 시각
+    risk_probability: Mapped[float] = mapped_column(Double)
+    is_risk: Mapped[bool] = mapped_column(Boolean)
+    actual_inventory: Mapped[int | None] = mapped_column(Integer)  # 이용 시각 직전 수집분의 실제 수량
+    outcome: Mapped[str | None] = mapped_column(String(10))       # hit·miss·unknown(판정 불가)
+    judged_at: Mapped[datetime | None] = mapped_column(Timestamp)
+    rented: Mapped[bool | None] = mapped_column(Boolean)          # 사용자가 직접 표시한 대여 여부
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "station_id", "target_at"),
+        CheckConstraint("risk_probability BETWEEN 0 AND 1", name="risk_probability_range"),
+        CheckConstraint("target_at > base_at", name="target_after_base"),
+        CheckConstraint("outcome IS NULL OR outcome IN ('hit', 'miss', 'unknown')", name="outcome"),
+        CheckConstraint("(outcome IS NULL) = (judged_at IS NULL)", name="judged_together"),
+        CheckConstraint("actual_inventory IS NULL OR actual_inventory >= 0", name="actual_inventory_nonnegative"),
+        Index(None, "user_id", "target_at"),   # 주간 리포트
+        Index(None, "target_at"),              # 판정 대기 찾기, 2주 지난 기록 삭제
     )

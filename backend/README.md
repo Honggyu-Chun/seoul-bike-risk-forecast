@@ -40,7 +40,7 @@ backend/
 │  ├─ api/
 │  │  ├─ deps.py            공통 의존성 (세션, AI, 현재 시각, debug, IP, Origin 확인)
 │  │  ├─ public/            공개 API 라우터
-│  │  ├─ account/           로그인·회원 API 라우터 (auth, me, favorites)
+│  │  ├─ account/           로그인·회원 API 라우터 (auth, me, favorites, views)
 │  │  └─ internal/          내부 데이터 API 라우터
 │  ├─ clients/              AI 호출(ai.py), 카카오 로컬 API 호출(kakao.py), SMTP 메일 발송(mailer.py)
 │  ├─ services/             판단 로직 (AI·DB 합치기, 장애 대체, 정각 경계)
@@ -158,6 +158,7 @@ AI 동기화 캐시는 `모델개발/data/runtime_cache/`에 생긴다(Git 제�
 | `POST /api/auth/password-reset`·`/confirm` | 재설정 메일 요청(항상 202), 토큰과 새 비밀번호로 변경(모든 기기 로그아웃) | 영향 없음 |
 | `GET /api/me/favorites` | 즐겨찾기 목록. `target_at`을 주면 예측·현재 수량을 붙임(`/api/predictions`와 같은 항목 + `alias`·`position`) | 200, 확률 `null`, 수량은 DB 최신 수집분 |
 | `POST`·`PATCH`·`DELETE /api/me/favorites...` | 추가(20개까지, 운영 중인 대여소만)·별칭 변경·삭제, `PUT .../order` 순서 변경, `POST .../import` 게스트 즐겨찾기 옮기기 | 영향 없음 |
+| `POST /api/me/views` | 예측 확인 기록(마이 리포트). 대여소 상세·추천에서 고른 대여소를 볼 때 프론트가 부르고, 백엔드가 예측을 직접 받아 저장. 같은 대여소·이용 시각은 한 번만(201, 이미 있으면 200). 위치는 받지 않음 | 200 `recorded=false`, 기록 안 함 |
 | `GET /internal/ai-data/v1/stations`·`observations`·`forecasts` | AI 동기화 (커서 페이지) | — |
 
 - `target_at`은 `GET /api/status`의 `supported_targets` 중 하나를 **그대로** 보낸다. 지난 정각이나 정각이 아닌 시각은 409 `target_not_supported`.

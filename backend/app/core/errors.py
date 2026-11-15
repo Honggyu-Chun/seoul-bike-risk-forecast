@@ -100,7 +100,7 @@ class UnsupportedMediaType(AppError):
 
 
 class StationNotFound(AppError):
-    """지금 운영 중이 아닌(모르는·폐소·좌표 미확인) 대여소를 즐겨찾기에 넣으려 함"""
+    """지금 운영 중이 아닌(모르는·폐소·좌표 미확인) 대여소를 즐겨찾기에 넣거나 예측 확인으로 기록하려 함"""
 
     def __init__(self):
         super().__init__(404, "station_not_found", "운영 중인 대여소가 아닙니다.")
