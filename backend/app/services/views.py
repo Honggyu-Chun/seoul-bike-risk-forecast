@@ -7,21 +7,35 @@
   그래서 정각 경계 409, AI가 꺼졌을 때의 처리가 /api/predictions와 같다.
 - 확률이나 위험 판정이 null이면(AI 꺼짐, 대상 아님) 기록하지 않고 recorded=false와 이유만 돌려준다.
 - 사용자 위치는 받지도 저장하지도 않는다.
+
+판정
+- 이용 시각 직전 5분 안에 완료된 수집분의 실제 수량과 비교한다(모델이 기준 재고를 잡는 방식과 같다).
+  위험 예측 + 0대, 위험 아님 + 1대 이상이면 hit, 반대면 miss. 수집분이 없거나 값이 비정상이면 unknown.
+- 이용 시각 5분 뒤부터 판정한다. 정각 직전에 끝난 수집분이 DB에 들어오기 전에 unknown으로 굳지 않게.
+- 리포트를 열 때 그 회원의 대기 기록을, 수집기가 회차마다(오래된 재고를 지우기 전) 모든 회원의 대기 기록을 판정한다.
+  재고는 8일만 두므로, 리포트를 오래 열지 않아도 결과가 남는다.
+
+리포트 (GET /api/me/report)
+- 월~일 한 주(KST, 이용 시각 기준). 이번 주 포함 CYCLEON_VIEW_RETENTION_WEEKS주(기본 2)만 고를 수 있고 그 밖은 422.
 """
-from datetime import datetime
+from collections import defaultdict
+from datetime import date, datetime, time, timedelta
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.clients.ai import AIClient
 from app.core.config import Settings
-from app.core.errors import StationNotFound
-from app.core.time import horizon_for
+from app.core.errors import InvalidRequest, StationNotFound
+from app.core.time import KST, horizon_for
 from app.db.models import PredictionView
 from app.repositories import stations as station_repo
 from app.repositories import views as repo
 from app.schemas.public import PredictionRequest
-from app.schemas.views import ViewCreate, ViewItem, ViewRecordResponse
+from app.schemas.views import ReportResponse, ReportSummary, ViewCreate, ViewItem, ViewRecordResponse
 from app.services import stations as station_service
+
+CAPTURE_WINDOW = timedelta(minutes=5)   # 이용 시각 직전 이 안에 완료된 수집분으로 판정
+JUDGE_DELAY = timedelta(minutes=5)      # 이용 시각 뒤 이만큼 지나야 판정
 
 
 def view_item(view: PredictionView) -> ViewItem:
@@ -60,3 +74,53 @@ async def record(session: AsyncSession, ai: AIClient, settings: Settings, now: d
     response = ViewRecordResponse(recorded=True, item=view_item(view))
     await session.commit()
     return response, created
+
+
+def _judge(view: PredictionView, value: int | None, now: datetime) -> None:
+    view.actual_inventory = value
+    if value is None:
+        view.outcome = "unknown"
+    else:
+        view.outcome = "hit" if view.is_risk == (value == 0) else "miss"
+    view.judged_at = now
+
+
+async def judge_pending(session: AsyncSession, now: datetime, user_id: int | None = None,
+                        limit: int | None = None) -> int:
+    """판정할 때가 된 기록을 판정하고 커밋한다. 판정한 수를 돌려준다. user_id가 None이면 모든 회원."""
+    views = await repo.pending_views(session, now - JUDGE_DELAY, user_id, limit)
+    if not views:
+        return 0
+    by_target: dict[datetime, list[PredictionView]] = defaultdict(list)
+    for view in views:
+        by_target[view.target_at].append(view)
+    for target_at, group in by_target.items():
+        capture_id = await repo.capture_before(session, target_at, CAPTURE_WINDOW)
+        values = (await repo.inventory_in_capture(session, capture_id, [v.station_id for v in group])
+                  if capture_id else {})
+        for view in group:
+            _judge(view, values.get(view.station_id), now)
+    await session.commit()
+    return len(views)
+
+
+def selectable_weeks(now: datetime, count: int) -> list[date]:
+    """고를 수 있는 주의 월요일(KST), 이번 주부터 최신 순."""
+    today = now.astimezone(KST).date()
+    monday = today - timedelta(days=today.weekday())
+    return [monday - timedelta(weeks=i) for i in range(count)]
+
+
+async def report(session: AsyncSession, settings: Settings, now: datetime, user_id: int,
+                 week: date | None) -> ReportResponse:
+    """GET /api/me/report. 그 회원의 대기 기록을 먼저 판정하고 한 주의 요약과 카드를 돌려준다."""
+    weeks = selectable_weeks(now, settings.view_retention_weeks)
+    week = weeks[0] if week is None else week
+    if week not in weeks:  # 월요일이 아니거나 보관 기간 밖·미래
+        raise InvalidRequest(["week"])
+    await judge_pending(session, now, user_id)
+    start = datetime.combine(week, time(0), KST)
+    views = await repo.week_views(session, user_id, start, start + timedelta(weeks=1))
+    summary = ReportSummary(viewed=len(views), judged=sum(v.outcome in ("hit", "miss") for v in views),
+                            hits=sum(v.outcome == "hit" for v in views), rented=sum(v.rented is True for v in views))
+    return ReportResponse(week=week, weeks=weeks, summary=summary, items=[view_item(v) for v in views])

@@ -244,7 +244,7 @@ class PredictionView(Base):
     - 사용자 위치와 대여소까지의 거리는 저장하지 않는다. 거리가 여러 개 쌓이면 위치를 역산할 수 있어서다.
     - station_name은 확인한 때의 이름(나중에 이름이 바뀌거나 폐소돼도 카드가 깨지지 않게).
     - actual_inventory·outcome·judged_at은 이용 시각이 지난 뒤 판정해 채운다. 판정 전이면 모두 null.
-    - 이용 시각 기준 2주(이번 주와 지난 주, KST)가 지나면 지운다. 회원을 지우면 함께 지워진다.
+    - 이용 시각 기준 2주(이번 주와 지난 주, KST, CYCLEON_VIEW_RETENTION_WEEKS)가 지나면 지운다. 회원을 지우면 함께 지워진다.
     """
     __tablename__ = "prediction_views"
 

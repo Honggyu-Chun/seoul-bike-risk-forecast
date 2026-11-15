@@ -170,6 +170,21 @@ async def fetch_capture(http: httpx.AsyncClient, api_key: str, *,
     return CaptureData(capture_id=capture_id, started_at=started, completed_at=clock(), rows=rows, pages=pages)
 
 
+JUDGE_BATCH = 5000  # 한 회차에 판정하는 마이 리포트 기록 수 상한(남으면 다음 회차에)
+
+
+async def _judge_views(session) -> int:
+    """마이 리포트 기록 판정. 오래된 재고를 지우기 전에 해야 결과가 남는다. 실패해도 수집·정리는 계속한다."""
+    from app.services.views import judge_pending
+
+    try:
+        return await judge_pending(session, utc_now(), limit=JUDGE_BATCH)
+    except Exception as exc:  # noqa: BLE001
+        await session.rollback()
+        logger.error("view judging failed: %s", type(exc).__name__)
+        return 0
+
+
 async def run(settings: Settings, *, once: bool = False) -> int:
     """수집 → 저장 → 오래된 재고 삭제를 interval마다 반복한다. 종료 코드를 돌려준다.
 
@@ -198,10 +213,11 @@ async def run(settings: Settings, *, once: bool = False) -> int:
                     capture = await fetch_capture(http, api_key)
                     async with sessions() as session:
                         saved = await save_capture(session, capture)
+                        judged = await _judge_views(session)
                         removed = await prune(session, utc_now() - timedelta(hours=settings.retention_hours))
-                    logger.info("capture saved: %d stations (%d changed), %d pages, %.1fs, pruned %d",
+                    logger.info("capture saved: %d stations (%d changed), %d pages, %.1fs, judged %d, pruned %d",
                                 len(capture.rows), saved.station_revisions, len(capture.pages),
-                                (capture.completed_at - capture.started_at).total_seconds(), removed)
+                                (capture.completed_at - capture.started_at).total_seconds(), judged, removed)
                 except ProviderStopped as exc:
                     logger.error("collector stopped: %s", exc.reason)
                     return 1

@@ -89,6 +89,7 @@ PyCharm은 인터프리터를 `backend\.venv\Scripts\python.exe`로, 소스 루�
 | `SEOUL_COLLECTION_API_KEY` | 서울 열린데이터광장 인증키 (data.seoul.go.kr) |
 | `CYCLEON_COLLECTION_INTERVAL_SECONDS` | 수집 간격(초). 기본 120 |
 | `CYCLEON_RETENTION_HOURS` | 재고 보관 시간. 기본 192(8일). AI 첫 동기화가 170시간을 요청하므로 그보다 길어야 한다 |
+| `CYCLEON_VIEW_RETENTION_WEEKS` | 마이 리포트 기록(예측 확인) 보관 주 수. 이용 시각(KST) 기준 이번 주 포함 N주, 리포트도 그만큼 보여 준다. 기본 2(이번 주와 지난 주), 1~12. 테스트 서버에서 정리를 빨리 보려면 1 |
 
 ## 실행
 
@@ -98,7 +99,7 @@ PyCharm은 인터프리터를 `backend\.venv\Scripts\python.exe`로, 소스 루�
 # 1. DB (한 번 띄워 두면 됨)
 docker compose start                 # 처음이면 docker compose up -d (PostgreSQL, Mailpit)
 
-# 2. 수집기 (2분마다 서울 전체 재고 저장, Ctrl+C로 종료)
+# 2. 수집기 (2분마다 서울 전체 재고 저장, 마이 리포트 기록 판정, Ctrl+C로 종료)
 .\.venv\Scripts\python -m app.collectors.seoul_bike
 .\.venv\Scripts\python -m app.collectors.seoul_bike --once   # 한 번만
 
@@ -159,6 +160,7 @@ AI 동기화 캐시는 `모델개발/data/runtime_cache/`에 생긴다(Git 제�
 | `GET /api/me/favorites` | 즐겨찾기 목록. `target_at`을 주면 예측·현재 수량을 붙임(`/api/predictions`와 같은 항목 + `alias`·`position`) | 200, 확률 `null`, 수량은 DB 최신 수집분 |
 | `POST`·`PATCH`·`DELETE /api/me/favorites...` | 추가(20개까지, 운영 중인 대여소만)·별칭 변경·삭제, `PUT .../order` 순서 변경, `POST .../import` 게스트 즐겨찾기 옮기기 | 영향 없음 |
 | `POST /api/me/views` | 예측 확인 기록(마이 리포트). 대여소 상세·추천에서 고른 대여소를 볼 때 프론트가 부르고, 백엔드가 예측을 직접 받아 저장. 같은 대여소·이용 시각은 한 번만(201, 이미 있으면 200). 위치는 받지 않음 | 200 `recorded=false`, 기록 안 함 |
+| `GET /api/me/report?week=` | 마이 리포트. 한 주(월~일 KST, 이용 시각 기준)의 요약(`viewed`·`judged`·`hits`·`rented`)과 카드. `week`은 응답의 `weeks`(보관 주 수만큼) 중 하나, 그 밖은 422. 열 때 이용 시각 5분 뒤가 지난 기록을 판정(직전 5분 안 수집분의 실제 수량과 비교) | 영향 없음 |
 | `GET /internal/ai-data/v1/stations`·`observations`·`forecasts` | AI 동기화 (커서 페이지) | — |
 
 - `target_at`은 `GET /api/status`의 `supported_targets` 중 하나를 **그대로** 보낸다. 지난 정각이나 정각이 아닌 시각은 409 `target_not_supported`.

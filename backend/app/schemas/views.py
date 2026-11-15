@@ -1,7 +1,8 @@
-"""예측 확인 기록 API 요청과 응답 (/api/me/views...). 마이 리포트의 재료다.
+"""예측 확인 기록·마이 리포트 API 요청과 응답 (/api/me/views, /api/me/report).
 
 기록 요청에는 대여소와 이용 시각만 받는다. 확률은 백엔드가 AI에서 직접 받고, 사용자 위치는 받지 않는다.
 """
+from datetime import date
 from typing import Literal
 
 from pydantic import AwareDatetime, BaseModel
@@ -34,3 +35,18 @@ class ViewRecordResponse(BaseModel):
     recorded: bool
     reason: str | None = None
     item: ViewItem | None = None
+
+
+class ReportSummary(BaseModel):
+    """주간 요약. "실제와 맞은 비율"은 hits ÷ judged로 프론트가 계산한다(judged가 0이면 "—")."""
+    viewed: int    # 확인한 예측 수(판정 전·판정 불가 포함)
+    judged: int    # 맞음·틀림으로 판정이 끝난 수(판정 불가 제외)
+    hits: int      # 맞은 수
+    rented: int    # 사용자가 "대여함"으로 표시한 수
+
+
+class ReportResponse(BaseModel):
+    week: date           # 이 리포트의 주(월요일, KST)
+    weeks: list[date]    # 고를 수 있는 주(월요일, 최신 먼저). 보관 기간(기본 2주)만큼
+    summary: ReportSummary
+    items: list[ViewItem]  # 이용 시각이 늦은 순

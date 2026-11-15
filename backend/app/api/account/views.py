@@ -1,25 +1,25 @@
-"""예측 확인 기록 (/api/me/views...). 마이 리포트의 재료. 로그인 필요, 변경 요청은 Origin 확인(CSRF 방지)을 거친다.
+"""예측 확인 기록과 마이 리포트 (/api/me/views, /api/me/report). 로그인 필요, 변경 요청은 Origin 확인(CSRF 방지)을 거친다.
 
 게스트의 확인은 기록하지 않는다.
 """
-from datetime import datetime
+from datetime import date, datetime
 
-from fastapi import APIRouter, Depends, Response, status
+from fastapi import APIRouter, Depends, Query, Response, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.account.me import current_account
 from app.api.deps import get_ai, get_app_settings, get_now, get_session, require_trusted_origin
 from app.clients.ai import AIClient
 from app.core.config import Settings
-from app.schemas.views import ViewCreate, ViewRecordResponse
+from app.schemas.views import ReportResponse, ViewCreate, ViewRecordResponse
 from app.services import views as service
 from app.services.accounts import Account
 
-router = APIRouter(prefix="/me/views", tags=["my report"])
+router = APIRouter(prefix="/me", tags=["my report"])
 guarded = [Depends(require_trusted_origin)]
 
 
-@router.post("", response_model=ViewRecordResponse, status_code=status.HTTP_201_CREATED, dependencies=guarded,
+@router.post("/views", response_model=ViewRecordResponse, status_code=status.HTTP_201_CREATED, dependencies=guarded,
              responses={200: {"description": "이미 기록돼 있음(처음 기록 그대로), 또는 기록하지 않음(recorded=false)"}})
 async def record_view(request: ViewCreate, response: Response, session: AsyncSession = Depends(get_session),
                       ai: AIClient = Depends(get_ai), settings: Settings = Depends(get_app_settings),
@@ -34,3 +34,15 @@ async def record_view(request: ViewCreate, response: Response, session: AsyncSes
     if not created:
         response.status_code = status.HTTP_200_OK
     return body
+
+
+@router.get("/report", response_model=ReportResponse)
+async def my_report(week: date | None = Query(None, description="그 주의 월요일(KST, 예: 2026-11-02). 빼면 이번 주. "
+                                                                  "응답의 weeks 중 하나만 받고 그 밖은 422"),
+                    session: AsyncSession = Depends(get_session), settings: Settings = Depends(get_app_settings),
+                    now: datetime = Depends(get_now), account: Account = Depends(current_account)):
+    """마이 리포트: 한 주의 요약(확인한 예측·판정 끝남·맞음·대여 표시 수)과 카드(이용 시각이 늦은 순).
+
+    열 때 이용 시각이 5분 이상 지난 기록을 먼저 판정한다(직전 5분 안 수집분의 실제 수량과 비교).
+    """
+    return await service.report(session, settings, now, account.user.id, week)

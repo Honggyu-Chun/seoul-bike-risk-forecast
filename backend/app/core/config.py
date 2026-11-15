@@ -48,6 +48,9 @@ class Settings(BaseSettings):
                                                validation_alias="CYCLEON_COLLECTION_INTERVAL_SECONDS")
     # 재고 보관 기간. AI 첫 동기화가 최근 170시간을 요청하므로 그보다 길어야 한다(기본 8일)
     retention_hours: float = Field(192, gt=170, validation_alias="CYCLEON_RETENTION_HOURS")
+    # 마이 리포트 기록(prediction_views) 보관 주 수. 이용 시각(KST) 기준 이번 주 포함 N주만 두고 리포트도 그만큼 보여 준다.
+    # 기본 2(이번 주와 지난 주). 테스트 서버에서 정리를 빨리 보려면 1(이번 주만, 다음 월요일 0시에 지워짐)
+    view_retention_weeks: int = Field(2, ge=1, le=12, validation_alias="CYCLEON_VIEW_RETENTION_WEEKS")
 
 
 @lru_cache
