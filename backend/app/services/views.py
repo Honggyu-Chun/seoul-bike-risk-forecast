@@ -17,6 +17,14 @@
 
 리포트 (GET /api/me/report)
 - 월~일 한 주(KST, 이용 시각 기준). 이번 주 포함 CYCLEON_VIEW_RETENTION_WEEKS주(기본 2)만 고를 수 있고 그 밖은 422.
+
+대여 표시와 지우기 (PATCH·DELETE /api/me/views...)
+- "대여함"은 이용 시각이 지난 뒤에만 표시할 수 있다(409). 표시 지우기(null)는 언제든 된다.
+- 하나 지우기·전체 지우기. 없는 기록을 지워도 204(즐겨찾기 삭제와 같다).
+
+보관 기간 정리
+- 고를 수 있는 가장 오래된 주보다 이용 시각이 이른 기록은 수집기가 회차마다 지운다.
+  기준이 월요일 0시(KST)에만 바뀌므로 매일 지우는 것과 같고, 주가 바뀌면 바로 반영된다.
 """
 from collections import defaultdict
 from datetime import date, datetime, time, timedelta
@@ -25,13 +33,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.clients.ai import AIClient
 from app.core.config import Settings
-from app.core.errors import InvalidRequest, StationNotFound
+from app.core.errors import InvalidRequest, StationNotFound, TargetNotPassed, ViewNotFound
 from app.core.time import KST, horizon_for
 from app.db.models import PredictionView
 from app.repositories import stations as station_repo
 from app.repositories import views as repo
 from app.schemas.public import PredictionRequest
-from app.schemas.views import ReportResponse, ReportSummary, ViewCreate, ViewItem, ViewRecordResponse
+from app.schemas.views import (ReportResponse, ReportSummary, ViewCreate, ViewItem, ViewRecordResponse,
+                               ViewRentedUpdate)
 from app.services import stations as station_service
 
 CAPTURE_WINDOW = timedelta(minutes=5)   # 이용 시각 직전 이 안에 완료된 수집분으로 판정
@@ -111,6 +120,11 @@ def selectable_weeks(now: datetime, count: int) -> list[date]:
     return [monday - timedelta(weeks=i) for i in range(count)]
 
 
+def week_start(week: date) -> datetime:
+    """그 주 월요일 0시(KST)."""
+    return datetime.combine(week, time(0), KST)
+
+
 async def report(session: AsyncSession, settings: Settings, now: datetime, user_id: int,
                  week: date | None) -> ReportResponse:
     """GET /api/me/report. 그 회원의 대기 기록을 먼저 판정하고 한 주의 요약과 카드를 돌려준다."""
@@ -119,8 +133,38 @@ async def report(session: AsyncSession, settings: Settings, now: datetime, user_
     if week not in weeks:  # 월요일이 아니거나 보관 기간 밖·미래
         raise InvalidRequest(["week"])
     await judge_pending(session, now, user_id)
-    start = datetime.combine(week, time(0), KST)
+    start = week_start(week)
     views = await repo.week_views(session, user_id, start, start + timedelta(weeks=1))
     summary = ReportSummary(viewed=len(views), judged=sum(v.outcome in ("hit", "miss") for v in views),
                             hits=sum(v.outcome == "hit" for v in views), rented=sum(v.rented is True for v in views))
     return ReportResponse(week=week, weeks=weeks, summary=summary, items=[view_item(v) for v in views])
+
+
+async def set_rented(session: AsyncSession, now: datetime, user_id: int, view_id: int,
+                     request: ViewRentedUpdate) -> ViewItem:
+    view = await repo.own_view(session, user_id, view_id)
+    if view is None:
+        raise ViewNotFound()
+    if request.rented is not None and now < view.target_at:
+        raise TargetNotPassed()
+    view.rented = request.rented
+    item = view_item(view)
+    await session.commit()
+    return item
+
+
+async def remove(session: AsyncSession, user_id: int, view_id: int) -> None:
+    await repo.delete_view(session, user_id, view_id)
+    await session.commit()
+
+
+async def remove_all(session: AsyncSession, user_id: int) -> None:
+    await repo.delete_all(session, user_id)
+    await session.commit()
+
+
+async def prune_views(session: AsyncSession, now: datetime, weeks: int) -> int:
+    """보관 기간(이번 주 포함 weeks주)보다 오래된 기록을 모든 회원에서 지우고 커밋한다. 지운 수를 돌려준다."""
+    removed = await repo.delete_before(session, week_start(selectable_weeks(now, weeks)[-1]))
+    await session.commit()
+    return removed

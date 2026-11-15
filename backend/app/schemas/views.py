@@ -5,7 +5,7 @@
 from datetime import date
 from typing import Literal
 
-from pydantic import AwareDatetime, BaseModel
+from pydantic import AwareDatetime, BaseModel, StrictBool
 
 from app.schemas.favorites import StationId
 from app.schemas.public import UtcDatetime
@@ -14,6 +14,11 @@ from app.schemas.public import UtcDatetime
 class ViewCreate(BaseModel):
     station_id: StationId
     target_at: AwareDatetime   # GET /api/status의 supported_targets 중 하나
+
+
+class ViewRentedUpdate(BaseModel):
+    """"대여함" 표시. true·false로 표시, null로 표시를 지운다. 빼면 422(실수로 지우지 않게)."""
+    rented: StrictBool | None
 
 
 class ViewItem(BaseModel):

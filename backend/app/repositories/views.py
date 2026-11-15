@@ -1,10 +1,11 @@
 """예측 확인 기록 테이블 조회와 변경. 회원 화면용 조회는 모두 user_id로 거른다(다른 사람의 기록에 닿지 않게).
 
-판정 대기 조회(pending_views)만 user_id 없이 쓸 수 있다(수집기가 모든 회원의 기록을 판정할 때). 커밋은 서비스가 한다.
+판정 대기 조회(pending_views)와 보관 기간 정리(delete_before)만 user_id 없이 쓴다(수집기가 모든 회원 기록을 다룰 때).
+커밋은 서비스가 한다.
 """
 from datetime import datetime, timedelta
 
-from sqlalchemy import select
+from sqlalchemy import delete, select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -15,6 +16,28 @@ async def get_view(session: AsyncSession, user_id: int, station_id: str, target_
     return await session.scalar(select(PredictionView).where(
         PredictionView.user_id == user_id, PredictionView.station_id == station_id,
         PredictionView.target_at == target_at))
+
+
+async def own_view(session: AsyncSession, user_id: int, view_id: int) -> PredictionView | None:
+    """그 회원의 기록 하나. 없거나 다른 회원의 것이면 None."""
+    return await session.scalar(select(PredictionView).where(
+        PredictionView.id == view_id, PredictionView.user_id == user_id))
+
+
+async def delete_view(session: AsyncSession, user_id: int, view_id: int) -> None:
+    await session.execute(delete(PredictionView).where(
+        PredictionView.id == view_id, PredictionView.user_id == user_id))
+
+
+async def delete_all(session: AsyncSession, user_id: int) -> int:
+    result = await session.execute(delete(PredictionView).where(PredictionView.user_id == user_id))
+    return result.rowcount
+
+
+async def delete_before(session: AsyncSession, before: datetime) -> int:
+    """이용 시각이 before 이전인 기록을 모든 회원에서 지운다. 지운 수를 돌려준다."""
+    result = await session.execute(delete(PredictionView).where(PredictionView.target_at < before))
+    return result.rowcount
 
 
 async def insert_view(session: AsyncSession, values: dict) -> PredictionView | None:

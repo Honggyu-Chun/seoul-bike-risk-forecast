@@ -173,20 +173,28 @@ async def fetch_capture(http: httpx.AsyncClient, api_key: str, *,
 JUDGE_BATCH = 5000  # 한 회차에 판정하는 마이 리포트 기록 수 상한(남으면 다음 회차에)
 
 
-async def _judge_views(session) -> int:
-    """마이 리포트 기록 판정. 오래된 재고를 지우기 전에 해야 결과가 남는다. 실패해도 수집·정리는 계속한다."""
-    from app.services.views import judge_pending
-
+async def _view_step(session, name: str, step: Callable[[], Awaitable[int]]) -> int:
+    """마이 리포트 기록 작업 하나. 실패해도 수집·재고 정리는 계속한다."""
     try:
-        return await judge_pending(session, utc_now(), limit=JUDGE_BATCH)
+        return await step()
     except Exception as exc:  # noqa: BLE001
         await session.rollback()
-        logger.error("view judging failed: %s", type(exc).__name__)
+        logger.error("view %s failed: %s", name, type(exc).__name__)
         return 0
 
 
+async def _maintain_views(session, settings: Settings) -> tuple[int, int]:
+    """마이 리포트 기록 판정(오래된 재고를 지우기 전에 해야 결과가 남는다) → 보관 기간이 지난 기록 삭제."""
+    from app.services.views import judge_pending, prune_views
+
+    now = utc_now()
+    judged = await _view_step(session, "judging", lambda: judge_pending(session, now, limit=JUDGE_BATCH))
+    expired = await _view_step(session, "cleanup", lambda: prune_views(session, now, settings.view_retention_weeks))
+    return judged, expired
+
+
 async def run(settings: Settings, *, once: bool = False) -> int:
-    """수집 → 저장 → 오래된 재고 삭제를 interval마다 반복한다. 종료 코드를 돌려준다.
+    """수집 → 저장 → 마이 리포트 판정·정리 → 오래된 재고 삭제를 interval마다 반복한다. 종료 코드를 돌려준다.
 
     - ProviderStopped: 즉시 종료 (키·한도 문제는 사람이 확인해야 함)
     - CollectionError: 경고만 남기고 다음 회차로
@@ -213,11 +221,12 @@ async def run(settings: Settings, *, once: bool = False) -> int:
                     capture = await fetch_capture(http, api_key)
                     async with sessions() as session:
                         saved = await save_capture(session, capture)
-                        judged = await _judge_views(session)
+                        judged, expired = await _maintain_views(session, settings)
                         removed = await prune(session, utc_now() - timedelta(hours=settings.retention_hours))
-                    logger.info("capture saved: %d stations (%d changed), %d pages, %.1fs, judged %d, pruned %d",
-                                len(capture.rows), saved.station_revisions, len(capture.pages),
-                                (capture.completed_at - capture.started_at).total_seconds(), judged, removed)
+                    logger.info("capture saved: %d stations (%d changed), %d pages, %.1fs, judged %d, "
+                                "views expired %d, pruned %d", len(capture.rows), saved.station_revisions,
+                                len(capture.pages), (capture.completed_at - capture.started_at).total_seconds(),
+                                judged, expired, removed)
                 except ProviderStopped as exc:
                     logger.error("collector stopped: %s", exc.reason)
                     return 1

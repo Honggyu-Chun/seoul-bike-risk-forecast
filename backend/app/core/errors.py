@@ -111,6 +111,20 @@ class FavoriteNotFound(AppError):
         super().__init__(404, "favorite_not_found", "즐겨찾기에 없는 대여소입니다.")
 
 
+class ViewNotFound(AppError):
+    """마이 리포트 기록이 없거나 다른 회원의 것(어느 쪽인지 알려 주지 않는다)"""
+
+    def __init__(self):
+        super().__init__(404, "view_not_found", "리포트에 없는 기록입니다.")
+
+
+class TargetNotPassed(AppError):
+    """이용 시각 전에는 "대여함"을 표시할 수 없다"""
+
+    def __init__(self):
+        super().__init__(409, "target_not_passed", "이용 시각이 지난 뒤에 표시할 수 있습니다.")
+
+
 class PlaceSearchUnavailable(AppError):
     """카카오 로컬 API 접속 실패·오류, 또는 REST API 키가 설정되지 않음"""
 
