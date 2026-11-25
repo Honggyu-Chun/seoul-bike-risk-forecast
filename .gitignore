@@ -51,3 +51,10 @@
 
 # IDE settings (machine specific)
 .idea/
+
+# Versioned, compressed team inference release (no raw data)
+!/모델개발/releases/team-model-20261110/models.zip
+
+# Local team environments and extracted weights
+**/.venv-*/
+/모델개발/artifacts/team_model/

@@ -1,0 +1,23 @@
+{
+  "schema": "cycleon_team_model_release_v1",
+  "archive": "models.zip",
+  "sha256": "cdce471f0ad7ede03dc367d3ba11e937569529eb6338408dcf87b160ec7e6fbf",
+  "bytes": 35927154,
+  "members": {
+    "manifest.json": "5302af8c2aed075e8113ab411457174c75748579837aace4c876e406925e6796",
+    "models/P53_h1.txt": "da61852a41cf2e84e832272978714b56125cc4b4b1b918628648dd38873bd45d",
+    "models/S_h1.txt": "6e9a637efd9dbab79abf5bde641d0e289abf3cb1a1365482afb1b1a1ab82a5e1",
+    "models/C_h1.txt": "ea2c00eaed1cc9e7578eeb174f5a2a9b195e2b113f328142e5f0b86dddf37781",
+    "models/profile51_h2.txt": "43010eb3a0b6bb773085fb775caf92d866448d3b538fa548e547f0aca8c4606c",
+    "models/S_h2.txt": "b056e10f0da986862748df04889749541a93d95048614a152609cc26a5055786",
+    "models/C_h2.txt": "b8ce9e72332a32ccb2d1d3cb94b635ebdebf4094bdeefd1b43ce72c7b4ed7a94",
+    "models/targetlag48_h3.txt": "d1df5cc81c610b005cdeab4103dfa4ad502cf5cccd564066fee5b5d6000a0a6c",
+    "models/S_h3.txt": "a86fc461519d152376ff121a7c658fca81909633408ed35c4e969be0e479e6c5",
+    "models/C_h3.txt": "7c74418efe766f585d807704c673c7ef9ec70c938f05c2b51dcde0f29d5e65de"
+  },
+  "models": 9,
+  "enabled_http_models": 3,
+  "data_included": false,
+  "secrets_included": false,
+  "primary_model_live_enabled": false
+}
