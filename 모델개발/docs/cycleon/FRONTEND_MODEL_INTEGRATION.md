@@ -1,6 +1,6 @@
 # 프론트 모델 결과 사용 매뉴얼
 
-팀 백엔드가 반환한 JSON을 표시합니다. 모델 토큰·snapshot 전송 권한을 브라우저에 넣지 않습니다. 기본 실제 모델 경로는 C이며 선정 고급 모델이 자동 실행된다고 표시하지 않습니다.
+팀 백엔드가 반환한 JSON을 표시합니다. 모델 토큰·snapshot 전송 권한을 브라우저에 넣지 않습니다. 예측 항목별로 실제 적용된 모델과 가용 확률을 받습니다.
 
 ## 화면의 의미
 
@@ -20,7 +20,7 @@
 | latest_inventory | 최신 실측 수량. null은 알 수 없음, 0은 실제 0대 |
 | latest_inventory_received_at / latest_inventory_age_seconds | 실제 수신과 경과 시간 |
 | is_risk | 저장 임계값 판정. 임의 50% 판정선 금지 |
-| input_group / model_id | 실제 적용 경로. 현재 C / C_h1 등 |
+| input_group / model_id | 실제 적용 모델. 주 모델은 P53·P51·P48, 대체는 C이며 보류일 때는 null일 수 있음 |
 | reason | 개별 보류 사유. 새 코드에도 일반 보류 처리 |
 
 예측 요청은 station_ids와 horizons_hours 배열입니다. 팀 백엔드가 모델 JSON을 그대로 중계할지 화면용 봉투로 감쌀지는 합의하되 필드 의미는 유지합니다.
@@ -38,7 +38,7 @@ recommended는 1곳 또는 null, alternatives는 최대 2곳, abstained는 보�
 | 오래된 재고 / 추천 보류 | 신선도 안내·추천 없음 |
 | 연결 실패 / 서버 오류 | 다시 시도·장애 안내. 0%로 바꾸지 않음 |
 
-no_station_within_radius와 no_fresh_positive_eligible_prediction을 구분합니다. 반경 확대는 사용자가 선택하도록 합니다. 기존 모의 API로 화면을 개발할 수 있으며 실제 C 모델 연결은 [팀 실행 안내](TEAM_MODEL_GUIDE.md)를 사용합니다.
+no_station_within_radius와 no_fresh_positive_eligible_prediction을 구분합니다. 반경 확대는 사용자가 선택하도록 합니다. 기존 모의 API로 화면을 개발할 수 있으며 실제 최종 모델 연결은 [최종 모델 실행 안내](FINAL_MODEL_QUICKSTART.md)를 사용합니다.
 
 ## 타입과 연결
 
