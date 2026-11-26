@@ -58,8 +58,8 @@ def seed(url, received_at=NOW - timedelta(seconds=60)):
 class FakeAI:
     """/v1/predictions에 정해진 확률을 준다. base로 AI의 기준 정각을 바꿀 수 있다."""
 
-    def __init__(self, base=BASE, down=False):
-        self.base, self.down, self.requests = base, down, []
+    def __init__(self, base=BASE, down=False, unknown=("ST-404",)):
+        self.base, self.down, self.unknown, self.requests = base, down, set(unknown), []
 
     def __call__(self, request: httpx.Request) -> httpx.Response:
         if self.down:
@@ -70,10 +70,11 @@ class FakeAI:
         items = []
         for sid in body["station_ids"]:
             for h in body["horizons_hours"]:
-                known = sid.startswith("ST-") and sid != "ST-404"
+                known = sid.startswith("ST-") and sid not in self.unknown
                 items.append({
                     "station_id": sid, "horizon_hours": h, "target_at": stamp(self.base + timedelta(hours=h)),
-                    "risk_probability": 0.1 * h if known else None, "is_risk": False if known else None,
+                    "risk_probability": 0.1 * h if known else None,
+                    "available_probability": 1 - 0.1 * h if known else None, "is_risk": False if known else None,
                     "model_id": "m-1" if known else None, "input_group": "C" if known else None,
                     "reason": None if known else "station_unknown_or_ineligible",
                     "latest_inventory": 4 if known else None,
@@ -176,16 +177,35 @@ def test_nearby_merges_db_and_ai(make_client, test_database_url):
     assert [i["station_id"] for i in body["items"]] == ["ST-2", "ST-10", "ST-3"]  # 거리순
     first = body["items"][0]
     assert first == {"station_id": "ST-2", "name": "ST-2 대여소", "latitude": first["latitude"],
-                     "longitude": CENTER[1], "distance_m": first["distance_m"], "latest_inventory": 4,
-                     "latest_inventory_received_at": "2026-11-04T05:39:30Z", "inventory_fresh": True,
-                     "risk_probability": pytest.approx(0.2), "is_risk": False, "reason": None}
+                     "longitude": CENTER[1], "distance_m": first["distance_m"],
+                     "latest_inventory": 0, "latest_inventory_received_at": "2026-11-04T05:39:00Z",  # DB 값
+                     "inventory_fresh": True, "risk_probability": pytest.approx(0.2),
+                     "available_probability": pytest.approx(0.8), "is_risk": False, "reason": None}
     assert fake.requests == [{"station_ids": ["ST-2", "ST-10", "ST-3"], "horizons_hours": [2]}]
 
 
 def test_nearby_debug(make_client, test_database_url):
     seed(test_database_url)
     item = nearby(make_client(), debug="true").json()["items"][0]
-    assert item["debug"] == {"model_id": "m-1", "input_group": "C", "latest_inventory_age_seconds": 30}
+    assert item["debug"] == {"model_id": "m-1", "input_group": "C", "latest_inventory_age_seconds": 60}
+
+
+def test_inventory_is_the_same_with_ai_on_and_off(make_client, test_database_url):
+    """수량은 AI 켜짐·꺼짐과 관계없이 DB 최신 수집분이다."""
+    seed(test_database_url)
+    on = nearby(make_client(), radius_m=1000).json()["items"]
+    off = nearby(make_client(FakeAI(down=True)), radius_m=1000).json()["items"]
+    pick = lambda items: [(i["station_id"], i["latest_inventory"], i["latest_inventory_received_at"]) for i in items]
+    assert pick(on) == pick(off) == [("ST-2", 0, "2026-11-04T05:39:00Z"), ("ST-10", 2, "2026-11-04T05:39:00Z"),
+                                     ("ST-3", 7, "2026-11-04T05:39:00Z")]
+
+
+def test_station_unknown_to_model_still_shows_inventory(make_client, test_database_url):
+    seed(test_database_url)
+    items = nearby(make_client(FakeAI(unknown=("ST-3",))), radius_m=1000).json()["items"]
+    st3 = next(i for i in items if i["station_id"] == "ST-3")
+    assert (st3["latest_inventory"], st3["risk_probability"], st3["available_probability"], st3["reason"]) == \
+        (7, None, None, "station_unknown_or_ineligible")
 
 
 def test_nearby_when_ai_is_down_uses_db_inventory(make_client, test_database_url):

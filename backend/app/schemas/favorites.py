@@ -61,6 +61,7 @@ class FavoriteItem(BaseModel):
     latest_inventory_received_at: UtcDatetime | None = None
     inventory_fresh: bool | None = None
     risk_probability: float | None = None
+    available_probability: float | None = None
     is_risk: bool | None = None
     reason: str | None = None
     debug: PredictionDebug | None = None

@@ -1,7 +1,7 @@
 """즐겨찾기 흐름.
 
 - 목록 + 예측: 기존 POST /api/predictions 로직(services.stations.predict)을 그대로 쓴다. 그래서 409 규칙,
-  AI가 꺼졌을 때의 대체 수량(ai_available=false), 모르는 대여소 처리가 /api/predictions와 같다.
+  수량 출처(DB), AI가 꺼졌을 때의 처리(ai_available=false), 모르는 대여소 처리가 /api/predictions와 같다.
 - 추가: 지금 운영 중인 대여소만(아니면 404 station_not_found). 이미 있으면 그대로 두고 200.
 - 20개 한도는 사용자 행을 잠근 상태에서 센다(동시 추가로 넘지 않게).
 """

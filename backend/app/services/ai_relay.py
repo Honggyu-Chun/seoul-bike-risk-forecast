@@ -47,7 +47,8 @@ async def build_status(ai: AIClient, now: datetime, debug: bool) -> StatusRespon
     server_at·base_at·supported_targets는 백엔드가 now로 직접 계산하고, AI에서는 준비 상태만 가져온다.
     - AI 접속 실패(AIUnavailable)는 여기서 잡아 ai_available=false, status=null로 200을 낸다.
     - AI 401·5xx(AIAuthFailed, AIError)는 잡지 않는다. 설정·장애 문제라 502로 드러나게 둔다.
-    - debug면 모델 단계·번들·마지막 사전 계산 시각을 debug 객체로 붙인다(AI가 죽어 있으면 모두 null).
+    - debug면 모델 단계·번들·마지막 사전 계산 시각·사전 계산 오류·받은 대여소 수·모델 경로를 debug 객체로 붙인다
+      (AI가 죽어 있으면 모두 null).
     """
     base = base_at(now)
     try:
@@ -66,12 +67,16 @@ async def build_status(ai: AIClient, now: datetime, debug: bool) -> StatusRespon
             model_stage=ai_status.model_stage if ai_status else None,
             model_bundle_id=ai_status.model_bundle_id if ai_status else None,
             last_precompute_at=ai_status.last_precompute_at if ai_status else None,
+            precompute_error=ai_status.precompute_error if ai_status else None,
+            station_count=ai_status.data.station_count if ai_status and ai_status.data else None,
+            model_route=ai_status.data.model_route if ai_status and ai_status.data else None,
+            primary_prediction_count=ai_status.data.primary_prediction_count if ai_status and ai_status.data else None,
         )
     return StatusResponse(**fields)
 
 
 def _station(item: AIRankedPrediction) -> RecommendedStation:
-    """AI 추천 항목에서 공개 명세의 9개 필드만 남긴다.
+    """AI 추천 항목에서 공개 명세 필드만 남긴다. 수량도 모델 값 그대로다(추천 판단에 쓴 값).
 
     score(정렬 점수라 확률로 오해할 수 있음), model_id, input_group, horizon_hours 등은 버린다.
     남길 필드 목록은 RecommendedStation 정의를 그대로 따르므로, 필드를 늘릴 때는 스키마만 고치면 된다.

@@ -26,13 +26,14 @@ def ai_status(base=AI_BASE):
     return {"service": "CycleOn", "status": "ready", "server_at": "2026-11-04T05:40:00.000000+00:00",
             "base_at": base, "supported_targets": [], "model_bundle_id": "bundle-1",
             "model_stage": "development", "last_precompute_at": "2026-11-04T05:00:20.000000+00:00",
-            "precompute_error": None, "data": {}, "latest_inventory_age_limit_seconds": 300,
+            "precompute_error": None, "data": {"station_count": 2743, "model_route": "C_only", "primary_prediction_count": 0}, "latest_inventory_age_limit_seconds": 300,
             "time_policy": "x"}
 
 
 def ranked(station_id, probability, distance):
     return {"station_id": station_id, "horizon_hours": 2, "target_at": "2026-11-04T07:00:00.000000+00:00",
-            "risk_probability": probability, "is_risk": probability >= .5, "model_id": "m", "input_group": "C",
+            "risk_probability": probability, "available_probability": 1 - probability,
+            "is_risk": probability >= .5, "model_id": "m", "input_group": "C",
             "reason": None, "latest_inventory": 3, "latest_inventory_received_at": "2026-11-04T05:39:30.000000+00:00",
             "latest_inventory_age_seconds": 30, "latest_inventory_observed_at": None,
             "name": f"대여소 {station_id}", "latitude": 37.5665, "longitude": 126.978,
@@ -103,7 +104,8 @@ def test_status_uses_backend_clock():
 def test_status_debug_only_when_enabled():
     debug = make_client(FakeAI()).get("/api/status", params={"debug": "true"}).json()["debug"]
     assert debug == {"model_stage": "development", "model_bundle_id": "bundle-1",
-                     "last_precompute_at": "2026-11-04T05:00:20Z"}
+                     "last_precompute_at": "2026-11-04T05:00:20Z", "precompute_error": None,
+                     "station_count": 2743, "model_route": "C_only", "primary_prediction_count": 0}
     disabled = make_client(FakeAI(), CYCLEON_DEBUG_ENABLED="false").get("/api/status", params={"debug": "true"})
     assert "debug" not in disabled.json()
 
@@ -144,7 +146,8 @@ def test_recommendation_keeps_order_and_trims_fields():
     assert body["recommended"] == {"station_id": "ST-2", "name": "대여소 ST-2", "latitude": 37.5665,
                                    "longitude": 126.978, "distance_m": 120.0, "latest_inventory": 3,
                                    "latest_inventory_received_at": "2026-11-04T05:39:30Z",
-                                   "risk_probability": .3, "is_risk": False}
+                                   "risk_probability": .3, "available_probability": pytest.approx(.7),
+                                   "is_risk": False}
     assert [s["station_id"] for s in body["alternatives"]] == ["ST-1"]
     assert json.loads(fake.requests[0].content)["horizon_hours"] == 3
 

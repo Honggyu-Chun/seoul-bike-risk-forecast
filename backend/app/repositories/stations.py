@@ -48,7 +48,7 @@ class Inventory:
 async def latest_inventory(session: AsyncSession, station_ids: list[str] | None) -> dict[str, Inventory]:
     """가장 최근 완료 수집분에서 요청한 대여소들의 재고. station_ids=None이면 그 수집분의 전체 대여소.
 
-    AI가 꺼졌을 때의 수량 대체와 지도 마커 색(GET /api/stations)에 쓴다.
+    공개 API의 수량(지도 마커 색, nearby, predictions, 즐겨찾기)은 모두 이 값이다.
     수집분이 하나도 없거나, 그 수집분에 없는 대여소는 결과에 없다.
     """
     if station_ids is not None and not station_ids:

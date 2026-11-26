@@ -1,11 +1,13 @@
-"""대여소 공개 API 로직: DB의 대여소 정보(이름·좌표)와 AI 예측(확률·최신 재고)을 합친다.
+"""대여소 공개 API 로직: DB의 대여소 정보(이름·좌표)·수량과 AI 예측(확률)을 합친다.
 
-AI 예측 응답에는 이름·좌표가 없어서, 백엔드가 자기 DB와 합쳐 내려주는 것이 이 모듈의 핵심이다.
+수량 출처는 AI가 켜져 있든 꺼져 있든 항상 백엔드 DB의 가장 최근 완료 수집분이다.
+모델(연구실 API)은 재고를 따로 수집하므로 수신 시각이 우리 DB와 조금씩 다르다. DB 값을 쓰면 지도(/api/stations)와
+출처가 같고, 모델이 모르는 대여소도 수량을 보여 줄 수 있다. AI에서는 확률·위험 판정·보류 이유만 받는다.
+(추천 결과만 예외로 모델 값을 쓴다. 추천 판단에 쓴 값이기 때문이다. services/ai_relay.py)
 
 AI가 꺼져 있을 때(AIUnavailable)
 - 오류가 아니라 200 + ai_available=false
 - 확률·위험 판정은 null, reason="ai_unavailable"
-- 수량은 백엔드 DB의 가장 최근 완료 수집분으로 채운다(지도·목록은 계속 동작)
 AI 401·5xx는 잡지 않는다(502로 드러나게).
 """
 from datetime import datetime, timedelta
@@ -54,26 +56,24 @@ async def _predict(ai: AIClient, settings: Settings, station_ids: list[str], hor
     return {(item.station_id, item.horizon_hours): item for item in items}
 
 
-def _prediction_fields(prediction: AIPrediction | None, fallback: repo.Inventory | None, now: datetime,
-                       debug: bool) -> dict:
-    """예측·재고 관련 공통 필드. prediction이 None이면 AI가 꺼진 경우다."""
-    if prediction is None:
-        received = fallback.received_at if fallback else None
-        fields = {"latest_inventory": fallback.value if fallback else None,
-                  "latest_inventory_received_at": received, "inventory_fresh": _fresh(received, now),
-                  "risk_probability": None, "is_risk": None, "reason": AI_UNAVAILABLE}
-        if debug:
-            age = (now - received).total_seconds() if received else None
-            fields["debug"] = PredictionDebug(model_id=None, input_group=None, latest_inventory_age_seconds=age)
-        return fields
-    fields = {"latest_inventory": prediction.latest_inventory,
-              "latest_inventory_received_at": prediction.latest_inventory_received_at,
-              "inventory_fresh": _fresh(prediction.latest_inventory_received_at, now),
-              "risk_probability": prediction.risk_probability, "is_risk": prediction.is_risk,
-              "reason": prediction.reason}
+def _prediction_fields(prediction: AIPrediction | None, ai_available: bool, inventory: repo.Inventory | None,
+                       now: datetime, debug: bool) -> dict:
+    """예측·재고 관련 공통 필드. 수량은 DB(inventory), 확률은 AI(prediction).
+
+    ai_available=False면 AI 접속 실패라 reason="ai_unavailable".
+    """
+    received = inventory.received_at if inventory else None
+    fields = {"latest_inventory": inventory.value if inventory else None,
+              "latest_inventory_received_at": received, "inventory_fresh": _fresh(received, now),
+              "risk_probability": prediction.risk_probability if prediction else None,
+              "available_probability": prediction.available_probability if prediction else None,
+              "is_risk": prediction.is_risk if prediction else None,
+              "reason": prediction.reason if prediction else (None if ai_available else AI_UNAVAILABLE)}
     if debug:
-        fields["debug"] = PredictionDebug(model_id=prediction.model_id, input_group=prediction.input_group,
-                                          latest_inventory_age_seconds=prediction.latest_inventory_age_seconds)
+        age = (now - received).total_seconds() if received else None
+        fields["debug"] = PredictionDebug(model_id=prediction.model_id if prediction else None,
+                                          input_group=prediction.input_group if prediction else None,
+                                          latest_inventory_age_seconds=age)
     return fields
 
 
@@ -118,7 +118,7 @@ async def nearby(session: AsyncSession, ai: AIClient, settings: Settings, now: d
 
     1. target_at → 간격(h). 지원하지 않으면 409 (DB·AI 조회 전에)
     2. DB에서 반경 안 대여소를 직선거리로 고름
-    3. AI 예측(해당 h 하나)을 500개씩 나눠 받음. 실패하면 DB 최신 재고로 대체
+    3. AI 예측(해당 h 하나)을 500개씩 나눠 받음. 수량은 DB 최신 수집분
     4. 이름·좌표·거리와 합쳐 거리순 정렬
     반경 안에 대여소가 없으면 AI를 부르지 않고 count=0 (ai_available은 true로 둔다)
     """
@@ -131,11 +131,12 @@ async def nearby(session: AsyncSession, ai: AIClient, settings: Settings, now: d
     ids = [s.station_id for _, s in inside]
 
     predictions = await _predict(ai, settings, ids, [horizon], base)
-    fallback = await repo.latest_inventory(session, ids) if predictions is None else {}
+    inventory = await repo.latest_inventory(session, ids)
+    available = predictions is not None
     items = [NearbyItem(station_id=s.station_id, name=s.name, latitude=s.latitude, longitude=s.longitude,
                         distance_m=d,
-                        **_prediction_fields(None if predictions is None else predictions.get((s.station_id, horizon)),
-                                             fallback.get(s.station_id), now, debug))
+                        **_prediction_fields((predictions or {}).get((s.station_id, horizon)), available,
+                                             inventory.get(s.station_id), now, debug))
              for d, s in inside]
     return NearbyResponse(base_at=base, target_at=target_at, radius_m=radius_m,
                           ai_available=predictions is not None, count=len(items), items=items)
@@ -157,15 +158,15 @@ async def predict(session: AsyncSession, ai: AIClient, settings: Settings, now: 
     known = await repo.stations_by_ids(session, ids)
 
     predictions = await _predict(ai, settings, ids, horizons, base)
-    fallback = await repo.latest_inventory(session, ids) if predictions is None else {}
+    inventory = await repo.latest_inventory(session, ids)
+    available = predictions is not None
     items = []
     for sid in ids:
         station = known.get(sid)
         for h in horizons:
-            prediction = None if predictions is None else predictions.get((sid, h))
             items.append(PredictionItem(
                 station_id=sid, target_at=base + timedelta(hours=h),
                 name=station.name if station else None,
                 latitude=station.latitude if station else None, longitude=station.longitude if station else None,
-                **_prediction_fields(prediction, fallback.get(sid), now, debug)))
+                **_prediction_fields((predictions or {}).get((sid, h)), available, inventory.get(sid), now, debug)))
     return PredictionsResponse(base_at=base, ai_available=predictions is not None, items=items)

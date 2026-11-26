@@ -17,6 +17,10 @@ class StatusDebug(BaseModel):
     model_stage: str | None
     model_bundle_id: str | None
     last_precompute_at: UtcDatetime | None
+    precompute_error: str | None
+    station_count: int | None      # 모델이 지금 입력으로 가진 대여소 수
+    model_route: str | None        # C_only 또는 weather_primary_with_C_fallback
+    primary_prediction_count: int | None  # 이번 정각에 최종 기상 모델(P53·P51·P48)로 계산한 예측 수
 
 
 class StatusResponse(BaseModel):
@@ -44,6 +48,7 @@ class RecommendedStation(BaseModel):
     latest_inventory: int | None
     latest_inventory_received_at: UtcDatetime | None
     risk_probability: float | None
+    available_probability: float | None   # 1대 이상 있을 확률. 모델 값 그대로(확률이 없으면 null)
     is_risk: bool | None
 
 
@@ -100,6 +105,7 @@ class NearbyItem(BaseModel):
     latest_inventory_received_at: UtcDatetime | None
     inventory_fresh: bool          # 수량이 300초 안의 값이면 true
     risk_probability: float | None
+    available_probability: float | None   # 1대 이상 있을 확률. 모델 값 그대로(확률이 없으면 null)
     is_risk: bool | None
     reason: str | None             # 확률이 null인 이유. AI 원문 그대로, AI 접속 실패만 ai_unavailable
     debug: PredictionDebug | None = None
@@ -130,6 +136,7 @@ class PredictionItem(BaseModel):
     latest_inventory_received_at: UtcDatetime | None
     inventory_fresh: bool
     risk_probability: float | None
+    available_probability: float | None   # 1대 이상 있을 확률. 모델 값 그대로(확률이 없으면 null)
     is_risk: bool | None
     reason: str | None
     debug: PredictionDebug | None = None

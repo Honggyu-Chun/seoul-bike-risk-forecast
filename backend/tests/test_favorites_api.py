@@ -160,9 +160,10 @@ def test_list_with_predictions(client):
     assert (body["base_at"], body["ai_available"], body["count"]) == ("2026-11-04T05:00:00Z", True, 2)
     first = body["items"][0]
     assert first == {"station_id": "ST-3", "alias": "집 앞", "position": 0, "name": "ST-3 대여소",
-                     "latitude": first["latitude"], "longitude": CENTER[1], "target_at": H1, "latest_inventory": 4,
-                     "latest_inventory_received_at": "2026-11-04T05:39:30Z", "inventory_fresh": True,
-                     "risk_probability": pytest.approx(0.1), "is_risk": False, "reason": None}
+                     "latitude": first["latitude"], "longitude": CENTER[1], "target_at": H1,
+                     "latest_inventory": 7, "latest_inventory_received_at": "2026-11-04T05:39:00Z",  # DB 값
+                     "inventory_fresh": True, "risk_probability": pytest.approx(0.1),
+                     "available_probability": pytest.approx(0.9), "is_risk": False, "reason": None}
     assert ids(body) == ["ST-3", "ST-2"]
 
 
