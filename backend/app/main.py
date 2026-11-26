@@ -5,7 +5,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 
 from app.api.account import auth, favorites, me, views
-from app.api.internal import ai_data
 from app.api.public import places, predictions, recommendations, stations, status
 from app.clients.ai import AIClient
 from app.clients.kakao import KakaoLocalClient
@@ -44,7 +43,6 @@ def create_app(settings: Settings | None = None, ai_client: AIClient | None = No
     # 대여소 목록(수천 곳, 수량 포함)처럼 큰 JSON을 압축해 보낸다. 1KB보다 작은 응답은 그대로
     app.add_middleware(GZipMiddleware, minimum_size=1000)
     register_error_handlers(app)
-    app.include_router(ai_data.router)
     for module in (status, stations, predictions, recommendations, places, auth, me, favorites, views):
         app.include_router(module.router, prefix="/api")
 

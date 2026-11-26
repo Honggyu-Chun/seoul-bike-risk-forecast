@@ -1,13 +1,15 @@
 """테이블 정의.
 
-stations·captures·observations는 내부 데이터 API(AI가 커서로 이어 받는 경로)의 record 모양을 컬럼으로 그대로 갖는다.
+stations·captures·observations는 따릉이 수집분이다. 공개 API(이름·좌표·수량)와 마이 리포트 판정이 쓰고,
+모델 서비스(연구실 API)는 이 테이블을 읽지 않는다.
 users·sessions·login_attempts·favorites·email_tokens·prediction_views는 로그인·회원 기능용이다(맨 아래).
 JSON 덩어리(payload)로 저장하지 않고 컬럼으로 나눠, 제약 조건으로 잘못된 값을 DB 단계에서 막는다.
 
 cursor_seq
-- 테이블별 '커밋 순서' 번호. AI는 이 값으로 "어디까지 받았는지"를 기억하고 이어 받는다.
+- 테이블별 '커밋 순서' 번호. 대여소의 최신 revision(가장 큰 cursor_seq)을 고를 때 쓴다.
 - 관측 시각이나 ID가 아니다. 반드시 커밋 순서대로 늘어나야 한다(저장 시 테이블 잠금 안에서 max+1).
-- 충돌로 다시 내보내는 기록은 cursor_seq를 새 값으로 바꾼다. 그래서 기본 키(id)와 분리했다.
+- 원래 AI가 커서로 이어 받는 내부 데이터 API용으로 만들었다. 그 API는 지웠고, 컬럼과 잠금은 revision 순서용으로
+  남겨 두었다. 단순화는 별도 작업이다.
 
 시각은 모두 timestamptz(시간대 포함)로 저장한다.
 """
@@ -27,8 +29,8 @@ class Station(Base):
 
     한 대여소(station_id)에 revision이 여러 개 있을 수 있고, 현재 정보는 cursor_seq가 가장 큰 행이다.
     - 이름·좌표·식별 상태가 바뀌면 새 revision 행을 추가한다.
-    - valid_from은 그 대여소를 처음 받은 시각이다. AI는 valid_from 이전 재고를 버리므로,
-      이름만 바뀐 경우에는 새 행에도 원래 valid_from을 그대로 쓴다(좌표 이전·폐소·ID 재사용만 새 구간).
+    - valid_from은 그 대여소를 처음 받은 시각이다. 이름만 바뀐 경우에는 새 행에도 원래 valid_from을
+      그대로 쓴다(좌표 이전·폐소·ID 재사용만 새 구간).
     - 좌표가 없거나 서울 범위를 벗어나면 identity_status='unverified', 좌표는 null.
     """
     __tablename__ = "stations"
@@ -63,8 +65,8 @@ class Station(Base):
 class Capture(Base):
     """완전 수집분 1회. 서울 전체 재고를 끝 페이지까지 다 받았을 때만 행이 생긴다.
 
-    AI는 expected_rows = actual_rows = 그 capture의 고유 대여소 수이고, 모든 재고의 received_at이
-    started_at~completed_at 안에 있어야 완료로 본다. 하나라도 어긋나면 그 수집분 전체를 쓰지 않는다.
+    expected_rows = actual_rows = 그 capture의 고유 대여소 수이고, 모든 재고의 received_at이
+    started_at~completed_at 안에 있다. 공개 API와 마이 리포트 판정은 이런 완전 수집분만 쓴다.
     """
     __tablename__ = "captures"
 

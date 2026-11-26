@@ -59,7 +59,7 @@ class BikeRow:
     name: str
     latitude: float | None     # 서울 범위 밖이면 None (DB 제약을 지키기 위해)
     longitude: float | None
-    verified: bool             # 좌표가 서울 범위 안이면 True. AI는 verified 대여소만 예측에 쓴다
+    verified: bool             # 좌표가 서울 범위 안이면 True
     value: int | None          # 거치 자전거 수. 0 이상 정수가 아니면 None (0으로 채우지 않음)
     quality: str               # valid / invalid
     raw_value: str | None      # 원본 문자열
