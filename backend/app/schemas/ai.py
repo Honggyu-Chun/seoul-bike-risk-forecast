@@ -8,12 +8,21 @@ class AIModel(BaseModel):
     model_config = ConfigDict(extra="ignore")
 
 
+class AIServiceData(AIModel):
+    station_count: int | None = None  # 모델이 지금 입력으로 가진 대여소 수
+    model_route: str | None = None  # C_only 또는 weather_primary_with_C_fallback(최종 기상 모델 + C 대체)
+    primary_prediction_count: int | None = None  # 이번 정각에 최종 기상 모델(P53·P51·P48)로 계산한 예측 수
+
+
 class AIStatus(AIModel):
+    """not_ready: 모델이 이번 기준 정각의 예측을 아직 준비하지 못함(정각 직후, 모델 재시작 직후)."""
     status: Literal["ready", "not_ready"]
     base_at: AwareDatetime
     model_bundle_id: str | None = None
     model_stage: str | None = None
     last_precompute_at: AwareDatetime | None = None
+    precompute_error: str | None = None
+    data: AIServiceData | None = None
 
 
 class AIPrediction(AIModel):
@@ -21,6 +30,7 @@ class AIPrediction(AIModel):
     horizon_hours: int
     target_at: AwareDatetime
     risk_probability: float | None = Field(None, ge=0, le=1)
+    available_probability: float | None = Field(None, ge=0, le=1)  # 1대 이상 있을 확률(= 1 - risk)
     is_risk: bool | None = None
     model_id: str | None = None
     input_group: str | None = None
