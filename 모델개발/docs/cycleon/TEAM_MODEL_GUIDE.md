@@ -1,6 +1,6 @@
 # 팀 모델 실행 안내
 
-2026년 11월 10일 main 기준 인계본입니다. 실제 저장 모델의 확률을 받아 개발할 수 있습니다. 기본 HTTP 서비스는 **C 대체 모델 1·2·3시간**을 사용합니다. P53/P51/P48와 S 모델도 함께 제공하지만 기상·대여소 소속·수신 journal 검증이 남아 기본 HTTP 경로에서 활성화하지 않습니다.
+처음에는 [최종 모델 실행 안내](FINAL_MODEL_QUICKSTART.md)의 `python -m team_model demo`를 사용하세요. 검증한 이력·기상 입력을 전송하면 같은 HTTP 서비스가 P53/P51/P48로 추론합니다. 이 문서는 대체 모델과 기본 입력 점검 방법도 다룹니다.
 
 ## 제공 내용
 
@@ -10,7 +10,8 @@
 | 실제 모델 9개 압축 묶음, 약 35.9MB | releases/team-model-20261110/models.zip |
 | ZIP·개별 파일 SHA-256 | releases/team-model-20261110/release.json |
 | 현재 서비스 기계 명세 | docs/cycleon/team_model_openapi.json |
-| 자동 검증 | python -m unittest team_model.test_service -v |
+| 주 모델 HTTP 검증 | `python -m team_model demo` |
+| 회귀 검증 | `python -m unittest team_model.test_service team_model.test_final_inputs team_model.test_weather_predictions -v` |
 
 학습 데이터·계정·비밀 토큰·운영 DB는 포함하지 않습니다. 설치와 실행은 학습·공공 API 수집을 시작하지 않습니다.
 
@@ -47,7 +48,7 @@ $env:CYCLEON_SERVICE_TOKEN = '<32자 이상 서버 전용 비밀값>'
 3. POST /v1/predictions에 station_ids와 horizons_hours를 보냅니다.
 4. POST /v1/recommendations에 위치·시간 간격·반경을 보냅니다.
 
-시작 직후 입력이 없으면 not_ready와 null이 정상입니다. 새 정각으로 바뀌면 새 snapshot이 필요합니다. 최신 재고 갱신마다 새 materialized_at으로 snapshot을 보내되, 같은 기준 정각의 특징·신원·좌표를 사후 수정하지 않습니다. API 요청마다 재학습하지 않고 snapshot 갱신 때 실제 C 모델로 사전 계산합니다.
+시작 직후 입력이 없으면 not_ready와 null이 정상입니다. 새 정각으로 바뀌면 새 snapshot이 필요합니다. 최신 재고 갱신마다 새 materialized_at으로 snapshot을 보내되, 같은 기준 정각의 특징·신원·좌표를 사후 수정하지 않습니다. API 요청마다 재학습하지 않고 snapshot 갱신 때 각 대여소·간격의 유효 입력으로 사전 계산합니다.
 
 ~~~powershell
 $headers = @{Authorization = "Bearer $env:CYCLEON_SERVICE_TOKEN"}
@@ -65,8 +66,8 @@ available_probability는 목표 정각에 1대 이상일 확률, risk_probabilit
 
 - 백엔드는 [입력·인증·갱신 매뉴얼](BACKEND_MODEL_INTEGRATION.md)을 구현합니다.
 - 프론트는 [확률·보류·오류 표시 매뉴얼](FRONTEND_MODEL_INTEGRATION.md)을 구현합니다.
-- 모델 담당은 실제 공급자 입력과 신원 증빙을 검수합니다. 주 모델의 기상·전체 대여소 소속·immutable journal 검증 전 C 경로를 고급 모델로 표시하지 않습니다.
+- 모델 담당은 실제 공급자 입력과 신원 증빙을 검수합니다. 격자 강수·이력·신원에 따른 경로 선택은 개별 응답의 model_id와 input_group으로 확인합니다.
 
-실제 저장 모델 3개·원래 C 특징 생성과 확률/판정 일치·3간격·자정·정각 변경·신원 누락·0대·300초 신선도·중복·미래 입력·인증·반경·재현을 자동 검사합니다. 이 결과는 실제 공급자 품질·전체 도시 지연·24시간 운영·TLS·사용자 인증까지 증명하지 않습니다. 과거 58.75% 감소도 이 새 HTTP 배포의 실운영 측정값이 아닙니다. [평가 결과](RESULTS_20261110.md)를 함께 읽습니다.
+대체 모델 검사는 저장 C 모델 3개·원래 C 특징 생성과 확률/판정 일치·3간격·자정·정각 변경·신원 누락·0대·300초 신선도·중복·미래 입력·인증·반경·재현을 자동 검사합니다. 이 결과는 실제 공급자 품질·전체 도시 지연·24시간 운영·TLS·사용자 인증까지 증명하지 않습니다. 과거 58.75% 감소도 이 새 HTTP 배포의 실운영 측정값이 아닙니다. [평가 결과](RESULTS_20261110.md)를 함께 읽습니다.
 
 추가로 python -m team_model.smoke_http를 실행하면 임시 localhost 서버에서 인증→입력→세 간격 예측→추천을 검사하고 자신이 만든 임시 서버만 종료합니다. 합성 입력이므로 공급자 품질이나 실제 대여 효과를 검사하지 않습니다.

@@ -11,6 +11,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.security import HTTPBearer
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, field_validator, model_validator
 from .runtime import Runtime
+from .final_inputs import FinalInputs, calculate
 KST = ZoneInfo('Asia/Seoul')
 
 def instant(x):
@@ -51,6 +52,7 @@ class StationInput(Strict):
             raise ValueError('Latest value and received_at must be supplied together')
         return self
 class Snapshot(Strict):
+    final_inputs: FinalInputs | None = None
     capture_complete: Literal[True]
     source_capture_id: str = Field(min_length=1,max_length=200)
     base_at: datetime
@@ -64,6 +66,8 @@ class Snapshot(Strict):
         if self.base_at != hour(self.base_at): raise ValueError('base_at must be an exact KST hour')
         if self.materialized_at < self.base_at: raise ValueError('materialized_at precedes base_at')
         ids=[s.station_id for s in self.stations];codes=[s.model_station_code for s in self.stations]
+        if self.final_inputs is not None:
+            self.final_inputs.validate_at(self.base_at,set(ids))
         if len(ids)!=len(set(ids)) or len(codes)!=len(set(codes)):
             raise ValueError('Duplicate station identity or historical model code')
         for s in self.stations:
@@ -138,11 +142,12 @@ class RecommendationResponse(Strict):
     eligible_count:int
 
 class ServiceData(Strict):
-    model_route:Literal['C_only']='C_only'
+    model_route:Literal['C_only','weather_primary_with_C_fallback']='C_only'
     real_model_loaded:Literal[True]=True
-    primary_weather_routes_enabled:Literal[False]=False
+    primary_weather_routes_enabled:bool=False
     whole_service_approved:Literal[False]=False
     station_count:int
+    primary_prediction_count:int=0
 class ServiceStatus(Strict):
     service:Literal['CycleOn']='CycleOn'
     status:Literal['ready','not_ready']
@@ -150,7 +155,7 @@ class ServiceStatus(Strict):
     base_at:datetime
     supported_targets:list[datetime]
     model_bundle_id:str
-    model_stage:Literal['team_C_reference_requires_live_acceptance']
+    model_stage:Literal['team_C_reference_requires_live_acceptance','weather_primary_live']
     last_precompute_at:datetime | None
     precompute_error:str | None
     latest_inventory_age_limit_seconds:Literal[300]=300
@@ -161,12 +166,15 @@ class SnapshotAccepted(Strict):
     base_at:datetime
     stations:int
     qualified_stations:int
-    model_route:Literal['C_only']='C_only'
+    model_route:Literal['C_only','weather_primary_with_C_fallback']='C_only'
     real_model_loaded:Literal[True]=True
-    primary_weather_routes_enabled:Literal[False]=False
+    primary_weather_routes_enabled:bool=False
 
 class Service:
-    def __init__(self,runtime,clock=lambda:datetime.now(timezone.utc)):
+    def __init__(self,runtime,clock=lambda:datetime.now(timezone.utc),weather_directory=None):
+        from .weather_predictions import WeatherPredictions
+        self.weather=WeatherPredictions(weather_directory,runtime.routes) if weather_directory is not None else None
+        self.primary_count=0
         self.runtime,self.clock=runtime,clock
         self.lock=RLock();self.snapshot=None;self.predictions={};self.last_precompute_at=None
     def ingest(self,data):
@@ -176,11 +184,20 @@ class Service:
             if self.snapshot and (data.materialized_at <= self.snapshot.materialized_at or data.base_at<self.snapshot.base_at):
                 raise ValueError('Snapshot rollback or non-increasing materialization')
             if self.snapshot and data.base_at == self.snapshot.base_at:
+                if data.final_inputs != self.snapshot.final_inputs:
+                    raise ValueError("Final inputs changed within the same base hour")
                 previous = {s.station_id:s.model_dump(exclude={'latest_inventory','latest_inventory_received_at','latest_inventory_observed_at'}) for s in self.snapshot.stations}
+                if data.final_inputs is not None and previous.keys() != {s.station_id for s in data.stations}:
+                    raise ValueError('Station catalogue changed within the same forecast hour')
                 for station in data.stations:
                     fixed = station.model_dump(exclude={'latest_inventory','latest_inventory_received_at','latest_inventory_observed_at'})
                     if station.station_id in previous and fixed != previous[station.station_id]:
                         raise ValueError('Base-hour input changed after first materialization')
+            if (self.snapshot is not None and data.final_inputs is not None
+                    and data.base_at == self.snapshot.base_at):
+                # Only latest inventory changed; the forecast and all neighbours are fixed.
+                self.snapshot = data
+                return self.accepted(len(data.stations) - len(self.reasons))
             eligible=[];reasons={};pred={}
             for s in data.stations:
                 reason=None
@@ -191,15 +208,36 @@ class Service:
                 if reason:reasons[s.station_id]=reason
                 else:eligible.append(s)
             local=data.base_at.astimezone(KST)
+            weather_rows=self.weather.load(data.base_at,now) if self.weather else {}
+            primary_count=0
             for h in (1,2,3):
                 if eligible:
                     matrix=np.asarray([[s.model_station_code,s.inventory_at_base,np.log1p(np.float32(s.inventory_at_base)),local.hour,local.weekday(),local.month,int(local.weekday()>=5),h] for s in eligible],np.float32)
                     probabilities,threshold=self.runtime.predict_c(matrix,h)
                     for s,risk in zip(eligible,probabilities):
-                        pred[s.station_id,h]=(float(risk),bool(risk>=threshold))
+                        key=(s.station_id,h)
+                        entry=weather_rows.get(key)
+                        if entry and entry[0]==s.identity_revision and entry[1]==s.inventory_at_base and entry[2]==0:
+                            pred[key]=entry[3:]
+                            primary_count+=1
+                        else:
+                            pred[key]=(float(risk),bool(risk>=threshold),f'C_h{h}','C')
+            if data.final_inputs is not None:
+                if self.weather is not None:
+                    raise ValueError("Select a single primary input source")
+                primary=calculate(self.runtime,data,{s.station_id for s in eligible})
+                pred.update(primary)
+                primary_count=len(primary)
+            self.primary_count=primary_count
             self.snapshot,self.predictions,self.reasons=data,pred,reasons
             self.last_precompute_at=stamp(now)
-            return {'status':'accepted','base_at':stamp(data.base_at),'stations':len(data.stations),'qualified_stations':len(eligible),'model_route':'C_only','real_model_loaded':True,'primary_weather_routes_enabled':False}
+            return self.accepted(len(eligible))
+    def accepted(self, qualified):
+        return {'status':'accepted','base_at':stamp(self.snapshot.base_at),'stations':len(self.snapshot.stations),
+                'qualified_stations':qualified,'model_route':self.route(),'real_model_loaded':True,
+                'primary_weather_routes_enabled':bool(self.primary_count)}
+    def route(self):
+        return 'weather_primary_with_C_fallback' if self.weather or (self.snapshot and self.snapshot.final_inputs is not None) else 'C_only'
     def predict(self,station_ids,horizons):
         now=instant(self.clock());base=hour(now)
         with self.lock:
@@ -209,12 +247,12 @@ class Service:
             for sid in dict.fromkeys(station_ids):
                 s=current.get(sid)
                 for h in dict.fromkeys(horizons):
-                    risk,flag=self.predictions.get((sid,h),(None,None)) if ready else (None,None)
+                    risk,flag,model,group=self.predictions.get((sid,h),(None,)*4) if ready else (None,)*4
                     reason=('base_not_precomputed' if not ready else self.reasons.get(sid,'station_unknown_or_ineligible')) if risk is None else None
                     age=(now-s.latest_inventory_received_at).total_seconds() if s and s.latest_inventory_received_at else None
                     items.append({'station_id':sid,'horizon_hours':h,'target_at':stamp(base+timedelta(hours=h)),
                         'risk_probability':risk,'available_probability':None if risk is None else 1-risk,'is_risk':flag,
-                        'model_id':None if risk is None else f'C_h{h}','reason':reason,'input_group':None if risk is None else 'C',
+                        'model_id':model,'reason':reason,'input_group':group,
                         'latest_inventory':s.latest_inventory if s else None,'latest_inventory_received_at':stamp(s.latest_inventory_received_at) if s and s.latest_inventory_received_at else None,
                         'latest_inventory_age_seconds':age,'latest_inventory_observed_at':stamp(s.latest_inventory_observed_at) if s and s.latest_inventory_observed_at else None})
             return {'base_at':stamp(base),'requested_at':stamp(now),'items':items}
@@ -224,9 +262,10 @@ class Service:
             ready=self.snapshot is not None and self.snapshot.base_at==base and bool(self.predictions)
             return {'service':'CycleOn','status':'ready' if ready else 'not_ready','server_at':stamp(now),'base_at':stamp(base),
                 'supported_targets':[stamp(base+timedelta(hours=h)) for h in (1,2,3)],'model_bundle_id':self.runtime.manifest['id'],
-                'model_stage':'team_C_reference_requires_live_acceptance','last_precompute_at':self.last_precompute_at,
-                'precompute_error':None,'latest_inventory_age_limit_seconds':300,'time_policy':'latest_exact_hour_base; latest_inventory_separate',
-                'data':{'model_route':'C_only','real_model_loaded':True,'primary_weather_routes_enabled':False,
+                'model_stage':'weather_primary_live' if self.route()!='C_only' else 'team_C_reference_requires_live_acceptance','last_precompute_at':self.last_precompute_at,
+                'precompute_error':self.weather.error if self.weather and ready else None,'latest_inventory_age_limit_seconds':300,'time_policy':'latest_exact_hour_base; latest_inventory_separate',
+                'data':{'model_route':self.route(),'real_model_loaded':True,'primary_weather_routes_enabled':bool(ready and self.primary_count),
+                    'primary_prediction_count':self.primary_count if ready else 0,
                     'whole_service_approved':False,'station_count':len(self.snapshot.stations) if self.snapshot else 0}}
     def recommend(self,request):
         with self.lock:
@@ -246,13 +285,13 @@ class Service:
                 'alternatives':eligible[1:3],'abstained':not bool(eligible),'reason':None if eligible else 'no_station_within_radius' if not nearby else 'no_fresh_positive_eligible_prediction',
                 'nearby_count':len(nearby),'eligible_count':len(eligible)}
 
-def create_app(token,runtime=None,clock=lambda:datetime.now(timezone.utc)):
+def create_app(token,runtime=None,clock=lambda:datetime.now(timezone.utc),weather_directory=None):
     if not token or len(token)<32:raise ValueError('Set CYCLEON_SERVICE_TOKEN to at least 32 characters')
-    runtime=runtime or Runtime();service=Service(runtime,clock)
+    runtime=runtime or Runtime();service=Service(runtime,clock,weather_directory)
     bearer=HTTPBearer(auto_error=False)
     def auth(credentials=Depends(bearer)):
         if not credentials or not secrets.compare_digest(credentials.credentials,token):raise HTTPException(401,'service_authentication_required')
-    app=FastAPI(title='CycleOn team C model service',version='1.0.0',dependencies=[Depends(auth)])
+    app=FastAPI(title='CycleOn station probability service',version='1.0.0',dependencies=[Depends(auth)])
     app.state.service=service
     @app.get('/v1/status',response_model=ServiceStatus)
     def status():return service.status()

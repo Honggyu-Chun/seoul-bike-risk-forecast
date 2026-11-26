@@ -1,6 +1,6 @@
 # 백엔드 모델 연결 매뉴얼
 
-팀 백엔드는 원본 저장·신원 연결·수신 이력을, 모델 서비스는 C 특징 생성·3간격 추론·추천을 담당합니다. 기본 HTTP 경로는 C 실제 모델이며 고급 기상 모델은 활성화하지 않습니다. 이번 snapshot은 팀 연동용 입력이며 기존 내부 조회 API의 저장 책임을 대체하지 않습니다.
+팀 백엔드는 재고·대여소 신원·이력·예보를 저장하고 실제 수신 시각을 보존합니다. 모델 서비스에 정각 snapshot을 보내면 서비스가 1·2·3시간의 최종 모델을 실행합니다. [작동하는 전체 JSON을 만드는 명령과 호출 예시](FINAL_MODEL_QUICKSTART.md)를 먼저 확인하세요.
 
 ## API 계약
 
@@ -29,6 +29,7 @@
 | base_inventory_received_at | 그 재고의 실제 수신 시각. 기준 이후 금지. 300초 이상이면 해당 역 예측 보류 |
 | latest_inventory / latest_inventory_received_at | 현재 표시·추천용 최신 실측 재고와 실제 수신 시각 |
 | latest_inventory_observed_at | 공급자가 주는 실제 관측 시각. 없으면 null |
+| final_inputs | 검증한 과거 재고와 목표 정각 기상 예보. 구성은 [최종 모델 입력 표](FINAL_MODEL_QUICKSTART.md)와 [OpenAPI](team_model_openapi.json)의 FinalInputs 참조. 생략하면 C 입력만 사용 |
 
 재고와 대응 수신 시각은 함께 null 또는 함께 존재해야 합니다. 미래 수신·중복·시간대 누락·알 수 없는 필드는 422입니다. 미검증 신원·기준 재고 결측·기준 재고 stale·미지원 학습 번호는 개별 예측 null입니다. 같은 정각에서 기준 재고·좌표·신원 메타데이터를 바꾸면 422입니다. 새 materialized_at은 이전보다 커야 합니다.
 
@@ -40,7 +41,7 @@ C는 station_code, inventory, log_inventory, hour, weekday, month, weekend, hori
 
 14:40 조회에서 기준 14:00, 목표 15·16·17시입니다. 14:40 최신 재고를 14:00 inventory_at_base로 소급하지 않습니다. 원본에 없는 관측 시각·수신 시각을 만들지 않습니다.
 
-서울 재고·공식 대여소 신원/좌표가 필요합니다. 기상청 과거 포털 예보는 고급 모델의 연구 입력이지만 이번 C HTTP 경로는 사용하지 않습니다. RN1·단위·발표/수신·전체 소속 검증 전 live API를 연구 예보와 교환하지 않습니다. 대기질·버스·열차·관광·NEIS·SGIS·DEM을 C 입력으로 보낼 필요는 없습니다.
+최종 모델은 서울 재고·공식 대여소 신원과 좌표·과거 재고·기상청 목표 시각 격자 예보를 사용합니다. RN1이 0인 유효 예보를 사용하고 강수·이력 부족 시 가능한 곳은 C로 대체합니다. 각 결과의 model_id와 input_group으로 적용 모델을 확인합니다.
 
 ## Python 예시
 
@@ -58,7 +59,7 @@ with httpx.Client(base_url=os.environ["CYCLEON_AI_BASE_URL"],
     result = r.json()
 ~~~
 
-team_model/examples/snapshot.json은 **고정 시각의 합성 구조 예시**입니다. 현재 서버에 그대로 보내 실데이터라고 쓰지 않습니다. 시각을 임의 바꾸어 과거 신원 증빙을 유효하게 만들지 않습니다. 실제 모델 계산 확인은 python -m team_model check 또는 합성 테스트를 실행합니다.
+team_model/examples/snapshot.json은 **고정 시각의 합성 구조 예시**입니다. 현재 서버에 그대로 보내 실데이터라고 쓰지 않습니다. 시각을 임의 바꾸어 과거 신원 증빙을 유효하게 만들지 않습니다. 최종 세 모델의 계산은 `python -m team_model demo`, C 모델의 계산은 `python -m team_model check`로 확인합니다.
 
 ## 장애와 재시작
 

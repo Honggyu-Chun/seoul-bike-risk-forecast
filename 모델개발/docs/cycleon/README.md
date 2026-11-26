@@ -1,4 +1,4 @@
-> **최신 팀 연결 기준(2026-11-10):** 실제 C 모델 호출·입력 방식은 [팀 모델 실행 안내](TEAM_MODEL_GUIDE.md), [백엔드](BACKEND_MODEL_INTEGRATION.md), [프론트](FRONTEND_MODEL_INTEGRATION.md), [현재 OpenAPI](team_model_openapi.json)를 사용합니다. 아래는 이전 참조·모의 API 기록입니다. 새 최종 집계는 [11월 10일 결과](RESULTS_20261110.md)를 보세요.
+> 실제 모델로 시작할 때는 [최종 모델 실행 안내](FINAL_MODEL_QUICKSTART.md), [백엔드 입력](BACKEND_MODEL_INTEGRATION.md), [프론트 출력](FRONTEND_MODEL_INTEGRATION.md), [OpenAPI](team_model_openapi.json)를 사용합니다. 아래는 이전 모의 API의 개발 기록입니다.
 
 # CycleOn 모델 API 연동 가이드
 
@@ -19,7 +19,7 @@
 
 ## 제공 범위
 
-Git에는 API·현재 서빙 참조 코드·명세·합성 목업·설치 도구·계약 검사가 있다. 실모델 가중치·전체 연구 데이터·실행 DB·키는 포함하지 않는다. 목업은 고정 시각과 합성 확률이며 모델 성능을 나타내지 않는다.
+Git에는 API·현재 서빙 참조 코드·명세·합성 목업·설치 도구·계약 검사가 있다. 이 목업 자체는 가중치를 사용하지 않는다. 실제 서비스용 모델 묶음은 저장소의 `모델개발/releases/team-model-20261110/models.zip`에 있다. 목업은 고정 시각과 합성 확률이며 모델 성능을 나타내지 않는다.
 
 현재 개발용 실모델은 T/C 세 간격 번들이다. S/C는 후보 제안이며 최종 모델과 추천 정책은 미확정이다. 완료 기반 22개 설정과 후속 연구를 구분하며 64개는 필수 완료 수가 아니다. W/F/E의 기상 출처·공유 특징 검수는 통과했지만 팀 데이터 공급과 실제 서비스 검증은 별도다.
 
