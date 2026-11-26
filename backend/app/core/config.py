@@ -11,7 +11,8 @@ BACKEND_DIR = Path(__file__).resolve().parents[2]
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=BACKEND_DIR / ".env", env_file_encoding="utf-8", extra="ignore")
 
-    ai_base_url: str = Field("http://127.0.0.1:18011", validation_alias="CYCLEON_AI_BASE_URL")
+    # 모델 API. 기본은 연구실 모델 API를 연 SSH 터널(ssh -N -L 18102:127.0.0.1:18101 amsl-lab), 목업은 18011
+    ai_base_url: str = Field("http://127.0.0.1:18102", validation_alias="CYCLEON_AI_BASE_URL")
     service_token: SecretStr = Field(SecretStr(""), validation_alias="CYCLEON_SERVICE_TOKEN")
     ai_timeout_seconds: float = Field(5.0, gt=0, validation_alias="CYCLEON_AI_TIMEOUT_SECONDS")
     # AI 응답의 base_at이 백엔드 기준 정각과 같은지 확인. 시계가 고정된 목업을 쓸 때만 false

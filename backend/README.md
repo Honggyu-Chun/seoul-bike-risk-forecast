@@ -6,22 +6,21 @@
 | --- | --- | --- |
 | 공개 API | 프론트 → 백엔드 | `/api/...` (5개) |
 | 로그인·회원 API | 프론트 → 백엔드 | `/api/auth/...`, `/api/me...` (세션 쿠키) |
-| AI 중계 | 백엔드 → AI 서비스 | AI의 `/v1/status`, `/v1/predictions`, `/v1/recommendations` |
-| 내부 데이터 API | AI 서비스 → 백엔드 | `/internal/ai-data/v1/...` (3개, 서비스 토큰 필요) |
+| AI 중계 | 백엔드 → 연구실 모델 API (SSH 터널) | 모델의 `/v1/status`, `/v1/predictions`, `/v1/recommendations` |
 | 재고 수집기 | 백엔드 → 서울시 API | 별도 프로세스, 2분마다 |
 | 장소 검색 중계 | 백엔드 → 카카오 로컬 API | `GET /api/places`가 부를 때만 |
 | 메일 발송 | 백엔드 → SMTP 서버 | 이메일 인증·비밀번호 재설정 링크 (로컬은 Mailpit) |
 
 ```text
-[프론트] ──/api──> [백엔드] ──/v1──> [AI 서비스]
-                     │  ▲              │
-                     │  └──── 20초마다 /internal/ai-data/v1 (AI가 재고를 가져감)
+[프론트] ──/api──> [백엔드] ──/v1 (SSH 터널)──> [연구실 모델 API] <── 연구실이 재고·이력·기상 예보를 직접 수집
+                     │ 이름·좌표·수량
                      ▼
                [PostgreSQL] <── 2분마다 [수집기] <── 서울시 따릉이 API
 ```
 
 - 프론트는 **공개 API만** 부른다. 요청·응답 필드는 「CycleOn 공개 API 명세 (프론트엔드용)」 문서가 기준이다.
-- AI 예측은 **정각마다 한 번** 계산된다. 수집(2분), AI 동기화(20초), 예측(정각)은 서로 독립적으로 돈다.
+- 예측은 연구실 모델 API가 **정각마다** 계산한다(1시간 P53, 2시간 P51, 3시간 P48, 조건이 안 되면 C 대체). 모델은 우리 DB를 읽지 않고, 백엔드도 모델에 입력을 보내지 않는다.
+- 수량(현재 자전거 수)은 항상 우리 DB의 최신 수집분, 확률만 모델에서 받는다. 우리 수집기는 지도·목록 수량과 마이 리포트 판정에 쓰인다.
 
 ## 폴더 구조
 
@@ -33,19 +32,17 @@ backend/
 │  │  ├─ config.py          환경변수 (pydantic-settings, backend/.env)
 │  │  ├─ time.py            기준 정각(KST), target_at → 간격(1·2·3) 변환
 │  │  ├─ errors.py          오류 응답 {"error": {"code", "message", ...}}
-│  │  ├─ security.py        내부 API 서비스 토큰 확인
 │  │  ├─ passwords.py       비밀번호 규칙, bcrypt 해시(스레드풀)
 │  │  ├─ log_filters.py     접속 로그에서 쿼리(위치·검색어) 지우기
 │  │  └─ geo.py             직선거리 계산
 │  ├─ api/
 │  │  ├─ deps.py            공통 의존성 (세션, AI, 현재 시각, debug, IP, Origin 확인)
 │  │  ├─ public/            공개 API 라우터
-│  │  ├─ account/           로그인·회원 API 라우터 (auth, me, favorites, views)
-│  │  └─ internal/          내부 데이터 API 라우터
+│  │  └─ account/           로그인·회원 API 라우터 (auth, me, favorites, views)
 │  ├─ clients/              AI 호출(ai.py), 카카오 로컬 API 호출(kakao.py), SMTP 메일 발송(mailer.py)
 │  ├─ services/             판단 로직 (AI·DB 합치기, 장애 대체, 정각 경계)
-│  ├─ repositories/         DB 읽기·쓰기 (수집분 저장 규칙, 커서 페이지)
-│  ├─ schemas/              요청·응답 모델 (public: 프론트, ai: AI 응답, ai_data: 내부 API)
+│  ├─ repositories/         DB 읽기·쓰기 (수집분 저장 규칙, 대여소·수량 조회)
+│  ├─ schemas/              요청·응답 모델 (public: 프론트, ai: AI 응답)
 │  ├─ db/                   엔진·세션, 테이블 정의
 │  └─ collectors/           따릉이 재고 수집기
 ├─ migrations/              Alembic 마이그레이션
@@ -73,10 +70,10 @@ PyCharm은 인터프리터를 `backend\.venv\Scripts\python.exe`로, 소스 루�
 
 | 항목 | 설명 |
 | --- | --- |
-| `CYCLEON_AI_BASE_URL` | AI 서비스 주소. 목업 `http://127.0.0.1:18011`, 실제 AI `http://127.0.0.1:8001` |
-| `CYCLEON_SERVICE_TOKEN` | 백엔드와 AI가 **같은 값**으로 쓰는 32자 이상 비밀 문자열. JWT가 아니다. 만들기: `.\.venv\Scripts\python -c "import secrets; print(secrets.token_urlsafe(32))"` |
+| `CYCLEON_AI_BASE_URL` | 모델 API 주소. 연구실 API는 SSH 터널로 연 `http://127.0.0.1:18102`(기본), 목업은 `http://127.0.0.1:18011` |
+| `CYCLEON_SERVICE_TOKEN` | 모델 API의 서버 토큰(Bearer). 연구실 API는 운영 담당자가 비공개로 전달한 값, 목업은 `RUN_CYCLEON_MOCK.cmd`의 값. JWT가 아니고 사용자 로그인과 무관하다. 브라우저·Git·공유 로그에 넣지 않는다 |
 | `CYCLEON_AI_TIMEOUT_SECONDS` | AI 응답 대기 시간(초) |
-| `CYCLEON_AI_CLOCK_CHECK` | AI 응답의 기준 정각이 백엔드와 같은지 확인. **실제 AI는 `true`, 목업은 `false`** (목업 시계가 고정이라) |
+| `CYCLEON_AI_CLOCK_CHECK` | AI 응답의 기준 정각이 백엔드와 같은지 확인. **연구실 API는 `true`, 목업은 `false`** (목업 시계가 고정이라) |
 | `CORS_ORIGINS` | 브라우저 호출을 허용할 프론트 주소 (JSON 배열). 로그인·회원 API의 Origin 확인도 이 목록을 쓴다. 리버스 프록시로 한 사이트에서 서비스하면 그 사이트 주소(`https://...`)를 넣는다 |
 | `CYCLEON_COOKIE_SECURE` | 세션 쿠키에 `Secure`를 붙일지. **https 운영은 `true`**, http 로컬 개발은 `false` |
 | `CYCLEON_BCRYPT_ROUNDS` | bcrypt 비용. 기본 12(1회 약 0.2~0.3초). 테스트만 4로 낮춘다 |
@@ -88,7 +85,7 @@ PyCharm은 인터프리터를 `backend\.venv\Scripts\python.exe`로, 소스 루�
 | `TEST_DATABASE_URL` | pytest 전용 DB. 테스트가 테이블을 비우므로 **개발 DB와 다른 DB**여야 한다 |
 | `SEOUL_COLLECTION_API_KEY` | 서울 열린데이터광장 인증키 (data.seoul.go.kr) |
 | `CYCLEON_COLLECTION_INTERVAL_SECONDS` | 수집 간격(초). 기본 120 |
-| `CYCLEON_RETENTION_HOURS` | 재고 보관 시간. 기본 192(8일). AI 첫 동기화가 170시간을 요청하므로 그보다 길어야 한다 |
+| `CYCLEON_RETENTION_HOURS` | 재고 보관 시간. 기본 192(8일), 최소 24(마이 리포트 판정에 필요한 수집분보다 길게) |
 | `CYCLEON_VIEW_RETENTION_WEEKS` | 마이 리포트 기록(예측 확인) 보관 주 수. 이용 시각(KST) 기준 이번 주 포함 N주, 리포트도 그만큼 보여 준다. 그보다 오래된 기록은 수집기가 회차마다 지운다. 기본 2(이번 주와 지난 주), 1~12. 테스트 서버에서 정리를 빨리 보려면 1 |
 
 ## 실행
@@ -109,9 +106,24 @@ docker compose start                 # 처음이면 docker compose up -d (Postgr
 
 API 문서는 `http://127.0.0.1:8100/docs`에서 볼 수 있다.
 
-### AI 서비스 (둘 중 하나)
+### 모델 API (둘 중 하나)
 
-**목업** (모델 없이 고정된 합성 값, 시계 고정)
+**연구실 모델 API** (기본. 실제 최종 모델)
+
+연구실 PC의 `127.0.0.1:18101`은 인터넷 공용 주소가 아니다. SSH 접속 권한과 서버 토큰을 운영 담당자에게 받은 뒤 터널을 열어 둔다.
+`amsl-lab`은 SSH 설정에 등록한 별칭이고, 없으면 담당자에게 받은 접속 대상으로 바꾼다.
+
+```powershell
+ssh -N -L 18102:127.0.0.1:18101 amsl-lab   # 터널을 연 채로 둔다. 로컬 18102 → 연구실 18101
+```
+
+`.env`: `CYCLEON_AI_BASE_URL=http://127.0.0.1:18102`, `CYCLEON_SERVICE_TOKEN=`(연구실 서버 토큰), `CYCLEON_AI_CLOCK_CHECK=true`
+
+- 연결 확인: `GET /api/status?debug=true`가 `status: ready`이고 `debug.primary_prediction_count`가 0보다 크면 최종 기상 모델로 예측하고 있다.
+- 연구실 API는 재고·이력·예보를 직접 모은다. 백엔드는 조회만 하고 **모델에 입력(snapshot)을 보내지 않는다.**
+- 로컬 포트를 18102로 쓰는 이유: 모델팀 빠른 시작 문서와 같고, 자기 PC에서 모델 서버(18101)를 띄워도 겹치지 않는다.
+
+**목업** (모델 없이 고정된 합성 값, 시계 고정. 화면 개발용)
 
 ```powershell
 cd ..
@@ -121,25 +133,9 @@ cd ..
 
 `.env`: `CYCLEON_AI_BASE_URL=http://127.0.0.1:18011`, `CYCLEON_SERVICE_TOKEN=`(RUN_CYCLEON_MOCK.cmd의 값), `CYCLEON_AI_CLOCK_CHECK=false`
 
-**실제 AI 서비스** (우리 DB를 동기화해서 예측. 모델 번들이 없으면 확률은 `null`)
-
-```powershell
-cd ..\모델개발
-& "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe" -m venv .venv   # 처음 한 번 (3.12)
-.\.venv\Scripts\pip install -r requirements-serving.txt
-$env:PYTHONDONTWRITEBYTECODE = "1"
-$env:CYCLEON_SERVICE_TOKEN = "<backend\.env와 같은 값>"
-.\.venv\Scripts\python scripts\cycleon_service.py ai --backend-url http://127.0.0.1:8100 --port 8001
-# 모델 번들을 받았으면 --bundle <번들 폴더> 추가
-```
-
-`.env`: `CYCLEON_AI_BASE_URL=http://127.0.0.1:8001`, `CYCLEON_AI_CLOCK_CHECK=true`
-
-AI 동기화 캐시는 `모델개발/data/runtime_cache/`에 생긴다(Git 제외). 오래된 자료를 지우지 않아 켜 둔 만큼 커진다.
-
 ### 끄기
 
-수집기 → 백엔드·AI(Ctrl+C) → `docker compose stop` 순서. `docker compose down`은 컨테이너만 지우고 데이터는 남긴다. **`down -v`는 데이터 볼륨까지 지우므로 쓰지 않는다.**
+수집기 → 백엔드(Ctrl+C) → SSH 터널(Ctrl+C) → `docker compose stop` 순서. `docker compose down`은 컨테이너만 지우고 데이터는 남긴다. **`down -v`는 데이터 볼륨까지 지우므로 쓰지 않는다.**
 
 ## API
 
@@ -162,7 +158,6 @@ AI 동기화 캐시는 `모델개발/data/runtime_cache/`에 생긴다(Git 제�
 | `POST /api/me/views` | 예측 확인 기록(마이 리포트). 대여소 상세·추천에서 고른 대여소를 볼 때 프론트가 부르고, 백엔드가 예측을 직접 받아 저장. 같은 대여소·이용 시각은 한 번만(201, 이미 있으면 200). 위치는 받지 않음 | 200 `recorded=false`, 기록 안 함 |
 | `GET /api/me/report?week=` | 마이 리포트. 한 주(월~일 KST, 이용 시각 기준)의 요약(`viewed`·`judged`·`hits`·`rented`)과 카드. `week`은 응답의 `weeks`(보관 주 수만큼) 중 하나, 그 밖은 422. 열 때 이용 시각 5분 뒤가 지난 기록을 판정(직전 5분 안 수집분의 실제 수량과 비교) | 영향 없음 |
 | `PATCH`·`DELETE /api/me/views/{id}`, `DELETE /api/me/views` | "대여함" 표시(`rented`: true·false, null은 표시 지우기). 이용 시각 전에는 409 `target_not_passed`, 없거나 남의 기록은 404 `view_not_found`. 기록 하나·전체 지우기(204, 없어도 204) | 영향 없음 |
-| `GET /internal/ai-data/v1/stations`·`observations`·`forecasts` | AI 동기화 (커서 페이지) | — |
 
 - `target_at`은 `GET /api/status`의 `supported_targets` 중 하나를 **그대로** 보낸다. 지난 정각이나 정각이 아닌 시각은 409 `target_not_supported`.
 - 오류는 모두 `{"error": {"code", "message", ...}}`. AI 401은 502 `ai_auth_failed`, AI 422·5xx는 502 `ai_error`.
@@ -200,11 +195,12 @@ docker compose start                 # DB 테스트에 필요
 | 증상 | 원인과 해결 |
 | --- | --- |
 | 409 `target_not_supported` | `target_at`이 지금 선택지가 아님. `/docs`의 기본값(현재 시각, 분·초 포함)이나 지난 정각을 보낸 경우. 응답의 `supported_targets` 중 하나를 쓴다 |
-| 확률 `null`, `reason: base_inventory_unavailable` | 기준 정각 직전 5분 안에 완료된 수집분이 없음. 수집기가 멈췄거나 PC가 절전 상태였던 경우. 수집기가 돌면 다음 정각부터 풀린다 |
-| 확률 `null`, `reason: model_not_ready` / `history_not_ready` | 모델 번들이 없거나, 수집 이력이 부족함(T 경로는 수집 시작 후 7일) |
+| 주변·예측이 200 `ai_available=false`, 추천이 503 `ai_unavailable` | 모델 API에 연결되지 않음. SSH 터널이 끊겼거나 연구실 PC가 꺼진 경우. 터널을 다시 연다. 그동안 지도·목록·수량은 정상 |
+| 확률 `null`, `reason: base_not_precomputed`, 상태 `not_ready` | 모델이 이번 정각 예측을 아직 계산하지 못함. 정각 직후 잠시는 정상. 계속되면 연구실 담당자에게 알린다 |
+| 확률 `null`, `reason: base_inventory_unavailable` / `base_inventory_stale` | 연구실 쪽 기준 정각 재고가 없거나 오래됨(연구실 수집 문제). 우리 수집기와는 무관하다 |
+| 확률 `null`, `reason: station_unknown_or_ineligible` / `station_identity_not_verified_for_model` / `historical_model_code_unknown` | 모델 입력에 없거나, 신원이 확인되지 않았거나, 학습하지 않은 대여소(신설·이전 등). 수량은 DB 값으로 그대로 나온다 |
 | 주변·예측·추천 API가 502 `ai_error` (목업 사용 중) | `CYCLEON_AI_CLOCK_CHECK=true`로 목업에 붙음. 목업은 `false`로 |
-| 502 `ai_auth_failed` | 백엔드와 AI의 `CYCLEON_SERVICE_TOKEN`이 다름 |
-| AI 동기화가 계속 422 | 개발 DB를 비웠는데 AI 캐시는 예전 커서를 기억함. AI를 끄고 `모델개발/data/runtime_cache/`를 지운 뒤 다시 켠다 |
+| 502 `ai_auth_failed` | `CYCLEON_SERVICE_TOKEN`이 모델 API의 서버 토큰과 다름. 연구실 토큰을 다시 확인한다 |
 | 수집기가 바로 종료 (`collector stopped: provider_INFO-100` 등) | 인증키 오류나 한도 초과. 키를 확인한다. 이때는 재시도하지 않고 멈추도록 되어 있다 |
 | `alembic` 실행 시 `UnicodeDecodeError` | `alembic.ini`에 한글이 들어감 |
 | import 단계에서 `SyntaxError` (`class Page[R]` 등) | venv가 Python 3.11 이하로 만들어짐. 3.12로 다시 만든다 |
@@ -215,6 +211,5 @@ docker compose start                 # DB 테스트에 필요
 - 비밀번호 재설정 요청은 계정당 15분 3통으로만 막는다(IP별 제한 없음). 배포 때 IP별 제한을 검토한다.
 - `/api/places`에는 호출 횟수 제한이 없다. 카카오 하루 호출 한도를 넘기면 그날은 503이 난다. 배포 때 IP별 제한을 검토한다.
 - 폐소 감지(`valid_to`), 수집기 중복 실행 방지가 없다.
-- 기상 자료(`/forecasts`)는 기상을 쓰는 모델 번들이 나올 때까지 빈 페이지다.
-- 배포용 Dockerfile·운영 설정은 배포 서버가 정해지면 추가한다.
+- 배포용 Dockerfile·운영 설정은 배포 서버가 정해지면 추가한다. 배포 서버에서 연구실 SSH 터널을 계속 유지하는 방법(끊기면 다시 연결)도 그때 정한다.
 - 만료된 세션과 하루 지난 로그인 시도 기록은 로그인할 때 지운다. 로그인이 드문 기간에는 남아 있을 수 있다(정기 정리는 배포 때 추가).
