@@ -9,9 +9,20 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     sub=p.add_subparsers(dest='command',required=True)
     sub.add_parser('install');sub.add_parser('check')
+    demo=sub.add_parser('demo', help='Run real final models on synthetic inputs over local HTTP')
+    demo.add_argument('--write-snapshot',type=Path,help='Write a new current-hour example JSON and exit')
     serve=sub.add_parser('serve');serve.add_argument('--host',default='127.0.0.1');serve.add_argument('--port',type=int,default=18101)
+    serve.add_argument('--weather-directory',type=Path,help='Trusted directory of hash-checked hourly model receipts')
     export=sub.add_parser('export-openapi');export.add_argument('--output',type=Path,required=True)
     args=p.parse_args()
+    if args.command=='demo':
+        if args.write_snapshot:
+            from .demo import snapshot
+            args.write_snapshot.write_text(json.dumps(snapshot(),ensure_ascii=False),encoding='utf-8')
+        else:
+            from .smoke_http import main as smoke
+            smoke(final=True)
+        return
     if args.command=='install':
         print(json.dumps({'installed':str(install_bundle()),'new_fit':0}));return
     if args.command=='check':
@@ -26,7 +37,7 @@ def main():
         args.output.parent.mkdir(parents=True,exist_ok=True)
         args.output.write_text(json.dumps(app.openapi(),ensure_ascii=False,indent=2),encoding='utf-8',newline='\n');return
     token=os.environ.get('CYCLEON_SERVICE_TOKEN','')
-    app=create_app(token)
+    app=create_app(token,weather_directory=args.weather_directory)
     import uvicorn
     uvicorn.run(app,host=args.host,port=args.port,workers=1)
 if __name__=='__main__':main()

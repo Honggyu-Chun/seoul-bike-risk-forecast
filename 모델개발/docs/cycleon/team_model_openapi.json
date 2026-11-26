@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "CycleOn team C model service",
+    "title": "CycleOn station probability service",
     "version": "1.0.0"
   },
   "paths": {
@@ -160,6 +160,170 @@
   },
   "components": {
     "schemas": {
+      "FinalInputs": {
+        "properties": {
+          "product": {
+            "type": "string",
+            "const": "kma_completed_hour_v2",
+            "title": "Product"
+          },
+          "history_received_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "History Received At"
+          },
+          "histories": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/StationHistory"
+            },
+            "type": "object",
+            "maxProperties": 5000,
+            "title": "Histories"
+          },
+          "forecasts": {
+            "items": {
+              "$ref": "#/components/schemas/Forecast"
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Forecasts"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "product",
+          "history_received_at",
+          "histories",
+          "forecasts"
+        ],
+        "title": "FinalInputs"
+      },
+      "Forecast": {
+        "properties": {
+          "horizon": {
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3
+            ],
+            "title": "Horizon"
+          },
+          "issued_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Issued At"
+          },
+          "received_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Received At"
+          },
+          "target_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Target At"
+          },
+          "by_station": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/GridValues"
+            },
+            "type": "object",
+            "maxProperties": 5000,
+            "title": "By Station"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "horizon",
+          "issued_at",
+          "received_at",
+          "target_at",
+          "by_station"
+        ],
+        "title": "Forecast"
+      },
+      "GridValues": {
+        "properties": {
+          "T1H": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 60.0,
+                "minimum": -90.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "T1H"
+          },
+          "RN1": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 2000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rn1"
+          },
+          "REH": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reh"
+          },
+          "WSD": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 150.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Wsd"
+          },
+          "PTY": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 7.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pty"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "T1H",
+          "RN1",
+          "REH",
+          "WSD",
+          "PTY"
+        ],
+        "title": "GridValues"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -711,7 +875,10 @@
         "properties": {
           "model_route": {
             "type": "string",
-            "const": "C_only",
+            "enum": [
+              "C_only",
+              "weather_primary_with_C_fallback"
+            ],
             "title": "Model Route",
             "default": "C_only"
           },
@@ -723,7 +890,6 @@
           },
           "primary_weather_routes_enabled": {
             "type": "boolean",
-            "const": false,
             "title": "Primary Weather Routes Enabled",
             "default": false
           },
@@ -736,6 +902,11 @@
           "station_count": {
             "type": "integer",
             "title": "Station Count"
+          },
+          "primary_prediction_count": {
+            "type": "integer",
+            "title": "Primary Prediction Count",
+            "default": 0
           }
         },
         "additionalProperties": false,
@@ -785,7 +956,10 @@
           },
           "model_stage": {
             "type": "string",
-            "const": "team_C_reference_requires_live_acceptance",
+            "enum": [
+              "team_C_reference_requires_live_acceptance",
+              "weather_primary_live"
+            ],
             "title": "Model Stage"
           },
           "last_precompute_at": {
@@ -843,6 +1017,16 @@
       },
       "Snapshot": {
         "properties": {
+          "final_inputs": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FinalInputs"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "capture_complete": {
             "type": "boolean",
             "const": true,
@@ -907,7 +1091,10 @@
           },
           "model_route": {
             "type": "string",
-            "const": "C_only",
+            "enum": [
+              "C_only",
+              "weather_primary_with_C_fallback"
+            ],
             "title": "Model Route",
             "default": "C_only"
           },
@@ -919,7 +1106,6 @@
           },
           "primary_weather_routes_enabled": {
             "type": "boolean",
-            "const": false,
             "title": "Primary Weather Routes Enabled",
             "default": false
           }
@@ -932,6 +1118,45 @@
           "qualified_stations"
         ],
         "title": "SnapshotAccepted"
+      },
+      "StationHistory": {
+        "properties": {
+          "identity_revision": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Identity Revision"
+          },
+          "continuous_since": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Continuous Since"
+          },
+          "prior_inventory": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0.0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
+            "maxItems": 671,
+            "minItems": 168,
+            "title": "Prior Inventory"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "identity_revision",
+          "continuous_since",
+          "prior_inventory"
+        ],
+        "title": "StationHistory"
       },
       "StationInput": {
         "properties": {

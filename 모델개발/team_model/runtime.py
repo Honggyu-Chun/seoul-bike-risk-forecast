@@ -42,7 +42,6 @@ def install_bundle(target=None):
 
 class Runtime:
     def __init__(self, bundle_dir=None):
-        import lightgbm as lgb
         self.directory = install_bundle() if bundle_dir is None else Path(bundle_dir).resolve()
         descriptor = json.loads((RELEASE / 'release.json').read_text(encoding='utf-8'))
         if sha(self.directory / 'manifest.json') != descriptor['members']['manifest.json']:
@@ -51,23 +50,35 @@ class Runtime:
         self.allowed_codes = set(self.manifest['trained_station_codes'])
         self.routes = {r['id']: r for r in self.manifest['routes']}
         self.models = {}
-        # C is the only enabled live integration route. Advanced routes stay offline.
         for h in (1, 2, 3):
-            r = self.routes[f'C_h{h}']
-            file = (self.directory / r['model_file']).resolve()
-            if not file.is_relative_to(self.directory) or sha(file) != r['model_sha256']:
-                raise ValueError('Saved C model digest mismatch')
+            self._model(f'C_h{h}')
+
+    def _model(self, model_id):
+        if model_id not in self.models:
+            import lightgbm as lgb
+            route = self.routes[model_id]
+            file = (self.directory / route['model_file']).resolve()
+            if not file.is_relative_to(self.directory) or sha(file) != route['model_sha256']:
+                raise ValueError('Saved model digest mismatch')
             model = lgb.Booster(model_file=str(file))
-            if model.feature_name() != r['columns'] or model.num_feature() != 8:
-                raise ValueError('Saved C feature order mismatch')
-            self.models[h] = model
-    def predict_c(self, matrix, horizon):
-        r = self.routes[f'C_h{horizon}']
-        raw = np.asarray(self.models[horizon].predict(np.asarray(matrix, dtype=np.float32), num_threads=1), dtype=np.float32)
+            if model.feature_name() != route['columns']:
+                raise ValueError('Saved model feature order mismatch')
+            self.models[model_id] = model
+        return self.models[model_id]
+
+    def predict_route(self, model_id, matrix):
+        route = self.routes[model_id]
+        features = np.asarray(matrix, dtype=np.float32)
+        if features.ndim != 2 or features.shape[1] != len(route['columns']):
+            raise ValueError('Incorrect feature matrix dimensions')
+        raw = np.asarray(self._model(model_id).predict(features, num_threads=1), dtype=np.float32)
         q = np.clip(raw, 1e-7, 1-1e-7)
-        params = r['calibration']
+        params = route['calibration']
         z = np.clip(params['coefficient'] * np.log(q / (1-q)) + params['intercept'], -50, 50)
         risk = np.asarray(1 / (1 + np.exp(-z)), dtype=np.float64)
         if not np.isfinite(risk).all() or ((risk < 0) | (risk > 1)).any():
             raise ValueError('Invalid saved model probability')
-        return risk, np.float64(r['threshold'])
+        return risk, route['threshold']
+
+    def predict_c(self, matrix, horizon):
+        return self.predict_route(f'C_h{horizon}', matrix)

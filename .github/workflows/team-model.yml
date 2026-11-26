@@ -3,6 +3,9 @@ on:
   pull_request:
     paths:
       - '모델개발/team_model/**'
+      - '모델개발/cycleon/features.py'
+      - '모델개발/cycleon/collectors.py'
+      - '모델개발/cycleon/common.py'
       - '모델개발/releases/team-model-20261110/**'
       - '모델개발/requirements-team-model.txt'
       - '.github/workflows/team-model.yml'
@@ -10,6 +13,9 @@ on:
     branches: [main, feature/team-model-serving]
     paths:
       - '모델개발/team_model/**'
+      - '모델개발/cycleon/features.py'
+      - '모델개발/cycleon/collectors.py'
+      - '모델개발/cycleon/common.py'
       - '모델개발/releases/team-model-20261110/**'
       - '모델개발/requirements-team-model.txt'
       - '.github/workflows/team-model.yml'
@@ -29,7 +35,9 @@ jobs:
         working-directory: 모델개발
       - run: python -m team_model check
         working-directory: 모델개발
-      - run: python -m unittest team_model.test_service -v
+      - run: python -m unittest team_model.test_service team_model.test_weather_predictions team_model.test_final_inputs -v
         working-directory: 모델개발
       - run: python -m team_model.smoke_http
+        working-directory: 모델개발
+      - run: python -m team_model demo
         working-directory: 모델개발

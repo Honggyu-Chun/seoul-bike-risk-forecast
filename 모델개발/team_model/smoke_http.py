@@ -10,7 +10,8 @@ import sys
 import time
 import httpx
 
-def main():
+def main(final=False):
+    from .weather_predictions import PRIMARY
     with socket.socket() as sock:
         sock.bind(("127.0.0.1", 0))
         port = sock.getsockname()[1]
@@ -49,19 +50,27 @@ def main():
             station.update(identity_verified_at=(base-timedelta(days=1)).isoformat(),
                            base_inventory_received_at=(base-timedelta(seconds=30)).isoformat(),
                            latest_inventory_received_at=now.isoformat())
+            if final:
+                from .demo import snapshot
+                sample = snapshot(now)
+                station = sample["stations"][0]
             response = client.post("/internal/ai-data/v1/snapshot", json=sample)
             response.raise_for_status()
             result = client.post("/v1/predictions", json={"station_ids": [station["station_id"]], "horizons_hours": [1, 2, 3]})
             result.raise_for_status()
             items = result.json()["items"]
             assert len(items) == 3
-            assert all(x["model_id"] == "C_h" + str(x["horizon_hours"]) and x["available_probability"] == 1-x["risk_probability"] for x in items)
+            assert all(x["model_id"] == (PRIMARY[x["horizon_hours"]-1] if final else "C_h" + str(x["horizon_hours"])) and x["available_probability"] == 1-x["risk_probability"] for x in items)
             rec = client.post("/v1/recommendations", json={"latitude": station["latitude"], "longitude": station["longitude"], "horizon_hours": 1})
             rec.raise_for_status()
             assert rec.json()["recommended"] is not None
-            print(json.dumps({"status":"passed_real_HTTP_synthetic_inputs","saved_C_models":3,"auth_verified":True,
-                              "snapshot_prediction_recommendation":True,"new_fit":0,"provider_calls":0,
-                              "primary_live_routes_enabled":False,"temporary_server_stopped_on_exit":True}))
+            if final:
+                assert rec.json()["recommended"]["model_id"] == PRIMARY[0]
+            print(json.dumps({"status":"passed_real_HTTP_synthetic_inputs","synthetic_inputs":True,
+                              "predictions":[{"horizon":x["horizon_hours"],"model_id":x["model_id"],
+                                              "available_probability":x["available_probability"]} for x in items],
+                              "recommendation_model":rec.json()["recommended"]["model_id"],
+                              "provider_calls":0,"new_fit":0}))
     finally:
         # Only the child created above is stopped. Existing services are untouched.
         child.terminate()
