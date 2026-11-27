@@ -1,4 +1,4 @@
-"""장소·주소 검색 API 테스트 (GET /api/places). 카카오 로컬 API는 가짜(httpx.MockTransport)를 쓴다."""
+"""장소·주소 검색 API 테스트 (GET /api/places, GET /api/places/reverse). 카카오 로컬 API는 가짜(httpx.MockTransport)를 쓴다."""
 import logging
 
 import httpx
@@ -23,8 +23,9 @@ PANGYO = place("판교역 신분당선", "경기 성남시 분당구 백현동 5
 class FakeKakao:
     """경로별로 정해 둔 documents를 준다. status·error로 장애를 흉내 낸다."""
 
-    def __init__(self, keyword=(), address=(), status=200, error=None, body=None):
-        self.documents = {"/v2/local/search/keyword.json": list(keyword), "/v2/local/search/address.json": list(address)}
+    def __init__(self, keyword=(), address=(), coord=(), status=200, error=None, body=None):
+        self.documents = {"/v2/local/search/keyword.json": list(keyword), "/v2/local/search/address.json": list(address),
+                          "/v2/local/geo/coord2address.json": list(coord)}
         self.status, self.error, self.body, self.requests = status, error, body, []
 
     def __call__(self, request: httpx.Request) -> httpx.Response:
@@ -116,6 +117,91 @@ def test_missing_key_is_503_without_calling_kakao():
     fake = FakeKakao(keyword=[GANGNAM])
     response = search(make_client(fake, key=""), "강남역")
     assert response.status_code == 503 and fake.requests == []
+
+
+# 좌표 → 주소 (GET /api/places/reverse)
+
+def coord_doc(jibun, road=None):
+    """coord2address 문서. 도로명이 없는 곳이면 road_address가 null로 온다."""
+    return {"address": {"address_name": jibun, "region_1depth_name": jibun.split()[0]},
+            "road_address": {"address_name": road, "building_name": ""} if road else None}
+
+
+AMSA = coord_doc("서울 강동구 암사동 509", road="서울 강동구 암사로 31")
+
+
+def reverse(client, lat=37.55, lon=127.13):
+    return client.get("/api/places/reverse", params={"lat": lat, "lon": lon})
+
+
+def test_reverse_returns_both_addresses():
+    fake = FakeKakao(coord=[AMSA])
+    response = reverse(make_client(fake))
+    assert response.status_code == 200
+    assert response.json() == {"address": "서울 강동구 암사동 509", "road_address": "서울 강동구 암사로 31",
+                               "in_seoul": True}
+    request = fake.requests[0]
+    assert request.url.path == "/v2/local/geo/coord2address.json"
+    assert request.headers["authorization"] == "KakaoAK test-key"
+    assert float(request.url.params["x"]) == 127.13 and float(request.url.params["y"]) == 37.55   # x=경도, y=위도
+
+
+def test_reverse_without_road_address():
+    body = reverse(make_client(FakeKakao(coord=[coord_doc("서울 강동구 암사동 산 1")]))).json()
+    assert body == {"address": "서울 강동구 암사동 산 1", "road_address": None, "in_seoul": True}
+
+
+def test_reverse_no_address_is_200_with_nulls():
+    body = reverse(make_client(FakeKakao(coord=[])), lat=37.53, lon=127.0).json()   # 한강 위
+    assert body == {"address": None, "road_address": None, "in_seoul": True}
+
+
+def test_reverse_outside_seoul():
+    fake = FakeKakao(coord=[coord_doc("경기 성남시 분당구 백현동 537", road="경기 성남시 분당구 판교역로 160")])
+    body = reverse(make_client(fake), lat=37.3948, lon=127.1111).json()
+    assert body["in_seoul"] is False and body["road_address"] == "경기 성남시 분당구 판교역로 160"
+
+
+def test_reverse_far_outside_seoul_without_address():
+    assert reverse(make_client(FakeKakao(coord=[])), lat=35.1, lon=129.0).json()["in_seoul"] is False
+
+
+def test_reverse_odd_document_shape_is_treated_as_no_address():
+    body = reverse(make_client(FakeKakao(coord=[{"address": "문자열", "road_address": {"address_name": 1}}]))).json()
+    assert body == {"address": None, "road_address": None, "in_seoul": True}
+
+
+@pytest.mark.parametrize("params", [{"lat": 40, "lon": 127}, {"lat": 37.5, "lon": 133}, {"lat": 37.5}, {}])
+def test_reverse_invalid_coordinates(params):
+    fake = FakeKakao(coord=[AMSA])
+    response = make_client(fake).get("/api/places/reverse", params=params)
+    assert response.status_code == 422 and response.json()["error"]["code"] == "invalid_request"
+    assert fake.requests == []
+
+
+@pytest.mark.parametrize("fake", [
+    FakeKakao(status=401), FakeKakao(status=429), FakeKakao(status=500),
+    FakeKakao(error=httpx.ConnectError("refused")), FakeKakao(body=b"not json"),
+])
+def test_reverse_kakao_failures_are_503_without_logging_coordinates(fake, caplog):
+    with caplog.at_level(logging.DEBUG):
+        response = reverse(make_client(fake), lat=37.512345, lon=127.098765)
+    assert response.status_code == 503 and response.json()["error"]["code"] == "place_search_unavailable"
+    assert "37.512345" not in caplog.text and "127.098765" not in caplog.text and "test-key" not in caplog.text
+
+
+def test_reverse_missing_key_is_503_without_calling_kakao():
+    fake = FakeKakao(coord=[AMSA])
+    response = reverse(make_client(fake, key=""))
+    assert response.status_code == 503 and fake.requests == []
+
+
+def test_access_log_hides_reverse_coordinates():
+    record = logging.LogRecord("uvicorn.access", logging.INFO, __file__, 1, '%s - "%s %s HTTP/%s" %d',
+                               ("127.0.0.1:5000", "GET", "/api/places/reverse?lat=37.512345&lon=127.098765", "1.1",
+                                200), None)
+    HideQueryString().filter(record)
+    assert "37.512345" not in record.getMessage() and "/api/places/reverse" in record.getMessage()
 
 
 # 접속 로그에서 쿼리(위치·검색어) 지우기
