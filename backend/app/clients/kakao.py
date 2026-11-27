@@ -1,7 +1,7 @@
-"""카카오 로컬 API(키워드 장소 검색, 주소 검색) 호출.
+"""카카오 로컬 API(키워드 장소 검색, 주소 검색, 좌표→주소 변환) 호출.
 
 REST API 키는 서버에만 둔다. 브라우저가 직접 부르면 키가 노출되므로 백엔드가 중계한다.
-검색어는 사용자의 위치 정보일 수 있어("우리 집 주소") 저장하지도, 로그에 남기지도 않는다.
+검색어·좌표는 사용자의 위치 정보일 수 있어("우리 집 주소", 현재 위치) 저장하지도, 로그에 남기지도 않는다.
 로그에는 경로와 상태 코드만 남긴다.
 
 결과 → 이 모듈이 내는 것
@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 KEYWORD_PATH = "/v2/local/search/keyword.json"
 ADDRESS_PATH = "/v2/local/search/address.json"
+COORD2ADDRESS_PATH = "/v2/local/geo/coord2address.json"
 
 
 class KakaoLocalClient:
@@ -62,3 +63,7 @@ class KakaoLocalClient:
     async def address(self, query: str, size: int = 10) -> list[dict]:
         """주소로 검색("강남대로 396"). 키워드 검색에 결과가 없을 때 쓴다."""
         return await self._documents(ADDRESS_PATH, {"query": query, "size": size})
+
+    async def coord2address(self, lat: float, lon: float) -> list[dict]:
+        """좌표가 가리키는 주소(지번·도로명). 카카오는 x=경도, y=위도 순서로 받는다. 주소가 없는 곳이면 빈 목록."""
+        return await self._documents(COORD2ADDRESS_PATH, {"x": lon, "y": lat})
