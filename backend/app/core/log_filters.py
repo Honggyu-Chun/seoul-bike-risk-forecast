@@ -1,6 +1,7 @@
 """로그에 사용자 위치가 남지 않게 하는 설정.
 
-uvicorn 접속 로그는 기본으로 요청 주소를 쿼리까지 남긴다(/api/stations/nearby?lat=..&lon=.., /api/places?query=..).
+uvicorn 접속 로그는 기본으로 요청 주소를 쿼리까지 남긴다(/api/stations/nearby?lat=..&lon=.., /api/places?query=..,
+/api/places/reverse?lat=..&lon=..).
 위치·검색어가 로그에 쌓이지 않도록 쿼리를 지우고 경로만 남긴다. httpx도 INFO 수준에서 호출 주소를 남기므로
 WARNING 이상만 남긴다(카카오 호출 주소에 검색어가 들어간다).
 """

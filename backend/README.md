@@ -8,7 +8,7 @@
 | 로그인·회원 API | 프론트 → 백엔드 | `/api/auth/...`, `/api/me...` (세션 쿠키) |
 | AI 중계 | 백엔드 → 연구실 모델 API (SSH 터널) | 모델의 `/v1/status`, `/v1/predictions`, `/v1/recommendations` |
 | 재고 수집기 | 백엔드 → 서울시 API | 별도 프로세스, 2분마다 |
-| 장소 검색 중계 | 백엔드 → 카카오 로컬 API | `GET /api/places`가 부를 때만 |
+| 장소 검색·주소 변환 중계 | 백엔드 → 카카오 로컬 API | `GET /api/places`, `/api/places/reverse`가 부를 때만 |
 | 메일 발송 | 백엔드 → SMTP 서버 | 이메일 인증·비밀번호 재설정 링크 (로컬은 Mailpit) |
 
 ```text
@@ -77,7 +77,7 @@ PyCharm은 인터프리터를 `backend\.venv\Scripts\python.exe`로, 소스 루�
 | `CORS_ORIGINS` | 브라우저 호출을 허용할 프론트 주소 (JSON 배열). 로그인·회원 API의 Origin 확인도 이 목록을 쓴다. 리버스 프록시로 한 사이트에서 서비스하면 그 사이트 주소(`https://...`)를 넣는다 |
 | `CYCLEON_COOKIE_SECURE` | 세션 쿠키에 `Secure`를 붙일지. **https 운영은 `true`**, http 로컬 개발은 `false` |
 | `CYCLEON_BCRYPT_ROUNDS` | bcrypt 비용. 기본 12(1회 약 0.2~0.3초). 테스트만 4로 낮춘다 |
-| `KAKAO_REST_API_KEY` | 장소 검색용 카카오 **REST API 키**(developers.kakao.com의 앱 → 앱 키). 서버에만 둔다. 지도 표시용 JavaScript 키는 프론트에서 쓰고, 앱 설정에 사이트 도메인을 등록한다. 비어 있으면 `/api/places`만 503 |
+| `KAKAO_REST_API_KEY` | 장소 검색용 카카오 **REST API 키**(developers.kakao.com의 앱 → 앱 키). 서버에만 둔다. 지도 표시용 JavaScript 키는 프론트에서 쓰고, 앱 설정에 사이트 도메인을 등록한다. 비어 있으면 `/api/places`·`/api/places/reverse`만 503 |
 | `SMTP_HOST`·`SMTP_PORT`·`SMTP_STARTTLS`·`SMTP_USERNAME`·`SMTP_PASSWORD`·`MAIL_FROM` | 메일 발송(일반 SMTP). 로컬은 Mailpit(`127.0.0.1`, `1025`, STARTTLS `false`, 계정 없음), 실제 발송은 프로젝트용 Gmail(`smtp.gmail.com`, `587`, `true`, 주소, 앱 비밀번호). Resend·SES도 SMTP 값만 바꿔 쓴다. `SMTP_HOST`가 비어 있으면 인증 메일은 503 |
 | `CYCLEON_PUBLIC_BASE_URL` | 메일 속 링크가 열 프론트 주소. 링크는 `<주소>/verify-email?token=...`, `<주소>/reset-password?token=...` |
 | `CYCLEON_DEBUG_ENABLED` | `?debug=true` 허용 여부. 운영에서는 `false` |
@@ -147,6 +147,7 @@ cd ..
 | `POST /api/predictions` | 선택·즐겨찾기 대여소 예측 (`all_targets`로 3개 시각) | 위와 같음 |
 | `POST /api/recommendations` | 추천 1곳 + 대안 최대 2곳 | 503 `ai_unavailable` |
 | `GET /api/places?query=` | 장소·주소 검색 → 서울 안 후보 최대 5개(이름·주소·좌표). 카카오 장애·키 없음은 503 `place_search_unavailable` | 영향 없음 |
+| `GET /api/places/reverse?lat=&lon=` | 좌표 → 지번·도로명 주소와 `in_seoul`(추천 결과의 "현재 위치: …"). 주소가 없는 곳은 200에 둘 다 `null`. 오류는 장소 검색과 같음 | 영향 없음 |
 | `POST /api/auth/signup`·`login`·`logout` | 가입(바로 로그인)·로그인·로그아웃. 세션 쿠키 발급·삭제 | 영향 없음 |
 | `GET`·`PATCH`·`DELETE /api/me` | 프로필 조회·닉네임/소개 변경·탈퇴(비밀번호 확인) | 영향 없음 |
 | `PUT /api/me/password`, `POST /api/me/logout-all` | 비밀번호 변경(다른 기기 로그아웃), 모든 기기 로그아웃 | 영향 없음 |
@@ -209,7 +210,7 @@ docker compose start                 # DB 테스트에 필요
 
 - uvicorn 접속 로그는 쿼리를 지우고 경로만 남긴다(`app/core/log_filters.py`). 위치(`lat`, `lon`)·검색어가 로그에 쌓이지 않는다. 앞단 리버스 프록시(nginx 등)의 접속 로그는 배포 때 따로 맞춘다.
 - 비밀번호 재설정 요청은 계정당 15분 3통으로만 막는다(IP별 제한 없음). 배포 때 IP별 제한을 검토한다.
-- `/api/places`에는 호출 횟수 제한이 없다. 카카오 하루 호출 한도를 넘기면 그날은 503이 난다. 배포 때 IP별 제한을 검토한다.
+- `/api/places`·`/api/places/reverse`에는 호출 횟수 제한이 없다. 둘이 카카오 하루 호출 한도를 나눠 쓰고, 넘기면 그날은 503이 난다. 배포 때 IP별 제한을 검토한다.
 - 폐소 감지(`valid_to`), 수집기 중복 실행 방지가 없다.
 - 배포용 Dockerfile·운영 설정은 배포 서버가 정해지면 추가한다. 배포 서버에서 연구실 SSH 터널을 계속 유지하는 방법(끊기면 다시 연결)도 그때 정한다.
 - 만료된 세션과 하루 지난 로그인 시도 기록은 로그인할 때 지운다. 로그인이 드문 기간에는 남아 있을 수 있다(정기 정리는 배포 때 추가).
