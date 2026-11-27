@@ -1,8 +1,8 @@
 """대여소·최신 재고 조회 (공개 API용, 읽기 전용)."""
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import date, datetime
 
-from sqlalchemy import select
+from sqlalchemy import extract, func, select
 from sqlalchemy.dialects.postgresql import distinct_on
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -65,3 +65,29 @@ async def latest_inventory(session: AsyncSession, station_ids: list[str] | None)
     rows = await session.execute(query)
     return {sid: Inventory(int(value) if value is not None else None, received_at)
             for sid, value, received_at in rows}
+
+
+@dataclass(frozen=True)
+class DayHourMean:
+    day: date                  # KST 날짜
+    hour: int                  # KST 시(0~23)
+    mean: float                # 그 날짜·시간의 수집분 평균 수량
+    samples: int               # 들어간 수집분 수
+
+
+async def day_hour_means(session: AsyncSession, station_id: str, start: datetime, end: datetime) -> list[DayHourMean]:
+    """start 이상 end 미만에 받은 한 대여소의 재고를 KST 날짜·시간별로 평균 낸다(최대 날짜 수 × 24행).
+
+    완료된 수집분의 quality='valid' 재고만 쓴다. 비정상·누락 값은 0으로 세지 않고 뺀다.
+    조회는 observations의 유일 인덱스 (source, entity_id, ...) 앞 두 열을 탄다.
+    """
+    local = func.timezone("Asia/Seoul", Observation.received_at)   # timestamptz → KST 벽시계 시각
+    day, hour = func.date(local).label("day"), extract("hour", local).label("hour")
+    rows = await session.execute(
+        select(day, hour, func.avg(Observation.value), func.count())
+        .join(Capture, Capture.capture_id == Observation.capture_id)
+        .where(Observation.source == "seoul_bike", Observation.entity_id == station_id,
+               Observation.variable == "inventory", Observation.quality == "valid",
+               Observation.received_at >= start, Observation.received_at < end, Capture.state == "complete")
+        .group_by(day, hour))
+    return [DayHourMean(d, int(h), float(mean), n) for d, h, mean, n in rows]
