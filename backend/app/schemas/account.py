@@ -126,8 +126,10 @@ class ProfileResponse(BaseModel):
     email: str | None
     email_verified: bool
     created_at: UtcDatetime
+    avatar_url: str | None         # "/api/me/avatar?v=..." 그대로 <img src>에 쓴다. 사진이 없으면 null(기본 이미지)
 
     @classmethod
-    def of(cls, user) -> "ProfileResponse":
+    def of(cls, user, avatar_url: str | None = None) -> "ProfileResponse":
         return cls(login_id=user.login_id, nickname=user.nickname, bio=user.bio, email=user.email,
-                   email_verified=user.email_verified_at is not None, created_at=user.created_at)
+                   email_verified=user.email_verified_at is not None, created_at=user.created_at,
+                   avatar_url=avatar_url)

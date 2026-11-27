@@ -156,6 +156,32 @@ class FavoritesLimit(AppError):
         super().__init__(409, "favorites_limit", f"즐겨찾기는 {limit}개까지 저장할 수 있습니다.", limit=limit)
 
 
+class AvatarNotFound(AppError):
+    def __init__(self):
+        super().__init__(404, "avatar_not_found", "등록한 프로필 사진이 없습니다.")
+
+
+class ImageTooLarge(AppError):
+    """5MB를 넘거나, 픽셀 수(가로×세로)가 너무 큰 사진"""
+
+    def __init__(self):
+        super().__init__(413, "image_too_large", "사진이 너무 큽니다. 5MB 이하의 사진을 올려 주세요.")
+
+
+class UnsupportedImage(AppError):
+    """JPEG·PNG·WebP가 아닌 파일(Content-Type 또는 실제 형식)"""
+
+    def __init__(self):
+        super().__init__(415, "unsupported_image", "JPEG, PNG, WebP 사진만 올릴 수 있습니다.")
+
+
+class InvalidImage(AppError):
+    """열 수 없거나 깨진 사진 파일"""
+
+    def __init__(self):
+        super().__init__(422, "invalid_image", "사진 파일을 읽을 수 없습니다.")
+
+
 def error_response(status_code: int, code: str, message: str, headers: dict[str, str] | None = None,
                    **extra) -> JSONResponse:
     return JSONResponse(status_code=status_code, content={"error": {"code": code, "message": message, **extra}},

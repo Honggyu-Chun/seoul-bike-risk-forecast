@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.clients.ai import AIClient
 from app.clients.mailer import Mailer
 from app.core.config import Settings
-from app.core.errors import OriginNotAllowed, UnsupportedMediaType
+from app.core.errors import OriginNotAllowed, UnsupportedImage, UnsupportedMediaType
 from app.core.time import utc_now
 from app.services.accounts import COOKIE_NAME
 
@@ -60,12 +60,34 @@ def require_trusted_origin(request: Request, settings: Settings = Depends(get_ap
       도구(curl 등)라 허용한다.
     - 본문이 있으면 JSON이어야 한다. HTML 폼(form-urlencoded 등)으로는 보낼 수 없게.
     """
+    _check_origin(request, settings)
+    has_body = request.headers.get("content-length", "0") != "0" or "transfer-encoding" in request.headers
+    if has_body and _content_type(request) != "application/json":
+        raise UnsupportedMediaType()
+
+
+IMAGE_TYPES = ("image/jpeg", "image/png", "image/webp")
+
+
+def require_trusted_image_origin(request: Request, settings: Settings = Depends(get_app_settings)) -> None:
+    """프로필 사진 업로드용 require_trusted_origin. Origin 확인은 같고, 본문은 JSON 대신 JPEG·PNG·WebP만 받는다.
+
+    image/* Content-Type은 HTML 폼이 보낼 수 없는 형식이다(다른 사이트에서 보내려면 CORS 사전 요청이 필요하고,
+    CORS_ORIGINS에 없으면 브라우저가 막는다). 그래서 JSON만 받을 때와 CSRF 방지 효과가 같다.
+    """
+    _check_origin(request, settings)
+    if _content_type(request) not in IMAGE_TYPES:
+        raise UnsupportedImage()
+
+
+def _check_origin(request: Request, settings: Settings) -> None:
     origin = request.headers.get("origin")
     if origin is not None and origin not in settings.cors_origins:
         raise OriginNotAllowed()
-    has_body = request.headers.get("content-length", "0") != "0" or "transfer-encoding" in request.headers
-    if has_body and request.headers.get("content-type", "").split(";")[0].strip().lower() != "application/json":
-        raise UnsupportedMediaType()
+
+
+def _content_type(request: Request) -> str:
+    return request.headers.get("content-type", "").split(";")[0].strip().lower()
 
 
 def debug_flag(debug: bool = Query(False, description="진단 정보 포함 (개발·QA용)"),

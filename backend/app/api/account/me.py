@@ -12,7 +12,7 @@ from app.clients.mailer import Mailer
 from app.core.config import Settings
 from app.schemas.account import EmailUpdate, PasswordChange, PasswordConfirm, ProfileResponse, ProfileUpdate
 from app.services import accounts as service
-from app.services import email_recovery
+from app.services import avatars, email_recovery
 from app.services.accounts import Account
 
 router = APIRouter(prefix="/me", tags=["me"])
@@ -26,16 +26,16 @@ async def current_account(session: AsyncSession = Depends(get_session),
 
 
 @router.get("", response_model=ProfileResponse)
-async def get_me(account: Account = Depends(current_account)):
+async def get_me(session: AsyncSession = Depends(get_session), account: Account = Depends(current_account)):
     """로그인 여부와 프로필. 앱을 열 때 한 번 부른다(401이면 게스트)."""
-    return ProfileResponse.of(account.user)
+    return await avatars.profile(session, account.user)
 
 
 @router.patch("", response_model=ProfileResponse, dependencies=guarded)
 async def update_me(request: ProfileUpdate, session: AsyncSession = Depends(get_session),
                     account: Account = Depends(current_account)):
     """닉네임·한 줄 소개 변경. 보낸 필드만 바꾸고, 빈 문자열·null은 지운다."""
-    return ProfileResponse.of(await service.update_profile(session, account, request))
+    return await avatars.profile(session, await service.update_profile(session, account, request))
 
 
 @router.put("/email", response_model=ProfileResponse, dependencies=guarded)
@@ -45,7 +45,7 @@ async def change_email(request: EmailUpdate, session: AsyncSession = Depends(get
 
     다른 계정이 이미 인증한 주소면 409 email_taken.
     """
-    return ProfileResponse.of(await email_recovery.change_email(session, account, request))
+    return await avatars.profile(session, await email_recovery.change_email(session, account, request))
 
 
 @router.post("/email/verification", status_code=status.HTTP_204_NO_CONTENT, dependencies=guarded)

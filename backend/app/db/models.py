@@ -2,7 +2,7 @@
 
 stations·captures·observations는 따릉이 수집분이다. 공개 API(이름·좌표·수량)와 마이 리포트 판정이 쓰고,
 모델 서비스(연구실 API)는 이 테이블을 읽지 않는다.
-users·sessions·login_attempts·favorites·email_tokens·prediction_views는 로그인·회원 기능용이다(맨 아래).
+users·sessions·login_attempts·favorites·email_tokens·prediction_views·user_avatars는 로그인·회원 기능용이다(맨 아래).
 JSON 덩어리(payload)로 저장하지 않고 컬럼으로 나눠, 제약 조건으로 잘못된 값을 DB 단계에서 막는다.
 
 cursor_seq
@@ -16,7 +16,7 @@ cursor_seq
 from datetime import datetime
 
 from sqlalchemy import (BigInteger, Boolean, CheckConstraint, DateTime, Double, ForeignKey, Index, Integer,
-                        String, Text, UniqueConstraint, false, func, text)
+                        LargeBinary, String, Text, UniqueConstraint, false, func, text)
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -274,3 +274,16 @@ class PredictionView(Base):
         Index(None, "user_id", "target_at"),   # 주간 리포트
         Index(None, "target_at"),              # 판정 대기 찾기, 2주 지난 기록 삭제
     )
+
+
+class UserAvatar(Base):
+    """회원의 프로필 사진. 업로드할 때 256×256 WebP로 새로 만든 것만 둔다(원본·EXIF 메타데이터는 버린다).
+
+    한 사람당 한 장(user_id가 PK). 장당 수십 KB. 회원을 지우면 함께 지워진다.
+    저장·조회는 repositories/avatars.py에만 있어 나중에 객체 저장소로 옮길 수 있다.
+    """
+    __tablename__ = "user_avatars"
+
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    image: Mapped[bytes] = mapped_column(LargeBinary)
+    updated_at: Mapped[datetime] = mapped_column(Timestamp)
