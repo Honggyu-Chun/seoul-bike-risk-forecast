@@ -143,6 +143,7 @@ cd ..
 | --- | --- | --- |
 | `GET /api/status` | 기준 정각, 선택 가능한 이용 시각 3개 | 200, `ai_available=false` |
 | `GET /api/stations` | 지도용 대여소 목록과 지금 수량(마커 색, DB 최신 수집분). 위치를 주면 거리순. 캐시 없이 매번, gzip 압축 | 영향 없음 |
+| `GET /api/stations/{station_id}/hourly-average?day_type=` | 대여소 상세의 시간대별 평균 수량. 최근 7일(오늘 포함, KST) 수집분으로 0~23시 평균(24개, 값이 없으면 `null`). `day_type`은 `weekday`·`weekend`·`all`, 빼면 오늘의 유형. 운영 중이 아니면 404 `station_not_found`. 10분 캐시 | 영향 없음 |
 | `GET /api/stations/nearby` | 반경 안 대여소 + 0대 확률 + 현재 수량 | 200, 확률 `null`, 수량은 DB 최신 수집분 |
 | `POST /api/predictions` | 선택·즐겨찾기 대여소 예측 (`all_targets`로 3개 시각) | 위와 같음 |
 | `POST /api/recommendations` | 추천 1곳 + 대안 최대 2곳 | 503 `ai_unavailable` |

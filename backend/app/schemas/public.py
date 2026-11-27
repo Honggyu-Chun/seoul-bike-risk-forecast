@@ -146,3 +146,24 @@ class PredictionsResponse(BaseModel):
     base_at: UtcDatetime
     ai_available: bool
     items: list[PredictionItem]
+
+
+# GET /api/stations/{station_id}/hourly-average
+
+DayType = Literal["weekday", "weekend", "all"]
+
+
+class HourlyAverage(BaseModel):
+    hour: int                      # KST 시(0~23)
+    avg_inventory: float | None    # 소수 첫째 자리. 그 시간에 값이 하나도 없으면 null
+    samples: int                   # 평균에 들어간 수집분 수(2분마다 1개)
+
+
+class HourlyAverageResponse(BaseModel):
+    station_id: str
+    name: str
+    day_type: DayType
+    period_start: UtcDatetime      # 계산에 쓴 기간 [period_start, period_end)
+    period_end: UtcDatetime
+    days: int                      # 실제로 값이 들어간 날 수. 화면 문구 "최근 5일(평일) 평균"용
+    hours: list[HourlyAverage]     # 항상 24개, 0시부터
