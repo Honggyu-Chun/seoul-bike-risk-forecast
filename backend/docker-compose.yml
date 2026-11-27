@@ -1,0 +1,30 @@
+# 개발용 PostgreSQL과 가짜 메일 서버(Mailpit). backend 폴더에서: docker compose up -d
+services:
+  postgres:
+    image: postgres:17
+    container_name: cycleon-postgres
+    environment:
+      POSTGRES_USER: cycleon
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cycleon-local}  # 개발용 기본값. 운영에서는 다른 값을 쓴다
+      POSTGRES_DB: cycleon
+    ports:
+      - "127.0.0.1:5432:5432"  # 이 PC에서만 접속
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # postgres 17 이미지의 데이터 경로(바꾸면 데이터가 볼륨에 저장되지 않음)
+      - ./docker/init-test-db.sql:/docker-entrypoint-initdb.d/init-test-db.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cycleon -d cycleon"]
+      interval: 5s
+      retries: 10
+
+  # 개발용 가짜 메일 서버. 백엔드가 보낸 메일을 실제로 보내지 않고 http://localhost:8025 화면에 모아 보여 준다
+  mailpit:
+    image: axllent/mailpit:v1.21.8
+    container_name: cycleon-mailpit
+    ports:
+      - "127.0.0.1:1025:1025"  # SMTP (SMTP_HOST=127.0.0.1, SMTP_PORT=1025, SMTP_STARTTLS=false)
+      - "127.0.0.1:8025:8025"  # 받은 메일 보기
+
+volumes:
+  pgdata:
+    name: cycleon-pgdata  # docker run으로 만든 볼륨을 그대로 이어서 쓴다
