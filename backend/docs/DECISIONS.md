@@ -28,6 +28,7 @@
 | 16 | 11-26 | `e8998d5` ~ `5b733ab` | 모델 연결 | 연구실 모델 API 조회(입력은 연구실이 공급), 수량은 DB·확률은 모델, 내부 데이터 API 삭제 |
 | 17 | 11-27 | `feature/places-reverse` | 좌표→주소 | 카카오 `coord2address` 중계, 주소 없는 곳은 200 `null`, 좌표는 저장·로그 안 함 |
 | 18 | 11-27 | `feature/hourly-average` | 시간대별 평균 수량 | 새 테이블 없이 7일 수집분 조회, 날짜별 평균의 평균, 옮긴 대여소는 옮긴 뒤부터 |
+| 19 | 11-27 | `feature/avatar` | 프로필 사진 | 256px WebP로 새로 만들어 DB에 저장(원본·EXIF 버림), 이미지 본문용 Origin 확인, 디코딩 전 픽셀 수 확인 |
 
 ### 전체 구조
 
@@ -474,6 +475,26 @@ flowchart LR
 - **근거**: 수집기가 이미 8일을 보관하고 있어 새 테이블·배치 없이 만들 수 있다. 한 대여소의 7일치는 약 5,040행이라 요청마다 계산해도 된다(아래 측정).
 - **성능**: 8일 보관 규모의 합성 데이터(2,740곳 × 5,760회 = 1,578만 행, DB 5.9GB)로 `EXPLAIN ANALYZE`를 돌렸다. 기존 유일 인덱스 `(source, entity_id, event_key, variable, revision)`의 앞 두 열로 대여소 한 곳의 5,760행만 읽고, 디스크에서 처음 읽을 때 31~50ms, 캐시된 뒤 약 10ms다. 그래서 `(entity_id, received_at)` 인덱스는 추가하지 않았다. 10분 캐시 헤더로 같은 브라우저의 반복 조회도 줄인다.
 - **한계**: 주말 평균은 이틀치다. 더 긴 기간이 필요하면 수집기가 시간 단위 요약 테이블을 채우고 여러 주 보관하도록 바꾸고, API 모양은 그대로 둔다.
+
+---
+
+## 19. 프로필 사진 — `feature/avatar` (11-27)
+
+### D41. 프로필 사진은 256×256 WebP로 새로 만들어 DB 테이블에 두고, 원본은 버린다
+
+- **사항**: `PUT`·`GET`·`DELETE /api/me/avatar`. 올리기는 이미지 파일을 본문 그대로(`Content-Type: image/jpeg`·`png`·`webp`, 5MB 이하) 받아 Pillow로 EXIF 방향 적용 → 가운데 정사각형 자르기 → 256×256 WebP로 만든다. 프로필 응답(`ProfileResponse`)에 `avatar_url`(`/api/me/avatar?v=<바꾼 시각(ms)>` 또는 `null`)을 추가했다. 테이블 `user_avatars`(`user_id` PK·users 외래 키 `ON DELETE CASCADE`, `image` bytea, `updated_at`).
+- **오류**: 5MB 초과·픽셀 수 초과(2,500만 픽셀, 5000×5000) 413 `image_too_large`, JPEG·PNG·WebP가 아님 415 `unsupported_image`, 깨진 파일 422 `invalid_image`, 사진 없음 404 `avatar_not_found`.
+- **근거**:
+  - 원본을 저장하지 않으면 촬영 위치(EXIF GPS)·기기 정보가 남을 일이 없다. 256px WebP는 장당 수십 KB라 회원 1,000명이어도 수십 MB다.
+  - 배포 서버가 정해지지 않아 서버 디스크·객체 저장소는 볼륨·키·백업을 따로 정해야 한다. DB에 두면 배포 설정이 필요 없고 DB 백업에 함께 들어가며 탈퇴 시 외래 키로 지워진다. 저장·조회는 `repositories/avatars.py` 한 곳에 모아 나중에 옮길 수 있게 했다.
+  - 본문을 파일 그대로 받으면 `python-multipart` 의존성이 필요 없고 프론트도 `fetch` 한 줄이면 된다.
+- **보안**:
+  - 업로드도 Origin을 확인한다. JSON만 받던 `require_trusted_origin` 대신 이미지 Content-Type만 받는 변형(`require_trusted_image_origin`)을 쓴다. `image/*`는 HTML 폼이 보낼 수 없는 형식이라 CSRF 방지 효과가 같다.
+  - `Content-Length`가 5MB를 넘으면 읽지 않고, 헤더가 없거나 틀려도 읽으면서 5MB에서 멈춘다.
+  - 픽셀 수는 헤더의 가로·세로로 디코딩 전에 막는다(작은 파일이 메모리를 크게 잡아먹는 압축 폭탄). Pillow 기본 상한을 넘는 그림도 413이다. JPEG는 줄여 가며 디코딩한다(`draft`). 형식 해석기는 JPEG·PNG·WebP와 415 판별용 GIF·BMP만 돌린다.
+  - 변환은 CPU 작업이라 bcrypt처럼 스레드풀에서 돌린다(9장).
+  - `GET`은 `Cache-Control: private, max-age=86400`, `X-Content-Type-Options: nosniff`. 세션 쿠키 경로가 `/api`라 같은 사이트의 `<img src="/api/me/avatar?v=...">`에 쿠키가 실린다.
+- **효과**: 공개 프로필 화면이 없어 본인만 볼 수 있다. 업로드 횟수 제한은 두지 않았다(README 남은 일, 배포 때 `/api/places`·비밀번호 재설정 제한과 함께 검토).
 
 ---
 

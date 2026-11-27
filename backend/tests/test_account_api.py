@@ -105,7 +105,7 @@ def test_signup_logs_in_and_stores_only_hashes(client, test_database_url):
     response = signup(client, login_id="  Rider_01 ", email=" Me@Example.COM ")
     assert response.status_code == 201
     assert response.json() == {"login_id": "rider_01", "nickname": None, "bio": None, "email": "me@example.com",
-                               "email_verified": False, "created_at": "2026-11-09T05:00:00Z"}
+                               "email_verified": False, "created_at": "2026-11-09T05:00:00Z", "avatar_url": None}
     cookie = response.headers["set-cookie"]
     assert "HttpOnly" in cookie and "SameSite=lax" in cookie and "Path=/api" in cookie and "Max-Age=2592000" in cookie
     assert client.get("/api/me").json()["login_id"] == "rider_01"

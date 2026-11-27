@@ -14,7 +14,7 @@ from app.core.config import Settings
 from app.schemas.account import (LoginRequest, PasswordResetConfirm, PasswordResetRequest, ProfileResponse,
                                  SignupRequest, TokenRequest)
 from app.services import accounts as service
-from app.services import email_recovery
+from app.services import avatars, email_recovery
 
 router = APIRouter(prefix="/auth", tags=["auth"], dependencies=[Depends(require_trusted_origin)])
 
@@ -36,7 +36,7 @@ async def login(request: LoginRequest, response: Response, session: AsyncSession
     """로그인. 항상 새 세션 쿠키를 발급한다."""
     user, token = await service.login(session, settings, request, ip, now, old_token)
     service.set_session_cookie(response, token, settings)
-    return ProfileResponse.of(user)
+    return await avatars.profile(session, user)
 
 
 @router.post("/logout", status_code=status.HTTP_204_NO_CONTENT)

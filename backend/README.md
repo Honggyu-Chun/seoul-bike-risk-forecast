@@ -150,7 +150,8 @@ cd ..
 | `GET /api/places?query=` | 장소·주소 검색 → 서울 안 후보 최대 5개(이름·주소·좌표). 카카오 장애·키 없음은 503 `place_search_unavailable` | 영향 없음 |
 | `GET /api/places/reverse?lat=&lon=` | 좌표 → 지번·도로명 주소와 `in_seoul`(추천 결과의 "현재 위치: …"). 주소가 없는 곳은 200에 둘 다 `null`. 오류는 장소 검색과 같음 | 영향 없음 |
 | `POST /api/auth/signup`·`login`·`logout` | 가입(바로 로그인)·로그인·로그아웃. 세션 쿠키 발급·삭제 | 영향 없음 |
-| `GET`·`PATCH`·`DELETE /api/me` | 프로필 조회·닉네임/소개 변경·탈퇴(비밀번호 확인) | 영향 없음 |
+| `GET`·`PATCH`·`DELETE /api/me` | 프로필 조회·닉네임/소개 변경·탈퇴(비밀번호 확인). 프로필에 `avatar_url`(사진이 없으면 `null`) | 영향 없음 |
+| `PUT`·`GET`·`DELETE /api/me/avatar` | 프로필 사진 올리기·보기·지우기. 올리기는 JPEG·PNG·WebP 파일을 본문 그대로(5MB 이하), 256×256 WebP로 새로 만들어 저장(원본·EXIF는 버림). 보기는 `image/webp`, 없으면 404 `avatar_not_found` | 영향 없음 |
 | `PUT /api/me/password`, `POST /api/me/logout-all` | 비밀번호 변경(다른 기기 로그아웃), 모든 기기 로그아웃 | 영향 없음 |
 | `PUT /api/me/email`, `POST /api/me/email/verification` | 복구용 이메일 등록·변경(비밀번호 확인), 인증 메일 보내기 | 영향 없음 |
 | `POST /api/auth/email/verify` | 인증 메일 링크의 토큰으로 인증 완료(로그인 불필요) | 영향 없음 |
@@ -168,7 +169,7 @@ cd ..
 
 - 로그인하면 `cycleon_session` 쿠키(HttpOnly, SameSite=Lax, Path=/api)를 준다. DB에는 토큰의 SHA-256 해시만 둔다. 마지막 사용 후 14일, 로그인 후 30일 중 먼저 오는 때 끝난다.
 - 프론트는 백엔드와 **같은 사이트**에서 불러야 쿠키가 실린다. 개발은 Vite 프록시(`/api` → `http://127.0.0.1:8100`), 운영은 리버스 프록시(nginx·Caddy)가 프론트 파일과 `/api`를 함께 서비스하는 구성을 권장한다.
-- 로그인·가입·회원 변경 요청은 `Origin`이 `CORS_ORIGINS`에 있어야 하고(403 `origin_not_allowed`), 본문은 JSON만 받는다(415).
+- 로그인·가입·회원 변경 요청은 `Origin`이 `CORS_ORIGINS`에 있어야 하고(403 `origin_not_allowed`), 본문은 JSON만 받는다(415). 프로필 사진 올리기만 JSON 대신 `image/jpeg`·`png`·`webp`를 받는다(415 `unsupported_image`).
 - 횟수 제한: 같은 아이디+IP 로그인 실패 15분 5회, 같은 IP 실패 15분 30회, 같은 IP 가입 1시간 10회. 넘으면 429 `too_many_attempts`(`retry_after_seconds`, `Retry-After`).
 - **리버스 프록시 뒤에서는 실제 IP를 받아야 한다.** 프록시가 `X-Forwarded-For`를 붙이고, uvicorn은 믿는 프록시 주소만 지정한다: `uvicorn app.main:app --forwarded-allow-ips <프록시 IP>`(같은 서버의 nginx면 기본값 `127.0.0.1`로 충분). `*`는 쓰지 않는다. 아무나 보낸 헤더를 믿게 되어 횟수 제한을 피할 수 있다.
 
@@ -211,6 +212,7 @@ docker compose start                 # DB 테스트에 필요
 
 - uvicorn 접속 로그는 쿼리를 지우고 경로만 남긴다(`app/core/log_filters.py`). 위치(`lat`, `lon`)·검색어가 로그에 쌓이지 않는다. 앞단 리버스 프록시(nginx 등)의 접속 로그는 배포 때 따로 맞춘다.
 - 비밀번호 재설정 요청은 계정당 15분 3통으로만 막는다(IP별 제한 없음). 배포 때 IP별 제한을 검토한다.
+- 프로필 사진 올리기(`PUT /api/me/avatar`)에는 횟수 제한이 없다. 로그인한 회원만 쓸 수 있고 변환은 스레드풀에서 돈다. 배포 때 다른 제한과 함께 검토한다.
 - `/api/places`·`/api/places/reverse`에는 호출 횟수 제한이 없다. 둘이 카카오 하루 호출 한도를 나눠 쓰고, 넘기면 그날은 503이 난다. 배포 때 IP별 제한을 검토한다.
 - 폐소 감지(`valid_to`), 수집기 중복 실행 방지가 없다.
 - 배포용 Dockerfile·운영 설정은 배포 서버가 정해지면 추가한다. 배포 서버에서 연구실 SSH 터널을 계속 유지하는 방법(끊기면 다시 연결)도 그때 정한다.
