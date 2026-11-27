@@ -1,6 +1,9 @@
-"""장소·주소 검색. 키워드로 먼저 찾고, 없으면 주소로 찾는다. 서울 안의 결과만 최대 5개."""
+"""장소·주소 검색과 좌표→주소 변환.
+
+검색은 키워드로 먼저 찾고, 없으면 주소로 찾는다. 서울 안의 결과만 최대 5개.
+"""
 from app.clients.kakao import KakaoLocalClient
-from app.schemas.places import PlaceItem, PlacesResponse
+from app.schemas.places import PlaceItem, PlacesResponse, ReverseResponse
 
 MAX_RESULTS = 5
 # 서울 범위(대략). 주소가 "서울"로 시작하고 좌표도 이 안이어야 한다.
@@ -37,9 +40,10 @@ def _from_address(document: dict) -> PlaceItem | None:
                      category=None)
 
 
-def _in_seoul(place: PlaceItem) -> bool:
-    return (place.address.startswith("서울") and SEOUL_LAT[0] <= place.latitude <= SEOUL_LAT[1]
-            and SEOUL_LON[0] <= place.longitude <= SEOUL_LON[1])
+def _in_seoul(address: str | None, lat: float, lon: float) -> bool:
+    """주소가 "서울"로 시작하고 좌표도 서울 범위 안. 주소가 없는 곳(한강 위 등)은 좌표만 본다."""
+    in_box = SEOUL_LAT[0] <= lat <= SEOUL_LAT[1] and SEOUL_LON[0] <= lon <= SEOUL_LON[1]
+    return in_box and (address is None or address.startswith("서울"))
 
 
 async def search(client: KakaoLocalClient, query: str) -> PlacesResponse:
@@ -48,6 +52,21 @@ async def search(client: KakaoLocalClient, query: str) -> PlacesResponse:
     places = [p for p in map(_from_keyword, documents) if p]
     if not documents:
         places = [p for p in map(_from_address, await client.address(query)) if p]
-    seoul = [p for p in places if _in_seoul(p)]
+    seoul = [p for p in places if _in_seoul(p.address, p.latitude, p.longitude)]
     return PlacesResponse(count=min(len(seoul), MAX_RESULTS), outside_seoul=bool(places) and not seoul,
                           items=seoul[:MAX_RESULTS])
+
+
+def _address_name(part: object) -> str | None:
+    """coord2address 문서의 address·road_address 항목에서 주소 문자열. 없거나(null) 모양이 다르면 None."""
+    if isinstance(part, dict) and isinstance(part.get("address_name"), str) and part["address_name"].strip():
+        return part["address_name"].strip()
+    return None
+
+
+async def reverse(client: KakaoLocalClient, lat: float, lon: float) -> ReverseResponse:
+    """좌표 → 지번·도로명 주소. 주소가 없는 곳은 두 필드 모두 None(200). 좌표는 저장·로그하지 않는다."""
+    documents = await client.coord2address(lat, lon)
+    document = documents[0] if documents else {}
+    address, road = _address_name(document.get("address")), _address_name(document.get("road_address"))
+    return ReverseResponse(address=address, road_address=road, in_seoul=_in_seoul(address or road, lat, lon))
